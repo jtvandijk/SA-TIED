@@ -1,0 +1,16 @@
+# global variables
+
+meta:
+  title: SA-TIED
+
+urls:
+  w01: "01-getting-started.html"
+  w02: "02-mapping-data.html"
+  w03: "03-autocorrelation.html"
+  w04: "04-spatial-models.html"
+
+slides:
+  l01: "https://github.com/jtvandijk/SA-TIED/tree/master/slides/l01-geo.pdf"
+  l02: "https://github.com/jtvandijk/SA-TIED/tree/master/slides/l02-geo.pdf"
+  l03: "https://github.com/jtvandijk/SA-TIED/tree/master/slides/l03-geo.pdf"
+  l04: "https://github.com/jtvandijk/SA-TIED/tree/master/slides/l04-geo.pdf"

@@ -1,0 +1,37 @@
+# SA-TIED Geospatial Workshop {.unnumbered}
+
+```{r} 
+#| label: 00-welcome
+#| echo: False
+#| cache: True
+#| out.width: "100%"
+knitr::include_graphics('images/w00/sa-tied-welcome.jpg') 
+```
+
+## Welcome {.unnumbered}
+Welcome to the workbook for the **SA-TIED Geospatial Workshop**. Over the course of this two-day workshop, you will be introduced to the R programming language for spatial data analysis. We will explore the following topics:
+
+- Fundamentals of using R for data analysis
+- Creating basic maps using R
+- Quantifying the degree of spatial dependence in a dataset
+- Incorporating space into statistical models
+
+## Module overview {.unnumbered}
+The schedule of this workshop is as follows:
+
+| Day  | Type              | Time        | Topic
+| :--- |:------            |:------      | :--------------
+| 1    | Lecture           | 09h00-09h45 | [R for Data Analysis]({{< var slides.l01 >}}) |
+| 1    | Computer tutorial | 10h00-12h00 | [R for Data Analysis]({{< var urls.c01 >}}) |
+| 1    | Lecture           | 13h00-13h45 | [R for Spatial Analysis]({{< var slides.l02 >}}) | 
+| 1    | Computer tutorial | 14h00-16h00 | [R for Spatial Analysis]({{< var slides.c02 >}}) | 
+| 2    | Lecture           | 09h00-09h45 | [Spatial Autocorrelation]({{< var slides.l03 >}}) |
+| 2    | Computer tutorial | 10h00-12h00 | [Spatial Autocorrelation]({{< var urls.c03 >}}) |
+| 2    | Lecture           | 13h00-13h45 | [Spatial Models]({{< var slides.l04 >}}) | 
+| 2    | Computer tutorial | 14h00-16h00 | [Spatial Models]({{< var slides.c04 >}}) | 
+
+## Acknowledgements {.unnumbered}
+This workbook takes is partially based on content from:
+
+- The [GEOG0030: Geocomputation 2023-2024](https://jtvandijk.github.io/GEOG0030_20232024/) workbook by [Justin van Dijk](https://www.mappingdutchman.com)
+- The [Mapping and Modelling Geographic Data in R](https://profrichharris.github.io/MandM/) course by [Richard Harris](https://profrichharris.github.io/)

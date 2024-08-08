@@ -1,0 +1,72 @@
+[
+  {
+    "objectID": "00-index.html",
+    "href": "00-index.html",
+    "title": "Methods in Human Geography",
+    "section": "",
+    "text": "Welcome to the second half of Methods in Human Geography. In this part of the module, you will delve into essential statistical analysis techniques and gain a strong foundation in working with spatial data. We wil be utilising R and the RStudio environment for statistical analysis, and the open-source programme QGIS for handling spatial data.\n\n\n\nMoodle is the central point of contact for GEOG0018 and it is where all important information will be communicated such as key module and assessment information. This workbook contains links to all reading material as well as the contents for all computer tutorials.\n\n\n\nThe topics covered over the next five weeks are:\n\n\n\nWeek\nSection\nTopic\n\n\n\n\n1\nGetting Started\nProgramming for Data Analysis\n\n\n2\nStatistical Analysis\nStatistical Analysis I\n\n\n3\nStatistical Analysis\nStatistical Analysis II\n\n\n4\nSpatial Analysis\nSpatial Analysis I\n\n\n5\nSpatial Analysis\nSpatial Analysis II\n\n\n\n\n\n\nThis year’s workbook is compiled using:\n\nThe GEOG0030: Geocomputation 2023-2024 workbook by Justin van Dijk\nPrevious GEOG018: Methods in Human Geography content created by Rory Coulter"
+  },
+  {
+    "objectID": "00-index.html#welcome",
+    "href": "00-index.html#welcome",
+    "title": "Methods in Human Geography",
+    "section": "",
+    "text": "Welcome to the second half of Methods in Human Geography. In this part of the module, you will delve into essential statistical analysis techniques and gain a strong foundation in working with spatial data. We wil be utilising R and the RStudio environment for statistical analysis, and the open-source programme QGIS for handling spatial data."
+  },
+  {
+    "objectID": "00-index.html#moodle",
+    "href": "00-index.html#moodle",
+    "title": "Methods in Human Geography",
+    "section": "",
+    "text": "Moodle is the central point of contact for GEOG0018 and it is where all important information will be communicated such as key module and assessment information. This workbook contains links to all reading material as well as the contents for all computer tutorials."
+  },
+  {
+    "objectID": "00-index.html#module-overview",
+    "href": "00-index.html#module-overview",
+    "title": "Methods in Human Geography",
+    "section": "",
+    "text": "The topics covered over the next five weeks are:\n\n\n\nWeek\nSection\nTopic\n\n\n\n\n1\nGetting Started\nProgramming for Data Analysis\n\n\n2\nStatistical Analysis\nStatistical Analysis I\n\n\n3\nStatistical Analysis\nStatistical Analysis II\n\n\n4\nSpatial Analysis\nSpatial Analysis I\n\n\n5\nSpatial Analysis\nSpatial Analysis II"
+  },
+  {
+    "objectID": "00-index.html#acknowledgements",
+    "href": "00-index.html#acknowledgements",
+    "title": "Methods in Human Geography",
+    "section": "",
+    "text": "This year’s workbook is compiled using:\n\nThe GEOG0030: Geocomputation 2023-2024 workbook by Justin van Dijk\nPrevious GEOG018: Methods in Human Geography content created by Rory Coulter"
+  },
+  {
+    "objectID": "01-recap.html",
+    "href": "01-recap.html",
+    "title": "1 Programming for Data Analysis",
+    "section": "",
+    "text": "1 Programming for Data Analysis"
+  },
+  {
+    "objectID": "03-statistics2.html",
+    "href": "03-statistics2.html",
+    "title": "1 Statistical Analysis II",
+    "section": "",
+    "text": "1 Statistical Analysis II"
+  },
+  {
+    "objectID": "02-statistics1.html",
+    "href": "02-statistics1.html",
+    "title": "1 Statistical Analysis I",
+    "section": "",
+    "text": "1 Statistical Analysis I"
+  },
+  {
+    "objectID": "04-spatial1.html",
+    "href": "04-spatial1.html",
+    "title": "1 Spatial Analysis I",
+    "section": "",
+    "text": "1 Spatial Analysis I"
+  },
+  {
+    "objectID": "05-spatial2.html",
+    "href": "05-spatial2.html",
+    "title": "1 Spatial Analysis II",
+    "section": "",
+    "text": "1 Spatial Analysis II"
+  }
+]
