@@ -43,11 +43,11 @@ website:
         contents:
           text: "Welcome"
           file: 00-index.qmd
-      - section: "Spatial Data"
+      - section: "Mapping Data"
         contents:
           - 01-getting-started.qmd
           - 02-mapping-data.qmd
-      - section: "Spatial Models"
+      - section: "Modelling Spatial Data"
         contents:
           - 03-spatial-autocorrelation.qmd
           - 04-spatial-models.qmd

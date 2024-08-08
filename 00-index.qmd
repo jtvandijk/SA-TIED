@@ -16,7 +16,7 @@ Welcome to the workbook for the **SA-TIED Geospatial Workshop**. Over the course
 - Quantifying the degree of spatial dependence in a dataset
 - Incorporating space into statistical models
 
-## Module overview {.unnumbered}
+## Workshop overview {.unnumbered}
 The schedule of this workshop is as follows:
 
 | Day  | Type              | Time        | Topic
