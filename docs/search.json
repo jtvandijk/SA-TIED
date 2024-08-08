@@ -2,71 +2,57 @@
   {
     "objectID": "00-index.html",
     "href": "00-index.html",
-    "title": "Methods in Human Geography",
+    "title": "SA-TIED Geospatial Workshop",
     "section": "",
-    "text": "Welcome to the second half of Methods in Human Geography. In this part of the module, you will delve into essential statistical analysis techniques and gain a strong foundation in working with spatial data. We wil be utilising R and the RStudio environment for statistical analysis, and the open-source programme QGIS for handling spatial data.\n\n\n\nMoodle is the central point of contact for GEOG0018 and it is where all important information will be communicated such as key module and assessment information. This workbook contains links to all reading material as well as the contents for all computer tutorials.\n\n\n\nThe topics covered over the next five weeks are:\n\n\n\nWeek\nSection\nTopic\n\n\n\n\n1\nGetting Started\nProgramming for Data Analysis\n\n\n2\nStatistical Analysis\nStatistical Analysis I\n\n\n3\nStatistical Analysis\nStatistical Analysis II\n\n\n4\nSpatial Analysis\nSpatial Analysis I\n\n\n5\nSpatial Analysis\nSpatial Analysis II\n\n\n\n\n\n\nThis year’s workbook is compiled using:\n\nThe GEOG0030: Geocomputation 2023-2024 workbook by Justin van Dijk\nPrevious GEOG018: Methods in Human Geography content created by Rory Coulter"
+    "text": "Welcome to the workbook for the SA-TIED Geospatial Workshop. Over the course of this two-day introductory workshop, you will be introduced to the R programming language, make some thematic maps, and conduct some spatial data analysis. We will explore the following topics:\n\nFundamentals of using R for data analysis\nCreating basic maps using R\nQuantifying the degree of spatial dependence in a dataset\nIncorporating space into statistical models\n\n\n\n\nThe schedule of this workshop is as follows:\n\n\n\nDay\nType\nTime\nTopic\n\n\n\n\n1\nLecture\n09h00-09h45\nR for Data Analysis\n\n\n1\nComputer tutorial\n10h00-12h00\nR for Data Analysis\n\n\n1\nLecture\n13h00-13h45\nR for Spatial Analysis\n\n\n1\nComputer tutorial\n14h00-16h00\nR for Spatial Analysis\n\n\n2\nLecture\n09h00-09h45\nSpatial Autocorrelation\n\n\n2\nComputer tutorial\n10h00-12h00\nSpatial Autocorrelation\n\n\n2\nLecture\n13h00-13h45\nSpatial Models\n\n\n2\nComputer tutorial\n14h00-16h00\nSpatial Models\n\n\n\n\n\n\nThis workbook takes is partially based on content from:\n\nThe GEOG0030: Geocomputation 2023-2024 workbook by Justin van Dijk\nThe Mapping and Modelling Geographic Data in R course by Richard Harris"
   },
   {
     "objectID": "00-index.html#welcome",
     "href": "00-index.html#welcome",
-    "title": "Methods in Human Geography",
+    "title": "SA-TIED Geospatial Workshop",
     "section": "",
-    "text": "Welcome to the second half of Methods in Human Geography. In this part of the module, you will delve into essential statistical analysis techniques and gain a strong foundation in working with spatial data. We wil be utilising R and the RStudio environment for statistical analysis, and the open-source programme QGIS for handling spatial data."
-  },
-  {
-    "objectID": "00-index.html#moodle",
-    "href": "00-index.html#moodle",
-    "title": "Methods in Human Geography",
-    "section": "",
-    "text": "Moodle is the central point of contact for GEOG0018 and it is where all important information will be communicated such as key module and assessment information. This workbook contains links to all reading material as well as the contents for all computer tutorials."
+    "text": "Welcome to the workbook for the SA-TIED Geospatial Workshop. Over the course of this two-day introductory workshop, you will be introduced to the R programming language, make some thematic maps, and conduct some spatial data analysis. We will explore the following topics:\n\nFundamentals of using R for data analysis\nCreating basic maps using R\nQuantifying the degree of spatial dependence in a dataset\nIncorporating space into statistical models"
   },
   {
     "objectID": "00-index.html#module-overview",
     "href": "00-index.html#module-overview",
-    "title": "Methods in Human Geography",
+    "title": "SA-TIED Geospatial Workshop",
     "section": "",
-    "text": "The topics covered over the next five weeks are:\n\n\n\nWeek\nSection\nTopic\n\n\n\n\n1\nGetting Started\nProgramming for Data Analysis\n\n\n2\nStatistical Analysis\nStatistical Analysis I\n\n\n3\nStatistical Analysis\nStatistical Analysis II\n\n\n4\nSpatial Analysis\nSpatial Analysis I\n\n\n5\nSpatial Analysis\nSpatial Analysis II"
+    "text": "The schedule of this workshop is as follows:\n\n\n\nDay\nType\nTime\nTopic\n\n\n\n\n1\nLecture\n09h00-09h45\nR for Data Analysis\n\n\n1\nComputer tutorial\n10h00-12h00\nR for Data Analysis\n\n\n1\nLecture\n13h00-13h45\nR for Spatial Analysis\n\n\n1\nComputer tutorial\n14h00-16h00\nR for Spatial Analysis\n\n\n2\nLecture\n09h00-09h45\nSpatial Autocorrelation\n\n\n2\nComputer tutorial\n10h00-12h00\nSpatial Autocorrelation\n\n\n2\nLecture\n13h00-13h45\nSpatial Models\n\n\n2\nComputer tutorial\n14h00-16h00\nSpatial Models"
   },
   {
     "objectID": "00-index.html#acknowledgements",
     "href": "00-index.html#acknowledgements",
-    "title": "Methods in Human Geography",
+    "title": "SA-TIED Geospatial Workshop",
     "section": "",
-    "text": "This year’s workbook is compiled using:\n\nThe GEOG0030: Geocomputation 2023-2024 workbook by Justin van Dijk\nPrevious GEOG018: Methods in Human Geography content created by Rory Coulter"
+    "text": "This workbook takes is partially based on content from:\n\nThe GEOG0030: Geocomputation 2023-2024 workbook by Justin van Dijk\nThe Mapping and Modelling Geographic Data in R course by Richard Harris"
   },
   {
-    "objectID": "01-recap.html",
-    "href": "01-recap.html",
-    "title": "1 Programming for Data Analysis",
+    "objectID": "01-getting-started.html",
+    "href": "01-getting-started.html",
+    "title": "1 R for Data Analysis",
     "section": "",
-    "text": "1 Programming for Data Analysis"
+    "text": "1 R for Data Analysis"
   },
   {
-    "objectID": "03-statistics2.html",
-    "href": "03-statistics2.html",
-    "title": "1 Statistical Analysis II",
+    "objectID": "02-mapping-data.html",
+    "href": "02-mapping-data.html",
+    "title": "1 R for Spatial Analysis",
     "section": "",
-    "text": "1 Statistical Analysis II"
+    "text": "1 R for Spatial Analysis"
   },
   {
-    "objectID": "02-statistics1.html",
-    "href": "02-statistics1.html",
-    "title": "1 Statistical Analysis I",
+    "objectID": "03-spatial-autocorrelation.html",
+    "href": "03-spatial-autocorrelation.html",
+    "title": "1 Spatial Autocorrelation",
     "section": "",
-    "text": "1 Statistical Analysis I"
+    "text": "1 Spatial Autocorrelation"
   },
   {
-    "objectID": "04-spatial1.html",
-    "href": "04-spatial1.html",
-    "title": "1 Spatial Analysis I",
+    "objectID": "04-spatial-models.html",
+    "href": "04-spatial-models.html",
+    "title": "1 Spatial Models",
     "section": "",
-    "text": "1 Spatial Analysis I"
-  },
-  {
-    "objectID": "05-spatial2.html",
-    "href": "05-spatial2.html",
-    "title": "1 Spatial Analysis II",
-    "section": "",
-    "text": "1 Spatial Analysis II"
+    "text": "1 Spatial Models"
   }
 ]

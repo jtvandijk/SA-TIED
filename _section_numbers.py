@@ -35,12 +35,19 @@ for htmlf in html_files:
     cnt += 1
     
     # update TOC chapter 1
-    html_content = html_content.replace('<span class="menu-text">Programming for Data Analysis</span>', \
-                                        '<span class="menu-text">1 Programming for Data Analysis</span>')
+    html_content = html_content.replace('<span class="menu-text">R for Data Analysis</span>', \
+                                        '<span class="menu-text">1 R for Data Analysis</span>')
     # update TOC chapter 2
-    html_content = html_content.replace('<span class="menu-text">Statistical Analysis I</span>', \
-                                        '<span class="menu-text">2 Statistical Analysis I</span>')
-                                        
+    html_content = html_content.replace('<span class="menu-text">R for Spatial Analysis</span>', \
+                                        '<span class="menu-text">2 R for Spatial Analysis</span>')
+
+    # update TOC chapter 3
+    html_content = html_content.replace('<span class="menu-text">Spatial Autocorrelation</span>', \
+                                        '<span class="menu-text">3 Spatial Autocorrelation</span>')
+    # update TOC chapter 4
+    html_content = html_content.replace('<span class="menu-text">Spatial Models</span>', \
+                                        '<span class="menu-text">4 Spatial Models</span>')
+                                                                          
     # write
     with open(htmlf, 'w') as file:
         file.write(html_content)
