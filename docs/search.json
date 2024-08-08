@@ -4,7 +4,7 @@
     "href": "00-index.html",
     "title": "SA-TIED Geospatial Workshop",
     "section": "",
-    "text": "Welcome to the workbook for the SA-TIED Geospatial Workshop. Over the course of this two-day introductory workshop, you will be introduced to the R programming language, make some thematic maps, and conduct some spatial data analysis. We will explore the following topics:\n\nFundamentals of using R for data analysis\nCreating basic maps using R\nQuantifying the degree of spatial dependence in a dataset\nIncorporating space into statistical models\n\n\n\n\nThe schedule of this workshop is as follows:\n\n\n\nDay\nType\nTime\nTopic\n\n\n\n\n1\nLecture\n09h00-09h45\nR for Data Analysis\n\n\n1\nComputer tutorial\n10h00-12h00\nR for Data Analysis\n\n\n1\nLecture\n13h00-13h45\nR for Spatial Analysis\n\n\n1\nComputer tutorial\n14h00-16h00\nR for Spatial Analysis\n\n\n2\nLecture\n09h00-09h45\nSpatial Autocorrelation\n\n\n2\nComputer tutorial\n10h00-12h00\nSpatial Autocorrelation\n\n\n2\nLecture\n13h00-13h45\nSpatial Models\n\n\n2\nComputer tutorial\n14h00-16h00\nSpatial Models\n\n\n\n\n\n\nThis workbook takes is partially based on content from:\n\nThe GEOG0030: Geocomputation 2023-2024 workbook by Justin van Dijk\nThe Mapping and Modelling Geographic Data in R course by Richard Harris"
+    "text": "Welcome to the workbook for the SA-TIED Geospatial Workshop. Over the course of this two-day introductory workshop, you will be introduced to the R programming language, make some thematic maps, and conduct some spatial data analysis. We will explore the following topics:\n\nFundamentals of using R for data analysis\nCreating basic maps using R\nQuantifying the degree of spatial dependence in a dataset\nIncorporating space into statistical models\n\n\n\n\nThe schedule of this workshop is as follows:\n\n\n\nDay\nType\nTime\nTopic\n\n\n\n\n1\nLecture\n09h00-09h45\nR for Data Analysis\n\n\n1\nComputer tutorial\n10h00-12h00\nR for Data Analysis\n\n\n1\nLecture\n13h00-13h45\nR for Spatial Analysis\n\n\n1\nComputer tutorial\n14h00-16h00\nR for Spatial Analysis\n\n\n2\nLecture\n09h00-09h45\nSpatial Autocorrelation\n\n\n2\nComputer tutorial\n10h00-12h00\nSpatial Autocorrelation\n\n\n2\nLecture\n13h00-13h45\nSpatial Models\n\n\n2\nComputer tutorial\n14h00-16h00\nSpatial Models\n\n\n\n\n\n\nThis workbook is created using the Quarto publishing system. The workbook’s content is partially based on:\n\nThe GEOG0030: Geocomputation 2023-2024 workbook by Justin van Dijk\nThe Mapping and Modelling Geographic Data in R course by Richard Harris"
   },
   {
     "objectID": "00-index.html#welcome",
@@ -25,7 +25,7 @@
     "href": "00-index.html#acknowledgements",
     "title": "SA-TIED Geospatial Workshop",
     "section": "",
-    "text": "This workbook takes is partially based on content from:\n\nThe GEOG0030: Geocomputation 2023-2024 workbook by Justin van Dijk\nThe Mapping and Modelling Geographic Data in R course by Richard Harris"
+    "text": "This workbook is created using the Quarto publishing system. The workbook’s content is partially based on:\n\nThe GEOG0030: Geocomputation 2023-2024 workbook by Justin van Dijk\nThe Mapping and Modelling Geographic Data in R course by Richard Harris"
   },
   {
     "objectID": "01-getting-started.html",
