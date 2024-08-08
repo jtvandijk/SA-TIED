@@ -24,11 +24,11 @@ The schedule of this workshop is as follows:
 | 1    | Lecture           | 09h00-09h45 | [R for Data Analysis]({{< var slides.l01 >}}) |
 | 1    | Computer tutorial | 10h00-12h00 | [R for Data Analysis]({{< var urls.c01 >}}) |
 | 1    | Lecture           | 13h00-13h45 | [R for Spatial Analysis]({{< var slides.l02 >}}) | 
-| 1    | Computer tutorial | 14h00-16h00 | [R for Spatial Analysis]({{< var slides.c02 >}}) | 
+| 1    | Computer tutorial | 14h00-16h00 | [R for Spatial Analysis]({{< var urls.c02 >}}) | 
 | 2    | Lecture           | 09h00-09h45 | [Spatial Autocorrelation]({{< var slides.l03 >}}) |
 | 2    | Computer tutorial | 10h00-12h00 | [Spatial Autocorrelation]({{< var urls.c03 >}}) |
 | 2    | Lecture           | 13h00-13h45 | [Spatial Models]({{< var slides.l04 >}}) | 
-| 2    | Computer tutorial | 14h00-16h00 | [Spatial Models]({{< var slides.c04 >}}) | 
+| 2    | Computer tutorial | 14h00-16h00 | [Spatial Models]({{< var urls.c04 >}}) | 
 
 ## Acknowledgements {.unnumbered}
 This workbook takes is partially based on content from:

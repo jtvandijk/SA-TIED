@@ -3,7 +3,7 @@
     "path": "~/Library/CloudStorage/Dropbox/UCL/Web/jtvandijk.github.io/SA-TIED/00-index.qmd",
     "project_path": "00-index.qmd",
     "type": "quarto_markdown",
-    "hash": "0",
+    "hash": "1966168500",
     "contents": "",
     "dirty": false,
     "created": 1723131657768.0,
@@ -13,15 +13,15 @@
         "rmdVisualMode": "false",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "12,0",
-        "scrollLine": "0"
+        "cursorPosition": "26,80",
+        "scrollLine": "19"
     },
     "folds": "",
-    "lastKnownWriteTime": 1723133210,
+    "lastKnownWriteTime": 1723133683,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1723133210860,
+    "last_content_update": 1723133683412,
     "read_only": false,
     "read_only_alternatives": []
 }
