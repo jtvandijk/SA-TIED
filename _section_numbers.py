@@ -58,7 +58,7 @@ with open(htmlredir) as file:
     html_content = file.read()
 
     # update redirect / if to W02
-    html_content = html_content.replace('02-statistics1.html', \
+    html_content = html_content.replace('02-mapping-data.html', \
                                         '00-index.html')
 
     # write
