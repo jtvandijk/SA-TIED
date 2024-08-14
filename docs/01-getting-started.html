@@ -214,6 +214,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#installation-of-r" id="toc-installation-of-r" class="nav-link" data-scroll-target="#installation-of-r"><span class="header-section-number">1.1</span> Installation of R</a></li>
   <li><a href="#customisation-of-r" id="toc-customisation-of-r" class="nav-link" data-scroll-target="#customisation-of-r"><span class="header-section-number">1.2</span> Customisation of R</a></li>
+  <li><a href="#getting-started-with-r" id="toc-getting-started-with-r" class="nav-link" data-scroll-target="#getting-started-with-r"><span class="header-section-number">1.3</span> Getting started with R</a>
+  <ul class="collapse">
+  <li><a href="#command-input" id="toc-command-input" class="nav-link" data-scroll-target="#command-input"><span class="header-section-number">1.3.1</span> Command input</a></li>
+  <li><a href="#storing-variables" id="toc-storing-variables" class="nav-link" data-scroll-target="#storing-variables"><span class="header-section-number">1.3.2</span> Storing variables</a></li>
+  <li><a href="#accessing-variables" id="toc-accessing-variables" class="nav-link" data-scroll-target="#accessing-variables"><span class="header-section-number">1.3.3</span> Accessing variables</a></li>
+  <li><a href="#text-variables" id="toc-text-variables" class="nav-link" data-scroll-target="#text-variables"><span class="header-section-number">1.3.4</span> Text variables</a></li>
+  <li><a href="#calling-functions" id="toc-calling-functions" class="nav-link" data-scroll-target="#calling-functions"><span class="header-section-number">1.3.5</span> Calling functions</a></li>
+  <li><a href="#inspecting-variables" id="toc-inspecting-variables" class="nav-link" data-scroll-target="#inspecting-variables"><span class="header-section-number">1.3.6</span> Inspecting variables</a></li>
+  <li><a href="#creating-larger-objectss" id="toc-creating-larger-objectss" class="nav-link" data-scroll-target="#creating-larger-objectss"><span class="header-section-number">1.3.7</span> Creating larger objectss</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jtvandijk/SA-TIED/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -233,12 +243,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Navigate in your browser to the download page: <a href="https://cran.r-project.org/">[Link]</a></li>
 <li>If you use a Windows computer, click on <em>Download R for Windows</em>. Then click on <em>base</em>. Download and install <strong>R 4.4.x for Windows</strong>. If you use a Mac computer, click on <em>Download R for macOS</em> and download and install <strong>R-4.4.x.arm64.pkg</strong> for <a href="https://support.apple.com/en-gb/HT211814">Apple silicon Macs</a> and <strong>R-4.4.x.x86_64.pkg</strong> for older <a href="https://support.apple.com/en-gb/HT211814">Intel-based Macs</a>.</li>
 </ol>
-<p>That is it! You now have successfully installed R onto your computer. To make working with R a little bit easier we also need to install something called an Integrated Development Environment (IDE). We will use <a href="https://posit.co/download/rstudio-desktop/">RStudio Desktop</a>:</p>
+<p>That is it! You now have successfully installed R onto your computer. To make working with the R language a little bit easier we also need to install something called an Integrated Development Environment (IDE). We will use <a href="https://posit.co/download/rstudio-desktop/">RStudio Desktop</a>:</p>
 <ol type="1">
 <li>Navigate to the official webpage of RStudio: <a href="https://posit.co/download/rstudio-desktop/#download">[Link]</a></li>
 <li>Download and install RStudio Desktop on your computer (<strong>free version!</strong>)</li>
 </ol>
-<p>After this, start <strong>RStudio</strong> to see if the installation was successful and you should see something like this:</p>
+<p>After this, start <strong>RStudio</strong> to see if the installation was successful and you should see something simmilar to what is shown in <a href="#fig-rstudio-interface">Figure&nbsp;1</a>.</p>
 <div class="cell" data-hash="01-getting-started_cache/html/fig-rstudio-interface_c8158df261f66491761e18412d82586a">
 <div class="cell-output-display">
 <div id="fig-rstudio-interface" class="quarto-figure quarto-figure-center anchored">
@@ -249,17 +259,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>The main windows that we will be using are:</p>
+<table class="table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 77%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Window</th>
+<th style="text-align: left;">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><em>Console</em></td>
+<td style="text-align: left;">where we write one-off code such as installing packages</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>Files</em></td>
+<td style="text-align: left;">where we can see where our files are stored on our computer system</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>Environment</em></td>
+<td style="text-align: left;">where our variables or objects are kept in memory</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>Plots</em></td>
+<td style="text-align: left;">where the outputs of our graphs, charts and maps are shown</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="customisation-of-r" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="customisation-of-r"><span class="header-section-number">1.2</span> Customisation of R</h2>
-<p>Now we have installed R and RStudio, we need to customise R. Many useful R functions come in packages, these are free libraries of code written and made available by other R users. This includes packages specifically developed for data cleaning, data wrangling, visualisation, mapping, and spatial analysis. To save us some time, we will install <strong>all R packages that we will need</strong> for the workshop in one go. Start RStudio, and copy and paste the following code into the <strong>console</strong> window. You can execute the code by hitting <strong>Enter</strong>. Depending on your computer’s specifications and the internet connection, this may take a short while.</p>
-<div class="cell" data-warnings="true" data-hash="01-getting-started_cache/html/01-install-libaries_257f55951a3bce2ae29895f788521905">
+<p>Now we have installed R and RStudio, we need to customise R. Many useful R functions come in packages, these are free libraries of code written and made available by other R users. This includes packages specifically developed for data cleaning, data wrangling, visualisation, mapping, and spatial analysis. To save us some time, we will install <strong>all R packages that we will need</strong> for the workshop in one go. Start RStudio, and copy and paste the following code into the <strong>console</strong> window. You can execute the code by pressing the <strong>Return</strong> button on your keyboard. Depending on your computer’s specifications and the internet connection, this may take a short while.</p>
+<div class="cell" data-warnings="true" data-hash="01-getting-started_cache/html/01-install-libaries_22756f2b2793534e1bb3653ed3fd393c">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>R code</strong></pre>
 </div>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install packages</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"sf"</span>, <span class="st">"tmap"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"sf"</span>, <span class="st">"tmap"</span>, <span class="st">"spdep"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="callout callout-style-simple callout-warning">
@@ -272,8 +313,381 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>Once you have installed the packages, we need to check whether we can in fact load them into R. Copy and paste the following code into the <strong>console</strong>, and execute by pressing <strong>Return</strong> on your keyboard again.</p>
+<div class="cell" data-warnings="true" data-verbose="true" data-hash="01-getting-started_cache/html/01-load-libaries_6ff5f48e0e2e17839954397932a51608">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spdep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>You will see some information printed to your console but as long as you do not get any of the messages below, the installation was successful. If you do get any of the messages below it means that the package was not properly installed, so try to install the package in question again.</p>
+<ul>
+<li><code>Error: package or namespace load failed for &lt;packagename&gt;</code></li>
+<li><code>Error: package '&lt;packagename&gt;' could not be loaded</code></li>
+<li><code>Error in library(&lt;packagename&gt;) : there is no package called '&lt;packagename&gt;'</code></li>
+</ul>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Many packages depend on other packages (so-called <em>dependencies</em>). It happens at times when you install a package it does not install all dependencies. If you encounter any of the above errors in reference to a package that you did not explicitly install, it is probably a missing dependency. Simply install the dependency by typing <code>install.packages('&lt;dependencyname&gt;')</code> and try loading all packages again.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="getting-started-with-r" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="getting-started-with-r"><span class="header-section-number">1.3</span> Getting started with R</h2>
+<p>Unlike traditional statistical analysis software like <a href="https://www.microsoft.com/en-us/microsoft-365/excel">Microsoft Excel</a> or <a href="https://www.stata.com/">Stata</a>, which often rely on point-and-click interfaces, R requires users to input commands to perform tasks such as loading datasets or fitting models. This command-based approach is typically done by writing scripts, which not only document your workflow but also allow for easy repetition of tasks.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>If you are familiar with Stata’s <strong>do-file</strong> you will find that the approach to programming in R is comparable.</p>
+</div>
+</div>
+</div>
+<p>We will first start off with using to test out some of R’s in-built functionality by creating a few variables. In your console, let us go ahead and conduct some quick maths. At their most basic, all programming languages can be used like calculators.</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>In your RStudio console, you should see a prompt sign <code>&gt;</code> on the left hand side. This is where we can directly interact with R. Anything that appears as red in the command line means it is an error or a warning. If you just see a <code>&gt;</code> it means you can type in your next line, whereas a <code>+</code> means that you have not finished the previous line of code. As will become clear, <code>+</code> signs often appear if you do not close brackets or you did not properly finish your command in a way that R expected.</p>
+</div>
+</div>
+</div>
+<section id="command-input" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="command-input"><span class="header-section-number">1.3.1</span> Command input</h3>
+<p>Type in <code>10 * 12</code> into the console and execute.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/04-math1_8fb4f18a50153c260de9277ea8dde272">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># multiplication</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="sc">*</span> <span class="dv">12</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 120</code></pre>
+</div>
+</div>
+<p>Once you press return, you should see the answer of <code>120</code> returned below.</p>
+</section>
+<section id="storing-variables" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="storing-variables"><span class="header-section-number">1.3.2</span> Storing variables</h3>
+<p>Rather than use <em>raw</em> or <em>standalone</em> numbers and values, we primarily want to use variables that store these values (or groups of them) under a memorable name for easy reference later. In R terminology this is called <strong>creating an object</strong> and this object becomes stored as a <strong>variable</strong>. The <code>&lt;-</code> symbol is used to assign the value to the variable name you have given. Let us create two variables to experiment with.</p>
+<p>Type in <code>ten &lt;- 10</code> into the console and execute.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/04-math2_f7e1f69743517ec3d893e9e0087dd4c1">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># store a variable</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ten <span class="ot">&lt;-</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>You will see nothing is returned in the console, but if you check your environment window it has now appeared as a new variable that contains the associated value.</p>
+<p>Type in <code>twelve &lt;- 12</code> into the console and execute.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/04-math3_c3ac6c89674c8f74717688b8e202da56">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># store a variable</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>twelve <span class="ot">&lt;-</span> <span class="dv">12</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>Once again, you will see nothing returned to the console but do check your environment window for your variable. We have now stored two numbers into our environment and given them variable names for easy reference. R stores these objects as variables in your computer’s <a href="https://en.wikipedia.org/wiki/Random-access_memory">RAM memory</a> so they can be processed quickly. Without saving your environment, these variables would be lost if you close R. Now we have our variables, we can go ahead and execute the same simple multiplication:</p>
+<p>Type in <code>ten * twelve</code> into the console and execute.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/04-math4_1f459e60c6a1f198afdd8d304bc359c4">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using variables</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ten <span class="sc">*</span> twelve</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 120</code></pre>
+</div>
+</div>
+<p>You should see the output in the console of <code>120</code>. Whilst this maths may look trivial, it is, in fact, extremely powerful as it shows how these <strong>variables</strong> can be treated in the same way as the values they contain.</p>
+<p>Next, type in <code>ten * twelve * 8</code> into the console and execute.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/04-math5_6f9c8ab5771937b9f8c85ecb29e89c24">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using variables and values</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>ten <span class="sc">*</span> twelve <span class="sc">*</span> <span class="dv">8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 960</code></pre>
+</div>
+</div>
+<p>You should get an answer of <code>960</code>. As you can see, we can mix <strong>variables</strong> with <strong>raw values</strong> without any problems. We can also store the output of variable calculations as a new variable.</p>
+<p>Type <code>output &lt;- ten * twelve * 8</code> into the console and execute.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/04-math6_94079089dee69b9f19b1e115ba853b0d">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># store output</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> ten <span class="sc">*</span> twelve <span class="sc">*</span> <span class="dv">8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>Because we are storing the output of our maths to a new variable, the answer is not returned to the screen.</p>
+</section>
+<section id="accessing-variables" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="accessing-variables"><span class="header-section-number">1.3.3</span> Accessing variables</h3>
+<p>We can ask our computer to return this <code>output</code> by simply typing it into the console. You should see we get the same value as the earlier equation.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/04-math7_cf79580801d76f84ba279c577855596d">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># return value</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 960</code></pre>
+</div>
+</div>
+</section>
+<section id="text-variables" class="level3" data-number="1.3.4">
+<h3 data-number="1.3.4" class="anchored" data-anchor-id="text-variables"><span class="header-section-number">1.3.4</span> Text variables</h3>
+<p>We can also store variables of different data types, not just numbers but text as well.</p>
+<p>Type in <code>str_variable &lt;- "Hello Pretoria"</code> into the console and execute.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/04-str1_cd31511c3597b7b335e32e89527174c8">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># store a variable</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>str_variable <span class="ot">&lt;-</span> <span class="st">"Hello Pretoria"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>We have just stored our sentence made from a combination of characters. A variable that stores text is known as a string. A string is always denoted by the use of quotation marks (<code>""</code> or <code>''</code>).</p>
+<p>Type in <code>str_variable</code> into the console and execute.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/04-str2_c42a1e48608b0586a24b706f0066adc9">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># return variable</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>str_variable</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Hello Pretoria"</code></pre>
+</div>
+</div>
+<p>You should see our entire sentence returned, enclosed in quotation marks (<code>""</code>).</p>
+</section>
+<section id="calling-functions" class="level3" data-number="1.3.5">
+<h3 data-number="1.3.5" class="anchored" data-anchor-id="calling-functions"><span class="header-section-number">1.3.5</span> Calling functions</h3>
+<p>We can also <strong>call</strong> a function on our variable. For example, we can also ask R to <strong>print</strong> our variable, which will give us the same output as accessing it directly via the console.</p>
+<p>Type in <code>print(str_variable)</code> into the console and execute.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/04-str3_5b619c900eb2ecd3462721417de4bcbc">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># printing a variable</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(str_variable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Hello Pretoria"</code></pre>
+</div>
+</div>
+<p>You can type <code>?print</code> into the console to find out more about the <code>print()</code> function.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/04-str4_d633d8d44648cbee7f7d187989b78c58">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># open documentation of the print function</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>?print</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>This can be used with any function to get access to their documentation which is essential to know how to use the function correctly and understand its output.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>In many cases, a function will take more than one argument or parameter, so it is important to know what you need to provide the function with in order for it to work. For now, we are using functions that only need one <em>required</em> argument although most functions will also have several <em>optional</em> or <em>default</em> parameters.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="inspecting-variables" class="level3" data-number="1.3.6">
+<h3 data-number="1.3.6" class="anchored" data-anchor-id="inspecting-variables"><span class="header-section-number">1.3.6</span> Inspecting variables</h3>
+<p>Within the base R language, there are various functions that have been written to help us examine and find out information about our variables. For example, we can use the <code>typeof()</code> function to check what data type our variable is.</p>
+<p>Type in <code>typeof(str_variable)</code> into the console and execute.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/04-str5_72ab5f9e441fb21e7f96519f186eb020">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># call the typeof() function</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(str_variable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+<p>You should see the answer: <code>character</code>. As evident, our <code>str_variable</code> is a <strong>character</strong> data type. We can try testing this out on one of our earlier variables too.</p>
+<p>Type in <code>typeof(ten)</code> into the console and execute.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/04-str6_f2812c7ce4863a52bded6835e007f13d">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># call the typeof() function</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(ten)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "double"</code></pre>
+</div>
+</div>
+<p>You should see the answer: <code>double</code>. For high-level objects that involve more complex data structures, such as when we load a <code>csv</code> or <code>.dta</code> into R as a <strong>dataframe</strong>, we are also able to check what <strong>class</strong> our object is. Type in <code>class(str_variable)</code> into the console and execute.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/04-str7_90f5ae629c96ba37417cf6789f8dbd34">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># call the class() function</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(str_variable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+<p>In this case, you will get the same answer because in R both its class and type are the same: a <em>character</em>. In other programming languages, you might have had <em>string</em> returned instead, but this effectively means the same thing.</p>
+<p>Type in <code>class(ten)</code> into the console and execute.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/04-str8_461f5663f2cd38f5f8860b2d524ddc31">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># call the class() function</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(ten)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+</div>
+<p>In this case, you will get a different answer because the class of this variable is numeric. This is because the class of numeric objects can contain either doubles (decimals) or integers (whole numbers). We can test this by asking whether our <code>ten</code> variable is an integer or not.</p>
+<p>Type in <code>is.integer(ten)</code> into the console and execute.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/04-var1_83603ccf3ff2d45a365c2f36e196cdd0">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(ten)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<p>You should see we get the answer <code>FALSE</code>: as we know from our earlier <code>typeof()</code> function our variable ten is stored as a double and therefore cannot be an integer.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Whilst knowing how to distinguish between different data types might not seem important now, the difference of a double versus an integer can quite easily lead to unexpected errors.</p>
+</div>
+</div>
+</div>
+<p>We can also ask how long our variable is. in this case, we will find out how many different sets of characters (strings) are stored in our variable, <code>str_variable</code>.</p>
+<p>Type in <code>length(str_variable)</code> into the console and execute.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/04-var2_2c42c95dfebbb8f725bc8aa5dfc8b2e7">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># call the length() function</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(str_variable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+<p>You should get the answer <code>1</code> because we only have one <em>set</em> of characters. We can also ask how long each set of characters is within our variable, i.e.&nbsp;ask how long the string contained by our variable is.</p>
+<p>Type in <code>nchar(str_variable)</code> into the console and execute.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/04-var3_72a3a2cf84c82689987c582c09b46ea5">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># call the nchar() function</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nchar</span>(str_variable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 14</code></pre>
+</div>
+</div>
+<p>You should get an answer of <code>31</code>.</p>
+</section>
+<section id="creating-larger-objectss" class="level3" data-number="1.3.7">
+<h3 data-number="1.3.7" class="anchored" data-anchor-id="creating-larger-objectss"><span class="header-section-number">1.3.7</span> Creating larger objectss</h3>
+<p>Variables are not constricted to one value, but can be combined to create larger objects. Type in <code>two_str_variable &lt;- c("This is our second variable", "It has two parts to it")</code> into the console and execute.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/04-var4_3dc9890a39ad14a00ce83d52c3044730">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># store a new variable</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>two_str_variable <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"This is our second string variable"</span>, <span class="st">"It has two parts to it"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>In this piece of code, we have created a new variable using the <code>c()</code> function in R, that stands for <em>combine values into a vector or list</em>. We have provided that function with two sets of strings, using a <em>comma</em> to separate our two strings - all contained within the function’s brackets (<code>()</code>). Y</p>
+<p>Let us now try both our <code>length()</code> and <code>nchar()</code> on our new variable and see what the results are:</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/04-var5_3e7422114255a8ff60c5070b500e0497">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># call the length() function</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(two_str_variable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># call the nchar() function</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nchar</span>(two_str_variable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 34 22</code></pre>
+</div>
+</div>
+<p>You should notice that the <code>length()</code> function now returned a <code>2</code> and the <code>nchar()</code> function returned two values of <code>34</code> and <code>22</code>.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>You may have noticed that every line of code in the examples is accompanied by a comment explaining its purpose. Comments in R are created using the hash symbol: <code>#</code>. This symbol tells R to ignore the commented line when running the code. These comments are helpful for understanding your code when you revisit it later or share with others.</p>
+</div>
+</div>
+</div>
 
 
+</section>
 </section>
 </section>
 
