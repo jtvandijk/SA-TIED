@@ -17,7 +17,7 @@ Welcome to the workbook for the **SA-TIED Geospatial Workshop**. Over the course
 - Incorporating space into statistical models
 
 ## Prerequisites {.unnumbered}
-No specific prerequisites, although familiarity with working with coding environments such a [R](https://www.r-project.org/), [Python](https://www.python.org/downloads/) and [Stata](https://www.stata.com/) is recommended.
+While there are no specific prerequisites for this workshop, basic familiarity with [R](https://www.r-project.org/), [Python](https://www.python.org/downloads/) or   [Stata](https://www.stata.com/) **do-files** .
 
 ## Workshop overview {.unnumbered}
 The schedule of this workshop is as follows:
