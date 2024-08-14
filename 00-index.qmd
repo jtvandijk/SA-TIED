@@ -9,7 +9,7 @@ knitr::include_graphics('images/w00/sa-tied-welcome.jpg')
 ```
 
 ## Welcome {.unnumbered}
-Welcome to the workbook for the **SA-TIED Geospatial Workshop**. Over the course of this two-day introductory workshop, you will be introduced to the R programming language, learn how to make thematic maps, and execute a basic spatial model. We will explore the following topics:
+Welcome to the workbook for the **SA-TIED Geospatial Workshop**. Over the course of this two-day introductory workshop, you will be introduced to the R programming language, learn how to map socio-economic and demographic data, and gain an understanding of the ideas behind spatial models.. We will explore the following topics:
 
 - Fundamentals of using R for data analysis
 - Creating basic maps using R
