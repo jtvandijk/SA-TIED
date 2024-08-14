@@ -1,0 +1,121 @@
+library(tidyverse)
+tibble(x=1:5,y=(1:5)^2)
+tibble(x=1:5,y=(1:5)^2) %>% summarise(total=sum(y))
+options(java.parameters = "-Xmx2G")
+library(r5r)
+data_path <- system.file("extdata/poa", package = "r5r")
+r5r_core <- setup_r5(data_path = data_path)
+poi <- fread(file.path(data_path, "poa_points_of_interest.csv"))#
+head(poi)
+library(sf)#
+library(data.table)#
+library(ggplot2)
+poi <- fread(file.path(data_path, "poa_points_of_interest.csv"))#
+head(poi)
+points <- fread(file.path(data_path, "poa_hexgrid.csv"))#
+#
+# sample points#
+sampled_rows <-  sample(1:nrow(points), 200, replace=TRUE)#
+points <- points[ sampled_rows, ]#
+head(points)
+# set departure datetime input#
+departure_datetime <- as.POSIXct("13-05-2019 14:00:00",#
+                                 format = "%d-%m-%Y %H:%M:%S")#
+#
+# calculate accessibility#
+access <- accessibility(r5r_core = r5r_core,#
+                        origins = points,#
+                        destinations = points,#
+                        opportunities_colnames = c("schools", "healthcare"),#
+                        mode = c("WALK", "TRANSIT"),#
+                        departure_datetime = departure_datetime,#
+                        decay_function = "step",#
+                        cutoffs = 60#
+                        )#
+head(access)
+# set inputs#
+mode <- c("WALK", "TRANSIT")#
+max_walk_time <- 30 # minutes#
+max_trip_duration <- 120 # minutes#
+departure_datetime <- as.POSIXct("13-05-2019 14:00:00",#
+                                 format = "%d-%m-%Y %H:%M:%S")#
+#
+# calculate a travel time matrix#
+ttm <- travel_time_matrix(r5r_core = r5r_core,#
+                          origins = poi,#
+                          destinations = poi,#
+                          mode = mode,#
+                          departure_datetime = departure_datetime,#
+                          max_walk_time = max_walk_time,#
+                          max_trip_duration = max_trip_duration)#
+#
+head(ttm)
+# set inputs#
+origins <- poi[10,]#
+destinations <- poi[12,]#
+mode <- c("WALK", "TRANSIT")#
+max_walk_time <- 60 # minutes#
+departure_datetime <- as.POSIXct("13-05-2019 14:00:00",#
+                                 format = "%d-%m-%Y %H:%M:%S")#
+#
+# calculate detailed itineraries#
+det <- detailed_itineraries(r5r_core = r5r_core,#
+                            origins = origins,#
+                            destinations = destinations,#
+                            mode = mode,#
+                            departure_datetime = departure_datetime,#
+                            max_walk_time = max_walk_time,#
+                            shortest_path = FALSE)#
+#
+head(det)
+# extract OSM network#
+street_net <- street_network_to_sf(r5r_core)#
+#
+# extract public transport network#
+transit_net <- r5r::transit_network_to_sf(r5r_core)#
+#
+# plot#
+ggplot() +#
+  geom_sf(data = street_net$edges, color='gray85') +#
+  geom_sf(data = det, aes(color=mode)) +#
+  facet_wrap(.~option) + #
+  theme_void()
+list.files(data.path)
+list.files(data_path)
+poi
+data_path <- system.file("/Users/justinvandijk/Library/CloudStorage/Dropbox/UCL/Research/MiscScripts/data")
+list.files(data_path)
+data_path <- "/Users/justinvandijk/Library/CloudStorage/Dropbox/UCL/Research/MiscScripts/data"
+list.files(data_path)
+data_path <- system.file("/Users/justinvandijk/Library/CloudStorage/Dropbox/UCL/Research/MiscScripts/GTFS/data")
+list.files(data_path)
+dp <- ''
+dp <- '/Users/justinvandijk/Library/CloudStorage/Dropbox/UCL/Research/MiscScripts/GTFS/data'
+list.files(dp)
+r5r_core <- setup_r5(data_path = dp)
+install.packages('tidytransit')
+library(tidytransit)
+library(dplyr)
+library(tidyverse)
+library(pillar)
+ls
+install.packages('rjava')
+31
+ls
+library(rjava)
+install.packages('rjava')
+system("uname -m")
+rJava::.jinit()#
+rJava::.jcall("java.lang.System", "S", "getProperty", "java.version")
+utils::remove.packages('r5r')#
+  devtools::install_github("ipeaGIT/r5r", subdir = "r-package")#
+  library(r5r)
+setwd("/Users/justinvandijk/Library/CloudStorage/Dropbox/UCL/Web/jtvandijk.github.io/SA-TIED")
+library(sf)
+install.packages(sf)
+install.packages('sf')
+options(repos=c(CRAN="https://cran.rstudio.com/"))çç\
+library(sf)
+install.packages('sf')
+library(sf)
+cpt <- st_read('data/spatial/subplace-cape-town-2013.gpkg') |> st_set_crs('EPSG:4148') |> st_transform('EPSG:4326')
