@@ -388,8 +388,7 @@ nchar(str_variable)
 
 You should get an answer of `31`.
 
-### Creating larger objectss
-
+### Creating larger objects
 Variables are not constricted to one value, but can be combined to create larger objects. Type in `two_str_variable <- c("This is our second variable", "It has two parts to it")` into the console and execute.
 
 ```{r}
