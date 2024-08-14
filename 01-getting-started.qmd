@@ -113,7 +113,6 @@ Type in `10 * 12` into the console and execute.
 Once you press return, you should see the answer of `120` returned below.
 
 ### Storing variables
-
 Rather than use *raw* or *standalone* numbers and values, we primarily want to use variables that store these values (or groups of them) under a memorable name for easy reference later. In R terminology this is called **creating an object** and this object becomes stored as a **variable**. The `<-` symbol is used to assign the value to the variable name you have given. Let us create two variables to experiment with.
 
 Type in `ten <- 10` into the console and execute.
@@ -388,7 +387,7 @@ nchar(str_variable)
 
 You should get an answer of `31`.
 
-### Creating larger objects
+### Creating multi-value objects
 Variables are not constricted to one value, but can be combined to create larger objects. Type in `two_str_variable <- c("This is our second variable", "It has two parts to it")` into the console and execute.
 
 ```{r}
@@ -425,3 +424,15 @@ You should notice that the `length()` function now returned a `2` and the `nchar
 ::: callout-note
 You may have noticed that every line of code in the examples is accompanied by a comment explaining its purpose. Comments in R are created using the hash symbol: `#`. This symbol tells R to ignore the commented line when running the code. These comments are helpful for understanding your code when you revisit it later or share with others.
 :::
+
+- Dataframes
+- Tidyverse
+
+## RStudio rojects
+RStudio projects make it straightforward to divide your work into multiple contexts, each with their own working directory, workspace, history, and source documents. 
+
+- Start R Project
+
+## Bathetha isi-Xhosa
+
+- Load 2011 Census for Cape Town - language table.
