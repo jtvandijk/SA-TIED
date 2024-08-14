@@ -1,1 +1,45 @@
 # R for Data Analysis
+
+## Installation of R
+R is a programming language originally designed for conducting statistical analysis and creating graphics. The major advantage of using R is that it is open source, can be used on any computer operating system, and is free for anyone to use and contribute to. Because of this, it has rapidly become the statistical language of choice for many academics and has a large user community with people constantly contributing new packages to carry out all manner of statistical, graphical, and importantly for us, geographical tasks.
+
+Installing R takes a few relatively simple steps involving two pieces of software. First there is the R programme itself. Follow these steps to get it installed on your computer:
+
+1. Navigate in your browser to the download page: [[Link]](https://cran.r-project.org/)
+2. If you use a Windows computer, click on *Download R for Windows*. Then click on *base*. Download and install **R 4.4.x for Windows**. If you use a Mac computer, click on *Download R for macOS* and download and install **R-4.4.x.arm64.pkg** for [Apple silicon Macs](https://support.apple.com/en-gb/HT211814) and **R-4.4.x.x86_64.pkg** for older [Intel-based Macs](https://support.apple.com/en-gb/HT211814).
+
+That is it! You now have successfully installed R onto your computer. To make working with R a little bit easier we also need to install something called an Integrated Development Environment (IDE). We will use [RStudio Desktop](https://posit.co/download/rstudio-desktop/):
+
+1. Navigate to the official webpage of RStudio: [[Link]](https://posit.co/download/rstudio-desktop/#download)
+2. Download and install RStudio Desktop on your computer (**free version!**)
+
+After this, start **RStudio** to see if the installation was successful and you should see something like this:
+
+```{r} 
+#| label: fig-rstudio-interface
+#| echo: False
+#| cache: True
+#| fig-cap: "The RStudio interface."
+knitr::include_graphics('images/w01/rstudio-interface.png')
+```
+
+## Customisation of R
+Now we have installed R and RStudio, we need to customise R. Many useful R functions come in packages, these are free libraries of code written and made available by other R users. This includes packages specifically developed for data cleaning, data wrangling, visualisation, mapping, and spatial analysis. To save us some time, we will install **all R packages that we will need** for the workshop in one go. Start RStudio, and copy and paste the following code into the **console** window. You can execute the code by hitting **Enter**. Depending on your computer's specifications and the internet connection, this may take a short while.
+
+```{r} 
+#| label: 01-install-libaries
+#| echo: True
+#| warnings: True
+#| message: True
+#| eval: False
+#| tidy: True
+#| filename: "R code"
+# install packages
+install.packages(c('tidyverse','sf','tmap'))
+```
+
+::: {.callout-warning}
+For Linux and macOS users who are new to working with spatial data in R, this installation of some of these libraries may fail since additional (non-R) libraries are required (which are automatically installed for Windows users). If this is the case, please refer to the [information pages](https://r-spatial.github.io/sf/#macos) of the `sf` library for instructions.
+:::
+
+

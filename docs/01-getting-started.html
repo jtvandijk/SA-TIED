@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -176,7 +210,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#r-for-data-analysis" id="toc-r-for-data-analysis" class="nav-link active" data-scroll-target="#r-for-data-analysis"><span class="header-section-number">1</span> R for Data Analysis</a></li>
+  <li><a href="#r-for-data-analysis" id="toc-r-for-data-analysis" class="nav-link active" data-scroll-target="#r-for-data-analysis"><span class="header-section-number">1</span> R for Data Analysis</a>
+  <ul class="collapse">
+  <li><a href="#installation-of-r" id="toc-installation-of-r" class="nav-link" data-scroll-target="#installation-of-r"><span class="header-section-number">1.1</span> Installation of R</a></li>
+  <li><a href="#customisation-of-r" id="toc-customisation-of-r" class="nav-link" data-scroll-target="#customisation-of-r"><span class="header-section-number">1.2</span> Customisation of R</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jtvandijk/SA-TIED/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -187,8 +225,56 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="r-for-data-analysis" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> R for Data Analysis</h1>
+<section id="installation-of-r" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="installation-of-r"><span class="header-section-number">1.1</span> Installation of R</h2>
+<p>R is a programming language originally designed for conducting statistical analysis and creating graphics. The major advantage of using R is that it is open source, can be used on any computer operating system, and is free for anyone to use and contribute to. Because of this, it has rapidly become the statistical language of choice for many academics and has a large user community with people constantly contributing new packages to carry out all manner of statistical, graphical, and importantly for us, geographical tasks.</p>
+<p>Installing R takes a few relatively simple steps involving two pieces of software. First there is the R programme itself. Follow these steps to get it installed on your computer:</p>
+<ol type="1">
+<li>Navigate in your browser to the download page: <a href="https://cran.r-project.org/">[Link]</a></li>
+<li>If you use a Windows computer, click on <em>Download R for Windows</em>. Then click on <em>base</em>. Download and install <strong>R 4.4.x for Windows</strong>. If you use a Mac computer, click on <em>Download R for macOS</em> and download and install <strong>R-4.4.x.arm64.pkg</strong> for <a href="https://support.apple.com/en-gb/HT211814">Apple silicon Macs</a> and <strong>R-4.4.x.x86_64.pkg</strong> for older <a href="https://support.apple.com/en-gb/HT211814">Intel-based Macs</a>.</li>
+</ol>
+<p>That is it! You now have successfully installed R onto your computer. To make working with R a little bit easier we also need to install something called an Integrated Development Environment (IDE). We will use <a href="https://posit.co/download/rstudio-desktop/">RStudio Desktop</a>:</p>
+<ol type="1">
+<li>Navigate to the official webpage of RStudio: <a href="https://posit.co/download/rstudio-desktop/#download">[Link]</a></li>
+<li>Download and install RStudio Desktop on your computer (<strong>free version!</strong>)</li>
+</ol>
+<p>After this, start <strong>RStudio</strong> to see if the installation was successful and you should see something like this:</p>
+<div class="cell" data-hash="01-getting-started_cache/html/fig-rstudio-interface_c8158df261f66491761e18412d82586a">
+<div class="cell-output-display">
+<div id="fig-rstudio-interface" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/w01/rstudio-interface.png" class="img-fluid figure-img" width="1090"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: The RStudio interface.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="customisation-of-r" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="customisation-of-r"><span class="header-section-number">1.2</span> Customisation of R</h2>
+<p>Now we have installed R and RStudio, we need to customise R. Many useful R functions come in packages, these are free libraries of code written and made available by other R users. This includes packages specifically developed for data cleaning, data wrangling, visualisation, mapping, and spatial analysis. To save us some time, we will install <strong>all R packages that we will need</strong> for the workshop in one go. Start RStudio, and copy and paste the following code into the <strong>console</strong> window. You can execute the code by hitting <strong>Enter</strong>. Depending on your computer’s specifications and the internet connection, this may take a short while.</p>
+<div class="cell" data-warnings="true" data-hash="01-getting-started_cache/html/01-install-libaries_257f55951a3bce2ae29895f788521905">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">'tidyverse'</span>,<span class="st">'sf'</span>,<span class="st">'tmap'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>For Linux and macOS users who are new to working with spatial data in R, this installation of some of these libraries may fail since additional (non-R) libraries are required (which are automatically installed for Windows users). If this is the case, please refer to the <a href="https://r-spatial.github.io/sf/#macos">information pages</a> of the <code>sf</code> library for instructions.</p>
+</div>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
