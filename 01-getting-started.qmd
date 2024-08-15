@@ -450,7 +450,7 @@ Please ensure that **folder names** and **file names** do not contain spaces or 
 :::
 
 ## Bathetha isiXhosa
-With the basics covered, let us dive into loading a real dataset, performing data cleaning, and conducting some exploratory data analysis. We will work with a dataset that contains counts of the primary languages spoken in South African, sourced from the [South African Census Community Profiles 2011](https://www.statssa.gov.za/?page_id=3839) and made available through the [DataFirst](https://www.datafirst.uct.ac.za/dataportal/index.php/catalog/517/data-dictionary) data service. You can download a copy of the file through the link below and save it in your project folder under `data/attributes`.
+With the basics covered, let us dive into loading a real dataset, performing data cleaning, and conducting some exploratory data analysis on the isiXhosa speaking population. We will work with a dataset that contains counts of the primary languages spoken in South African, sourced from the [South African Census Community Profiles 2011](https://www.statssa.gov.za/?page_id=3839) and made available through the [DataFirst](https://www.datafirst.uct.ac.za/dataportal/index.php/catalog/517/data-dictionary) data service. You can download a copy of the file through the link below and save it in your project folder under `data/attributes`.
 
 | File                                 | Type   | Link |
 | :------                              | :------| :------ |
