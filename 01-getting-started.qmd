@@ -100,7 +100,6 @@ We will first start off with using to test out some of R's in-built functionalit
 In your RStudio console, you should see a prompt sign `>` on the left hand side. This is where we can directly interact with R. Anything that appears as red in the command line means it is an error or a warning. If you just see a `>` it means you can type in your next line, whereas a `+` means that you have not finished the previous line of code. As will become clear, `+` signs often appear if you do not close brackets or you did not properly finish your command in a way that R expected.
 :::
 
-### Command input
 Type in `10 * 12` into the console and execute.
 
 ```{r}
@@ -444,7 +443,7 @@ For more information on the `tidyverse` have a look at [www.tidyverse.org](https
 ## RStudio projects
 In RStudio, we can use **scripts** to build up our code that we can run repeatedly and save for future use. We can organise these scripts into RStduio projects.These projects keep all the files associated with an analysis together: input data, R scripts, analytical results, figures, etc. This means we can easily keep track of all data, input and output, whilst still creating standalone scripts for each bit of processing analysis we do. It also makes dealing with [directories and filepaths](https://en.wikipedia.org/wiki/Path_(computing)) much easier.
 
-Navigate to **File** -> **New Project** -> **New Directory**, and create a folder with the name **GeoSpatial-Workshop24**. Click on **Create Project**. You should now see your main window switch to this new project and if you check your **files** window, you should now see a new **R Project** called **GeoSpatial-Workshop24**.
+Navigate to **File** -> **New Project** -> **New Directory**, and create a folder with the name `GeoSpatial-Workshop24`. Click on **Create Project**. You should now see your main window switch to this new project and if you check your **files** window, you should now see a new **R Project** called `GeoSpatial-Workshop24`.
   
 ::: {.callout-warning}
 Please ensure that **folder names** and **file names** do not contain spaces or special characters such as `*` `.` `"` `/` `\` `[` `]` `:` `;` `|` `=` `,` `<` `?` `>` `&` `$` `#` `!` `'` `{` `}` `(` `)`. Different operating systems and programming languages deal differently with spaces and special characters and as such including these in your folder names and file names can cause many problems and unexpected errors. As an alternative to using white space you can use an underscore `_` or hyphen `-` if you like.
@@ -644,7 +643,10 @@ In this case, we have overwritten our initial object, though this is not strictl
 head(att)
 ```
 
-Our code appears to have worked successfully. The next thing that we probably want to do is normalise our data. A common challenge with spatial data is that the spatial units aren not always the same size — some Small Area Layers may have larger populations, while others have fewer residents. This makes it difficult to compare absolute counts fairly. To address this, we can sum the counts across all relevant columns to determine the total number of speakers in each area. Then, we can calculate the proportion of isiXhosa speakers within each Small Area Layer.
+Our code appears to have worked successfully. 
+
+### Aggregate data
+The next thing that we probably want to do is standardise our data. A common challenge with spatial data is that the spatial units aren not always the same size — some Small Area Layers may have larger populations, while others have fewer residents. This makes it difficult to compare absolute counts fairly. To address this, we can sum the counts across all relevant columns to determine the total number of speakers in each area. Then, we can calculate the proportion of isiXhosa speakers within each Small Area Layer:
 
 ```{r}
 #| label: 01-sum-across
@@ -668,7 +670,7 @@ head(att)
 
 You can further inspect the results using the `View()` function.
 
-We now have the percentage of people who speak isiXhosa as their primary language for each Small Area Layer. To provide a more meaningful representation, we can aggregate the data by sub-places. This involves grouping our data by `sp_code`, which contains unique sub-place codes. We will then:
+We now have the percentage of people who speak isiXhosa as their primary language for each Small Area Layer. To provide a more meaningful representation, however, we can aggregate the data by sub-places. This involves grouping our data by `sp_code`, which contains unique sub-place codes. We will then:
 
 1. Sum the number of isiXhosa speakers within each sub-place and store this in a new variable.
 2. Sum the total number of people within each sub-place and store this in another new variable.

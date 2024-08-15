@@ -38,3 +38,7 @@ This workbook is created using the [Quarto](https://quarto.org/) publishing syst
 
 - The [GEOG0030: Geocomputation 2023-2024](https://jtvandijk.github.io/GEOG0030_20232024/) workbook by [Justin van Dijk](https://www.mappingdutchman.com)
 - The [Mapping and Modelling Geographic Data in R](https://profrichharris.github.io/MandM/) course by [Richard Harris](https://profrichharris.github.io/)
+
+The workbooks contains data sourced from the 2011 South African Census of Population:
+
+- Statistics South Africa. South African Census Community Profiles 2011 [dataset]. Version 1. Pretoria: Statistics SA [producer], 2014. Cape Town: DataFirst [distributor], 2015. DOI: [https://doi.org/10.25828/6n0m-7m52](https://doi.org/10.25828/6n0m-7m52)
