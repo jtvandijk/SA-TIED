@@ -225,9 +225,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#creating-multi-value-objects" id="toc-creating-multi-value-objects" class="nav-link" data-scroll-target="#creating-multi-value-objects"><span class="header-section-number">1.3.7</span> Creating multi-value objects</a></li>
   </ul></li>
   <li><a href="#rstudio-projects" id="toc-rstudio-projects" class="nav-link" data-scroll-target="#rstudio-projects"><span class="header-section-number">1.4</span> RStudio projects</a></li>
-  <li><a href="#bathetha-isi-xhosa" id="toc-bathetha-isi-xhosa" class="nav-link" data-scroll-target="#bathetha-isi-xhosa"><span class="header-section-number">1.5</span> Bathetha isi-Xhosa</a>
+  <li><a href="#bathetha-isixhosa" id="toc-bathetha-isixhosa" class="nav-link" data-scroll-target="#bathetha-isixhosa"><span class="header-section-number">1.5</span> Bathetha isiXhosa</a>
   <ul class="collapse">
   <li><a href="#loading-data" id="toc-loading-data" class="nav-link" data-scroll-target="#loading-data"><span class="header-section-number">1.5.1</span> Loading data</a></li>
+  <li><a href="#exploring-data" id="toc-exploring-data" class="nav-link" data-scroll-target="#exploring-data"><span class="header-section-number">1.5.2</span> Exploring data</a></li>
+  <li><a href="#subset-data" id="toc-subset-data" class="nav-link" data-scroll-target="#subset-data"><span class="header-section-number">1.5.3</span> Subset data</a></li>
   </ul></li>
   <li><a href="#assignment" id="toc-assignment" class="nav-link" data-scroll-target="#assignment"><span class="header-section-number">1.6</span> Assignment</a></li>
   </ul></li>
@@ -771,8 +773,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="bathetha-isi-xhosa" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="bathetha-isi-xhosa"><span class="header-section-number">1.5</span> Bathetha isi-Xhosa</h2>
+<section id="bathetha-isixhosa" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="bathetha-isixhosa"><span class="header-section-number">1.5</span> Bathetha isiXhosa</h2>
 <p>With the basics covered, let us dive into loading a real dataset, performing data cleaning, and conducting some exploratory data analysis. We will work with a dataset that contains counts of the primary languages spoken in South African, sourced from the <a href="https://www.statssa.gov.za/?page_id=3839">South African Census Community Profiles 2011</a> and made available through the <a href="https://www.datafirst.uct.ac.za/dataportal/index.php/catalog/517/data-dictionary">DataFirst</a> data service. You can download a copy of the file through the link below and save it in your project folder under <code>data/attributes</code>.</p>
 <table class="table">
 <thead>
@@ -786,7 +788,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td style="text-align: left;">SA Census 2011 Language Table</td>
 <td style="text-align: left;"><code>.dta</code></td>
-<td style="text-align: left;"><a href="https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes">Download</a></td>
+<td style="text-align: left;"><a href="https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes/language.dta">Download</a></td>
 </tr>
 </tbody>
 </table>
@@ -935,15 +937,254 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 1  1600001</code></pre>
 </div>
 </div>
-<p>Alternatively, you can access the data within individual columns by referring to their names using the <code>$</code> operator. This allows you to easily extract and work with a specific column without needing to know its position in the dataframe.</p>
-<p>For example, if your dataframe is named <code>dataframe</code> and you want to access a column named <code>age</code>, you would use <code>dataframe$age</code>. This method is especially useful when your data has many columns or when the column positions may change, as it relies on the column names rather than their index numbers.</p>
+<p>Alternatively, you can access the data within individual columns by referring to their names using the <code>$</code> operator. This allows you to easily extract and work with a specific column without needing to know its position in the dataframe. For example, if your dataframe is named <code>dataframe</code> and you want to access a column named <code>age</code>, you would use <code>dataframe$age</code>. This method is especially useful when your data has many columns or when the column positions may change, as it relies on the column names rather than their index numbers.</p>
+</section>
+<section id="exploring-data" class="level3" data-number="1.5.2">
+<h3 data-number="1.5.2" class="anchored" data-anchor-id="exploring-data"><span class="header-section-number">1.5.2</span> Exploring data</h3>
+<p>Now that we have loaded and inspected our data, we can examine its distribution. We will focus on the column that contains the counts of individuals who speak isiXhosa as their primary language, aggregated by Small Area Layer—the most granular geographic level available in the 2011 Census. This data is stored in the <code>lng_4</code> column of the dataframe.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/01-explore-data_c3930be5e1ee7ab810487ba0f68765e5">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mean</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(att<span class="sc">$</span>lng_4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 95.99431</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># median</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(att<span class="sc">$</span>lng_4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># range</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(att<span class="sc">$</span>lng_4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]    0 6465</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summary</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(att<span class="sc">$</span>lng_4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   0.00    0.00    9.00   95.99   72.00 6465.00 </code></pre>
+</div>
+</div>
+<p>We can also call some functions to quickly draw a boxplot, histogram, or scatterplot:</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/fig-01-plot-data-boxplot_b69e6e1444431ddf7598de0755d7e279">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(att<span class="sc">$</span>lng_4, <span class="at">horizontal =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output-display">
+<div id="fig-01-plot-data-boxplot" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="01-getting-started_files/figure-html/fig-01-plot-data-boxplot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: Quick boxplot.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/fig-01-plot-data-histogram_af3850cf3ff1f617d0e42bbeee8f9918">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(att<span class="sc">$</span>lng_4, <span class="at">breaks =</span> <span class="dv">50</span>, <span class="at">xlab =</span> <span class="st">"isiXhosa"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output-display">
+<div id="fig-01-plot-data-histogram" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="01-getting-started_files/figure-html/fig-01-plot-data-histogram-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: Quick histogram.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/fig-01-plot-data-bivariate_45b3a163d7f7d8064178d010fbc66e90">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bivariate plot</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(att<span class="sc">$</span>lng_4, att<span class="sc">$</span>lng_2, <span class="at">xlab =</span> <span class="st">"isiXhosa"</span>, <span class="at">ylab =</span> <span class="st">"English"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output-display">
+<div id="fig-01-plot-data-bivariate" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="01-getting-started_files/figure-html/fig-01-plot-data-bivariate-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Quick bivariate plot.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="subset-data" class="level3" data-number="1.5.3">
+<h3 data-number="1.5.3" class="anchored" data-anchor-id="subset-data"><span class="header-section-number">1.5.3</span> Subset data</h3>
+<p>The dataset is quite extensive, containing counts for all 84,908 Small Area Layers. To make our analysis more manageable, let’s focus on a subset of the data, specifically zooming in on Cape Town. We can achieve this by filtering the data using the <code>dc_name</code> column, which corresponds to the District Municipality Name.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/01-filter-data_ac401fce9caaafb7de2c90cef8ea12bb">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prepare data: filter out Cape Town</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>att <span class="ot">&lt;-</span> att <span class="sc">|&gt;</span></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(dc_name <span class="sc">==</span> <span class="st">"City of Cape Town"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The code above uses a pipe function: <code>|&gt;</code>. The pipe operator allows you to pass the output of one function directly into the next, streamlining your code. While it might seem a bit confusing at first, you will find that it makes your code faster to write and easier to read. More importantly, it reduces the need to create multiple intermediate variables to store outputs.</p>
+</div>
+</div>
+</div>
+<p>In this case, we have overwritten our initial object, though this is not strictly necessary. Our object now contains a subset of the full language dataset that we initially loaded.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/01-inspect-data-subset_7dbce5ce0a22e378f12bd15ab28fef6b">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect data</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(att)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 28
+  sal_code   sp_code sp_name   mp_code mp_name mn_mdb_c mn_code mn_name dc_mdb_c
+     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   
+1  1990001 199014025 Paarden …  199014 Milner… CPT          199 City o… CPT     
+2  1990002 199016089 Mimosa     199016 Bellvi… CPT          199 City o… CPT     
+3  1990003 199041008 Signal H…  199041 Cape T… CPT          199 City o… CPT     
+4  1990004 199017021 Durbanvi…  199017 Durban… CPT          199 City o… CPT     
+5  1990005 199053012 Pine Hav…  199053 Simon'… CPT          199 City o… CPT     
+6  1990006 199030007 Guguleth…  199030 Gugule… CPT          199 City o… CPT     
+# ℹ 19 more variables: dc_code &lt;dbl&gt;, dc_name &lt;chr&gt;, pr_code &lt;dbl&gt;,
+#   pr_name &lt;chr&gt;, lng_1 &lt;dbl&gt;, lng_2 &lt;dbl&gt;, lng_3 &lt;dbl&gt;, lng_4 &lt;dbl&gt;,
+#   lng_5 &lt;dbl&gt;, lng_6 &lt;dbl&gt;, lng_7 &lt;dbl&gt;, lng_8 &lt;dbl&gt;, lng_9 &lt;dbl&gt;,
+#   lng_10 &lt;dbl&gt;, lng_11 &lt;dbl&gt;, lng_12 &lt;dbl&gt;, lng_13 &lt;dbl&gt;, lng_14 &lt;dbl&gt;,
+#   lng_15 &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Our code appears to have worked successfully. The next thing that we probably want to do is normalise our data. A common challenge with spatial data is that the spatial units aren not always the same size — some Small Area Layers may have larger populations, while others have fewer residents. This makes it difficult to compare absolute counts fairly. To address this, we can sum the counts across all relevant columns to determine the total number of speakers in each area. Then, we can calculate the proportion of isiXhosa speakers within each Small Area Layer.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/01-sum-across_95aa8db21b8331246847ea7bf7d41eb5">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prepare data: sum across</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>att <span class="ot">&lt;-</span> att <span class="sc">|&gt;</span></span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">sal_pop =</span> <span class="fu">sum</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">"lng"</span>)), <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="co"># prepare data: calculate percentages</span></span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>att <span class="ot">&lt;-</span> att <span class="sc">|&gt;</span></span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">sal_prop_xhosa =</span> lng_4<span class="sc">/</span>sal_pop)</span>
+<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-10"><a href="#cb69-10" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect data</span></span>
+<span id="cb69-11"><a href="#cb69-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(att)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 30
+  sal_code   sp_code sp_name   mp_code mp_name mn_mdb_c mn_code mn_name dc_mdb_c
+     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   
+1  1990001 199014025 Paarden …  199014 Milner… CPT          199 City o… CPT     
+2  1990002 199016089 Mimosa     199016 Bellvi… CPT          199 City o… CPT     
+3  1990003 199041008 Signal H…  199041 Cape T… CPT          199 City o… CPT     
+4  1990004 199017021 Durbanvi…  199017 Durban… CPT          199 City o… CPT     
+5  1990005 199053012 Pine Hav…  199053 Simon'… CPT          199 City o… CPT     
+6  1990006 199030007 Guguleth…  199030 Gugule… CPT          199 City o… CPT     
+# ℹ 21 more variables: dc_code &lt;dbl&gt;, dc_name &lt;chr&gt;, pr_code &lt;dbl&gt;,
+#   pr_name &lt;chr&gt;, lng_1 &lt;dbl&gt;, lng_2 &lt;dbl&gt;, lng_3 &lt;dbl&gt;, lng_4 &lt;dbl&gt;,
+#   lng_5 &lt;dbl&gt;, lng_6 &lt;dbl&gt;, lng_7 &lt;dbl&gt;, lng_8 &lt;dbl&gt;, lng_9 &lt;dbl&gt;,
+#   lng_10 &lt;dbl&gt;, lng_11 &lt;dbl&gt;, lng_12 &lt;dbl&gt;, lng_13 &lt;dbl&gt;, lng_14 &lt;dbl&gt;,
+#   lng_15 &lt;dbl&gt;, sal_pop &lt;dbl&gt;, sal_prop_xhosa &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>You can further inspect the results using the <code>View()</code> function.</p>
+<p>We now have the percentage of people who speak isiXhosa as their primary language for each Small Area Layer. To provide a more meaningful representation, we can aggregate the data by sub-places. This involves grouping our data by <code>sp_code</code>, which contains unique sub-place codes. We will then:</p>
+<ol type="1">
+<li>Sum the number of isiXhosa speakers within each sub-place and store this in a new variable.</li>
+<li>Sum the total number of people within each sub-place and store this in another new variable.</li>
+<li>Extract the distinct values for each sub-place.</li>
+</ol>
+<p>By using the pipe function again, we can chain these steps together efficiently as follows:</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/01-aggregate-sub-place_837b91e7c5d276cdce7d9733bb9b82ce">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prepare data: aggregate small areas to sub places</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>att <span class="ot">&lt;-</span> att <span class="sc">|&gt;</span></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(sp_code) <span class="sc">|&gt;</span></span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">sp_pop =</span> <span class="fu">sum</span>(sal_pop)) <span class="sc">|&gt;</span></span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">sp_xhosa =</span> <span class="fu">sum</span>(lng_4)) <span class="sc">|&gt;</span></span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">distinct</span>(sp_code, sp_pop, sp_xhosa)</span>
+<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect data</span></span>
+<span id="cb71-10"><a href="#cb71-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(att)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+    sp_code sp_pop sp_xhosa
+      &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+1 199014025     12        0
+2 199016089   1212        0
+3 199041008     12        0
+4 199017021   7893      105
+5 199053012      9        0
+6 199030007  55242    47385</code></pre>
+</div>
+</div>
+<p>You can further inspect the results using the <code>View()</code> function.</p>
+<p>We can save this dataset so that we can easily load it the next time we want to work with this by writing it to a <code>.csv</code> file.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/01-write-csv_5a729893877b4d48f388aab9b2dc650f">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># write data</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(<span class="at">x =</span> att, <span class="at">file =</span> <span class="st">"data/attributes/language.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
 </section>
 </section>
 <section id="assignment" class="level2" data-number="1.6">
 <h2 data-number="1.6" class="anchored" data-anchor-id="assignment"><span class="header-section-number">1.6</span> Assignment</h2>
-<ul>
-<li>Create a CPT boxplot using ‘access to internet from home’ using the 2011 Census data.</li>
-</ul>
+<p>This concludes this session. Please try to complete the following tasks:</p>
+<ol type="1">
+<li>Create a histogram showing the distribution of the <em>number</em> of isiXhosa speakers in Cape Town, grouped by sub-place.</li>
+<li>Create a boxplot of the <em>proportion</em> of isiXhosa-speakers in Cape Town, grouped by sub place.</li>
+</ol>
+<p>Next, use the link below to download another dataset sourced from the <a href="https://www.statssa.gov.za/?page_id=3839">South African Census Community Profiles 2011</a> that contains information on internet access. Save the file in your project folder under <code>data/attributes</code>.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">File</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Link</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">SA Census 2011 Internet Access Table</td>
+<td style="text-align: left;"><code>.dta</code></td>
+<td style="text-align: left;"><a href="https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes/internet-access.dta">Download</a></td>
+</tr>
+</tbody>
+</table>
+<p>Use this dataset to:</p>
+<ol type="1">
+<li>Create a histogram of the distribution of the <em>number</em> of people with internet access at home in the City of Johannesburg, grouped by sub-place.</li>
+<li>Create a boxplot of the <em>proportion</em> of people with internet access at home in the City of Johannesburg, grouped by sub-place.</li>
+</ol>
 
 
 </section>

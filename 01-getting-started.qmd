@@ -450,12 +450,12 @@ Navigate to **File** -> **New Project** -> **New Directory**, and create a folde
 Please ensure that **folder names** and **file names** do not contain spaces or special characters such as `*` `.` `"` `/` `\` `[` `]` `:` `;` `|` `=` `,` `<` `?` `>` `&` `$` `#` `!` `'` `{` `}` `(` `)`. Different operating systems and programming languages deal differently with spaces and special characters and as such including these in your folder names and file names can cause many problems and unexpected errors. As an alternative to using white space you can use an underscore `_` or hyphen `-` if you like.
 :::
 
-## Bathetha isi-Xhosa
+## Bathetha isiXhosa
 With the basics covered, let us dive into loading a real dataset, performing data cleaning, and conducting some exploratory data analysis. We will work with a dataset that contains counts of the primary languages spoken in South African, sourced from the [South African Census Community Profiles 2011](https://www.statssa.gov.za/?page_id=3839) and made available through the [DataFirst](https://www.datafirst.uct.ac.za/dataportal/index.php/catalog/517/data-dictionary) data service. You can download a copy of the file through the link below and save it in your project folder under `data/attributes`.
 
 | File                                 | Type   | Link |
 | :------                              | :------| :------ |
-| SA Census 2011 Language Table        | `.dta` | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes) |
+| SA Census 2011 Language Table        | `.dta` | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes/language.dta) |
 
 To get started, let us create our first script. **File** -> **New File** -> **R Script**. Create a folder named `scripts`, and save your script as `01-language-analysis.r`. 
 
@@ -549,10 +549,180 @@ att[1, ]
 att[1,1]
 ```
 
-Alternatively, you can access the data within individual columns by referring to their names using the `$` operator. This allows you to easily extract and work with a specific column without needing to know its position in the dataframe.
+Alternatively, you can access the data within individual columns by referring to their names using the `$` operator. This allows you to easily extract and work with a specific column without needing to know its position in the dataframe. For example, if your dataframe is named `dataframe` and you want to access a column named `age`, you would use `dataframe$age`. This method is especially useful when your data has many columns or when the column positions may change, as it relies on the column names rather than their index numbers.
 
-For example, if your dataframe is named `dataframe` and you want to access a column named `age`, you would use `dataframe$age`. This method is especially useful when your data has many columns or when the column positions may change, as it relies on the column names rather than their index numbers.
+### Exploring data
+Now that we have loaded and inspected our data, we can examine its distribution. We will focus on the column that contains the counts of individuals who speak isiXhosa as their primary language, aggregated by Small Area Layer—the most granular geographic level available in the 2011 Census. This data is stored in the `lng_4` column of the dataframe.
+
+```{r}
+#| label: 01-explore-data
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# mean 
+mean(att$lng_4)
+
+# median
+median(att$lng_4)
+
+# range
+range(att$lng_4)
+
+# summary
+summary(att$lng_4)
+```
+
+We can also call some functions to quickly draw a boxplot, histogram, or scatterplot:
+
+```{r}
+#| label: fig-01-plot-data-boxplot
+#| fig-cap: Quick boxplot.
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# boxplot 
+boxplot(att$lng_4, horizontal = TRUE)
+```
+
+```{r}
+#| label: fig-01-plot-data-histogram
+#| fig-cap: Quick histogram.
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# histogram
+hist(att$lng_4, breaks = 50, xlab = 'isiXhosa')
+```
+
+```{r}
+#| label: fig-01-plot-data-bivariate
+#| fig-cap: Quick bivariate plot.
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# bivariate plot
+plot(att$lng_4, att$lng_2, xlab = 'isiXhosa', ylab = 'English')
+```
+
+### Subset data
+The dataset is quite extensive, containing counts for all 84,908 Small Area Layers. To make our analysis more manageable, let's focus on a subset of the data, specifically zooming in on Cape Town. We can achieve this by filtering the data using the `dc_name` column, which corresponds to the District Municipality Name.
+
+```{r}
+#| label: 01-filter-data
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# prepare data: filter out Cape Town
+att <- att |>
+  filter(dc_name == 'City of Cape Town')
+```
+
+::: {.callout-note}
+The code above uses a pipe function: `|>`. The pipe operator allows you to pass the output of one function directly into the next, streamlining your code. While it might seem a bit confusing at first, you will find that it makes your code faster to write and easier to read. More importantly, it reduces the need to create multiple intermediate variables to store outputs.
+:::
+
+In this case, we have overwritten our initial object, though this is not strictly necessary. Our object now contains a subset of the full language dataset that we initially loaded.
+
+```{r}
+#| label: 01-inspect-data-subset
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# inspect data
+head(att)
+```
+
+Our code appears to have worked successfully. The next thing that we probably want to do is normalise our data. A common challenge with spatial data is that the spatial units aren not always the same size — some Small Area Layers may have larger populations, while others have fewer residents. This makes it difficult to compare absolute counts fairly. To address this, we can sum the counts across all relevant columns to determine the total number of speakers in each area. Then, we can calculate the proportion of isiXhosa speakers within each Small Area Layer.
+
+```{r}
+#| label: 01-sum-across
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# prepare data: sum across
+att <- att |>
+  rowwise() |>
+  mutate(sal_pop = sum(across(starts_with('lng')), na.rm = TRUE))
+
+# prepare data: calculate percentages
+att <- att |>
+  mutate(sal_prop_xhosa = lng_4 / sal_pop)
+
+# inspect data
+head(att)
+```
+
+You can further inspect the results using the `View()` function.
+
+We now have the percentage of people who speak isiXhosa as their primary language for each Small Area Layer. To provide a more meaningful representation, we can aggregate the data by sub-places. This involves grouping our data by `sp_code`, which contains unique sub-place codes. We will then:
+
+1. Sum the number of isiXhosa speakers within each sub-place and store this in a new variable.
+2. Sum the total number of people within each sub-place and store this in another new variable.
+3. Extract the distinct values for each sub-place.
+
+By using the pipe function again, we can chain these steps together efficiently as follows:
+
+```{r}
+#| label: 01-aggregate-sub-place
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# prepare data: aggregate small areas to sub places
+att <- att |>
+  group_by(sp_code) |>
+  mutate(sp_pop = sum(sal_pop)) |>
+  mutate(sp_xhosa = sum(lng_4)) |>
+  ungroup() |>
+  distinct(sp_code, sp_pop, sp_xhosa) 
+
+# inspect data
+head(att)
+```
+
+You can further inspect the results using the `View()` function. 
+
+We can save this dataset so that we can easily load it the next time we want to work with this by writing it to a `.csv` file.
+
+```{r}
+#| label: 01-write-csv
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# write data
+write_csv(x = att, file = 'data/attributes/language.csv')
+```
 
 ## Assignment
+This concludes this session. Please try to complete the following tasks:
 
-- Create a CPT boxplot using 'access to internet from home' using the 2011 Census data.
+1. Create a histogram showing the distribution of the *number* of isiXhosa speakers in Cape Town, grouped by sub-place.
+2. Create a boxplot of the *proportion* of isiXhosa-speakers in Cape Town, grouped by sub place.
+
+Next, use the link below to download another dataset sourced from the [South African Census Community Profiles 2011](https://www.statssa.gov.za/?page_id=3839) that contains information on internet access. Save the file in your project folder under `data/attributes`.
+
+| File                                 | Type   | Link |
+| :------                              | :------| :------ |
+| SA Census 2011 Internet Access Table        | `.dta` | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes/internet-access.dta) |
+
+Use this dataset to:
+
+1. Create a histogram of the distribution of the *number* of people with internet access at home in the City of Johannesburg, grouped by sub-place.
+2. Create a boxplot of the *proportion* of people with internet access at home in the City of Johannesburg, grouped by sub-place.

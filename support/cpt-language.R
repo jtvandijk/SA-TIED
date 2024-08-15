@@ -27,7 +27,7 @@ att <- att |>
 att <- att |>
   group_by(sp_code) |>
   mutate(sp_pop = sum(pop)) |>
-  mutate(sp_xhosa = sum(lng_2)) |>
+  mutate(sp_xhosa = sum(lng_4)) |>
   ungroup() |>
   distinct(sp_code, sp_pop, sp_xhosa) 
 
