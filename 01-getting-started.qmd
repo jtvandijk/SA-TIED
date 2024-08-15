@@ -1,7 +1,6 @@
 # R for Data Analysis
 
 ## Installation of R
-
 R is a programming language originally designed for conducting statistical analysis and creating graphics. The major advantage of using R is that it is open source, can be used on any computer operating system, and is free for anyone to use and contribute to. Because of this, it has rapidly become the statistical language of choice for many academics and has a large user community with people constantly contributing new packages to carry out all manner of statistical, graphical, and importantly for us, geographical tasks.
 
 Installing R takes a few relatively simple steps involving two pieces of software. First there is the R programme itself. Follow these steps to get it installed on your computer:
@@ -34,7 +33,6 @@ The main windows that we will be using are:
 | *Plots*       | where the outputs of our graphs, charts and maps are shown         |
 
 ## Customisation of R
-
 Now we have installed R and RStudio, we need to customise R. Many useful R functions come in packages, these are free libraries of code written and made available by other R users. This includes packages specifically developed for data cleaning, data wrangling, visualisation, mapping, and spatial analysis. To save us some time, we will install **all R packages that we will need** for the workshop in one go. Start RStudio, and copy and paste the following code into the **console** window. You can execute the code by pressing the **Return** button on your keyboard. Depending on your computer's specifications and the internet connection, this may take a short while.
 
 ```{r}
@@ -46,7 +44,7 @@ Now we have installed R and RStudio, we need to customise R. Many useful R funct
 #| tidy: True
 #| filename: "R code"
 # install packages
-install.packages(c('tidyverse','sf','tmap','spdep'))
+install.packages(c('tidyverse','haven','sf','tmap','spdep'))
 ```
 
 ::: callout-warning
@@ -66,6 +64,7 @@ Once you have installed the packages, we need to check whether we can in fact lo
 #| filename: "R code"
 # load packages
 library(tidyverse)
+library(haven)
 library(sf)
 library(tmap)
 library(spdep)
@@ -82,7 +81,6 @@ Many packages depend on other packages (so-called *dependencies*). It happens at
 :::
 
 ## Getting started with R
-
 Unlike traditional statistical analysis software like [Microsoft Excel](https://www.microsoft.com/en-us/microsoft-365/excel) or [Stata](https://www.stata.com/), which often rely on point-and-click interfaces, R requires users to input commands to perform tasks such as loading datasets or fitting models. This command-based approach is typically done by writing scripts, which not only document your workflow but also allow for easy repetition of tasks.
 
 ::: callout-note
@@ -96,11 +94,10 @@ In your RStudio console, you should see a prompt sign `>` on the left hand side.
 :::
 
 ### Command input
-
 Type in `10 * 12` into the console and execute.
 
 ```{r}
-#| label: 04-math1
+#| label: 01-math1
 #| classes: styled-output
 #| echo: True
 #| eval: True
@@ -118,7 +115,7 @@ Rather than use *raw* or *standalone* numbers and values, we primarily want to u
 Type in `ten <- 10` into the console and execute.
 
 ```{r}
-#| label: 04-math2
+#| label: 01-math2
 #| classes: styled-output
 #| echo: True
 #| eval: True
@@ -133,7 +130,7 @@ You will see nothing is returned in the console, but if you check your environme
 Type in `twelve <- 12` into the console and execute.
 
 ```{r}
-#| label: 04-math3
+#| label: 01-math3
 #| classes: styled-output
 #| echo: True
 #| eval: True
@@ -148,7 +145,7 @@ Once again, you will see nothing returned to the console but do check your envir
 Type in `ten * twelve` into the console and execute.
 
 ```{r}
-#| label: 04-math4
+#| label: 01-math4
 #| classes: styled-output
 #| echo: True
 #| eval: True
@@ -163,7 +160,7 @@ You should see the output in the console of `120`. Whilst this maths may look tr
 Next, type in `ten * twelve * 8` into the console and execute.
 
 ```{r}
-#| label: 04-math5
+#| label: 01-math5
 #| classes: styled-output
 #| echo: True
 #| eval: True
@@ -178,7 +175,7 @@ You should get an answer of `960`. As you can see, we can mix **variables** with
 Type `output <- ten * twelve * 8` into the console and execute.
 
 ```{r}
-#| label: 04-math6
+#| label: 01-math6
 #| classes: styled-output
 #| echo: True
 #| eval: True
@@ -191,11 +188,10 @@ output <- ten * twelve * 8
 Because we are storing the output of our maths to a new variable, the answer is not returned to the screen.
 
 ### Accessing variables
-
 We can ask our computer to return this `output` by simply typing it into the console. You should see we get the same value as the earlier equation.
 
 ```{r}
-#| label: 04-math7
+#| label: 01-math7
 #| classes: styled-output
 #| echo: True
 #| eval: True
@@ -206,13 +202,12 @@ output
 ```
 
 ### Text variables
-
 We can also store variables of different data types, not just numbers but text as well.
 
 Type in `str_variable <- "Hello Pretoria"` into the console and execute.
 
 ```{r}
-#| label: 04-str1
+#| label: 01-str1
 #| classes: styled-output
 #| echo: True
 #| eval: True
@@ -227,7 +222,7 @@ We have just stored our sentence made from a combination of characters. A variab
 Type in `str_variable` into the console and execute.
 
 ```{r}
-#| label: 04-str2
+#| label: 01-str2
 #| classes: styled-output
 #| echo: True
 #| eval: True
@@ -240,13 +235,12 @@ str_variable
 You should see our entire sentence returned, enclosed in quotation marks (`""`).
 
 ### Calling functions
-
 We can also **call** a function on our variable. For example, we can also ask R to **print** our variable, which will give us the same output as accessing it directly via the console.
 
 Type in `print(str_variable)` into the console and execute.
 
 ```{r}
-#| label: 04-str3
+#| label: 01-str3
 #| classes: styled-output
 #| echo: True
 #| eval: True
@@ -259,7 +253,7 @@ print(str_variable)
 You can type `?print` into the console to find out more about the `print()` function.
 
 ```{r}
-#| label: 04-str4
+#| label: 01-str4
 #| classes: styled-output
 #| echo: True
 #| eval: False
@@ -276,13 +270,12 @@ In many cases, a function will take more than one argument or parameter, so it i
 :::
 
 ### Inspecting variables
-
 Within the base R language, there are various functions that have been written to help us examine and find out information about our variables. For example, we can use the `typeof()` function to check what data type our variable is.
 
 Type in `typeof(str_variable)` into the console and execute.
 
 ```{r}
-#| label: 04-str5
+#| label: 01-str5
 #| classes: styled-output
 #| echo: True
 #| eval: True
@@ -297,7 +290,7 @@ You should see the answer: `character`. As evident, our `str_variable` is a **ch
 Type in `typeof(ten)` into the console and execute.
 
 ```{r}
-#| label: 04-str6
+#| label: 01-str6
 #| classes: styled-output
 #| echo: True
 #| eval: True
@@ -310,7 +303,7 @@ typeof(ten)
 You should see the answer: `double`. For high-level objects that involve more complex data structures, such as when we load a `csv` or `.dta` into R as a **dataframe**, we are also able to check what **class** our object is. Type in `class(str_variable)` into the console and execute.
 
 ```{r}
-#| label: 04-str7
+#| label: 01-str7
 #| classes: styled-output
 #| echo: True
 #| eval: True
@@ -325,7 +318,7 @@ In this case, you will get the same answer because in R both its class and type 
 Type in `class(ten)` into the console and execute.
 
 ```{r}
-#| label: 04-str8
+#| label: 01-str8
 #| classes: styled-output
 #| echo: True
 #| eval: True
@@ -340,7 +333,7 @@ In this case, you will get a different answer because the class of this variable
 Type in `is.integer(ten)` into the console and execute.
 
 ```{r}
-#| label: 04-var1
+#| label: 01-var1
 #| classes: styled-output
 #| echo: True
 #| eval: True
@@ -360,7 +353,7 @@ We can also ask how long our variable is. in this case, we will find out how man
 Type in `length(str_variable)` into the console and execute.
 
 ```{r}
-#| label: 04-var2
+#| label: 01-var2
 #| classes: styled-output
 #| echo: True
 #| eval: True
@@ -375,7 +368,7 @@ You should get the answer `1` because we only have one *set* of characters. We c
 Type in `nchar(str_variable)` into the console and execute.
 
 ```{r}
-#| label: 04-var3
+#| label: 01-var3
 #| classes: styled-output
 #| echo: True
 #| eval: True
@@ -391,7 +384,7 @@ You should get an answer of `31`.
 Variables are not constricted to one value, but can be combined to create larger objects. Type in `two_str_variable <- c("This is our second variable", "It has two parts to it")` into the console and execute.
 
 ```{r}
-#| label: 04-var4
+#| label: 01-var4
 #| classes: styled-output
 #| echo: True
 #| eval: True
@@ -406,7 +399,7 @@ In this piece of code, we have created a new variable using the `c()` function i
 Let us now try both our `length()` and `nchar()` on our new variable and see what the results are:
 
 ```{r}
-#| label: 04-var5
+#| label: 01-var5
 #| classes: styled-output
 #| echo: True
 #| eval: True
@@ -421,18 +414,72 @@ nchar(two_str_variable)
 
 You should notice that the `length()` function now returned a `2` and the `nchar()` function returned two values of `34` and `22`.
 
-::: callout-note
+::: {.callout-note}
 You may have noticed that every line of code in the examples is accompanied by a comment explaining its purpose. Comments in R are created using the hash symbol: `#`. This symbol tells R to ignore the commented line when running the code. These comments are helpful for understanding your code when you revisit it later or share with others.
 :::
 
-- Dataframes
-- Tidyverse
+If we extend the concept of multi-value objects in two dimensions, we end up with a dataframe. A dataframe is the **de-facto** data structure for most tabular data. We will use functions from the `tidyverse` library, which is essentially a suite of packages, to load a data file and conduct some exploratory data analysis. Some of the most important and useful functions, from the `tidyr` and `dplyr` packages, are:
+
+| Package   | Function          | Use to |
+| :-        | :--               | :------ |
+| `dplyr`	  | `select()`        | select columns |
+| `dplyr`	  | `filter()`        | select rows |
+| `dplyr`	  | `mutate()`        | transform or recode variables |
+| `dplyr`	  | `summarise()`     | summarise data |
+| `dplyr`	  | `group_by()`      | group data into subgroups for further processing |
+| `tidyr`	  | `pivot_longer()`  | convert data from wide format to long format |
+| `tidyr`	  | `pivot_wider()`   | convert long format dataset to wide format |
+
+::: {.callout-tip}
+For more information on the `tidyverse` have a look at [www.tidyverse.org](https://www.tidyverse.org/).
+:::
 
 ## RStudio rojects
-RStudio projects make it straightforward to divide your work into multiple contexts, each with their own working directory, workspace, history, and source documents. 
+In RStudio, we can use **scripts** to build up our code that we can run repeatedly and save for future use. We can organise these scripts into RStduio projects.These projects keep all the files associated with an analysis together: input data, R scripts, analytical results, figures, etc. This means we can easily keep track of all data, input and output, whilst still creating standalone scripts for each bit of processing analysis we do. It also makes dealing with [directories and filepaths](https://en.wikipedia.org/wiki/Path_(computing)) much easier.
 
-- Start R Project
+Navigate to **File** -> **New Project** -> **New Directory**, and create a folder with the name **GeoSpatial-Workshop24**. Click on **Create Project**. You should now see your main window switch to this new project and if you check your **files** window, you should now see a new **R Project** called **GeoSpatial-Workshop24**.
+  
+::: {.callout-warning}
+Please ensure that **folder names** and **file names** do not contain spaces or special characters such as `*` `.` `"` `/` `\` `[` `]` `:` `;` `|` `=` `,` `<` `?` `>` `&` `$` `#` `!` `'` `{` `}` `(` `)`. Different operating systems and programming languages deal differently with spaces and special characters and as such including these in your folder names and file names can cause many problems and unexpected errors. As an alternative to using white space you can use an underscore `_` or hyphen `-` if you like.
+:::
 
 ## Bathetha isi-Xhosa
+With the basics covered, let us dive into loading a real dataset, performing data cleaning, and conducting some exploratory data analysis. We will work with a dataset that contains counts of the primary languages spoken in South African, sourced from the [South African Census Community Profiles 2011](https://www.statssa.gov.za/?page_id=3839) and made available through the [DataFirst](https://www.datafirst.uct.ac.za/dataportal/index.php/catalog/517/data-dictionary) data service. You can download a copy of the file through the link below and save it in your project folder under `data/attributes`.
 
-- Load 2011 Census for Cape Town - language table.
+| File                                 | Type         | Link |
+| :------                              | :------      | :------ |
+| SA Census 2011 Language Table        | `.dta` |    [Download](https://github.com/jtvandijk/GEOG0030/tree/master/data/attributes/language.dta) |
+
+To get started, let us create our first script. **File** -> **New File** -> **R Script**. Create a folder named `scripts`, and save your script as `01-language-analysis.r`. We will start by loading the libraries that we will need:
+
+```{r}
+#| label: 01-load-libraries
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# load libraries
+library(tidyverse)
+library(haven)
+```
+
+::: {.callout-tip}
+In RStudio, there are two primary ways to run a script: all at once or by executing individual lines or chunks of code. As a beginner, it is often beneficial to use the line-by-line approach, as it allows you to test your code interactively and catch errors early.
+
+To run line-by-line:
+
+- By clicking: Highlight the line or chunk of code you want to run, then go to **Code** and select **Run selected lines**.
+- By key commands: Highlight the code, then press `Ctl` (or `Cmd` on Mac) + `Return`.
+
+To run the whole script:
+
+- By clicking:  In the scripting window, click **Run** in the top-right corner and choose **Run All**.
+- By key commands: Press `Option` + `Ctrl` (or `Cmd`) + `R`.
+
+If a script gets stuck or you realise there is an error in your code, you may need to interrupt R. To do this, go to **Session** -> **Interrupt R**. If the interruption doesn't work, you might need to terminate and restart R.
+:::
+
+## Assignment
+
+- Create a CPT boxplot using 'access to internet from home' using the 2011 Census data.

@@ -108,4 +108,4 @@ xhosa_map <-
              size = 0.4) 
 
 # save
-tmap_save(tm = xhosa_map, 'support/xhosa-cpt.jpg', width=15, height=15, units=c('cm'))
+tmap_save(tm = xhosa_map, 'support/cpt-xhosa.jpg', width=15, height=15, units=c('cm'))
