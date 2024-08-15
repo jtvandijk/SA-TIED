@@ -1,7 +1,7 @@
 # R for Spatial Analysis
 
 ## Loading spatial data
-Open a new script within your `Geospatial-Workshop24` project and save this as `02-language-maps.r`. We will start again by loading the libraries that we will need:
+Open a new script within your `Geospatial-Workshop24` project and save this as `02-language-maps.r`. We will start again by loading the libraries that we will need. You have been introduced to the `tidyverse` library last session, but now we are adding the `sf` library to read and load our spatial data as well as the `tmap` library to visualise our spatial data:
 
 ```{r}
 #| label: 02-load-libraries
@@ -35,9 +35,7 @@ tmap_mode("plot")
 options(max.print=100)
 ``` 
 
-You have been introduced to the `tidyverse` library last session, but now we are adding the `sf` library to read and load our spatial data as well as the `tmap` library to visualise our spatial data. 
-
-We will continue working with the `.csv` dataset that we prepared in the previous session, so we start by loading this:
+We will continue working with the `.csv` dataset that we prepared and saved in the previous session, so let us make sure it is loaded properly:
 
 ```{r}
 #| label: 02-load-csv
@@ -189,11 +187,11 @@ They seem to contain similar values, so that is promising. Let us try to join th
 #| classes: styled-output
 #| echo: True
 #| eval: False
-#| tidy: True
+#| tidy: False
 #| filename: "R code"
 # join attribute data onto spatial data
 cpt <- cpt |> 
-  left_join(att, by = c('sp_code' = 'sp_code'))
+  left_join(att, by = c("sp_code" = "sp_code"))
 ``` 
 You will notice that the join results in an error. 
 
@@ -203,7 +201,7 @@ Where the sub place codes in the `att` object are stored as numbers, the sub pla
 #| label: 02-cast-att
 #| classes: styled-output
 #| echo: True
-#| eval: False
+#| eval: True
 #| tidy: True
 #| filename: "R code"
 # change data type
@@ -221,11 +219,68 @@ We can now try to join the datasets together again:
 #| classes: styled-output
 #| echo: True
 #| eval: False
-#| tidy: True
+#| tidy: False
 #| filename: "R code"
 # join attribute data onto spatial data
 cpt <- cpt |> 
-  left_join(att, by = c('sp_code' = 'sp_code'))
+  left_join(att, by = c("sp_code" = "sp_code"))
 ``` 
 
+We can explore the joined data in usual fashion:
+
+```{r}
+#| label: 02-inspect-join
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# inspect columns, rows
+ncol(cpt)
+nrow(cpt)
+
+# inspect data
+head(cpt)
+
+# inspect column names
+names(cpt)
+```
+
+Always inspect your join to ensure everything looks as expected. A good way to do this is by using the `View()` function to check for any unexpected missing values, which are marked as `NA`. We can further compare the total number of rows in the spatial dataset with the total number of non-`NA` values in the joined columns:
+
+```{r}
+#| label: 02-inspect-na
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# inspect
+nrow(cpt)
+
+# inspect attribute data: sp_pop
+sum(!is.na(cpt$sp_pop))
+
+# inspect attribute data: sp_xhosas 
+sum(!is.na(cpt$sp_xhosa))
+```
+
+Out of the 921 sub-places, only 878 have data on the number of isiXhosa speakers and the total population. However, this discrepancy may not be due to the join; it could simply be that the original dataset lacks data for some units. Let's confirm this:
+
+```{r}
+#| label: 02-confirm-na
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# inspect
+nrow(att)
+```
+
+This confirms that all our full attribute dataset has been linked to the spatial dataset. 
+
+::: {.callout-warning}
+It is important to confirm the source of any `NA` values that are introduced to the dataset to ensure these are genuine. In our case the [South African Census Community Profiles 2011](https://www.statssa.gov.za/?page_id=3839) dataset includes sub places with no population, which typically correspond to industrial areas.
+:::
 

@@ -228,7 +228,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 data-number="1"><span class="header-section-number">2</span> R for Spatial Analysis</h1>
 <section id="loading-spatial-data" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="loading-spatial-data"><span class="header-section-number">2.1</span> Loading spatial data</h2>
-<p>Open a new script within your <code>Geospatial-Workshop24</code> project and save this as <code>02-language-maps.r</code>. We will start again by loading the libraries that we will need:</p>
+<p>Open a new script within your <code>Geospatial-Workshop24</code> project and save this as <code>02-language-maps.r</code>. We will start again by loading the libraries that we will need. You have been introduced to the <code>tidyverse</code> library last session, but now we are adding the <code>sf</code> library to read and load our spatial data as well as the <code>tmap</code> library to visualise our spatial data:</p>
 <div class="cell styled-output" data-hash="02-mapping-data_cache/html/02-load-libraries_0f263877f2f32bbddaf69e73a7362140">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -243,8 +243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell styled-output" data-hash="02-mapping-data_cache/html/02-tmap-settings_ef912f095665c04bde67693e18ab99da">
 
 </div>
-<p>You have been introduced to the <code>tidyverse</code> library last session, but now we are adding the <code>sf</code> library to read and load our spatial data as well as the <code>tmap</code> library to visualise our spatial data.</p>
-<p>We will continue working with the <code>.csv</code> dataset that we prepared in the previous session, so we start by loading this:</p>
+<p>We will continue working with the <code>.csv</code> dataset that we prepared and saved in the previous session, so let us make sure it is loaded properly:</p>
 <div class="cell styled-output" data-hash="02-mapping-data_cache/html/02-load-csv_01b1e166e8bd56c58c8fbef86833635a">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -458,19 +457,19 @@ Projected CRS: WGS_1984_Transverse_Mercator</code></pre>
 </div>
 </div>
 <p>They seem to contain similar values, so that is promising. Let us try to join the attribute data onto the spatial data:</p>
-<div class="cell styled-output" data-hash="02-mapping-data_cache/html/02-join-att-cpt-fail_97523c487d48aeb3ba32ecead725eb33">
+<div class="cell styled-output" data-hash="02-mapping-data_cache/html/02-join-att-cpt-fail_dceb00715a789bce081cb699231cd545">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>R code</strong></pre>
 </div>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># join attribute data onto spatial data</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>cpt <span class="ot">&lt;-</span> cpt <span class="sc">|&gt;</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(att, <span class="at">by =</span> <span class="fu">c</span>(<span class="at">sp_code =</span> <span class="st">"sp_code"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>cpt <span class="ot">&lt;-</span> cpt <span class="sc">|&gt;</span> </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(att, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"sp_code"</span> <span class="ot">=</span> <span class="st">"sp_code"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>You will notice that the join results in an error.</p>
 <p>Where the sub place codes in the <code>att</code> object are stored as numbers, the sub place codes in the <code>cpt</code> object are stored as strings. We can fix this by casting the number to characters:</p>
-<div class="cell styled-output" data-hash="02-mapping-data_cache/html/02-cast-att_03469d61ac28234290a92ad5dbbd4bec">
+<div class="cell styled-output" data-hash="02-mapping-data_cache/html/02-cast-att_623cbaf611358c05f888ee23c04bb44e">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>R code</strong></pre>
@@ -482,16 +481,107 @@ Projected CRS: WGS_1984_Transverse_Mercator</code></pre>
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect</span></span>
 <span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(att<span class="sc">$</span>sp_code)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
 </div>
 <p>We can now try to join the datasets together again:</p>
-<div class="cell styled-output" data-hash="02-mapping-data_cache/html/02-join-att-cpt_3478237c8623c0044ef0c523861979f7">
+<div class="cell styled-output" data-hash="02-mapping-data_cache/html/02-join-att-cpt_a061f1576a8d8c59d83420edbf12a29f">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>R code</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># join attribute data onto spatial data</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>cpt <span class="ot">&lt;-</span> cpt <span class="sc">|&gt;</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(att, <span class="at">by =</span> <span class="fu">c</span>(<span class="at">sp_code =</span> <span class="st">"sp_code"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># join attribute data onto spatial data</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>cpt <span class="ot">&lt;-</span> cpt <span class="sc">|&gt;</span> </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(att, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"sp_code"</span> <span class="ot">=</span> <span class="st">"sp_code"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>We can explore the joined data in usual fashion:</p>
+<div class="cell styled-output" data-hash="02-mapping-data_cache/html/02-inspect-join_d14b705472ed15578168e80c0d92680a">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect columns, rows</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(cpt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 17</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(cpt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 921</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect data</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cpt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 17
+  sp_code   sp_name    mp_code mp_name mn_mdb_c mn_code mn_name dc_mdb_c dc_mn_c
+  &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt;
+1 199035011 Greenfield  199035 Blue D… CPT          199 City o… CPT          199
+2 199035012 Wesbank     199035 Blue D… CPT          199 City o… CPT          199
+3 199035013 Kleinvlei   199035 Blue D… CPT          199 City o… CPT          199
+4 199035014 Palm Park   199035 Blue D… CPT          199 City o… CPT          199
+5 199035015 Park Vill…  199035 Blue D… CPT          199 City o… CPT          199
+6 199035016 Hill View   199035 Blue D… CPT          199 City o… CPT          199
+# ℹ 8 more variables: dc_name &lt;chr&gt;, pr_mdb_c &lt;chr&gt;, pr_code &lt;dbl&gt;,
+#   pr_name &lt;chr&gt;, albers_are &lt;dbl&gt;, shape_leng &lt;dbl&gt;, shape_area &lt;dbl&gt;,
+#   geom &lt;MULTIPOLYGON [m]&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect column names</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(cpt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "sp_code"    "sp_name"    "mp_code"    "mp_name"    "mn_mdb_c"  
+ [6] "mn_code"    "mn_name"    "dc_mdb_c"   "dc_mn_c"    "dc_name"   
+[11] "pr_mdb_c"   "pr_code"    "pr_name"    "albers_are" "shape_leng"
+[16] "shape_area" "geom"      </code></pre>
+</div>
+</div>
+<p>Always inspect your join to ensure everything looks as expected. A good way to do this is by using the <code>View()</code> function to check for any unexpected missing values, which are marked as <code>NA</code>. We can further compare the total number of rows in the spatial dataset with the total number of non-<code>NA</code> values in the joined columns:</p>
+<div class="cell styled-output" data-hash="02-mapping-data_cache/html/02-inspect-na_3717330f9328cee2d768815638bc008f">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(cpt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 921</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect attribute data: sp_pop</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(cpt<span class="sc">$</span>sp_pop))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect attribute data: sp_xhosas</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(cpt<span class="sc">$</span>sp_xhosa))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p>Out of the 921 sub-places, only 878 have data on the number of isiXhosa speakers and the total population. However, this discrepancy may not be due to the join; it could simply be that the original dataset lacks data for some units. Let’s confirm this:</p>
+<div class="cell styled-output" data-hash="02-mapping-data_cache/html/02-confirm-na_0d6c986d20d06d6b526d4e4c270b9b9e">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(att)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 878</code></pre>
+</div>
+</div>
+<p>This confirms that all our full attribute dataset has been linked to the spatial dataset.</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>It is important to confirm the source of any <code>NA</code> values that are introduced to the dataset to ensure these are genuine. In our case the <a href="https://www.statssa.gov.za/?page_id=3839">South African Census Community Profiles 2011</a> dataset includes sub places with no population, which typically correspond to industrial areas.</p>
+</div>
 </div>
 </div>
 

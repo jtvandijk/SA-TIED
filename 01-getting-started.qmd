@@ -611,7 +611,7 @@ hist(att$lng_4, breaks = 50, xlab = 'isiXhosa')
 plot(att$lng_4, att$lng_2, xlab = 'isiXhosa', ylab = 'English')
 ```
 
-### Subset data
+### Subsetting data
 The dataset is quite extensive, containing counts for all 84,908 Small Area Layers. To make our analysis more manageable, let's focus on a subset of the data, specifically zooming in on Cape Town. We can achieve this by filtering the data using the `dc_name` column, which corresponds to the District Municipality Name.
 
 ```{r}
@@ -645,7 +645,7 @@ head(att)
 
 Our code appears to have worked successfully. 
 
-### Aggregate data
+### Aggregating data
 The next thing that we probably want to do is standardise our data. A common challenge with spatial data is that the spatial units aren not always the same size — some Small Area Layers may have larger populations, while others have fewer residents. This makes it difficult to compare absolute counts fairly. To address this, we can sum the counts across all relevant columns to determine the total number of speakers in each area. Then, we can calculate the proportion of isiXhosa speakers within each Small Area Layer:
 
 ```{r}

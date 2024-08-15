@@ -228,8 +228,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#loading-data" id="toc-loading-data" class="nav-link" data-scroll-target="#loading-data"><span class="header-section-number">1.5.1</span> Loading data</a></li>
   <li><a href="#exploring-data" id="toc-exploring-data" class="nav-link" data-scroll-target="#exploring-data"><span class="header-section-number">1.5.2</span> Exploring data</a></li>
-  <li><a href="#subset-data" id="toc-subset-data" class="nav-link" data-scroll-target="#subset-data"><span class="header-section-number">1.5.3</span> Subset data</a></li>
-  <li><a href="#aggregate-data" id="toc-aggregate-data" class="nav-link" data-scroll-target="#aggregate-data"><span class="header-section-number">1.5.4</span> Aggregate data</a></li>
+  <li><a href="#subsetting-data" id="toc-subsetting-data" class="nav-link" data-scroll-target="#subsetting-data"><span class="header-section-number">1.5.3</span> Subsetting data</a></li>
+  <li><a href="#aggregating-data" id="toc-aggregating-data" class="nav-link" data-scroll-target="#aggregating-data"><span class="header-section-number">1.5.4</span> Aggregating data</a></li>
   </ul></li>
   <li><a href="#assignment" id="toc-assignment" class="nav-link" data-scroll-target="#assignment"><span class="header-section-number">1.6</span> Assignment</a></li>
   </ul></li>
@@ -1020,8 +1020,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="subset-data" class="level3" data-number="1.5.3">
-<h3 data-number="1.5.3" class="anchored" data-anchor-id="subset-data"><span class="header-section-number">1.5.3</span> Subset data</h3>
+<section id="subsetting-data" class="level3" data-number="1.5.3">
+<h3 data-number="1.5.3" class="anchored" data-anchor-id="subsetting-data"><span class="header-section-number">1.5.3</span> Subsetting data</h3>
 <p>The dataset is quite extensive, containing counts for all 84,908 Small Area Layers. To make our analysis more manageable, let’s focus on a subset of the data, specifically zooming in on Cape Town. We can achieve this by filtering the data using the <code>dc_name</code> column, which corresponds to the District Municipality Name.</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-filter-data_ac401fce9caaafb7de2c90cef8ea12bb">
 <div class="code-with-filename">
@@ -1071,8 +1071,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Our code appears to have worked successfully.</p>
 </section>
-<section id="aggregate-data" class="level3" data-number="1.5.4">
-<h3 data-number="1.5.4" class="anchored" data-anchor-id="aggregate-data"><span class="header-section-number">1.5.4</span> Aggregate data</h3>
+<section id="aggregating-data" class="level3" data-number="1.5.4">
+<h3 data-number="1.5.4" class="anchored" data-anchor-id="aggregating-data"><span class="header-section-number">1.5.4</span> Aggregating data</h3>
 <p>The next thing that we probably want to do is standardise our data. A common challenge with spatial data is that the spatial units aren not always the same size — some Small Area Layers may have larger populations, while others have fewer residents. This makes it difficult to compare absolute counts fairly. To address this, we can sum the counts across all relevant columns to determine the total number of speakers in each area. Then, we can calculate the proportion of isiXhosa speakers within each Small Area Layer:</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-sum-across_95aa8db21b8331246847ea7bf7d41eb5">
 <div class="code-with-filename">
