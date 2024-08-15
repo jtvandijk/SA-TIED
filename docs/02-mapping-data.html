@@ -216,6 +216,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#exploring-spatial-data" id="toc-exploring-spatial-data" class="nav-link" data-scroll-target="#exploring-spatial-data"><span class="header-section-number">2.2</span> Exploring spatial data</a></li>
   <li><a href="#joining-attribute-data" id="toc-joining-attribute-data" class="nav-link" data-scroll-target="#joining-attribute-data"><span class="header-section-number">2.3</span> Joining attribute data</a></li>
   <li><a href="#mapping-spatial-data" id="toc-mapping-spatial-data" class="nav-link" data-scroll-target="#mapping-spatial-data"><span class="header-section-number">2.4</span> Mapping spatial data</a></li>
+  <li><a href="#styling-data" id="toc-styling-data" class="nav-link" data-scroll-target="#styling-data"><span class="header-section-number">2.5</span> Styling data</a></li>
+  <li><a href="#assignment" id="toc-assignment" class="nav-link" data-scroll-target="#assignment"><span class="header-section-number">2.6</span> Assignment</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jtvandijk/SA-TIED/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -629,7 +631,7 @@ Projected CRS: WGS_1984_Transverse_Mercator</code></pre>
 </div>
 </div>
 </div>
-<p>In this case, the <code>fill()</code> argument in <code>tmap</code> is how we instruct the library to create a choropleth map based on the values in the specified column. If we set <code>fill()</code> to NULL, only the borders of our polygons will be drawn, without any color fill. The <code>qtm()</code> function in tmap is versatile, allowing us to pass various parameters to customise the aesthetics of our map. By checking the function’s documentation, you can explore the full list of available parameters. For instance, to set the borders of our Cape Town polygons to white, we can use the <code>borders</code> parameter:</p>
+<p>In this case, the <code>fill()</code> argument in <code>tmap</code> is how we instruct the library to create a choropleth map based on the values in the specified column. If we set <code>fill()</code> to NULL, only the borders of our polygons will be drawn, without any colour fill. The <code>qtm()</code> function in tmap is versatile, allowing us to pass various parameters to customise the aesthetics of our map. By checking the function’s documentation, you can explore the full list of available parameters. For instance, to set the borders of our Cape Town polygons to white, we can use the <code>borders</code> parameter:</p>
 <div class="cell" data-hash="02-mapping-data_cache/html/fig-02-qtm-borders_2f941bf40a8ee7133e81e81d616dc697">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -659,6 +661,272 @@ Projected CRS: WGS_1984_Transverse_Mercator</code></pre>
 </div>
 </div>
 </div>
+<p>Let us build a map using <code>tmap</code>:</p>
+<div class="cell" data-hash="02-mapping-data_cache/html/fig-05-map-1_bfcdeb40c1268723092a018337512721">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># shape, polygons</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(cpt) <span class="sc">+</span> <span class="fu">tm_polygons</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output-display">
+<div id="fig-05-map-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="02-mapping-data_files/figure-html/fig-05-map-1-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Building up a map layer by layer.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>As you can now see, we have mapped the spatial polygons of our <code>cpt</code> spatial dataframe. However, this is not quite the map we want; we need a choropleth map where the polygons are colored based on the proportion of isiXhosa speakers. To achieve this, we use the <code>col</code> parameter within the <code>tm_polygons()</code> function.</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The <code>col</code> parameter within <code>tm_polygons()</code> allows you to fill polygons with colours based on:</p>
+<ul>
+<li>A single colour value (e.g.&nbsp;<code>red</code>).</li>
+<li>The name of a data variable within the spatial data file. This variable can either contain specific colour values or numeric/categorical values that will be mapped to a colour palette.</li>
+</ul>
+</div>
+</div>
+</div>
+<p>Let us go ahead and pass our <code>sp_prop_xhosa</code> variable within the <code>col()</code> parameter and see what we get:</p>
+<div class="cell" data-hash="02-mapping-data_cache/html/fig-02-choro-1_a3b04e6c560e5316825bd11461a5a4a5">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># shape, polygons</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(cpt) <span class="sc">+</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># specify column</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">"sp_prop_xhosa"</span></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output-display">
+<div id="fig-02-choro-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="02-mapping-data_files/figure-html/fig-02-choro-1-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: Building up a map layer by layer.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We are making progress, but there are two immediate issues with our map. First, the classification breaks do not adequately reflect the variation in our dataset. By default, <code>tmap</code> uses <em>pretty</em> breaks, which may not be the most effective for our data. An alternative, such as natural breaks (or Jenks), might better reveal the data’s variation.</p>
+<p>To customise the classification breaks, refer to the <code>tm_polygons()</code> documentation. The following parameters are relevant:</p>
+<ul>
+<li><code>n</code>: Specifies the number of classification breaks.</li>
+<li><code>style</code>: Defines the method for classification breaks, such as fixed, standard deviation, equal, or quantile.</li>
+<li><code>breaks</code>: Allows you to set specific numeric breaks when using the fixed style.</li>
+</ul>
+<p>For example, if we want to adjust our choropleth map to use five classes determined by the natural breaks method, we need to add the <code>n</code> and <code>style</code> parameters to our <code>tm_polygons()</code> layer:</p>
+<div class="cell" data-hash="02-mapping-data_cache/html/fig-02-choro-2_a42b98d239883b497f6449062f123860">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># shape, polygons</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(cpt) <span class="sc">+</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># specify column, classes</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">col =</span> <span class="st">"sp_prop_xhosa"</span>, </span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">n =</span> <span class="dv">5</span>, </span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">style =</span> <span class="st">"jenks"</span></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>              )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output-display">
+<div id="fig-02-choro-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="02-mapping-data_files/figure-html/fig-02-choro-2-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;6: Building up a map layer by layer.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="styling-data" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="styling-data"><span class="header-section-number">2.5</span> Styling data</h2>
+<p>Styling a map in <code>tmap</code> requires a deeper understanding and familiarity with the library, which is something you will develop best through hands-on practice. Here are the key functions to be aware of:</p>
+<ul>
+<li><code>tm_layout()</code>: Customize titles, fonts, legends, and other layout elements.</li>
+<li><code>tm_compass()</code>: Add and style a North arrow or compass.</li>
+<li><code>tm_scale_bar()</code>: Add and style a scale bar.</li>
+</ul>
+<p>To begin styling your map, explore each of these functions and their parameters. Through trial and error, you can tweak and refine the map until you achieve the desired look:</p>
+<div class="cell" data-hash="02-mapping-data_cache/html/fig-02-choro-3_e9b789c191a2503a3f3fb4fe0ae46f2d">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># shape, polygons</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(cpt) <span class="sc">+</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># specify column, classes, labels, title</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="at">col=</span> <span class="st">'sp_prop_xhosa'</span>, <span class="at">n =</span> <span class="dv">5</span>, <span class="at">style =</span> <span class="st">'jenks'</span>,</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">'#feebe2'</span>,<span class="st">'#fbb4b9'</span>,<span class="st">'#f768a1'</span>,<span class="st">'#c51b8a'</span>,<span class="st">'#7a0177'</span>), </span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">'Largest share'</span>, <span class="st">'2nd largest'</span>, <span class="st">'3rd largest'</span>, <span class="st">'4th largest'</span>, <span class="st">'Smallest share'</span>),</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">'Share of population'</span>,</span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">textNA =</span> <span class="st">'No population'</span>,) <span class="sc">+</span></span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set layout</span></span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(</span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">main.title =</span> <span class="st">'Share of population speaking isiXhosa'</span>,</span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">main.title.size =</span> <span class="fl">0.9</span>,</span>
+<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">main.title.position =</span> <span class="fu">c</span>(<span class="st">'right'</span>, <span class="st">'top'</span>),</span>
+<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.outside =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="st">'right'</span>, <span class="st">'top'</span>),</span>
+<span id="cb52-18"><a href="#cb52-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title.size =</span> <span class="fl">0.7</span>,</span>
+<span id="cb52-19"><a href="#cb52-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title.fontface =</span> <span class="st">'bold'</span>,</span>
+<span id="cb52-20"><a href="#cb52-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text.size =</span> <span class="fl">0.5</span>,</span>
+<span id="cb52-21"><a href="#cb52-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">frame =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb52-22"><a href="#cb52-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">inner.margins =</span> <span class="fu">c</span>(<span class="fl">0.05</span>,<span class="fl">0.05</span>,<span class="fl">0.05</span>,<span class="fl">0.05</span>),</span>
+<span id="cb52-23"><a href="#cb52-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">fontfamily =</span> <span class="st">'Helvetica'</span></span>
+<span id="cb52-24"><a href="#cb52-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb52-25"><a href="#cb52-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-26"><a href="#cb52-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add North arrow</span></span>
+<span id="cb52-27"><a href="#cb52-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_compass</span>(</span>
+<span id="cb52-28"><a href="#cb52-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">'arrow'</span>,</span>
+<span id="cb52-29"><a href="#cb52-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">c</span>(<span class="st">'left'</span>, <span class="st">'top'</span>),</span>
+<span id="cb52-30"><a href="#cb52-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">1</span>,</span>
+<span id="cb52-31"><a href="#cb52-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">text.size =</span> <span class="fl">0.7</span></span>
+<span id="cb52-32"><a href="#cb52-32" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb52-33"><a href="#cb52-33" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-34"><a href="#cb52-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add scale bar</span></span>
+<span id="cb52-35"><a href="#cb52-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scale_bar</span>(</span>
+<span id="cb52-36"><a href="#cb52-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>),</span>
+<span id="cb52-37"><a href="#cb52-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">c</span>(<span class="st">'right'</span>, <span class="st">'bottom'</span>),</span>
+<span id="cb52-38"><a href="#cb52-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">text.size =</span> <span class="fl">0.4</span></span>
+<span id="cb52-39"><a href="#cb52-39" aria-hidden="true" tabindex="-1"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output-display">
+<div id="fig-02-choro-3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="02-mapping-data_files/figure-html/fig-02-choro-3-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;7: Building up a map layer by layer.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We can also have some map labels, if we want, by extracting centroids from selected polygons and adding these as seperate map layer:</p>
+<div class="cell" data-hash="02-mapping-data_cache/html/fig-02-choro-4_d885415f1b420ec0822bf56e11017965">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># map labels</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>cbd <span class="ot">&lt;-</span> cpt <span class="sc">|&gt;</span> </span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sp_code <span class="sc">==</span> <span class="st">'199041011'</span>) <span class="sc">|&gt;</span> <span class="fu">st_centroid</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: st_centroid assumes attributes are constant over geometries</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># map object</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>cpt_xhosa <span class="ot">&lt;-</span> </span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co"># shape, polygons</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(cpt) <span class="sc">+</span></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># specify column, classes, labels, title</span></span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="at">col=</span> <span class="st">'sp_prop_xhosa'</span>, <span class="at">n =</span> <span class="dv">5</span>, <span class="at">style =</span> <span class="st">'jenks'</span>,</span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">'#feebe2'</span>,<span class="st">'#fbb4b9'</span>,<span class="st">'#f768a1'</span>,<span class="st">'#c51b8a'</span>,<span class="st">'#7a0177'</span>), </span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">'Largest share'</span>, <span class="st">'2nd largest'</span>, <span class="st">'3rd largest'</span>, <span class="st">'4th largest'</span>, <span class="st">'Smallest share'</span>),</span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">'Share of population'</span>,</span>
+<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">textNA =</span> <span class="st">'No population'</span>,) <span class="sc">+</span></span>
+<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># cbd centroid</span></span>
+<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(cbd) <span class="sc">+</span></span>
+<span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb55-17"><a href="#cb55-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add points</span></span>
+<span id="cb55-18"><a href="#cb55-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">size =</span> <span class="fl">0.4</span>, <span class="at">col=</span> <span class="st">'#000000'</span>) <span class="sc">+</span></span>
+<span id="cb55-19"><a href="#cb55-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb55-20"><a href="#cb55-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add labels</span></span>
+<span id="cb55-21"><a href="#cb55-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_text</span>(<span class="at">text=</span><span class="st">'sp_name'</span>, <span class="at">xmod =</span> <span class="dv">0</span>, <span class="at">ymod =</span> <span class="sc">-</span><span class="fl">0.6</span>, <span class="at">col =</span> <span class="st">'#000000'</span>, <span class="at">size =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb55-22"><a href="#cb55-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb55-23"><a href="#cb55-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set layout</span></span>
+<span id="cb55-24"><a href="#cb55-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(</span>
+<span id="cb55-25"><a href="#cb55-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">main.title =</span> <span class="st">'Share of population speaking isi-Xhosa'</span>,</span>
+<span id="cb55-26"><a href="#cb55-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">main.title.size =</span> <span class="fl">0.9</span>,</span>
+<span id="cb55-27"><a href="#cb55-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">main.title.position =</span> <span class="fu">c</span>(<span class="st">'right'</span>, <span class="st">'top'</span>),</span>
+<span id="cb55-28"><a href="#cb55-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.outside =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb55-29"><a href="#cb55-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="st">'right'</span>, <span class="st">'top'</span>),</span>
+<span id="cb55-30"><a href="#cb55-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title.size =</span> <span class="fl">0.7</span>,</span>
+<span id="cb55-31"><a href="#cb55-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title.fontface =</span> <span class="st">'bold'</span>,</span>
+<span id="cb55-32"><a href="#cb55-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text.size =</span> <span class="fl">0.5</span>,</span>
+<span id="cb55-33"><a href="#cb55-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">frame =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb55-34"><a href="#cb55-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">inner.margins =</span> <span class="fu">c</span>(<span class="fl">0.05</span>,<span class="fl">0.05</span>,<span class="fl">0.05</span>,<span class="fl">0.05</span>),</span>
+<span id="cb55-35"><a href="#cb55-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">fontfamily =</span> <span class="st">'Helvetica'</span></span>
+<span id="cb55-36"><a href="#cb55-36" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb55-37"><a href="#cb55-37" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb55-38"><a href="#cb55-38" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add North arrow</span></span>
+<span id="cb55-39"><a href="#cb55-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_compass</span>(</span>
+<span id="cb55-40"><a href="#cb55-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">'arrow'</span>,</span>
+<span id="cb55-41"><a href="#cb55-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">c</span>(<span class="st">'left'</span>, <span class="st">'top'</span>),</span>
+<span id="cb55-42"><a href="#cb55-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">1</span>,</span>
+<span id="cb55-43"><a href="#cb55-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">text.size =</span> <span class="fl">0.7</span></span>
+<span id="cb55-44"><a href="#cb55-44" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb55-45"><a href="#cb55-45" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb55-46"><a href="#cb55-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add scale bar</span></span>
+<span id="cb55-47"><a href="#cb55-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scale_bar</span>(</span>
+<span id="cb55-48"><a href="#cb55-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>),</span>
+<span id="cb55-49"><a href="#cb55-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">c</span>(<span class="st">'right'</span>, <span class="st">'bottom'</span>),</span>
+<span id="cb55-50"><a href="#cb55-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">text.size =</span> <span class="fl">0.4</span></span>
+<span id="cb55-51"><a href="#cb55-51" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb55-52"><a href="#cb55-52" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb55-53"><a href="#cb55-53" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add credits</span></span>
+<span id="cb55-54"><a href="#cb55-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_credits</span>(<span class="st">'Data source: Census 2011, StatsSA'</span>,</span>
+<span id="cb55-55"><a href="#cb55-55" aria-hidden="true" tabindex="-1"></a>             <span class="at">fontface =</span> <span class="st">'italic'</span>, </span>
+<span id="cb55-56"><a href="#cb55-56" aria-hidden="true" tabindex="-1"></a>             <span class="at">position =</span> <span class="fu">c</span>(<span class="st">'left'</span>, <span class="st">'bottom'</span>),</span>
+<span id="cb55-57"><a href="#cb55-57" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="fl">0.4</span>)</span>
+<span id="cb55-58"><a href="#cb55-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-59"><a href="#cb55-59" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb55-60"><a href="#cb55-60" aria-hidden="true" tabindex="-1"></a>cpt_xhosa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-02-choro-4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="02-mapping-data_files/figure-html/fig-02-choro-4-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;8: Building up a map layer by layer.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In the code above, we stored the full map definition as an object - which means we can export the map:</p>
+<div class="cell styled-output" data-hash="02-mapping-data_cache/html/02-export-map_48a833cb8182c43e535dacd9bb93ff95">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_save</span>(<span class="at">tm =</span> xhosa_map, <span class="st">"cpt-xhosa.jpg"</span>, <span class="at">width =</span> <span class="dv">15</span>, <span class="at">height =</span> <span class="dv">15</span>, <span class="at">units =</span> <span class="fu">c</span>(<span class="st">"cm"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="assignment" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="assignment"><span class="header-section-number">2.6</span> Assignment</h2>
+<p>This concludes this session. Please try to complete the following tasks:</p>
+<ol type="1">
+<li>If you have not already done so <a href="01-getting-started.html#internet-at-home">in the previous session</a>, aggregate the internet access dataset by the <code>internet at home</code> variable for sub places in the City of Johannesburg.</li>
+<li>Download the spatial boundaries for sub places in the City of Johannesburg using the link below, and save the file in your <code>data/spatial</code> folder.</li>
+<li>Create a map that shows the proportion of individuals with internet access at home as part of the overall population.</li>
+</ol>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">File</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Link</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Johannesburg Sub Places</td>
+<td style="text-align: left;"><code>GeoPackage</code></td>
+<td style="text-align: left;"><a href="https://github.com/jtvandijk/SA-TIED/tree/master/data/spatial/subplace-johannesburg-2013.gpkg">Download</a></td>
+</tr>
+</tbody>
+</table>
 
 
 </section>

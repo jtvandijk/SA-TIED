@@ -712,7 +712,7 @@ We can save this dataset so that we can easily load it the next time we want to 
 write_csv(x = att, file = 'data/attributes/language.csv')
 ```
 
-## Assignment
+## Assignment {#internet-at-home}
 This concludes this session. Please try to complete the following tasks:
 
 1. Create a histogram showing the distribution of the *number* of isiXhosa speakers in Cape Town, grouped by sub-place.
@@ -726,5 +726,5 @@ Next, use the link below to download another dataset sourced from the [South Afr
 
 Use this dataset to:
 
-1. Create a histogram of the distribution of the *number* of people with internet access at home in the City of Johannesburg, grouped by sub-place.
-2. Create a boxplot of the *proportion* of people with internet access at home in the City of Johannesburg, grouped by sub-place.
+1. Create a histogram of the distribution of the *number* of people with `internet access at home` in the City of Johannesburg, grouped by sub-place.
+2. Create a boxplot of the *proportion* of people with `internet access at home` in the City of Johannesburg, grouped by sub-place.

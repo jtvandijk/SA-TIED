@@ -327,7 +327,7 @@ For our map-making, we will use one of the two primary visualisation libraries f
 qtm(cpt, fill="sp_prop_xhosa")
 ``` 
 
-In this case, the `fill()` argument in `tmap` is how we instruct the library to create a choropleth map based on the values in the specified column. If we set `fill()` to NULL, only the borders of our polygons will be drawn, without any color fill. The `qtm()` function in tmap is versatile, allowing us to pass various parameters to customise the aesthetics of our map. By checking the function's documentation, you can explore the full list of available parameters. For instance, to set the borders of our Cape Town polygons to white, we can use the `borders` parameter:
+In this case, the `fill()` argument in `tmap` is how we instruct the library to create a choropleth map based on the values in the specified column. If we set `fill()` to NULL, only the borders of our polygons will be drawn, without any colour fill. The `qtm()` function in tmap is versatile, allowing us to pass various parameters to customise the aesthetics of our map. By checking the function's documentation, you can explore the full list of available parameters. For instance, to set the borders of our Cape Town polygons to white, we can use the `borders` parameter:
 
 
 ```{r}
@@ -349,11 +349,228 @@ The primary approach to creating maps in `tmap` involves using a l [layered gram
 To actually render the shapes, you need to add a layer that specifies the type of shape you want R to draw from this spatial information—such as polygons for our data. This layer function tells R to "draw my spatial object as `X`," where `X` represents the type of shape. Within this layer, you can also provide additional details to control how R draws your shapes. Further, you can add more layers to include other spatial objects and their corresponding shapes on your map. Finally, layout options can be specified through a layout layer, allowing you to customize the overall appearance and arrangement of your map.
 :::
 
+Let us build a map using `tmap`:
 
+```{r tidy='styler'}
+#| label: fig-05-map-1
+#| fig-cap: Building up a map layer by layer.
+#| echo: True
+#| eval: True
+#| tidy: True
+#| cache: True
+#| filename: "R code"
+# shape, polygons
+tm_shape(cpt) +
+  tm_polygons()
+```
 
+As you can now see, we have mapped the spatial polygons of our `cpt` spatial dataframe. However, this is not quite the map we want; we need a choropleth map where the polygons are colored based on the proportion of isiXhosa speakers. To achieve this, we use the `col` parameter within the `tm_polygons()` function.
 
+::: {.callout-tip}
+The `col` parameter within `tm_polygons()` allows you to fill polygons with colours based on:
 
+- A single colour value (e.g. `red`).
+- The name of a data variable within the spatial data file. This variable can either contain specific colour values or numeric/categorical values that will be mapped to a colour palette.
+:::
 
+Let us go ahead and pass our `sp_prop_xhosa` variable within the `col()` parameter and see what we get:
 
+```{r tidy='styler'}
+#| label: fig-02-choro-1
+#| fig-cap: Building up a map layer by layer.
+#| echo: True
+#| eval: True
+#| cache: True
+#| filename: "R code"
 
+# shape, polygons
+tm_shape(cpt) +
+  # specify column
+  tm_polygons(
+    col = "sp_prop_xhosa"
+  )
+```
 
+We are making progress, but there are two immediate issues with our map. First, the classification breaks do not adequately reflect the variation in our dataset. By default, `tmap` uses *pretty* breaks, which may not be the most effective for our data. An alternative, such as natural breaks (or Jenks), might better reveal the data's variation.
+
+To customise the classification breaks, refer to the `tm_polygons()` documentation. The following parameters are relevant:
+
+- `n`: Specifies the number of classification breaks.
+- `style`: Defines the method for classification breaks, such as fixed, standard deviation, equal, or quantile.
+- `breaks`: Allows you to set specific numeric breaks when using the fixed style.
+
+For example, if we want to adjust our choropleth map to use five classes determined by the natural breaks method, we need to add the `n` and `style` parameters to our `tm_polygons()` layer:
+
+```{r tidy='styler'} 
+#| label: fig-02-choro-2
+#| fig-cap: Building up a map layer by layer.
+#| echo: True
+#| eval: True
+#| cache: True
+#| filename: "R code"
+# shape, polygons
+tm_shape(cpt) +
+  # specify column, classes
+  tm_polygons(
+              col = "sp_prop_xhosa", 
+              n = 5, 
+              style = "jenks"
+              )
+``` 
+
+## Styling data
+Styling a map in `tmap` requires a deeper understanding and familiarity with the library, which is something you will develop best through hands-on practice. Here are the key functions to be aware of:
+
+- `tm_layout()`: Customize titles, fonts, legends, and other layout elements.
+- `tm_compass()`: Add and style a North arrow or compass.
+- `tm_scale_bar()`: Add and style a scale bar.
+
+To begin styling your map, explore each of these functions and their parameters. Through trial and error, you can tweak and refine the map until you achieve the desired look:
+
+```{r tidy='styler'} 
+#| label: fig-02-choro-3
+#| fig-cap: Building up a map layer by layer.
+#| echo: True
+#| eval: True
+#| cache: True
+#| filename: "R code"
+# shape, polygons
+tm_shape(cpt) +
+
+  # specify column, classes, labels, title
+  tm_fill(col= 'sp_prop_xhosa', n = 5, style = 'jenks',
+          palette = c('#feebe2','#fbb4b9','#f768a1','#c51b8a','#7a0177'), 
+          labels = c('Largest share', '2nd largest', '3rd largest', '4th largest', 'Smallest share'),
+          title = 'Share of population',
+          textNA = 'No population',) +
+  
+  # set layout
+  tm_layout(
+    main.title = 'Share of population speaking isiXhosa',
+    main.title.size = 0.9,
+    main.title.position = c('right', 'top'),
+    legend.outside = FALSE,
+    legend.position = c('right', 'top'),
+    legend.title.size = 0.7,
+    legend.title.fontface = 'bold',
+    legend.text.size = 0.5,
+    frame = FALSE,
+    inner.margins = c(0.05,0.05,0.05,0.05),
+    fontfamily = 'Helvetica'
+  ) +
+  
+  # add North arrow
+  tm_compass(
+    type = 'arrow',
+    position = c('left', 'top'),
+    size = 1,
+    text.size = 0.7
+  ) +
+  
+  # add scale bar
+  tm_scale_bar(
+    breaks = c(0, 5, 10, 15, 20),
+    position = c('right', 'bottom'),
+    text.size = 0.4
+  ) 
+
+``` 
+
+We can also have some map labels, if we want, by extracting centroids from selected polygons and adding these as seperate map layer:
+
+```{r tidy='styler'} 
+#| label: fig-02-choro-4
+#| fig-cap: Building up a map layer by layer.
+#| echo: True
+#| eval: True
+#| cache: True
+#| filename: "R code"
+
+# map labels
+cbd <- cpt |> 
+  filter(sp_code == '199041011') |> st_centroid()
+
+# map object
+cpt_xhosa <- 
+
+# shape, polygons
+tm_shape(cpt) +
+
+  # specify column, classes, labels, title
+  tm_fill(col= 'sp_prop_xhosa', n = 5, style = 'jenks',
+          palette = c('#feebe2','#fbb4b9','#f768a1','#c51b8a','#7a0177'), 
+          labels = c('Largest share', '2nd largest', '3rd largest', '4th largest', 'Smallest share'),
+          title = 'Share of population',
+          textNA = 'No population',) +
+  
+  # cbd centroid
+  tm_shape(cbd) +
+  
+  # add points
+  tm_dots(size = 0.4, col= '#000000') +
+  
+  # add labels
+  tm_text(text='sp_name', xmod = 0, ymod = -0.6, col = '#000000', size = 0.8) +
+  
+  # set layout
+  tm_layout(
+    main.title = 'Share of population speaking isi-Xhosa',
+    main.title.size = 0.9,
+    main.title.position = c('right', 'top'),
+    legend.outside = FALSE,
+    legend.position = c('right', 'top'),
+    legend.title.size = 0.7,
+    legend.title.fontface = 'bold',
+    legend.text.size = 0.5,
+    frame = FALSE,
+    inner.margins = c(0.05,0.05,0.05,0.05),
+    fontfamily = 'Helvetica'
+  ) +
+  
+  # add North arrow
+  tm_compass(
+    type = 'arrow',
+    position = c('left', 'top'),
+    size = 1,
+    text.size = 0.7
+  ) +
+  
+  # add scale bar
+  tm_scale_bar(
+    breaks = c(0, 5, 10, 15, 20),
+    position = c('right', 'bottom'),
+    text.size = 0.4
+  ) +
+  
+  # add credits
+  tm_credits('Data source: Census 2011, StatsSA',
+             fontface = 'italic', 
+             position = c('left', 'bottom'),
+             size = 0.4)
+
+# plot
+cpt_xhosa
+```
+
+In the code above, we stored the full map definition as an object - which means we can export the map:
+
+```{r}
+#| label: 02-export-map
+#| classes: styled-output
+#| echo: True
+#| eval: False
+#| tidy: True
+#| filename: "R code"
+tmap_save(tm = xhosa_map, 'cpt-xhosa.jpg', width=15, height=15, units=c('cm'))
+```
+
+## Assignment 
+This concludes this session. Please try to complete the following tasks:
+
+1. If you have not already done so [in the previous session](01-getting-started.html#internet-at-home), aggregate the internet access dataset by the `internet at home` variable for sub places in the City of Johannesburg.
+2. Download the spatial boundaries for sub places in the City of Johannesburg using the link below, and save the file in your `data/spatial` folder.
+3. Create a map that shows the proportion of individuals with internet access at home as part of the overall population.
+
+| File                    | Type          | Link |
+| :------                 | :------       | :------ |
+| Johannesburg Sub Places | `GeoPackage`  | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/spatial/subplace-johannesburg-2013.gpkg) |
