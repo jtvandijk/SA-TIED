@@ -13,7 +13,14 @@ That is it! You now have successfully installed R onto your computer. To make wo
 1.  Navigate to the official webpage of RStudio: [\[Link\]](https://posit.co/download/rstudio-desktop/#download)
 2.  Download and install RStudio Desktop on your computer (**free version!**)
 
-After this, start **RStudio** to see if the installation was successful and you should see something simmilar to what is shown in @fig-rstudio-interface.
+After this, start **RStudio** to see if the installation was successful and you should see something similar to what is shown in @fig-rstudio-interface.
+
+```{r}
+#| label: 01-maxprint
+#| echo: False
+#| eval: True
+options(max.print=10)
+``` 
 
 ```{r}
 #| label: fig-rstudio-interface
@@ -418,7 +425,7 @@ You should notice that the `length()` function now returned a `2` and the `nchar
 You may have noticed that every line of code in the examples is accompanied by a comment explaining its purpose. Comments in R are created using the hash symbol: `#`. This symbol tells R to ignore the commented line when running the code. These comments are helpful for understanding your code when you revisit it later or share with others.
 :::
 
-If we extend the concept of multi-value objects in two dimensions, we end up with a dataframe. A dataframe is the **de-facto** data structure for most tabular data. We will use functions from the `tidyverse` library, which is essentially a suite of packages, to load a data file and conduct some exploratory data analysis. Some of the most important and useful functions, from the `tidyr` and `dplyr` packages, are:
+If we extend the concept of multi-value objects in two dimensions, we end up with a dataframe. A dataframe is the **de-facto** data structure for most tabular data. We will use functions from the `tidyverse` library, which is essentially a suite of packages, to load a data file and conduct some exploratory data analysis. Within the context of the `tidyverse` dataframes are referred to as `tibbles`. Some of the most important and useful functions, from the `tidyr` and `dplyr` packages, are:
 
 | Package   | Function          | Use to |
 | :-        | :--               | :------ |
@@ -434,7 +441,7 @@ If we extend the concept of multi-value objects in two dimensions, we end up wit
 For more information on the `tidyverse` have a look at [www.tidyverse.org](https://www.tidyverse.org/).
 :::
 
-## RStudio rojects
+## RStudio projects
 In RStudio, we can use **scripts** to build up our code that we can run repeatedly and save for future use. We can organise these scripts into RStduio projects.These projects keep all the files associated with an analysis together: input data, R scripts, analytical results, figures, etc. This means we can easily keep track of all data, input and output, whilst still creating standalone scripts for each bit of processing analysis we do. It also makes dealing with [directories and filepaths](https://en.wikipedia.org/wiki/Path_(computing)) much easier.
 
 Navigate to **File** -> **New Project** -> **New Directory**, and create a folder with the name **GeoSpatial-Workshop24**. Click on **Create Project**. You should now see your main window switch to this new project and if you check your **files** window, you should now see a new **R Project** called **GeoSpatial-Workshop24**.
@@ -446,17 +453,20 @@ Please ensure that **folder names** and **file names** do not contain spaces or 
 ## Bathetha isi-Xhosa
 With the basics covered, let us dive into loading a real dataset, performing data cleaning, and conducting some exploratory data analysis. We will work with a dataset that contains counts of the primary languages spoken in South African, sourced from the [South African Census Community Profiles 2011](https://www.statssa.gov.za/?page_id=3839) and made available through the [DataFirst](https://www.datafirst.uct.ac.za/dataportal/index.php/catalog/517/data-dictionary) data service. You can download a copy of the file through the link below and save it in your project folder under `data/attributes`.
 
-| File                                 | Type         | Link |
-| :------                              | :------      | :------ |
-| SA Census 2011 Language Table        | `.dta` |    [Download](https://github.com/jtvandijk/GEOG0030/tree/master/data/attributes/language.dta) |
+| File                                 | Type   | Link |
+| :------                              | :------| :------ |
+| SA Census 2011 Language Table        | `.dta` | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes) |
 
-To get started, let us create our first script. **File** -> **New File** -> **R Script**. Create a folder named `scripts`, and save your script as `01-language-analysis.r`. We will start by loading the libraries that we will need:
+To get started, let us create our first script. **File** -> **New File** -> **R Script**. Create a folder named `scripts`, and save your script as `01-language-analysis.r`. 
+
+We will start by loading the libraries that we will need:
 
 ```{r}
 #| label: 01-load-libraries
 #| classes: styled-output
 #| echo: True
 #| eval: True
+#| output: False
 #| tidy: True
 #| filename: "R code"
 # load libraries
@@ -479,6 +489,69 @@ To run the whole script:
 
 If a script gets stuck or you realise there is an error in your code, you may need to interrupt R. To do this, go to **Session** -> **Interrupt R**. If the interruption doesn't work, you might need to terminate and restart R.
 :::
+
+### Loading data
+Next, we can load the `language.dta` file into R. Using functions from the `haven` library, R is capable to read a large range of different filetypes - Stata's `.dta` file included.
+
+```{r}
+#| label: 01-load-data
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# load data
+att <- read_dta('data/attributes/language.dta')
+```
+
+::: {.callout-warning}
+If using a Windows machine, you may need to substitute your forward-slashes (`/`) with two backslashes (`\\`) whenever you are dealing with file paths.
+:::
+
+Let us have a look at the dataframe:
+
+```{r}
+#| label: 01-inspect-data
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# inspect columns, rows
+ncol(att)
+nrow(att)
+
+# inspect data
+head(att)
+
+# inspect column names
+names(att)
+```
+
+To access specific columns or rows in a dataframe, we can use indexing. Indexing refers to the numbering assigned to each element within a data structure, allowing us to precisely select and manipulate data.
+
+In R, indexing begins at 1, meaning that the first element of any data structure is accessed with the index `[1]`. This is different from many other programming languages, such as Python or Java, where indexing typically starts at `0`. For example, to access the first row of a dataframe, you would use `dataframe[1, ]`, and to access the first column, you would use `dataframe[, 1]`. The comma separates the row and column indices, with the absence of a number indicating all rows or columns respectively.
+
+```{r}
+#| label: 01-index-data
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# index rows
+att[ ,1]
+
+# index columns
+att[1, ]
+
+# specific value
+att[1,1]
+```
+
+Alternatively, you can access the data within individual columns by referring to their names using the `$` operator. This allows you to easily extract and work with a specific column without needing to know its position in the dataframe.
+
+For example, if your dataframe is named `dataframe` and you want to access a column named `age`, you would use `dataframe$age`. This method is especially useful when your data has many columns or when the column positions may change, as it relies on the column names rather than their index numbers.
 
 ## Assignment
 

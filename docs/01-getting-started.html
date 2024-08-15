@@ -224,8 +224,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#inspecting-variables" id="toc-inspecting-variables" class="nav-link" data-scroll-target="#inspecting-variables"><span class="header-section-number">1.3.6</span> Inspecting variables</a></li>
   <li><a href="#creating-multi-value-objects" id="toc-creating-multi-value-objects" class="nav-link" data-scroll-target="#creating-multi-value-objects"><span class="header-section-number">1.3.7</span> Creating multi-value objects</a></li>
   </ul></li>
-  <li><a href="#rstudio-rojects" id="toc-rstudio-rojects" class="nav-link" data-scroll-target="#rstudio-rojects"><span class="header-section-number">1.4</span> RStudio rojects</a></li>
-  <li><a href="#bathetha-isi-xhosa" id="toc-bathetha-isi-xhosa" class="nav-link" data-scroll-target="#bathetha-isi-xhosa"><span class="header-section-number">1.5</span> Bathetha isi-Xhosa</a></li>
+  <li><a href="#rstudio-projects" id="toc-rstudio-projects" class="nav-link" data-scroll-target="#rstudio-projects"><span class="header-section-number">1.4</span> RStudio projects</a></li>
+  <li><a href="#bathetha-isi-xhosa" id="toc-bathetha-isi-xhosa" class="nav-link" data-scroll-target="#bathetha-isi-xhosa"><span class="header-section-number">1.5</span> Bathetha isi-Xhosa</a>
+  <ul class="collapse">
+  <li><a href="#loading-data" id="toc-loading-data" class="nav-link" data-scroll-target="#loading-data"><span class="header-section-number">1.5.1</span> Loading data</a></li>
+  </ul></li>
   <li><a href="#assignment" id="toc-assignment" class="nav-link" data-scroll-target="#assignment"><span class="header-section-number">1.6</span> Assignment</a></li>
   </ul></li>
   </ul>
@@ -251,7 +254,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Navigate to the official webpage of RStudio: <a href="https://posit.co/download/rstudio-desktop/#download">[Link]</a></li>
 <li>Download and install RStudio Desktop on your computer (<strong>free version!</strong>)</li>
 </ol>
-<p>After this, start <strong>RStudio</strong> to see if the installation was successful and you should see something simmilar to what is shown in <a href="#fig-rstudio-interface">Figure&nbsp;1</a>.</p>
+<p>After this, start <strong>RStudio</strong> to see if the installation was successful and you should see something similar to what is shown in <a href="#fig-rstudio-interface">Figure&nbsp;1</a>.</p>
 <div class="cell" data-hash="01-getting-started_cache/html/fig-rstudio-interface_c8158df261f66491761e18412d82586a">
 <div class="cell-output-display">
 <div id="fig-rstudio-interface" class="quarto-figure quarto-figure-center anchored">
@@ -689,7 +692,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>If we extend the concept of multi-value objects in two dimensions, we end up with a dataframe. A dataframe is the <strong>de-facto</strong> data structure for most tabular data. We will use functions from the <code>tidyverse</code> library, which is essentially a suite of packages, to load a data file and conduct some exploratory data analysis. Some of the most important and useful functions, from the <code>tidyr</code> and <code>dplyr</code> packages, are:</p>
+<p>If we extend the concept of multi-value objects in two dimensions, we end up with a dataframe. A dataframe is the <strong>de-facto</strong> data structure for most tabular data. We will use functions from the <code>tidyverse</code> library, which is essentially a suite of packages, to load a data file and conduct some exploratory data analysis. Within the context of the <code>tidyverse</code> dataframes are referred to as <code>tibbles</code>. Some of the most important and useful functions, from the <code>tidyr</code> and <code>dplyr</code> packages, are:</p>
 <table class="table">
 <colgroup>
 <col style="width: 16%">
@@ -753,8 +756,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="rstudio-rojects" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="rstudio-rojects"><span class="header-section-number">1.4</span> RStudio rojects</h2>
+<section id="rstudio-projects" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="rstudio-projects"><span class="header-section-number">1.4</span> RStudio projects</h2>
 <p>In RStudio, we can use <strong>scripts</strong> to build up our code that we can run repeatedly and save for future use. We can organise these scripts into RStduio projects.These projects keep all the files associated with an analysis together: input data, R scripts, analytical results, figures, etc. This means we can easily keep track of all data, input and output, whilst still creating standalone scripts for each bit of processing analysis we do. It also makes dealing with <a href="https://en.wikipedia.org/wiki/Path_(computing)">directories and filepaths</a> much easier.</p>
 <p>Navigate to <strong>File</strong> -&gt; <strong>New Project</strong> -&gt; <strong>New Directory</strong>, and create a folder with the name <strong>GeoSpatial-Workshop24</strong>. Click on <strong>Create Project</strong>. You should now see your main window switch to this new project and if you check your <strong>files</strong> window, you should now see a new <strong>R Project</strong> called <strong>GeoSpatial-Workshop24</strong>.</p>
 <div class="callout callout-style-simple callout-warning">
@@ -783,32 +786,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td style="text-align: left;">SA Census 2011 Language Table</td>
 <td style="text-align: left;"><code>.dta</code></td>
-<td style="text-align: left;"><a href="https://github.com/jtvandijk/GEOG0030/tree/master/data/attributes/language.dta">Download</a></td>
+<td style="text-align: left;"><a href="https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes">Download</a></td>
 </tr>
 </tbody>
 </table>
-<p>To get started, let us create our first script. <strong>File</strong> -&gt; <strong>New File</strong> -&gt; <strong>R Script</strong>. Create a folder named <code>scripts</code>, and save your script as <code>01-language-analysis.r</code>. We will start by loading the libraries that we will need:</p>
-<div class="cell styled-output" data-hash="01-getting-started_cache/html/01-load-libraries_bdc636159496b1bd29c1880a41e7dd5c">
+<p>To get started, let us create our first script. <strong>File</strong> -&gt; <strong>New File</strong> -&gt; <strong>R Script</strong>. Create a folder named <code>scripts</code>, and save your script as <code>01-language-analysis.r</code>.</p>
+<p>We will start by loading the libraries that we will need:</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/01-load-libraries_da60c24fa63ee2fbe02d5d81690d2df2">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>R code</strong></pre>
 </div>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load libraries</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-simple callout-tip">
 <div class="callout-body d-flex">
@@ -831,6 +823,121 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<section id="loading-data" class="level3" data-number="1.5.1">
+<h3 data-number="1.5.1" class="anchored" data-anchor-id="loading-data"><span class="header-section-number">1.5.1</span> Loading data</h3>
+<p>Next, we can load the <code>language.dta</code> file into R. Using functions from the <code>haven</code> library, R is capable to read a large range of different filetypes - Stata’s <code>.dta</code> file included.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/01-load-data_02ba9290d03126094f988114f27242c9">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load data</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>att <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"data/attributes/language.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>If using a Windows machine, you may need to substitute your forward-slashes (<code>/</code>) with two backslashes (<code>\\</code>) whenever you are dealing with file paths.</p>
+</div>
+</div>
+</div>
+<p>Let us have a look at the dataframe:</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/01-inspect-data_a8b5306aad462ba98e2c97abb8e2a748">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect columns, rows</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(att)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 28</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(att)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 84908</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect data</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(att)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 28
+  sal_code   sp_code sp_name   mp_code mp_name mn_mdb_c mn_code mn_name dc_mdb_c
+     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   
+1  1600001 160002001 Matzikam…  160002 Matzik… WC011        160 Matzik… DC1     
+2  1600002 160002001 Matzikam…  160002 Matzik… WC011        160 Matzik… DC1     
+3  1600003 160002001 Matzikam…  160002 Matzik… WC011        160 Matzik… DC1     
+4  1600004 160010001 Vredenda…  160010 Vreden… WC011        160 Matzik… DC1     
+5  1600005 160002001 Matzikam…  160002 Matzik… WC011        160 Matzik… DC1     
+6  1600006 160002001 Matzikam…  160002 Matzik… WC011        160 Matzik… DC1     
+# ℹ 19 more variables: dc_code &lt;dbl&gt;, dc_name &lt;chr&gt;, pr_code &lt;dbl&gt;,
+#   pr_name &lt;chr&gt;, lng_1 &lt;dbl&gt;, lng_2 &lt;dbl&gt;, lng_3 &lt;dbl&gt;, lng_4 &lt;dbl&gt;,
+#   lng_5 &lt;dbl&gt;, lng_6 &lt;dbl&gt;, lng_7 &lt;dbl&gt;, lng_8 &lt;dbl&gt;, lng_9 &lt;dbl&gt;,
+#   lng_10 &lt;dbl&gt;, lng_11 &lt;dbl&gt;, lng_12 &lt;dbl&gt;, lng_13 &lt;dbl&gt;, lng_14 &lt;dbl&gt;,
+#   lng_15 &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect column names</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(att)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "sal_code" "sp_code"  "sp_name"  "mp_code"  "mp_name"  "mn_mdb_c"
+ [7] "mn_code"  "mn_name"  "dc_mdb_c" "dc_code" 
+ [ reached getOption("max.print") -- omitted 18 entries ]</code></pre>
+</div>
+</div>
+<p>To access specific columns or rows in a dataframe, we can use indexing. Indexing refers to the numbering assigned to each element within a data structure, allowing us to precisely select and manipulate data.</p>
+<p>In R, indexing begins at 1, meaning that the first element of any data structure is accessed with the index <code>[1]</code>. This is different from many other programming languages, such as Python or Java, where indexing typically starts at <code>0</code>. For example, to access the first row of a dataframe, you would use <code>dataframe[1, ]</code>, and to access the first column, you would use <code>dataframe[, 1]</code>. The comma separates the row and column indices, with the absence of a number indicating all rows or columns respectively.</p>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/01-index-data_9942d742002d1da48e93b0ba7a4b2d53">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># index rows</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>att[, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 84,908 × 1
+   sal_code
+      &lt;dbl&gt;
+ 1  1600001
+ 2  1600002
+ 3  1600003
+ 4  1600004
+ 5  1600005
+ 6  1600006
+ 7  1600007
+ 8  1600008
+ 9  1600009
+10  1600010
+# ℹ 84,898 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># index columns</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>att[<span class="dv">1</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 28
+  sal_code   sp_code sp_name   mp_code mp_name mn_mdb_c mn_code mn_name dc_mdb_c
+     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   
+1  1600001 160002001 Matzikam…  160002 Matzik… WC011        160 Matzik… DC1     
+# ℹ 19 more variables: dc_code &lt;dbl&gt;, dc_name &lt;chr&gt;, pr_code &lt;dbl&gt;,
+#   pr_name &lt;chr&gt;, lng_1 &lt;dbl&gt;, lng_2 &lt;dbl&gt;, lng_3 &lt;dbl&gt;, lng_4 &lt;dbl&gt;,
+#   lng_5 &lt;dbl&gt;, lng_6 &lt;dbl&gt;, lng_7 &lt;dbl&gt;, lng_8 &lt;dbl&gt;, lng_9 &lt;dbl&gt;,
+#   lng_10 &lt;dbl&gt;, lng_11 &lt;dbl&gt;, lng_12 &lt;dbl&gt;, lng_13 &lt;dbl&gt;, lng_14 &lt;dbl&gt;,
+#   lng_15 &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># specific value</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>att[<span class="dv">1</span>, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  sal_code
+     &lt;dbl&gt;
+1  1600001</code></pre>
+</div>
+</div>
+<p>Alternatively, you can access the data within individual columns by referring to their names using the <code>$</code> operator. This allows you to easily extract and work with a specific column without needing to know its position in the dataframe.</p>
+<p>For example, if your dataframe is named <code>dataframe</code> and you want to access a column named <code>age</code>, you would use <code>dataframe$age</code>. This method is especially useful when your data has many columns or when the column positions may change, as it relies on the column names rather than their index numbers.</p>
+</section>
 </section>
 <section id="assignment" class="level2" data-number="1.6">
 <h2 data-number="1.6" class="anchored" data-anchor-id="assignment"><span class="header-section-number">1.6</span> Assignment</h2>
