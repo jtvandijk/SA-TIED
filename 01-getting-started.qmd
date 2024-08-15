@@ -722,7 +722,7 @@ Next, use the link below to download another dataset sourced from the [South Afr
 
 | File                                 | Type   | Link |
 | :------                              | :------| :------ |
-| SA Census 2011 Internet Access Table        | `.dta` | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes/internet-access.dta) |
+| SA Census 2011 Internet Access Table          | `.dta` | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes/internet-access.dta) |
 
 Use this dataset to:
 

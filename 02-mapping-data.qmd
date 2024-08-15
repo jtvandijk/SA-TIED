@@ -218,7 +218,7 @@ We can now try to join the datasets together again:
 #| label: 02-join-att-cpt
 #| classes: styled-output
 #| echo: True
-#| eval: False
+#| eval: True
 #| tidy: False
 #| filename: "R code"
 # join attribute data onto spatial data
@@ -283,4 +283,77 @@ This confirms that all our full attribute dataset has been linked to the spatial
 ::: {.callout-warning}
 It is important to confirm the source of any `NA` values that are introduced to the dataset to ensure these are genuine. In our case the [South African Census Community Profiles 2011](https://www.statssa.gov.za/?page_id=3839) dataset includes sub places with no population, which typically correspond to industrial areas.
 :::
+
+Since we know these `NA` values are not truly missing but represent structural zeroes, we can replace them with `0`. However, this step is not strictly necessary.
+
+```{r}
+#| label: 02-replace-na
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# replace NAs
+cpt <- cpt |>
+  mutate(sp_pop = if_else(is.na(sp_pop), 0, sp_pop),
+         sp_xhosa = if_else(is.na(sp_xhosa), 0, sp_xhosa))
+```
+
+We are almost ready to map the data. We only need to add the proportion of isiXhosa speakers within each sub place to the data frame:
+
+```{r}
+#| label: 02-xhosa-prop
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# calculate percentages
+cpt <- cpt |>
+  mutate(sp_prop_xhosa = sp_xhosa / sp_pop)
+```
+
+## Mapping spatial data
+For our map-making, we will use one of the two primary visualisation libraries for spatial data: `tmap.` `tmap` offers a flexible, layer-based approach that makes it easy to create various types of thematic maps, such as choropleths and bubble maps. One of the standout features of `tmap` is its quick plotting function, `qtm()`, which allows you to generate basic maps with minimal effort.
+
+```{r}
+#| label: fig-02-qtm
+#| fig-cap: Quick thematic map. 
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# quick thematic map
+qtm(cpt, fill="sp_prop_xhosa")
+``` 
+
+In this case, the `fill()` argument in `tmap` is how we instruct the library to create a choropleth map based on the values in the specified column. If we set `fill()` to NULL, only the borders of our polygons will be drawn, without any color fill. The `qtm()` function in tmap is versatile, allowing us to pass various parameters to customise the aesthetics of our map. By checking the function's documentation, you can explore the full list of available parameters. For instance, to set the borders of our Cape Town polygons to white, we can use the `borders` parameter:
+
+
+```{r}
+#| label: fig-02-qtm-borders
+#| fig-cap: Quick thematic map with white borders.
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# quick thematic map 
+qtm(cpt, fill="sp_prop_xhosa", borders = "white")
+``` 
+
+The map does not look quite right yet. While we can continue tweaking parameters in the `qtm()` function to improve it, `qtm()` is somewhat limited in its functionality and is primarily intended for quickly inspecting your data and creating basic maps. For more complex and refined map-making with the `tmap` library, it is better to use the main plotting method that starts with the `tm_shape()` function. 
+
+::: {.callout-note}
+The primary approach to creating maps in `tmap` involves using a l [layered grammar of graphics](https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149) to build up your map, starting with the `tm_shape()` function. This function, when provided with a spatial dataframe, captures the spatial information of your data, including its projection and geometry, and creates a spatial object. While you can override certain aspects of the spatial data (such as its projection) using the function's parameters, the essential role of tm_shape() is to instruct R to "use this object as the basis for drawing the shapes." 
+
+To actually render the shapes, you need to add a layer that specifies the type of shape you want R to draw from this spatial information—such as polygons for our data. This layer function tells R to "draw my spatial object as `X`," where `X` represents the type of shape. Within this layer, you can also provide additional details to control how R draws your shapes. Further, you can add more layers to include other spatial objects and their corresponding shapes on your map. Finally, layout options can be specified through a layout layer, allowing you to customize the overall appearance and arrangement of your map.
+:::
+
+
+
+
+
+
+
+
 
