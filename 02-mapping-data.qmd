@@ -1,1 +1,231 @@
 # R for Spatial Analysis
+
+## Loading spatial data
+Open a new script within your `Geospatial-Workshop24` project and save this as `02-language-maps.r`. We will start again by loading the libraries that we will need:
+
+```{r}
+#| label: 02-load-libraries
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| output: False
+#| tidy: True
+#| filename: "R code"
+# load libraries
+library(tidyverse)
+library(sf)
+library(tmap)
+```
+
+```{r}
+#| label: 02-tmap-settings
+#| classes: styled-output
+#| echo: False
+#| warning: False
+#| message: False
+#| eval: True
+# ensure tmap is set to plot
+tmap_mode("plot")
+```
+
+```{r}
+#| label: 02-maxprint
+#| echo: False
+#| eval: True
+options(max.print=100)
+``` 
+
+You have been introduced to the `tidyverse` library last session, but now we are adding the `sf` library to read and load our spatial data as well as the `tmap` library to visualise our spatial data. 
+
+We will continue working with the `.csv` dataset that we prepared in the previous session, so we start by loading this:
+
+```{r}
+#| label: 02-load-csv
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| cache: True
+#| filename: "R code"
+# load data
+att <- read_csv('data/attributes/language.csv')
+``` 
+
+You can inspect the dataframe by using the `View()` function.
+
+Next, we need a corresponding spatial dataset that contains the Cape Town's sub places and save it in your `data/spatial` folder.
+
+| File                    | Type          | Link |
+| :------                 | :------       | :------ |
+| Cape Town Sub Places    | `GeoPackage`  | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/spatial/subplace-cape-town-2013.gpkg) |
+
+::: {.callout-note}
+You may have used spatial data before and noticed that we did not download a collection of files known as a `shapefile` but a `GeoPackage` instead. Whilst `shapefiles` are still being used, `GeoPackage` is modern and portable file format. Have a look at this article on *towardsdatascience.com* for an excellent explanation on why one should use `GeoPackage` files over `shapefiles` where possible: [[Link]](https://towardsdatascience.com/why-you-need-to-use-geopackage-files-instead-of-shapefile-or-geojson-7cb24fe56416)
+:::
+
+Let us load the file and store it into an object called `cpt`. We can do this as follows:
+
+```{r}
+#| label: 02-load-gpkg
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| cache: True
+#| filename: "R code"
+# load data
+cpt <- st_read("data/spatial/subplace-cape-town-2013.gpkg")
+``` 
+
+You should also see the `cpt` variable appear in your environment window.
+
+## Exploring spatial data
+As this is the first time we have loaded spatial data into R, let's go for a little exploration of how we can interact with our spatial dataframe. The first thing we want to do when we load spatial data is to make a quick map to check whether everything is in order. To do this, we can use the same function we used before: `plot()`:
+
+```{r}
+#| label: 02-plot-cpt
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| cache: True
+#| filename: "R code"
+# plot data
+plot(cpt, max.plot = 1)
+``` 
+
+You should see your `cpt` plot appear in your **Plots** window.
+
+::: {.callout-warning}
+The `plot()` function should not to be used to make publishable maps but can be used as a quick way of inspecting your spatial data.
+:::
+
+Just as with a tabular dataframe, we can inspect the spatial data frame:
+
+```{r}
+#| label: 02-inspect-data-cpt
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# inspect columns, rows
+ncol(cpt)
+nrow(cpt)
+
+# inspect data
+head(cpt)
+
+# inspect column names
+names(cpt)
+```
+
+We can also again establish the class of our data:
+
+```{r}
+#| label: 02-class-data-cpt
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# inspect
+class(cpt)
+``` 
+
+We should see our data is an `sf` dataframe, which is what we want and we can move on.
+
+## Joining attribute data
+We now have our language dataset (`att`) with the number of isiXhosa speakers in Cape Town, organised by sub-place, as well as a spatial dataset containing the boundaries of these sub-places (`cpt`). We can now join this table data to our spatial data using an **Attribute Join**.
+
+::: {.callout-note}
+An attribute join links two datasets based on a common attribute, enabling the ‘matching’ of rows between them.
+
+```{r} 
+#| label: fig-join-attributes
+#| echo: False 
+#| cache: True
+#| fig-cap: "Attribute Joins."
+knitr::include_graphics('images/w02/attribute-joins.png')
+```
+
+To perform a successful join, each dataset must contain a unique identifying (UID) field. This could be a code, a name, or any other consistent identifier. It is crucial that the ID field is accurate across both datasets, with no typos or inconsistencies (e.g., "City of Cape Town" is not the same as "The City of Cape Town"). Whenever possible, it is preferable to use unique codes rather than names, as codes reduce the likelihood of errors and mismatches.
+:::
+
+Before proceeding with the join, we need to verify that a matching UID exists in both datasets. Let's look at the column names in our datasets again:
+
+```{r}
+#| label: 02-names-att-cpt
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# inspect
+names(att)
+names(cpt)
+``` 
+
+The `sp_code` columns looks promising as it features in both datasets. We can quickly sort both columns and have a peek at the data:
+
+```{r}
+#| label: 02-sort-att-cpt
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# inspect att
+head(sort(att$sp_code))
+
+#inspect cpt
+head(sort(cpt$sp_code))
+``` 
+
+They seem to contain similar values, so that is promising. Let us try to join the attribute data onto the spatial data:
+
+```{r}
+#| label: 02-join-att-cpt-fail
+#| classes: styled-output
+#| echo: True
+#| eval: False
+#| tidy: True
+#| filename: "R code"
+# join attribute data onto spatial data
+cpt <- cpt |> 
+  left_join(att, by = c('sp_code' = 'sp_code'))
+``` 
+You will notice that the join results in an error. 
+
+Where the sub place codes in the `att` object are stored as numbers, the sub place codes in the `cpt` object are stored as strings. We can fix this by casting the number to characters:
+
+```{r}
+#| label: 02-cast-att
+#| classes: styled-output
+#| echo: True
+#| eval: False
+#| tidy: True
+#| filename: "R code"
+# change data type
+att <- att |>
+  mutate(sp_code = as.character(sp_code))
+
+# inspect
+typeof(att$sp_code)
+``` 
+
+We can now try to join the datasets together again:
+
+```{r}
+#| label: 02-join-att-cpt
+#| classes: styled-output
+#| echo: True
+#| eval: False
+#| tidy: True
+#| filename: "R code"
+# join attribute data onto spatial data
+cpt <- cpt |> 
+  left_join(att, by = c('sp_code' = 'sp_code'))
+``` 
+
+
