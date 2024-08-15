@@ -596,7 +596,7 @@ boxplot(att$lng_4, horizontal = TRUE)
 #| tidy: True
 #| filename: "R code"
 # histogram
-hist(att$lng_4, breaks = 50, xlab = 'isiXhosa')
+hist(att$lng_4, breaks = 50, xlab = 'Number of Small Area Layers', main = 'Number of isiXhosa speakers')
 ```
 
 ```{r}
@@ -705,7 +705,7 @@ We can save this dataset so that we can easily load it the next time we want to 
 #| label: 01-write-csv
 #| classes: styled-output
 #| echo: True
-#| eval: True
+#| eval: False
 #| tidy: True
 #| filename: "R code"
 # write data
