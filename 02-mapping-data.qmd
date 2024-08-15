@@ -313,6 +313,19 @@ cpt <- cpt |>
   mutate(sp_prop_xhosa = sp_xhosa / sp_pop)
 ```
 
+We can save this dataset so that we can easily load it the next time we want to work with this by writing it to a `GeoPackage`:
+
+```{r}
+#| label: 02-xhosa-save
+#| classes: styled-output
+#| echo: True
+#| eval: False
+#| tidy: True
+#| filename: "R code"
+# write data
+st_write(obj = cpt, dsn = 'data/spatial/subplace-cape-town-2013-xhosa.gpkg')
+```
+
 ## Mapping spatial data
 For our map-making, we will use one of the two primary visualisation libraries for spatial data: `tmap.` `tmap` offers a flexible, layer-based approach that makes it easy to create various types of thematic maps, such as choropleths and bubble maps. One of the standout features of `tmap` is its quick plotting function, `qtm()`, which allows you to generate basic maps with minimal effort.
 
@@ -561,6 +574,7 @@ In the code above, we stored the full map definition as an object - which means 
 #| eval: False
 #| tidy: True
 #| filename: "R code"
+# write map
 tmap_save(tm = xhosa_map, 'cpt-xhosa.jpg', width=15, height=15, units=c('cm'))
 ```
 
