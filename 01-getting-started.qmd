@@ -1,7 +1,7 @@
 # R for Data Analysis
 
 ## Installation of R
-R is a programming language originally designed for conducting statistical analysis and creating graphics. The major advantage of using R is that it is open source, can be used on any computer operating system, and is free for anyone to use and contribute to. Because of this, it has rapidly become the statistical language of choice for many academics and has a large user community with people constantly contributing new packages to carry out all manner of statistical, graphical, and importantly for us, geographical tasks.
+R is a programming language originally designed for conducting statistical analysis and creating graphics. The major advantage of using R is that it can be used on any computer operating system, and is free for anyone to use and contribute to. Because of this, it has rapidly become the statistical language of choice for many academics and has a large user community with people constantly contributing new packages to carry out all manner of statistical, graphical, and importantly for us, geographical tasks.
 
 Installing R takes a few relatively simple steps involving two pieces of software. First there is the R programme itself. Follow these steps to get it installed on your computer:
 
@@ -32,12 +32,12 @@ knitr::include_graphics('images/w01/rstudio-interface.png')
 
 The main windows that we will be using are:
 
-| Window        | Purpose                                                            |
+| Window        | Purpose                                                             |
 |:---------------|:-------------------------------------------------------|
-| *Console*     | where we write one-off code such as installing packages            |
-| *Files*       | where we can see where our files are stored on our computer system |
-| *Environment* | where our variables or objects are kept in memory                  |
-| *Plots*       | where the outputs of our graphs, charts and maps are shown         |
+| *Console*     | Where we write one-off code such as installing packages.            |
+| *Files*       | Where we can see where our files are stored on our computer system. |
+| *Environment* | Where our variables or objects are kept in memory.                  |
+| *Plots*       | Where the outputs of our graphs, charts and maps are shown.         |
 
 ## Customisation of R
 Now we have installed R and RStudio, we need to customise R. Many useful R functions come in packages, these are free libraries of code written and made available by other R users. This includes packages specifically developed for data cleaning, data wrangling, visualisation, mapping, and spatial analysis. To save us some time, we will install **all R packages that we will need** for the workshop in one go. Start RStudio, and copy and paste the following code into the **console** window. You can execute the code by pressing the **Return** button on your keyboard. Depending on your computer's specifications and the internet connection, this may take a short while.
@@ -84,20 +84,20 @@ You will see some information printed to your console but as long as you do not 
 -   `Error in library(<packagename>) : there is no package called '<packagename>'`
 
 ::: callout-note
-Many packages depend on other packages (so-called *dependencies*). It happens at times when you install a package it does not install all dependencies. If you encounter any of the above errors in reference to a package that you did not explicitly install, it is probably a missing dependency. Simply install the dependency by typing `install.packages('<dependencyname>')` and try loading all packages again.
+Many packages require additional software components, known as *dependencies*, to function properly. Occasionally, when you install a package, some of these dependencies might not be installed automatically. If you encounter errors related to a package that you did not explicitly install, it is likely due to a missing dependency. To resolve this, identify the missing dependency and install it using the command `install.packages('<dependencyname>')`. Afterward, try loading your packages again.
 :::
 
 ## Getting started with R
-Unlike traditional statistical analysis software like [Microsoft Excel](https://www.microsoft.com/en-us/microsoft-365/excel) or [Stata](https://www.stata.com/), which often rely on point-and-click interfaces, R requires users to input commands to perform tasks such as loading datasets or fitting models. This command-based approach is typically done by writing scripts, which not only document your workflow but also allow for easy repetition of tasks.
+Unlike traditional statistical analysis software like [Microsoft Excel](https://www.microsoft.com/en-us/microsoft-365/excel) or [Stata](https://www.stata.com/), which often rely on point-and-click interfaces, R requires users to input commands to perform tasks such as loading datasets and fitting models. This command-based approach is typically done by writing scripts, which not only document your workflow but also allow for easy repetition of tasks.
 
 ::: callout-note
 If you are familiar with Stata's **do-file** you will find that the approach to programming in R is comparable.
 :::
 
-We will first start off with using to test out some of R's in-built functionality by creating a few variables. In your console, let us go ahead and conduct some quick maths. At their most basic, all programming languages can be used like calculators.
+Let us begin by exploring some of R's built-in functionality through a simple exercise: creating a few variables and performing basic calculations. Open your console, and let us start with some quick math. At its core, every programming language can be used as a powerful calculator.
 
 ::: callout-warning
-In your RStudio console, you should see a prompt sign `>` on the left hand side. This is where we can directly interact with R. Anything that appears as red in the command line means it is an error or a warning. If you just see a `>` it means you can type in your next line, whereas a `+` means that you have not finished the previous line of code. As will become clear, `+` signs often appear if you do not close brackets or you did not properly finish your command in a way that R expected.
+In your RStudio console, you will notice a prompt sign `>` on the left-hand side. This is where you can directly interact with R. If any text appears in red, it indicates an error or warning. When you see the `>`, it means R is ready for your next command. However, if you see a `+`, it means you have not completed the previous line of code. This often happens when brackets are left open or a command is not properly finished as R expected.
 :::
 
 Type in `10 * 12` into the console and execute.
@@ -116,7 +116,7 @@ Type in `10 * 12` into the console and execute.
 Once you press return, you should see the answer of `120` returned below.
 
 ### Storing variables
-Rather than use *raw* or *standalone* numbers and values, we primarily want to use variables that store these values (or groups of them) under a memorable name for easy reference later. In R terminology this is called **creating an object** and this object becomes stored as a **variable**. The `<-` symbol is used to assign the value to the variable name you have given. Let us create two variables to experiment with.
+Instead of using raw numbers or standalone values, it is more effective to store these values in variables, which allows for easy reference later. In R, this process is known as **creating an object**, and the object is stored as a variable. To assign a value to a variable, use the `<-` symbol. Let us create two variables to experiment with this concept.
 
 Type in `ten <- 10` into the console and execute.
 
@@ -131,7 +131,7 @@ Type in `ten <- 10` into the console and execute.
 ten <- 10
 ```
 
-You will see nothing is returned in the console, but if you check your environment window it has now appeared as a new variable that contains the associated value.
+You will see nothing is returned in the console. However, if you check your **environment** window, you will see that a new variable has appeared, containing the value you assigned.
 
 Type in `twelve <- 12` into the console and execute.
 
@@ -146,7 +146,7 @@ Type in `twelve <- 12` into the console and execute.
 twelve <- 12
 ```
 
-Once again, you will see nothing returned to the console but do check your environment window for your variable. We have now stored two numbers into our environment and given them variable names for easy reference. R stores these objects as variables in your computer's [RAM memory](https://en.wikipedia.org/wiki/Random-access_memory) so they can be processed quickly. Without saving your environment, these variables would be lost if you close R. Now we have our variables, we can go ahead and execute the same simple multiplication:
+Again, nothing will be returned to the console, but be sure to check your environment window for the newly created variable. We have now stored two numbers in our environment and assigned them variable names for easy reference. R stores these objects as variables in your computer's [RAM memory](https://en.wikipedia.org/wiki/Random-access_memory), allowing for quick processing. Keep in mind that without saving your environment, these variables will be lost when you close R. Now that we have our variables, let us proceed with a simple multiplication:
 
 Type in `ten * twelve` into the console and execute.
 
@@ -161,7 +161,7 @@ Type in `ten * twelve` into the console and execute.
 ten * twelve
 ```
 
-You should see the output in the console of `120`. Whilst this maths may look trivial, it is, in fact, extremely powerful as it shows how these **variables** can be treated in the same way as the values they contain.
+You should see the output in the console of `120`. While this calculation may seem trivial, it demonstrates a powerful concept: these variables can be treated just like the values they contain.
 
 Next, type in `ten * twelve * 8` into the console and execute.
 
@@ -176,7 +176,7 @@ Next, type in `ten * twelve * 8` into the console and execute.
 ten * twelve * 8
 ```
 
-You should get an answer of `960`. As you can see, we can mix **variables** with **raw values** without any problems. We can also store the output of variable calculations as a new variable.
+You should get an answer of `960`. As you can see, we can mix variables with raw values without any problems. We can also store the output of variable calculations as a new variable.
 
 Type `output <- ten * twelve * 8` into the console and execute.
 
@@ -191,10 +191,10 @@ Type `output <- ten * twelve * 8` into the console and execute.
 output <- ten * twelve * 8
 ```
 
-Because we are storing the output of our maths to a new variable, the answer is not returned to the screen.
+Because we are storing the output of our maths to a new variable, the answer is not returned to the screen but is kept in memory.
 
 ### Accessing variables
-We can ask our computer to return this `output` by simply typing it into the console. You should see we get the same value as the earlier equation.
+We can ask R to return the value of the `output` variable by simply typing its name into the console. You should see that it returns the same value as the earlier calculation.
 
 ```{r}
 #| label: 01-math7
@@ -223,7 +223,7 @@ Type in `str_variable <- "Hello Pretoria"` into the console and execute.
 str_variable <- "Hello Pretoria"
 ```
 
-We have just stored our sentence made from a combination of characters. A variable that stores text is known as a string. A string is always denoted by the use of quotation marks (`""` or `''`).
+We have just stored our sentence made from a combination of characters. A variable that stores text is known as a string. A string is always denoted by the use of single (`''`) or double (`""`) quotation marks.
 
 Type in `str_variable` into the console and execute.
 
@@ -241,7 +241,7 @@ str_variable
 You should see our entire sentence returned, enclosed in quotation marks (`""`).
 
 ### Calling functions
-We can also **call** a function on our variable. For example, we can also ask R to **print** our variable, which will give us the same output as accessing it directly via the console.
+We can also call a function on our variable. For example, we can ask R to **print** our variable, which will give us the same output as accessing it directly via the console.
 
 Type in `print(str_variable)` into the console and execute.
 
@@ -256,7 +256,7 @@ Type in `print(str_variable)` into the console and execute.
 print(str_variable)
 ```
 
-You can type `?print` into the console to find out more about the `print()` function.
+You can type `?print` into the console to learn more about the `print()` function. This method works with any function, giving you access to its documentation. Understanding this documentation is crucial for using the function correctly and interpreting its output.
 
 ```{r}
 #| label: 01-str4
@@ -268,8 +268,6 @@ You can type `?print` into the console to find out more about the `print()` func
 # open documentation of the print function
 ?print
 ```
-
-This can be used with any function to get access to their documentation which is essential to know how to use the function correctly and understand its output.
 
 ::: callout-note
 In many cases, a function will take more than one argument or parameter, so it is important to know what you need to provide the function with in order for it to work. For now, we are using functions that only need one *required* argument although most functions will also have several *optional* or *default* parameters.
@@ -291,7 +289,7 @@ Type in `typeof(str_variable)` into the console and execute.
 typeof(str_variable)
 ```
 
-You should see the answer: `character`. As evident, our `str_variable` is a **character** data type. We can try testing this out on one of our earlier variables too.
+You should see the answer: `character`. As evident, our `str_variable` is a `character` data type. We can try testing this out on one of our earlier variables too.
 
 Type in `typeof(ten)` into the console and execute.
 
@@ -306,7 +304,9 @@ Type in `typeof(ten)` into the console and execute.
 typeof(ten)
 ```
 
-You should see the answer: `double`. For high-level objects that involve more complex data structures, such as when we load a `csv` or `.dta` into R as a **dataframe**, we are also able to check what **class** our object is. Type in `class(str_variable)` into the console and execute.
+You should see the answer: `double`. Alternatively, we can check the `class` of a variable by using the `class()` function.
+
+Type in `class(str_variable)` into the console and execute.
 
 ```{r}
 #| label: 01-str7
@@ -319,7 +319,7 @@ You should see the answer: `double`. For high-level objects that involve more co
 class(str_variable)
 ```
 
-In this case, you will get the same answer because in R both its class and type are the same: a *character*. In other programming languages, you might have had *string* returned instead, but this effectively means the same thing.
+In this case, you will see the same result as before because, in R, both the `class` and `type` of a `string` are character. Other programming languages might use the term `string` instead, but it essentially means the same thing.
 
 Type in `class(ten)` into the console and execute.
 
@@ -334,7 +334,7 @@ Type in `class(ten)` into the console and execute.
 class(ten)
 ```
 
-In this case, you will get a different answer because the class of this variable is numeric. This is because the class of numeric objects can contain either doubles (decimals) or integers (whole numbers). We can test this by asking whether our `ten` variable is an integer or not.
+In this case, you will get a different result because the `class` of this variable is `numeric`. Numeric objects in R can be either `doubles` (decimals) or `integers` (whole numbers). You can test whether the `ten` variable is an integer by using specific functions designed for this purpose.
 
 Type in `is.integer(ten)` into the console and execute.
 
@@ -345,16 +345,17 @@ Type in `is.integer(ten)` into the console and execute.
 #| eval: True
 #| tidy: True
 #| filename: "R code"
+# call the integer() function
 is.integer(ten)
 ```
 
-You should see we get the answer `FALSE`: as we know from our earlier `typeof()` function our variable ten is stored as a double and therefore cannot be an integer.
+You should see the result `FALSE`. As we know from the `typeof()` function, the `ten` variable is stored as a `double`, so it cannot be an `integer`.
 
 ::: callout-note
-Whilst knowing how to distinguish between different data types might not seem important now, the difference of a double versus an integer can quite easily lead to unexpected errors.
+Whilst knowing how to distinguish between different data types might not seem important now, the difference betwee a `double` and an `integer` can quite easily lead to unexpected errors.
 :::
 
-We can also ask how long our variable is. in this case, we will find out how many different sets of characters (strings) are stored in our variable, `str_variable`.
+We can also check the length of our a variable.
 
 Type in `length(str_variable)` into the console and execute.
 
@@ -369,7 +370,7 @@ Type in `length(str_variable)` into the console and execute.
 length(str_variable)
 ```
 
-You should get the answer `1` because we only have one *set* of characters. We can also ask how long each set of characters is within our variable, i.e. ask how long the string contained by our variable is.
+You should get the answer `1` because we only have one *set* of characters.  We can also determine the length of each set of characters, which tells us the length of the string contained in the variable.
 
 Type in `nchar(str_variable)` into the console and execute.
 
@@ -384,7 +385,7 @@ Type in `nchar(str_variable)` into the console and execute.
 nchar(str_variable)
 ```
 
-You should get an answer of `31`.
+You should get an answer of `14`.
 
 ### Creating multi-value objects
 Variables are not constricted to one value, but can be combined to create larger objects. Type in `two_str_variable <- c("This is our second variable", "It has two parts to it")` into the console and execute.
@@ -400,7 +401,7 @@ Variables are not constricted to one value, but can be combined to create larger
 two_str_variable <- c("This is our second string variable", "It has two parts to it")
 ```
 
-In this piece of code, we have created a new variable using the `c()` function in R, that stands for *combine values into a vector or list*. We have provided that function with two sets of strings, using a *comma* to separate our two strings - all contained within the function's brackets (`()`). Y
+In this code, we have created a new variable using the `c()` function, which combines values into a `vector` or `list`. We provided the `c()` function with two sets of strings, separated by a comma and enclosed within the function's parentheses.
 
 Let us now try both our `length()` and `nchar()` on our new variable and see what the results are:
 
@@ -421,10 +422,10 @@ nchar(two_str_variable)
 You should notice that the `length()` function now returned a `2` and the `nchar()` function returned two values of `34` and `22`.
 
 ::: {.callout-note}
-You may have noticed that every line of code in the examples is accompanied by a comment explaining its purpose. Comments in R are created using the hash symbol: `#`. This symbol tells R to ignore the commented line when running the code. These comments are helpful for understanding your code when you revisit it later or share with others.
+You may have noticed that each line of code in the examples includes a comment explaining its purpose. In R, comments are created using the hash symbol `#`. This symbol instructs R to ignore the commented line when executing the code. Comments are useful for understanding your code when you revisit it later or when sharing it with others.
 :::
 
-If we extend the concept of multi-value objects in two dimensions, we end up with a dataframe. A dataframe is the **de-facto** data structure for most tabular data. We will use functions from the `tidyverse` library, which is essentially a suite of packages, to load a data file and conduct some exploratory data analysis. Within the context of the `tidyverse` dataframes are referred to as `tibbles`. Some of the most important and useful functions, from the `tidyr` and `dplyr` packages, are:
+Extending the concept of multi-value objects to two dimensions results in a `dataframe.` A dataframe is the de facto data structure for most tabular data. We will use functions from the `tidyverse` library, a suite of packages—to load a data file and conduct exploratory data analysis. Within the `tidyverse`, `dataframes` are referred to as `tibbles.` Some of the most important and useful functions come from the `tidyr` and `dplyr` packages, including:
 
 | Package   | Function          | Use to |
 | :-        | :--               | :------ |
@@ -441,9 +442,9 @@ For more information on the `tidyverse` have a look at [www.tidyverse.org](https
 :::
 
 ## RStudio projects
-In RStudio, we can use **scripts** to build up our code that we can run repeatedly and save for future use. We can organise these scripts into RStduio projects.These projects keep all the files associated with an analysis together: input data, R scripts, analytical results, figures, etc. This means we can easily keep track of all data, input and output, whilst still creating standalone scripts for each bit of processing analysis we do. It also makes dealing with [directories and filepaths](https://en.wikipedia.org/wiki/Path_(computing)) much easier.
+In RStudio, scripts allow us to build and save code that can be run repeatedly. We can organise these scripts into RStudio projects, which consolidate all files related to an analysis such as input data, R scripts, results, figures, and more. This organisation helps keep track of all data, input, and output, while enabling us to create standalone scripts for each part of our analysis. Additionally, it simplifies managing [directories and filepaths](https://en.wikipedia.org/wiki/Path_(computing)).
 
-Navigate to **File** -> **New Project** -> **New Directory**, and create a folder with the name `GeoSpatial-Workshop24`. Click on **Create Project**. You should now see your main window switch to this new project and if you check your **files** window, you should now see a new **R Project** called `GeoSpatial-Workshop24`.
+Navigate to **File** -> **New Project** -> **New Directory**, and create a folder with the name `GeoSpatial-Workshop24`. Click on **Create Project**. You should now see your main window switch to this new project and when you check your **files** window, you should see a new **R Project** called `GeoSpatial-Workshop24`.
   
 ::: {.callout-warning}
 Please ensure that **folder names** and **file names** do not contain spaces or special characters such as `*` `.` `"` `/` `\` `[` `]` `:` `;` `|` `=` `,` `<` `?` `>` `&` `$` `#` `!` `'` `{` `}` `(` `)`. Different operating systems and programming languages deal differently with spaces and special characters and as such including these in your folder names and file names can cause many problems and unexpected errors. As an alternative to using white space you can use an underscore `_` or hyphen `-` if you like.

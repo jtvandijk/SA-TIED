@@ -245,7 +245,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 data-number="1"><span class="header-section-number">1</span> R for Data Analysis</h1>
 <section id="installation-of-r" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="installation-of-r"><span class="header-section-number">1.1</span> Installation of R</h2>
-<p>R is a programming language originally designed for conducting statistical analysis and creating graphics. The major advantage of using R is that it is open source, can be used on any computer operating system, and is free for anyone to use and contribute to. Because of this, it has rapidly become the statistical language of choice for many academics and has a large user community with people constantly contributing new packages to carry out all manner of statistical, graphical, and importantly for us, geographical tasks.</p>
+<p>R is a programming language originally designed for conducting statistical analysis and creating graphics. The major advantage of using R is that it can be used on any computer operating system, and is free for anyone to use and contribute to. Because of this, it has rapidly become the statistical language of choice for many academics and has a large user community with people constantly contributing new packages to carry out all manner of statistical, graphical, and importantly for us, geographical tasks.</p>
 <p>Installing R takes a few relatively simple steps involving two pieces of software. First there is the R programme itself. Follow these steps to get it installed on your computer:</p>
 <ol type="1">
 <li>Navigate in your browser to the download page: <a href="https://cran.r-project.org/">[Link]</a></li>
@@ -282,19 +282,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><em>Console</em></td>
-<td style="text-align: left;">where we write one-off code such as installing packages</td>
+<td style="text-align: left;">Where we write one-off code such as installing packages.</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><em>Files</em></td>
-<td style="text-align: left;">where we can see where our files are stored on our computer system</td>
+<td style="text-align: left;">Where we can see where our files are stored on our computer system.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><em>Environment</em></td>
-<td style="text-align: left;">where our variables or objects are kept in memory</td>
+<td style="text-align: left;">Where our variables or objects are kept in memory.</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><em>Plots</em></td>
-<td style="text-align: left;">where the outputs of our graphs, charts and maps are shown</td>
+<td style="text-align: left;">Where the outputs of our graphs, charts and maps are shown.</td>
 </tr>
 </tbody>
 </table>
@@ -347,14 +347,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Many packages depend on other packages (so-called <em>dependencies</em>). It happens at times when you install a package it does not install all dependencies. If you encounter any of the above errors in reference to a package that you did not explicitly install, it is probably a missing dependency. Simply install the dependency by typing <code>install.packages('&lt;dependencyname&gt;')</code> and try loading all packages again.</p>
+<p>Many packages require additional software components, known as <em>dependencies</em>, to function properly. Occasionally, when you install a package, some of these dependencies might not be installed automatically. If you encounter errors related to a package that you did not explicitly install, it is likely due to a missing dependency. To resolve this, identify the missing dependency and install it using the command <code>install.packages('&lt;dependencyname&gt;')</code>. Afterward, try loading your packages again.</p>
 </div>
 </div>
 </div>
 </section>
 <section id="getting-started-with-r" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="getting-started-with-r"><span class="header-section-number">1.3</span> Getting started with R</h2>
-<p>Unlike traditional statistical analysis software like <a href="https://www.microsoft.com/en-us/microsoft-365/excel">Microsoft Excel</a> or <a href="https://www.stata.com/">Stata</a>, which often rely on point-and-click interfaces, R requires users to input commands to perform tasks such as loading datasets or fitting models. This command-based approach is typically done by writing scripts, which not only document your workflow but also allow for easy repetition of tasks.</p>
+<p>Unlike traditional statistical analysis software like <a href="https://www.microsoft.com/en-us/microsoft-365/excel">Microsoft Excel</a> or <a href="https://www.stata.com/">Stata</a>, which often rely on point-and-click interfaces, R requires users to input commands to perform tasks such as loading datasets and fitting models. This command-based approach is typically done by writing scripts, which not only document your workflow but also allow for easy repetition of tasks.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -365,14 +365,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>We will first start off with using to test out some of R’s in-built functionality by creating a few variables. In your console, let us go ahead and conduct some quick maths. At their most basic, all programming languages can be used like calculators.</p>
+<p>Let us begin by exploring some of R’s built-in functionality through a simple exercise: creating a few variables and performing basic calculations. Open your console, and let us start with some quick math. At its core, every programming language can be used as a powerful calculator.</p>
 <div class="callout callout-style-simple callout-warning">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>In your RStudio console, you should see a prompt sign <code>&gt;</code> on the left hand side. This is where we can directly interact with R. Anything that appears as red in the command line means it is an error or a warning. If you just see a <code>&gt;</code> it means you can type in your next line, whereas a <code>+</code> means that you have not finished the previous line of code. As will become clear, <code>+</code> signs often appear if you do not close brackets or you did not properly finish your command in a way that R expected.</p>
+<p>In your RStudio console, you will notice a prompt sign <code>&gt;</code> on the left-hand side. This is where you can directly interact with R. If any text appears in red, it indicates an error or warning. When you see the <code>&gt;</code>, it means R is ready for your next command. However, if you see a <code>+</code>, it means you have not completed the previous line of code. This often happens when brackets are left open or a command is not properly finished as R expected.</p>
 </div>
 </div>
 </div>
@@ -392,7 +392,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Once you press return, you should see the answer of <code>120</code> returned below.</p>
 <section id="storing-variables" class="level3" data-number="1.3.1">
 <h3 data-number="1.3.1" class="anchored" data-anchor-id="storing-variables"><span class="header-section-number">1.3.1</span> Storing variables</h3>
-<p>Rather than use <em>raw</em> or <em>standalone</em> numbers and values, we primarily want to use variables that store these values (or groups of them) under a memorable name for easy reference later. In R terminology this is called <strong>creating an object</strong> and this object becomes stored as a <strong>variable</strong>. The <code>&lt;-</code> symbol is used to assign the value to the variable name you have given. Let us create two variables to experiment with.</p>
+<p>Instead of using raw numbers or standalone values, it is more effective to store these values in variables, which allows for easy reference later. In R, this process is known as <strong>creating an object</strong>, and the object is stored as a variable. To assign a value to a variable, use the <code>&lt;-</code> symbol. Let us create two variables to experiment with this concept.</p>
 <p>Type in <code>ten &lt;- 10</code> into the console and execute.</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-math2_2cda6d157e3c402fd1c27a56ac1843f8">
 <div class="code-with-filename">
@@ -403,7 +403,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ten <span class="ot">&lt;-</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>You will see nothing is returned in the console, but if you check your environment window it has now appeared as a new variable that contains the associated value.</p>
+<p>You will see nothing is returned in the console. However, if you check your <strong>environment</strong> window, you will see that a new variable has appeared, containing the value you assigned.</p>
 <p>Type in <code>twelve &lt;- 12</code> into the console and execute.</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-math3_fe84e408eff5f0559138349ded448ad7">
 <div class="code-with-filename">
@@ -414,7 +414,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>twelve <span class="ot">&lt;-</span> <span class="dv">12</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>Once again, you will see nothing returned to the console but do check your environment window for your variable. We have now stored two numbers into our environment and given them variable names for easy reference. R stores these objects as variables in your computer’s <a href="https://en.wikipedia.org/wiki/Random-access_memory">RAM memory</a> so they can be processed quickly. Without saving your environment, these variables would be lost if you close R. Now we have our variables, we can go ahead and execute the same simple multiplication:</p>
+<p>Again, nothing will be returned to the console, but be sure to check your environment window for the newly created variable. We have now stored two numbers in our environment and assigned them variable names for easy reference. R stores these objects as variables in your computer’s <a href="https://en.wikipedia.org/wiki/Random-access_memory">RAM memory</a>, allowing for quick processing. Keep in mind that without saving your environment, these variables will be lost when you close R. Now that we have our variables, let us proceed with a simple multiplication:</p>
 <p>Type in <code>ten * twelve</code> into the console and execute.</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-math4_bb8b720b13d0b371b765c19f27279393">
 <div class="code-with-filename">
@@ -428,7 +428,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 120</code></pre>
 </div>
 </div>
-<p>You should see the output in the console of <code>120</code>. Whilst this maths may look trivial, it is, in fact, extremely powerful as it shows how these <strong>variables</strong> can be treated in the same way as the values they contain.</p>
+<p>You should see the output in the console of <code>120</code>. While this calculation may seem trivial, it demonstrates a powerful concept: these variables can be treated just like the values they contain.</p>
 <p>Next, type in <code>ten * twelve * 8</code> into the console and execute.</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-math5_8f8c44c8c8ebd3d8906d638e5b1b3109">
 <div class="code-with-filename">
@@ -442,7 +442,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 960</code></pre>
 </div>
 </div>
-<p>You should get an answer of <code>960</code>. As you can see, we can mix <strong>variables</strong> with <strong>raw values</strong> without any problems. We can also store the output of variable calculations as a new variable.</p>
+<p>You should get an answer of <code>960</code>. As you can see, we can mix variables with raw values without any problems. We can also store the output of variable calculations as a new variable.</p>
 <p>Type <code>output &lt;- ten * twelve * 8</code> into the console and execute.</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-math6_b3afcd4549bfafdd690c7f4a3f058a13">
 <div class="code-with-filename">
@@ -453,11 +453,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> ten <span class="sc">*</span> twelve <span class="sc">*</span> <span class="dv">8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>Because we are storing the output of our maths to a new variable, the answer is not returned to the screen.</p>
+<p>Because we are storing the output of our maths to a new variable, the answer is not returned to the screen but is kept in memory.</p>
 </section>
 <section id="accessing-variables" class="level3" data-number="1.3.2">
 <h3 data-number="1.3.2" class="anchored" data-anchor-id="accessing-variables"><span class="header-section-number">1.3.2</span> Accessing variables</h3>
-<p>We can ask our computer to return this <code>output</code> by simply typing it into the console. You should see we get the same value as the earlier equation.</p>
+<p>We can ask R to return the value of the <code>output</code> variable by simply typing its name into the console. You should see that it returns the same value as the earlier calculation.</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-math7_bc8fae2119755d1fcc43199c1454c72a">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -484,7 +484,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>str_variable <span class="ot">&lt;-</span> <span class="st">"Hello Pretoria"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>We have just stored our sentence made from a combination of characters. A variable that stores text is known as a string. A string is always denoted by the use of quotation marks (<code>""</code> or <code>''</code>).</p>
+<p>We have just stored our sentence made from a combination of characters. A variable that stores text is known as a string. A string is always denoted by the use of single (<code>''</code>) or double (<code>""</code>) quotation marks.</p>
 <p>Type in <code>str_variable</code> into the console and execute.</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-str2_203e7158d63a1d05002778782ea0a4e1">
 <div class="code-with-filename">
@@ -502,7 +502,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="calling-functions" class="level3" data-number="1.3.4">
 <h3 data-number="1.3.4" class="anchored" data-anchor-id="calling-functions"><span class="header-section-number">1.3.4</span> Calling functions</h3>
-<p>We can also <strong>call</strong> a function on our variable. For example, we can also ask R to <strong>print</strong> our variable, which will give us the same output as accessing it directly via the console.</p>
+<p>We can also call a function on our variable. For example, we can ask R to <strong>print</strong> our variable, which will give us the same output as accessing it directly via the console.</p>
 <p>Type in <code>print(str_variable)</code> into the console and execute.</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-str3_a1159d00296c4b6a5946943efcf98bc7">
 <div class="code-with-filename">
@@ -516,7 +516,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] "Hello Pretoria"</code></pre>
 </div>
 </div>
-<p>You can type <code>?print</code> into the console to find out more about the <code>print()</code> function.</p>
+<p>You can type <code>?print</code> into the console to learn more about the <code>print()</code> function. This method works with any function, giving you access to its documentation. Understanding this documentation is crucial for using the function correctly and interpreting its output.</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-str4_7b8a9589d77c92fc604281e6a845868d">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -526,7 +526,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>?print</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>This can be used with any function to get access to their documentation which is essential to know how to use the function correctly and understand its output.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -554,7 +553,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] "character"</code></pre>
 </div>
 </div>
-<p>You should see the answer: <code>character</code>. As evident, our <code>str_variable</code> is a <strong>character</strong> data type. We can try testing this out on one of our earlier variables too.</p>
+<p>You should see the answer: <code>character</code>. As evident, our <code>str_variable</code> is a <code>character</code> data type. We can try testing this out on one of our earlier variables too.</p>
 <p>Type in <code>typeof(ten)</code> into the console and execute.</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-str6_d8395beb99c15722e493e50ab334a162">
 <div class="code-with-filename">
@@ -568,7 +567,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] "double"</code></pre>
 </div>
 </div>
-<p>You should see the answer: <code>double</code>. For high-level objects that involve more complex data structures, such as when we load a <code>csv</code> or <code>.dta</code> into R as a <strong>dataframe</strong>, we are also able to check what <strong>class</strong> our object is. Type in <code>class(str_variable)</code> into the console and execute.</p>
+<p>You should see the answer: <code>double</code>. Alternatively, we can check the <code>class</code> of a variable by using the <code>class()</code> function.</p>
+<p>Type in <code>class(str_variable)</code> into the console and execute.</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-str7_4f72e938bddadfa511c9f1c0114ce891">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -581,7 +581,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] "character"</code></pre>
 </div>
 </div>
-<p>In this case, you will get the same answer because in R both its class and type are the same: a <em>character</em>. In other programming languages, you might have had <em>string</em> returned instead, but this effectively means the same thing.</p>
+<p>In this case, you will see the same result as before because, in R, both the <code>class</code> and <code>type</code> of a <code>string</code> are character. Other programming languages might use the term <code>string</code> instead, but it essentially means the same thing.</p>
 <p>Type in <code>class(ten)</code> into the console and execute.</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-str8_1f9e7280d8efa20b10991960402d1535">
 <div class="code-with-filename">
@@ -595,31 +595,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] "numeric"</code></pre>
 </div>
 </div>
-<p>In this case, you will get a different answer because the class of this variable is numeric. This is because the class of numeric objects can contain either doubles (decimals) or integers (whole numbers). We can test this by asking whether our <code>ten</code> variable is an integer or not.</p>
+<p>In this case, you will get a different result because the <code>class</code> of this variable is <code>numeric</code>. Numeric objects in R can be either <code>doubles</code> (decimals) or <code>integers</code> (whole numbers). You can test whether the <code>ten</code> variable is an integer by using specific functions designed for this purpose.</p>
 <p>Type in <code>is.integer(ten)</code> into the console and execute.</p>
-<div class="cell styled-output" data-hash="01-getting-started_cache/html/01-var1_86c2e7c7054b94c432c008be0c38d05b">
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/01-var1_8efadf04e039b9a35afe06eb8a586ab6">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>R code</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(ten)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># call the integer() function</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(ten)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
 </div>
-<p>You should see we get the answer <code>FALSE</code>: as we know from our earlier <code>typeof()</code> function our variable ten is stored as a double and therefore cannot be an integer.</p>
+<p>You should see the result <code>FALSE</code>. As we know from the <code>typeof()</code> function, the <code>ten</code> variable is stored as a <code>double</code>, so it cannot be an <code>integer</code>.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Whilst knowing how to distinguish between different data types might not seem important now, the difference of a double versus an integer can quite easily lead to unexpected errors.</p>
+<p>Whilst knowing how to distinguish between different data types might not seem important now, the difference betwee a <code>double</code> and an <code>integer</code> can quite easily lead to unexpected errors.</p>
 </div>
 </div>
 </div>
-<p>We can also ask how long our variable is. in this case, we will find out how many different sets of characters (strings) are stored in our variable, <code>str_variable</code>.</p>
+<p>We can also check the length of our a variable.</p>
 <p>Type in <code>length(str_variable)</code> into the console and execute.</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-var2_2026f96f24619796fc393098cbfce93c">
 <div class="code-with-filename">
@@ -633,7 +634,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 1</code></pre>
 </div>
 </div>
-<p>You should get the answer <code>1</code> because we only have one <em>set</em> of characters. We can also ask how long each set of characters is within our variable, i.e.&nbsp;ask how long the string contained by our variable is.</p>
+<p>You should get the answer <code>1</code> because we only have one <em>set</em> of characters. We can also determine the length of each set of characters, which tells us the length of the string contained in the variable.</p>
 <p>Type in <code>nchar(str_variable)</code> into the console and execute.</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-var3_2b3fa1251557bdc343aacf8e50b0e7c2">
 <div class="code-with-filename">
@@ -647,7 +648,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 14</code></pre>
 </div>
 </div>
-<p>You should get an answer of <code>31</code>.</p>
+<p>You should get an answer of <code>14</code>.</p>
 </section>
 <section id="creating-multi-value-objects" class="level3" data-number="1.3.6">
 <h3 data-number="1.3.6" class="anchored" data-anchor-id="creating-multi-value-objects"><span class="header-section-number">1.3.6</span> Creating multi-value objects</h3>
@@ -661,7 +662,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>two_str_variable <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"This is our second string variable"</span>, <span class="st">"It has two parts to it"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>In this piece of code, we have created a new variable using the <code>c()</code> function in R, that stands for <em>combine values into a vector or list</em>. We have provided that function with two sets of strings, using a <em>comma</em> to separate our two strings - all contained within the function’s brackets (<code>()</code>). Y</p>
+<p>In this code, we have created a new variable using the <code>c()</code> function, which combines values into a <code>vector</code> or <code>list</code>. We provided the <code>c()</code> function with two sets of strings, separated by a comma and enclosed within the function’s parentheses.</p>
 <p>Let us now try both our <code>length()</code> and <code>nchar()</code> on our new variable and see what the results are:</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-var5_e0ad318526dcc2cfd778ace40857055f">
 <div class="code-with-filename">
@@ -687,11 +688,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>You may have noticed that every line of code in the examples is accompanied by a comment explaining its purpose. Comments in R are created using the hash symbol: <code>#</code>. This symbol tells R to ignore the commented line when running the code. These comments are helpful for understanding your code when you revisit it later or share with others.</p>
+<p>You may have noticed that each line of code in the examples includes a comment explaining its purpose. In R, comments are created using the hash symbol <code>#</code>. This symbol instructs R to ignore the commented line when executing the code. Comments are useful for understanding your code when you revisit it later or when sharing it with others.</p>
 </div>
 </div>
 </div>
-<p>If we extend the concept of multi-value objects in two dimensions, we end up with a dataframe. A dataframe is the <strong>de-facto</strong> data structure for most tabular data. We will use functions from the <code>tidyverse</code> library, which is essentially a suite of packages, to load a data file and conduct some exploratory data analysis. Within the context of the <code>tidyverse</code> dataframes are referred to as <code>tibbles</code>. Some of the most important and useful functions, from the <code>tidyr</code> and <code>dplyr</code> packages, are:</p>
+<p>Extending the concept of multi-value objects to two dimensions results in a <code>dataframe.</code> A dataframe is the de facto data structure for most tabular data. We will use functions from the <code>tidyverse</code> library, a suite of packages—to load a data file and conduct exploratory data analysis. Within the <code>tidyverse</code>, <code>dataframes</code> are referred to as <code>tibbles.</code> Some of the most important and useful functions come from the <code>tidyr</code> and <code>dplyr</code> packages, including:</p>
 <table class="table">
 <colgroup>
 <col style="width: 16%">
@@ -757,8 +758,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="rstudio-projects" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="rstudio-projects"><span class="header-section-number">1.4</span> RStudio projects</h2>
-<p>In RStudio, we can use <strong>scripts</strong> to build up our code that we can run repeatedly and save for future use. We can organise these scripts into RStduio projects.These projects keep all the files associated with an analysis together: input data, R scripts, analytical results, figures, etc. This means we can easily keep track of all data, input and output, whilst still creating standalone scripts for each bit of processing analysis we do. It also makes dealing with <a href="https://en.wikipedia.org/wiki/Path_(computing)">directories and filepaths</a> much easier.</p>
-<p>Navigate to <strong>File</strong> -&gt; <strong>New Project</strong> -&gt; <strong>New Directory</strong>, and create a folder with the name <code>GeoSpatial-Workshop24</code>. Click on <strong>Create Project</strong>. You should now see your main window switch to this new project and if you check your <strong>files</strong> window, you should now see a new <strong>R Project</strong> called <code>GeoSpatial-Workshop24</code>.</p>
+<p>In RStudio, scripts allow us to build and save code that can be run repeatedly. We can organise these scripts into RStudio projects, which consolidate all files related to an analysis such as input data, R scripts, results, figures, and more. This organisation helps keep track of all data, input, and output, while enabling us to create standalone scripts for each part of our analysis. Additionally, it simplifies managing <a href="https://en.wikipedia.org/wiki/Path_(computing)">directories and filepaths</a>.</p>
+<p>Navigate to <strong>File</strong> -&gt; <strong>New Project</strong> -&gt; <strong>New Directory</strong>, and create a folder with the name <code>GeoSpatial-Workshop24</code>. Click on <strong>Create Project</strong>. You should now see your main window switch to this new project and when you check your <strong>files</strong> window, you should see a new <strong>R Project</strong> called <code>GeoSpatial-Workshop24</code>.</p>
 <div class="callout callout-style-simple callout-warning">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">

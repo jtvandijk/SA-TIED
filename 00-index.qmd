@@ -12,25 +12,26 @@ knitr::include_graphics('images/w00/sa-tied-welcome.jpg')
 Welcome to the workbook for the **SA-TIED Geospatial Workshop**. Over the course of this two-day introductory workshop, you will be introduced to the R programming language, learn how to map socio-economic and demographic data, and gain an understanding of the ideas behind spatial models. We will explore the following topics:
 
 - Fundamentals of using R for data analysis with the `tidyverse` library
-- Creating basic maps using R using the `tmap` library
+- Creating thematic maps using R with the `tmap` library
 - Quantifying the degree of spatial dependence in a dataset
 - Incorporating space into statistical models
 
 ## Prerequisites {.unnumbered}
-While there are no specific prerequisites for this workshop, basic familiarity with [R](https://www.r-project.org/), [Python](https://www.python.org/downloads/) or   [Stata](https://www.stata.com/) **do-files** is recommended. You will require a computer with admin rights to install the necessary software.
+While there are no specific prerequisites for this workshop, basic familiarity with [R](https://www.r-project.org/), [Python](https://www.python.org/downloads/) or [Stata](https://www.stata.com/) **do-files** is recommended. You will require a computer with admin rights to install the necessary software.
 
 ## Workshop overview {.unnumbered}
-The schedule of this workshop is as follows:
+The schedule of the workshop is as follows:
 
 | Day  | Type              | Time        | Details
-| :--- |:------            |:------      | :--------------
-| 1    | Lecture           | 09h00-09h45 | [Slides: R for Data Analysis]({{< var slides.l01 >}}) |
+| :-:  |:------            |:------      | :--------------
+| 1    | Lecture           | 09h00-09h45 | [Lecture Notes #1]({{< var slides.l01 >}}) |
 | 1    | Computer tutorial | 10h00-12h00 | [R for Data Analysis]({{< var urls.c01 >}}) |
-| 1    | Lecture           | 13h00-13h45 | [Slides: R for Spatial Analysis]({{< var slides.l02 >}}) | 
+| 1    | Lecture           | 13h00-13h45 | [Lecture Notes #2]({{< var slides.l02 >}}) | 
 | 1    | Computer tutorial | 14h00-16h00 | [R for Spatial Analysis]({{< var urls.c02 >}}) | 
-| 2    | Lecture           | 09h00-09h45 | [Slides: Spatial Autocorrelation]({{< var slides.l03 >}}) |
+|      |                   |             | |
+| 2    | Lecture           | 09h00-09h45 | [Lecture Notes #3]({{< var slides.l03 >}}) |
 | 2    | Computer tutorial | 10h00-12h00 | [Spatial Autocorrelation]({{< var urls.c03 >}}) |
-| 2    | Lecture           | 13h00-13h45 | [Slides: Spatial Models]({{< var slides.l04 >}}) | 
+| 2    | Lecture           | 13h00-13h45 | [Lecture Notes #4]({{< var slides.l04 >}}) | 
 | 2    | Computer tutorial | 14h00-16h00 | [Spatial Models]({{< var urls.c04 >}}) | 
 
 ## Acknowledgements {.unnumbered}

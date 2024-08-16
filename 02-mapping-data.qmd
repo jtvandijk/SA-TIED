@@ -349,6 +349,7 @@ In this case, the `fill()` argument in `tmap` is how we instruct the library to 
 #| echo: True
 #| eval: True
 #| tidy: True
+#| out.width: "100%"
 #| filename: "R code"
 # quick thematic map 
 qtm(cpt, fill="sp_prop_xhosa", borders = "white")
