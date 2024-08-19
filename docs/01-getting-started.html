@@ -251,12 +251,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Navigate in your browser to the download page: <a href="https://cran.r-project.org/">[Link]</a></li>
 <li>If you use a Windows computer, click on <em>Download R for Windows</em>. Then click on <em>base</em>. Download and install <strong>R 4.4.x for Windows</strong>. If you use a Mac computer, click on <em>Download R for macOS</em> and download and install <strong>R-4.4.x.arm64.pkg</strong> for <a href="https://support.apple.com/en-gb/HT211814">Apple silicon Macs</a> and <strong>R-4.4.x.x86_64.pkg</strong> for older <a href="https://support.apple.com/en-gb/HT211814">Intel-based Macs</a>.</li>
 </ol>
-<p>That is it! You now have successfully installed R onto your computer. To make working with the R language a little bit easier we also need to install something called an Integrated Development Environment (IDE). We will use <a href="https://posit.co/download/rstudio-desktop/">RStudio Desktop</a>:</p>
+<p>That is it! You now have successfully installed R onto your computer. To make working with the R language a little bit easier we also need to install something called an <a href="https://en.wikipedia.org/wiki/Integrated_development_environment">Integrated Development Environment (IDE)</a>. We will use <a href="https://posit.co/download/rstudio-desktop/">RStudio Desktop</a>:</p>
 <ol type="1">
 <li>Navigate to the official webpage of RStudio: <a href="https://posit.co/download/rstudio-desktop/#download">[Link]</a></li>
-<li>Download and install RStudio Desktop on your computer (<strong>free version!</strong>)</li>
+<li>Download and install RStudio on your computer.</li>
 </ol>
-<p>After this, start <strong>RStudio</strong> to see if the installation was successful and you should see something similar to what is shown in <a href="#fig-rstudio-interface">Figure&nbsp;1</a>.</p>
+<p>After this, start <strong>RStudio</strong> to see if the installation was successful. Your screen should something that looks like what is shown in <a href="#fig-rstudio-interface">Figure&nbsp;1</a>.</p>
 <div class="cell" data-hash="01-getting-started_cache/html/fig-rstudio-interface_c8158df261f66491761e18412d82586a">
 <div class="cell-output-display">
 <div id="fig-rstudio-interface" class="quarto-figure quarto-figure-center anchored">
@@ -750,7 +750,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>For more information on the <code>tidyverse</code> have a look at <a href="https://www.tidyverse.org/">www.tidyverse.org</a>.</p>
+<p>For more information on the <code>tidyverse</code> you can refer to <a href="https://www.tidyverse.org/">www.tidyverse.org</a>.</p>
 </div>
 </div>
 </div>
@@ -825,7 +825,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="loading-data" class="level3" data-number="1.5.1">
 <h3 data-number="1.5.1" class="anchored" data-anchor-id="loading-data"><span class="header-section-number">1.5.1</span> Loading data</h3>
-<p>Next, we can load the <code>language.dta</code> file into R. Using functions from the <code>haven</code> library, R is capable to read a large range of different filetypes - Stata’s <code>.dta</code> file included.</p>
+<p>Next, we can load the <code>language.dta</code> file into R. Using the <code>haven</code> library, R is capable to read a large range of different filetypes. This includes Stata <code>.dta</code> files:</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-load-data_02ba9290d03126094f988114f27242c9">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -888,13 +888,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>To access specific columns or rows in a dataframe, we can use indexing. Indexing refers to the numbering assigned to each element within a data structure, allowing us to precisely select and manipulate data.</p>
-<p>In R, indexing begins at 1, meaning that the first element of any data structure is accessed with the index <code>[1]</code>. This is different from many other programming languages, such as Python or Java, where indexing typically starts at <code>0</code>. For example, to access the first row of a dataframe, you would use <code>dataframe[1, ]</code>, and to access the first column, you would use <code>dataframe[, 1]</code>. The comma separates the row and column indices, with the absence of a number indicating all rows or columns respectively.</p>
-<div class="cell styled-output" data-hash="01-getting-started_cache/html/01-index-data_9942d742002d1da48e93b0ba7a4b2d53">
+<p>To access the first row of a dataframe, you would use <code>dataframe[1, ]</code>, and to access the first column, you would use <code>dataframe[, 1]</code>. The comma separates the row and column indices, with the absence of a number indicating all rows or columns respectively.</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>In R, indexing begins at 1, meaning that the first element of any data structure is accessed with the index <code>[1]</code>. This is different from many other programming languages, such as Python or Java, where indexing typically starts at <code>0</code>.</p>
+</div>
+</div>
+</div>
+<div class="cell styled-output" data-hash="01-getting-started_cache/html/01-index-data_cf6e186af5181fa219335c879120f23c">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>R code</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># index rows</span></span>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># index columns</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>att[, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
@@ -913,7 +923,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 10  1600010
 # ℹ 84,898 more rows</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># index columns</span></span>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># index rows</span></span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>att[<span class="dv">1</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 28
@@ -926,7 +936,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #   lng_10 &lt;dbl&gt;, lng_11 &lt;dbl&gt;, lng_12 &lt;dbl&gt;, lng_13 &lt;dbl&gt;, lng_14 &lt;dbl&gt;,
 #   lng_15 &lt;dbl&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># specific value</span></span>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># index cell</span></span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>att[<span class="dv">1</span>, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
@@ -935,11 +945,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 1  1600001</code></pre>
 </div>
 </div>
-<p>Alternatively, you can access the data within individual columns by referring to their names using the <code>$</code> operator. This allows you to easily extract and work with a specific column without needing to know its position in the dataframe. For example, if your dataframe is named <code>dataframe</code> and you want to access a column named <code>age</code>, you would use <code>dataframe$age</code>. This method is especially useful when your data has many columns or when the column positions may change, as it relies on the column names rather than their index numbers.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Alternatively, you can access the data within individual columns by referring to their names using the <code>$</code> operator. This allows you to easily extract and work with a specific column without needing to know its position in the dataframe. For example, if your dataframe is named <code>dataframe</code> and you want to access a column named <code>age</code>, you would use <code>dataframe$age</code>. This method is especially useful when your data has many columns or when the column positions may change, because it relies on the column names rather than their index numbers.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="exploring-data" class="level3" data-number="1.5.2">
 <h3 data-number="1.5.2" class="anchored" data-anchor-id="exploring-data"><span class="header-section-number">1.5.2</span> Exploring data</h3>
-<p>Now that we have loaded and inspected our data, we can examine its distribution. We will focus on the column that contains the counts of individuals who speak isiXhosa as their primary language, aggregated by Small Area Layer—the most granular geographic level available in the 2011 Census. This data is stored in the <code>lng_4</code> column of the dataframe.</p>
+<p>Now that we have loaded and inspected our data, we can examine its distribution. We will focus on the column that contains the counts of individuals who speak isiXhosa as their primary language, aggregated by Small Area Layer — the most granular geographic level available in the 2011 South African Census of Population. This data is stored in the <code>lng_4</code> column of the dataframe.</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-explore-data_c3930be5e1ee7ab810487ba0f68765e5">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -1109,7 +1128,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #   lng_15 &lt;dbl&gt;, sal_pop &lt;dbl&gt;, sal_prop_xhosa &lt;dbl&gt;</code></pre>
 </div>
 </div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
 <p>You can further inspect the results using the <code>View()</code> function.</p>
+</div>
+</div>
+</div>
 <p>We now have the percentage of people who speak isiXhosa as their primary language for each Small Area Layer. To provide a more meaningful representation, however, we can aggregate the data by sub-places. This involves grouping our data by <code>sp_code</code>, which contains unique sub-place codes. We will then:</p>
 <ol type="1">
 <li>Sum the number of isiXhosa speakers within each sub-place and store this in a new variable.</li>
@@ -1145,7 +1173,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 6 199030007  55242    47385</code></pre>
 </div>
 </div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
 <p>You can further inspect the results using the <code>View()</code> function.</p>
+</div>
+</div>
+</div>
 <p>We can save this dataset so that we can easily load it the next time we want to work with this by writing it to a <code>.csv</code> file.</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-write-csv_9d6a5d8278918d24435acfed0270ed50">
 <div class="code-with-filename">

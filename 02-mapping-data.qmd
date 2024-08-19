@@ -49,7 +49,9 @@ We will continue working with the `.csv` dataset that we prepared and saved in t
 att <- read_csv('data/attributes/language.csv')
 ``` 
 
-You can inspect the dataframe by using the `View()` function.
+::: {.callout-note}
+You can further inspect the results using the `View()` function. 
+:::
 
 Next, we need a corresponding spatial dataset that contains the Cape Town's sub places and save it in your `data/spatial` folder.
 
@@ -58,7 +60,7 @@ Next, we need a corresponding spatial dataset that contains the Cape Town's sub 
 | Cape Town Sub Places    | `GeoPackage`  | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/spatial/subplace-cape-town-2013.gpkg) |
 
 ::: {.callout-note}
-You may have used spatial data before and noticed that we did not download a collection of files known as a `shapefile` but a `GeoPackage` instead. Whilst `shapefiles` are still being used, `GeoPackage` is modern and portable file format. Have a look at this article on *towardsdatascience.com* for an excellent explanation on why one should use `GeoPackage` files over `shapefiles` where possible: [[Link]](https://towardsdatascience.com/why-you-need-to-use-geopackage-files-instead-of-shapefile-or-geojson-7cb24fe56416)
+You may have used spatial data before and noticed that we did not download a collection of files known as a `shapefile` but a `GeoPackage` instead. Whilst `shapefiles` are still being used, `GeoPackage` is a more modern and portable file format. Have a look at this article on *towardsdatascience.com* for an excellent explanation on why one should use `GeoPackage` files over `shapefiles` where possible: [[Link]](https://towardsdatascience.com/why-you-need-to-use-geopackage-files-instead-of-shapefile-or-geojson-7cb24fe56416)
 :::
 
 Let us load the file and store it into an object called `cpt`. We can do this as follows:
@@ -78,7 +80,7 @@ cpt <- st_read("data/spatial/subplace-cape-town-2013.gpkg")
 You should also see the `cpt` variable appear in your environment window.
 
 ## Exploring spatial data
-As this is the first time we have loaded spatial data into R, let's go for a little exploration of how we can interact with our spatial dataframe. The first thing we want to do when we load spatial data is to make a quick map to check whether everything is in order. To do this, we can use the same function we used before: `plot()`:
+As this is the first time we have loaded spatial data into R, let's go for a little exploration of how we can interact with our spatial dataframe. The first thing we want to do when we load spatial data is to quickly plot the data to check whether everything is in order. To do this, we can use the same function we used before: `plot()`.
 
 ```{r}
 #| label: 02-plot-cpt
@@ -107,8 +109,10 @@ Just as with a tabular dataframe, we can inspect the spatial data frame:
 #| eval: True
 #| tidy: True
 #| filename: "R code"
-# inspect columns, rows
+# inspect columns
 ncol(cpt)
+
+# inspect rows
 nrow(cpt)
 
 # inspect data
@@ -159,8 +163,10 @@ Before proceeding with the join, we need to verify that a matching UID exists in
 #| eval: True
 #| tidy: True
 #| filename: "R code"
-# inspect
+# inspect column names
 names(att)
+
+# inspect column names
 names(cpt)
 ``` 
 
@@ -235,8 +241,10 @@ We can explore the joined data in usual fashion:
 #| eval: True
 #| tidy: True
 #| filename: "R code"
-# inspect columns, rows
+# inspect columns
 ncol(cpt)
+
+# inspect rows
 nrow(cpt)
 
 # inspect data
@@ -358,7 +366,7 @@ qtm(cpt, fill="sp_prop_xhosa", borders = "white")
 The map does not look quite right yet. While we can continue tweaking parameters in the `qtm()` function to improve it, `qtm()` is somewhat limited in its functionality and is primarily intended for quickly inspecting your data and creating basic maps. For more complex and refined map-making with the `tmap` library, it is better to use the main plotting method that starts with the `tm_shape()` function. 
 
 ::: {.callout-note}
-The primary approach to creating maps in `tmap` involves using a l [layered grammar of graphics](https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149) to build up your map, starting with the `tm_shape()` function. This function, when provided with a spatial dataframe, captures the spatial information of your data, including its projection and geometry, and creates a spatial object. While you can override certain aspects of the spatial data (such as its projection) using the function's parameters, the essential role of tm_shape() is to instruct R to "use this object as the basis for drawing the shapes." 
+The primary approach to creating maps in `tmap` involves using a [layered grammar of graphics](https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149) to build up your map, starting with the `tm_shape()` function. This function, when provided with a spatial dataframe, captures the spatial information of your data, including its projection and geometry, and creates a spatial object. While you can override certain aspects of the spatial data (such as its projection) using the function's parameters, the essential role of `tm_shape()` is to instruct R to "use this object as the basis for drawing the shapes." 
 
 To actually render the shapes, you need to add a layer that specifies the type of shape you want R to draw from this spatial information—such as polygons for our data. This layer function tells R to "draw my spatial object as `X`," where `X` represents the type of shape. Within this layer, you can also provide additional details to control how R draws your shapes. Further, you can add more layers to include other spatial objects and their corresponding shapes on your map. Finally, layout options can be specified through a layout layer, allowing you to customize the overall appearance and arrangement of your map.
 :::
@@ -432,7 +440,7 @@ tm_shape(cpt) +
               )
 ``` 
 
-## Styling data
+## Styling spatial data
 Styling a map in `tmap` requires a deeper understanding and familiarity with the library, which is something you will develop best through hands-on practice. Here are the key functions to be aware of:
 
 - `tm_layout()`: Customize titles, fonts, legends, and other layout elements.
@@ -452,11 +460,14 @@ To begin styling your map, explore each of these functions and their parameters.
 tm_shape(cpt) +
 
   # specify column, classes, labels, title
-  tm_fill(col= 'sp_prop_xhosa', n = 5, style = 'jenks',
+  tm_polygons(col= 'sp_prop_xhosa', n = 5, style = 'jenks',
+          border.col = '#ffffff',
+          border.alpha = 0.3,
           palette = c('#feebe2','#fbb4b9','#f768a1','#c51b8a','#7a0177'), 
           labels = c('Largest share', '2nd largest', '3rd largest', '4th largest', 'Smallest share'),
           title = 'Share of population',
-          textNA = 'No population',) +
+          textNA = 'No population'
+  ) +
   
   # set layout
   tm_layout(
@@ -511,11 +522,14 @@ cpt_xhosa <-
 tm_shape(cpt) +
 
   # specify column, classes, labels, title
-  tm_fill(col= 'sp_prop_xhosa', n = 5, style = 'jenks',
+  tm_polygons(col= 'sp_prop_xhosa', n = 5, style = 'jenks',
+          border.col = '#ffffff',
+          border.alpha = 0.3,
           palette = c('#feebe2','#fbb4b9','#f768a1','#c51b8a','#7a0177'), 
           labels = c('Largest share', '2nd largest', '3rd largest', '4th largest', 'Smallest share'),
           title = 'Share of population',
-          textNA = 'No population',) +
+          textNA = 'No population'
+  ) +
   
   # cbd centroid
   tm_shape(cbd) +
@@ -566,7 +580,7 @@ tm_shape(cpt) +
 cpt_xhosa
 ```
 
-In the code above, we stored the full map definition as an object - which means we can export the map:
+In the code above, we stored the full map definition as an object. This makes it easy to export the map and save it as a `.jpg`, `.png` or `.pdf` file:
 
 ```{r}
 #| label: 02-export-map

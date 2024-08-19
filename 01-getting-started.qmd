@@ -8,12 +8,12 @@ Installing R takes a few relatively simple steps involving two pieces of softwar
 1.  Navigate in your browser to the download page: [\[Link\]](https://cran.r-project.org/)
 2.  If you use a Windows computer, click on *Download R for Windows*. Then click on *base*. Download and install **R 4.4.x for Windows**. If you use a Mac computer, click on *Download R for macOS* and download and install **R-4.4.x.arm64.pkg** for [Apple silicon Macs](https://support.apple.com/en-gb/HT211814) and **R-4.4.x.x86_64.pkg** for older [Intel-based Macs](https://support.apple.com/en-gb/HT211814).
 
-That is it! You now have successfully installed R onto your computer. To make working with the R language a little bit easier we also need to install something called an Integrated Development Environment (IDE). We will use [RStudio Desktop](https://posit.co/download/rstudio-desktop/):
+That is it! You now have successfully installed R onto your computer. To make working with the R language a little bit easier we also need to install something called an [Integrated Development Environment (IDE)](https://en.wikipedia.org/wiki/Integrated_development_environment). We will use [RStudio Desktop](https://posit.co/download/rstudio-desktop/):
 
 1.  Navigate to the official webpage of RStudio: [\[Link\]](https://posit.co/download/rstudio-desktop/#download)
-2.  Download and install RStudio Desktop on your computer (**free version!**)
+2.  Download and install RStudio on your computer.
 
-After this, start **RStudio** to see if the installation was successful and you should see something similar to what is shown in @fig-rstudio-interface.
+After this, start **RStudio** to see if the installation was successful. Your screen should something that looks like what is shown in @fig-rstudio-interface.
 
 ```{r}
 #| label: 01-maxprint
@@ -438,7 +438,7 @@ Extending the concept of multi-value objects to two dimensions results in a `dat
 | `tidyr`	  | `pivot_wider()`   | convert long format dataset to wide format |
 
 ::: {.callout-tip}
-For more information on the `tidyverse` have a look at [www.tidyverse.org](https://www.tidyverse.org/).
+For more information on the `tidyverse` you can refer to [www.tidyverse.org](https://www.tidyverse.org/).
 :::
 
 ## RStudio projects
@@ -491,7 +491,7 @@ If a script gets stuck or you realise there is an error in your code, you may ne
 :::
 
 ### Loading data
-Next, we can load the `language.dta` file into R. Using functions from the `haven` library, R is capable to read a large range of different filetypes - Stata's `.dta` file included.
+Next, we can load the `language.dta` file into R. Using the `haven` library, R is capable to read a large range of different filetypes. This includes Stata `.dta` files:
 
 ```{r}
 #| label: 01-load-data
@@ -530,7 +530,11 @@ names(att)
 
 To access specific columns or rows in a dataframe, we can use indexing. Indexing refers to the numbering assigned to each element within a data structure, allowing us to precisely select and manipulate data.
 
-In R, indexing begins at 1, meaning that the first element of any data structure is accessed with the index `[1]`. This is different from many other programming languages, such as Python or Java, where indexing typically starts at `0`. For example, to access the first row of a dataframe, you would use `dataframe[1, ]`, and to access the first column, you would use `dataframe[, 1]`. The comma separates the row and column indices, with the absence of a number indicating all rows or columns respectively.
+To access the first row of a dataframe, you would use `dataframe[1, ]`, and to access the first column, you would use `dataframe[, 1]`. The comma separates the row and column indices, with the absence of a number indicating all rows or columns respectively.
+
+::: {.callout-warning}
+In R, indexing begins at 1, meaning that the first element of any data structure is accessed with the index `[1]`. This is different from many other programming languages, such as Python or Java, where indexing typically starts at `0`. 
+:::
 
 ```{r}
 #| label: 01-index-data
@@ -539,20 +543,22 @@ In R, indexing begins at 1, meaning that the first element of any data structure
 #| eval: True
 #| tidy: True
 #| filename: "R code"
-# index rows
+# index columns
 att[ ,1]
 
-# index columns
+# index rows
 att[1, ]
 
-# specific value
+# index cell
 att[1,1]
 ```
 
-Alternatively, you can access the data within individual columns by referring to their names using the `$` operator. This allows you to easily extract and work with a specific column without needing to know its position in the dataframe. For example, if your dataframe is named `dataframe` and you want to access a column named `age`, you would use `dataframe$age`. This method is especially useful when your data has many columns or when the column positions may change, as it relies on the column names rather than their index numbers.
+::: {.callout-note}
+Alternatively, you can access the data within individual columns by referring to their names using the `$` operator. This allows you to easily extract and work with a specific column without needing to know its position in the dataframe. For example, if your dataframe is named `dataframe` and you want to access a column named `age`, you would use `dataframe$age`. This method is especially useful when your data has many columns or when the column positions may change, because it relies on the column names rather than their index numbers.
+:::
 
 ### Exploring data
-Now that we have loaded and inspected our data, we can examine its distribution. We will focus on the column that contains the counts of individuals who speak isiXhosa as their primary language, aggregated by Small Area Layer—the most granular geographic level available in the 2011 Census. This data is stored in the `lng_4` column of the dataframe.
+Now that we have loaded and inspected our data, we can examine its distribution. We will focus on the column that contains the counts of individuals who speak isiXhosa as their primary language, aggregated by Small Area Layer — the most granular geographic level available in the 2011 South African Census of Population. This data is stored in the `lng_4` column of the dataframe.
 
 ```{r}
 #| label: 01-explore-data
@@ -669,7 +675,9 @@ att <- att |>
 head(att)
 ```
 
-You can further inspect the results using the `View()` function.
+::: {.callout-note}
+You can further inspect the results using the `View()` function. 
+:::
 
 We now have the percentage of people who speak isiXhosa as their primary language for each Small Area Layer. To provide a more meaningful representation, however, we can aggregate the data by sub-places. This involves grouping our data by `sp_code`, which contains unique sub-place codes. We will then:
 
@@ -698,7 +706,9 @@ att <- att |>
 head(att)
 ```
 
+::: {.callout-note}
 You can further inspect the results using the `View()` function. 
+:::
 
 We can save this dataset so that we can easily load it the next time we want to work with this by writing it to a `.csv` file.
 
