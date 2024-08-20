@@ -1,7 +1,7 @@
 # Spatial Autocorrelation
 
 ## Loading spatial data
-Open a new script within your `Geospatial-Workshop24` project and save this as `03-autorrelcation.r`. We will start again by loading the libraries that we will need:
+Start your `Geospatial-Workshop24` project and open a new script. Save this as `03-autocorrelation.r`. We will start again by loading the libraries that we will need for:
 
 ```{r}
 #| label: 03-load-libraries
@@ -18,6 +18,7 @@ library(tmap)
 library(spdep)
 ```
 
+
 ```{r}
 #| label: 03-tmap-settings
 #| classes: styled-output
@@ -27,9 +28,6 @@ library(spdep)
 #| eval: True
 # ensure tmap is set to plot
 tmap_mode("plot")
-
-# switch of spherical geometry
-sf_use_s2(FALSE)
 ```
 
 ```{r}
@@ -43,7 +41,7 @@ In this session, we will be looking at education, focusing on the number of peop
 
 | File                                 | Type   | Link |
 | :------                              | :------| :------ |
-| SA Census 2011 No Schooling Variable          | `csv` | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes/no-schooling.csv) |
+| SA Census 2011 No Schooling Variable          | `csv` | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes/sa-no-schooling.csv) |
 | SA Municipalities                    | `GeoPackage`  | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/spatial/municipality-south-africa-2013.gpkg) |
 
 Now, we can load both files into memory:
@@ -59,7 +57,7 @@ Now, we can load both files into memory:
 sa_municipality <- st_read('data/spatial/municipality-south-africa-2013.gpkg')
 
 # load attribute data
-no_schooling <- read_csv('data/attributes/sa-no-schooling.csv')
+sa_no_schooling <- read_csv('data/attributes/sa-no-schooling.csv')
 ``` 
 
 ::: {.callout-note}
@@ -78,12 +76,12 @@ With this dataset, we are interested in analysing the proportion of people witho
 #| cache: True
 #| filename: "R code"
 # calculate proportions
-no_schooling <- no_schooling |>
+sa_no_schooling <- sa_no_schooling |>
   mutate(mn_prop_no_schooling = mn_no_school / mn_pop)
 
 # join attribute data onto spatial data
 sa_municipality <- sa_municipality |> 
-  left_join(no_schooling, by = c("mn_code" = "mn_code"))
+  left_join(sa_no_schooling, by = c("mn_code" = "mn_code"))
 ``` 
 
 We can now create a simple map:
@@ -109,10 +107,6 @@ tm_shape(sa_municipality) +
     legend.show = FALSE
   )
 ``` 
-
-::: {.callout-warning}
-If you get the following error when trying to plot the municipality boundaries: `Error: Shape contains invalid polygons. Please fix it or set tmap_options(check.and.fix = TRUE) and rerun the plot`, run `sf_use_s2(FALSE)` and try again.
-:::
 
 Looking at the map, the geographical patterning of the percentage of the population that did does not have any schooling appears to be neither random nor uniform, with a tendency for similar values to be found in closely located municipalities. Let us compare our map to a map with the same values which have been randomly permutated:
 
@@ -143,7 +137,33 @@ tm_shape(sa_municipality) +
   )
 ``` 
 
-Looking at @fig-03-choro-2, even with the values being randomly permuted, certain patterns seem to emerge. This observation raises an important question: to what extent are the patterns that we see in the actual data actually present? A widely used method to quantify the similarity between neighbouring locations is by calculating Moran’s I statistic. This measure assesses spatial autocorrelation, indicating the degree to which values of a variable cluster spatially — either through similar (positive spatial autocorrelation) or contrasting values (negative spatial autocorrelation, such as the alternating black and white squares on a chessboard).
+Looking at @fig-03-choro-2, even with the values being randomly permuted, certain patterns seem to emerge. This observation raises an important question: to what extent are the patterns that we see in the actual data actually present? A widely used method to quantify the similarity between neighbouring locations is by calculating Moran’s I statistic. This measure assesses spatial autocorrelation, indicating the degree to which values of a variable cluster spatially — either through similar (positive spatial autocorrelation) or contrasting values (negative spatial autocorrelation).
+
+Underlying our  Moran's I test is the concept of a **spatial lag**. A spatial lag refers to a concept in spatial analysis where the value of a variable at a given location is influenced by the values of the same variable at neighboring locations. Essentially, it captures the idea that observations in close proximity are likely to be correlated, meaning that what happens in one area can 'lag' into or affect nearby areas. The Moran's I statistic tries to capture the relationship between a value and its spatial lag. An Ordinary Least Squares (OLS) regression is applied, after both variables have been transformed to [z-scores](https://en.wikipedia.org/wiki/Standard_score), to fit the data and produce a slope, which determines the Moran’s I statistic.
+
+```{r}
+#| label: fig-moran-plot
+#| echo: False 
+#| fig-cap: "Scatter plot of spatially lagged income (neighboring income) versus each areas income. Source: [Manuel Gimond](https://mgimond.github.io/Spatial/spatial-autocorrelation.html)."
+knitr::include_graphics('images/w03/moran-scatter.png')
+```
+
+To calculate a $p$-value for our Moran’s I model, the spatial lag model is run multiple times using a random distribution of neighbouring values. This generates different slopes representing various ways our data could be distributed under the assumption of randomness. The outcome of this process is a sampling distribution of Moran’s I values that supports the null hypothesis, suggesting our data is randomly distributed. We then compare our observed slope with the distribution of these random slopes to determine whether our slope falls within the typical range or is an outlier.
+
+```{r}
+#| label: fig-moran-plot-sig
+#| echo: False 
+#| fig-cap: "Determining significance using a Monte Carlo simulation. Source: [Manuel Gimond](https://mgimond.github.io/Spatial/spatial-autocorrelation.html)."
+knitr::include_graphics('images/w03/mc-sim.png')
+```
+
+If our slope is an outlier, i.e. it is not a value we would expect if the data were randomly distributed, we can be more confident that the slope reflects significant clustering in our data. We can derive a *pseudo-*$p$ value from these simulation results:
+
+$$
+\frac{N_{extreme} + 1}{N + 1}
+$$
+
+Where ${N_{extreme}}$ is the number of simulated Moran's I values that were more extreme that our observed statistic and ${N}$ is the total number of simulations. In the example above shown in @fig-moran-plot-sig, only 1 out the 199 simulations was more extreme than the observed local Moran's I statistic. Therefore ${N_{extreme}}$ = 1 , so $p$ is equal to $(1+1) / (199 + 1) = 0.01$. This means that there is a one percent probability that we would be wrong in rejecting the null hypothesis.
 
 ## Defining neighbours
 If the purpose of a Moran’s I test is to quantify how similar places are to their neighbours, the first step is to define what constitutes a **neighbour.** This definition is not necessarily straightforward, because 'neighbouring' observations can be determined in various ways, based on either geometry or proximity. The most common methods include:
@@ -172,7 +192,53 @@ sa_mn_nb <- poly2nb(sa_municipality, queen = TRUE)
 # inspect
 summary(sa_mn_nb)
 ``` 
-::: {.callout-note}
-It is pretty common for the average number of contiguous neighbours to be about five and the most frequent number of contiguous neighbours to be five or six. It suggests that the spatial configuration of the places is loosely approximating a hexagonal tessellation, although places on the edge of a study region will typically have fewer contiguous neighbours then those at the centre. 
+The `neighbour list` object is a [sparse matrix](https://en.wikipedia.org/wiki/Sparse_matrix) that lists the neighboring polygons for each municipality. This matrix represents the spatial relationships between municipalities, where each entry indicates which polygons share boundaries. These neighborhood relationships can be visualized as a graph by extracting the coordinate points of the centroids of the polygons representing each municipality:
+
+::: {.callout-warning}
+Regardless of the neighborhood definition you choose, it is important to verify the results, particularly when using contiguity-based approaches. If your spatial file has issues such as polygons that appear adjacent but do not actually share a border, your results may be inaccurate. You could increase the default value of the `snap` distance parameter in the `poly2nb` function to include these polygons only seperated by small gaps.
 :::
+
+```{r}
+#| label: fig-nb-plot
+#| fig-cap: Neighbourhood graph using queen contiguity.
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| cache: True
+#| filename: "R code"
+# extract centroids from polygons
+sa_mn_cent <- st_centroid(sa_municipality, of_largest_polygon = TRUE)
+
+# plot graph
+par(mai = c(0,0,0,0))
+plot(st_geometry(sa_municipality), border = '#cccccc')
+plot(sa_mn_nb, st_geometry(sa_mn_cent), add = T)
+``` 
+## Defining weights
+The neighbourhood list simply identifies which areas are neighbours, but spatial weights take this a step further by assigning a weight to each neighbourhood connection. This is important because not all polygons have the same number of neighbours. To ensure that our spatially lagged values are comparable across neighbourhoods of different sizes, standardisation is required. The code below uses `style = 'W'` to row-standardise the values: if a municipality has five neighbours, the value of the spatially lagged variable will be the average of that variable across those five neighbours, with each neighbour receiving equal weight.
+
+```{r}
+#| label: 03-nb-weights
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| cache: True
+#| filename: "R code"
+# create spatial weights matrix
+sa_mn_nb_weights <- sa_mn_nb |>
+    nb2listw(style = "W")
+
+# inspect - neigbhours of polygon '10'
+sa_mn_nb_weights$neighbours[[10]]
+
+# inspect - weights of neighbours of polygon '10'
+sa_mn_nb_weights$weights[[10]]
+``` 
+
+:::{.callout-note}
+Not all places have neighbours. Islands, by definition, will not be considered as neighbours using a contiguity approach. If you attempt to create spatial weights using the `nb2listw()` function with a neighbourhood list that includes places without neighbours, you will encounter an error message. Potential solutions include using a different neighbourhood definition (e.g. $k$-nearest neighbours) or manually editing the neighbourhood file if you wish to include these polygons. Alternatively, you can leave it as is but must specify the argument `zero.policy = TRUE` in `nb2listw()` to allow for empty sets.
+:::
+
 

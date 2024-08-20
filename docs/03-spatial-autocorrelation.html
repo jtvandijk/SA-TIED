@@ -217,6 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#loading-spatial-data" id="toc-loading-spatial-data" class="nav-link" data-scroll-target="#loading-spatial-data"><span class="header-section-number">3.1</span> Loading spatial data</a></li>
   <li><a href="#spatial-dependency" id="toc-spatial-dependency" class="nav-link" data-scroll-target="#spatial-dependency"><span class="header-section-number">3.2</span> Spatial dependency</a></li>
   <li><a href="#defining-neighbours" id="toc-defining-neighbours" class="nav-link" data-scroll-target="#defining-neighbours"><span class="header-section-number">3.3</span> Defining neighbours</a></li>
+  <li><a href="#defining-weights" id="toc-defining-weights" class="nav-link" data-scroll-target="#defining-weights"><span class="header-section-number">3.4</span> Defining weights</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jtvandijk/SA-TIED/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -230,7 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 data-number="1"><span class="header-section-number">3</span> Spatial Autocorrelation</h1>
 <section id="loading-spatial-data" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="loading-spatial-data"><span class="header-section-number">3.1</span> Loading spatial data</h2>
-<p>Open a new script within your <code>Geospatial-Workshop24</code> project and save this as <code>03-autorrelcation.r</code>. We will start again by loading the libraries that we will need:</p>
+<p>Start your <code>Geospatial-Workshop24</code> project and open a new script. Save this as <code>03-autocorrelation.r</code>. We will start again by loading the libraries that we will need for:</p>
 <div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/03-load-libraries_1d1fc109f3f0ead73cb5c7cd09e7d33a">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -243,7 +244,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spdep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/03-tmap-settings_c4b2c7479e821c885d8b05f90087f8b4">
+<div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/03-tmap-settings_72fef5fe9be3722f4a453224b5a56679">
 
 </div>
 <p>In this session, we will be looking at education, focusing on the number of people with no schooling at the municipal level, as aggregated from the <a href="https://www.statssa.gov.za/?page_id=3839">South African Census Community Profiles 2011</a>. Along with this dataset, we also have access to a <code>GeoPackage</code> that contains the spatial boundaries of these municipalities. You can download both files below and save them in your project folder under <code>data/attributes</code> and <code>data/spatial</code>, respectively.</p>
@@ -259,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td style="text-align: left;">SA Census 2011 No Schooling Variable</td>
 <td style="text-align: left;"><code>csv</code></td>
-<td style="text-align: left;"><a href="https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes/no-schooling.csv">Download</a></td>
+<td style="text-align: left;"><a href="https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes/sa-no-schooling.csv">Download</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">SA Municipalities</td>
@@ -269,7 +270,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <p>Now, we can load both files into memory:</p>
-<div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/03-load-gpkg-csv_29f4b0074236fb1befdfdd47ca938025">
+<div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/03-load-gpkg-csv_f8a18e3dc3a4870de76c292a840090d2">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>R code</strong></pre>
@@ -288,7 +289,7 @@ Bounding box:  xmin: 1831416 ymin: -4141363 xmax: 3667419 ymax: -2526543
 Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load attribute data</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>no_schooling <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/attributes/sa-no-schooling.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>sa_no_schooling <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/attributes/sa-no-schooling.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 234 Columns: 4
 ── Column specification ────────────────────────────────────────────────────────
@@ -314,18 +315,18 @@ dbl (3): mn_code, mn_pop, mn_no_school
 <section id="spatial-dependency" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="spatial-dependency"><span class="header-section-number">3.2</span> Spatial dependency</h2>
 <p>With this dataset, we are interested in analysing the proportion of people without schooling across the country and visualising this information on a map. Let us start by preparing the data for mapping:</p>
-<div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/03-join-data_b241030622bbba11092fab9515645ca4">
+<div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/03-join-data_008e7c79af63e8ce749b7552cc9a2884">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>R code</strong></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate proportions</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>no_schooling <span class="ot">&lt;-</span> no_schooling <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sa_no_schooling <span class="ot">&lt;-</span> sa_no_schooling <span class="sc">|&gt;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mn_prop_no_schooling =</span> mn_no_school <span class="sc">/</span> mn_pop)</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># join attribute data onto spatial data</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>sa_municipality <span class="ot">&lt;-</span> sa_municipality <span class="sc">|&gt;</span> </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(no_schooling, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"mn_code"</span> <span class="ot">=</span> <span class="st">"mn_code"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(sa_no_schooling, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"mn_code"</span> <span class="ot">=</span> <span class="st">"mn_code"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>We can now create a simple map:</p>
@@ -354,16 +355,6 @@ dbl (3): mn_code, mn_pop, mn_no_school
 <p><img src="03-spatial-autocorrelation_files/figure-html/fig-03-choro-1-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption class="figure-caption">Figure&nbsp;1: Proportions of people having no schooling by municipality.</figcaption>
 </figure>
-</div>
-</div>
-</div>
-<div class="callout callout-style-simple callout-warning">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>If you get the following error when trying to plot the municipality boundaries: <code>Error: Shape contains invalid polygons. Please fix it or set tmap_options(check.and.fix = TRUE) and rerun the plot</code>, run <code>sf_use_s2(FALSE)</code> and try again.</p>
 </div>
 </div>
 </div>
@@ -400,7 +391,34 @@ dbl (3): mn_code, mn_pop, mn_no_school
 </div>
 </div>
 </div>
-<p>Looking at <a href="#fig-03-choro-2">Figure&nbsp;2</a>, even with the values being randomly permuted, certain patterns seem to emerge. This observation raises an important question: to what extent are the patterns that we see in the actual data actually present? A widely used method to quantify the similarity between neighbouring locations is by calculating Moran’s I statistic. This measure assesses spatial autocorrelation, indicating the degree to which values of a variable cluster spatially — either through similar (positive spatial autocorrelation) or contrasting values (negative spatial autocorrelation, such as the alternating black and white squares on a chessboard).</p>
+<p>Looking at <a href="#fig-03-choro-2">Figure&nbsp;2</a>, even with the values being randomly permuted, certain patterns seem to emerge. This observation raises an important question: to what extent are the patterns that we see in the actual data actually present? A widely used method to quantify the similarity between neighbouring locations is by calculating Moran’s I statistic. This measure assesses spatial autocorrelation, indicating the degree to which values of a variable cluster spatially — either through similar (positive spatial autocorrelation) or contrasting values (negative spatial autocorrelation).</p>
+<p>Underlying our Moran’s I test is the concept of a <strong>spatial lag</strong>. A spatial lag refers to a concept in spatial analysis where the value of a variable at a given location is influenced by the values of the same variable at neighboring locations. Essentially, it captures the idea that observations in close proximity are likely to be correlated, meaning that what happens in one area can ‘lag’ into or affect nearby areas. The Moran’s I statistic tries to capture the relationship between a value and its spatial lag. An Ordinary Least Squares (OLS) regression is applied, after both variables have been transformed to <a href="https://en.wikipedia.org/wiki/Standard_score">z-scores</a>, to fit the data and produce a slope, which determines the Moran’s I statistic.</p>
+<div class="cell" data-hash="03-spatial-autocorrelation_cache/html/fig-moran-plot_cc5def2871be2aff406fd27745151006">
+<div class="cell-output-display">
+<div id="fig-moran-plot" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/w03/moran-scatter.png" class="img-fluid figure-img" width="1226"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: Scatter plot of spatially lagged income (neighboring income) versus each areas income. Source: <a href="https://mgimond.github.io/Spatial/spatial-autocorrelation.html">Manuel Gimond</a>.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>To calculate a <span class="math inline">\(p\)</span>-value for our Moran’s I model, the spatial lag model is run multiple times using a random distribution of neighbouring values. This generates different slopes representing various ways our data could be distributed under the assumption of randomness. The outcome of this process is a sampling distribution of Moran’s I values that supports the null hypothesis, suggesting our data is randomly distributed. We then compare our observed slope with the distribution of these random slopes to determine whether our slope falls within the typical range or is an outlier.</p>
+<div class="cell" data-hash="03-spatial-autocorrelation_cache/html/fig-moran-plot-sig_925a60cbba3f3ac643ae57e971f2fea3">
+<div class="cell-output-display">
+<div id="fig-moran-plot-sig" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/w03/mc-sim.png" class="img-fluid figure-img" width="1094"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Determining significance using a Monte Carlo simulation. Source: <a href="https://mgimond.github.io/Spatial/spatial-autocorrelation.html">Manuel Gimond</a>.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>If our slope is an outlier, i.e.&nbsp;it is not a value we would expect if the data were randomly distributed, we can be more confident that the slope reflects significant clustering in our data. We can derive a <em>pseudo-</em><span class="math inline">\(p\)</span> value from these simulation results:</p>
+<p><span class="math display">\[
+\frac{N_{extreme} + 1}{N + 1}
+\]</span></p>
+<p>Where <span class="math inline">\({N_{extreme}}\)</span> is the number of simulated Moran’s I values that were more extreme that our observed statistic and <span class="math inline">\({N}\)</span> is the total number of simulations. In the example above shown in <a href="#fig-moran-plot-sig">Figure&nbsp;4</a>, only 1 out the 199 simulations was more extreme than the observed local Moran’s I statistic. Therefore <span class="math inline">\({N_{extreme}}\)</span> = 1 , so <span class="math inline">\(p\)</span> is equal to <span class="math inline">\((1+1) / (199 + 1) = 0.01\)</span>. This means that there is a one percent probability that we would be wrong in rejecting the null hypothesis.</p>
 </section>
 <section id="defining-neighbours" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="defining-neighbours"><span class="header-section-number">3.3</span> Defining neighbours</h2>
@@ -448,13 +466,73 @@ Link number distribution:
 193 with 10 links</code></pre>
 </div>
 </div>
+<p>The <code>neighbour list</code> object is a <a href="https://en.wikipedia.org/wiki/Sparse_matrix">sparse matrix</a> that lists the neighboring polygons for each municipality. This matrix represents the spatial relationships between municipalities, where each entry indicates which polygons share boundaries. These neighborhood relationships can be visualized as a graph by extracting the coordinate points of the centroids of the polygons representing each municipality:</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Regardless of the neighborhood definition you choose, it is important to verify the results, particularly when using contiguity-based approaches. If your spatial file has issues such as polygons that appear adjacent but do not actually share a border, your results may be inaccurate. You could increase the default value of the <code>snap</code> distance parameter in the <code>poly2nb</code> function to include these polygons only seperated by small gaps.</p>
+</div>
+</div>
+</div>
+<div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/fig-nb-plot_3aebea5e299cd43dedcc187b3c324822">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract centroids from polygons</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>sa_mn_cent <span class="ot">&lt;-</span> <span class="fu">st_centroid</span>(sa_municipality, <span class="at">of_largest_polygon =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: st_centroid assumes attributes are constant over geometries</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot graph</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mai =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(sa_municipality), <span class="at">border =</span> <span class="st">"#cccccc"</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sa_mn_nb, <span class="fu">st_geometry</span>(sa_mn_cent), <span class="at">add =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-nb-plot" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03-spatial-autocorrelation_files/figure-html/fig-nb-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: Neighbourhood graph using queen contiguity.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="defining-weights" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="defining-weights"><span class="header-section-number">3.4</span> Defining weights</h2>
+<p>The neighbourhood list simply identifies which areas are neighbours, but spatial weights take this a step further by assigning a weight to each neighbourhood connection. This is important because not all polygons have the same number of neighbours. To ensure that our spatially lagged values are comparable across neighbourhoods of different sizes, standardisation is required. The code below uses <code>style = 'W'</code> to row-standardise the values: if a municipality has five neighbours, the value of the spatially lagged variable will be the average of that variable across those five neighbours, with each neighbour receiving equal weight.</p>
+<div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/03-nb-weights_ce339eab180b7b04b379c17132aa4343">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create spatial weights matrix</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>sa_mn_nb_weights <span class="ot">&lt;-</span> sa_mn_nb <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">nb2listw</span>(<span class="at">style =</span> <span class="st">"W"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect - neigbhours of polygon '10'</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>sa_mn_nb_weights<span class="sc">$</span>neighbours[[<span class="dv">10</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]   3   9  11  44  45 124 165</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect - weights of neighbours of polygon '10'</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>sa_mn_nb_weights<span class="sc">$</span>weights[[<span class="dv">10</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1428571 0.1428571 0.1428571 0.1428571 0.1428571 0.1428571 0.1428571</code></pre>
+</div>
+</div>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>It is pretty common for the average number of contiguous neighbours to be about five and the most frequent number of contiguous neighbours to be five or six. It suggests that the spatial configuration of the places is loosely approximating a hexagonal tessellation, although places on the edge of a study region will typically have fewer contiguous neighbours then those at the centre.</p>
+<p>Not all places have neighbours. Islands, by definition, will not be considered as neighbours using a contiguity approach. If you attempt to create spatial weights using the <code>nb2listw()</code> function with a neighbourhood list that includes places without neighbours, you will encounter an error message. Potential solutions include using a different neighbourhood definition (e.g.&nbsp;<span class="math inline">\(k\)</span>-nearest neighbours) or manually editing the neighbourhood file if you wish to include these polygons. Alternatively, you can leave it as is but must specify the argument <code>zero.policy = TRUE</code> in <code>nb2listw()</code> to allow for empty sets.</p>
 </div>
 </div>
 </div>
