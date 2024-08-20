@@ -19,7 +19,7 @@ After this, start **RStudio** to see if the installation was successful. Your sc
 #| label: 01-maxprint
 #| echo: False
 #| eval: True
-options(max.print=10)
+options(max.print=1000)
 ``` 
 
 ```{r}
@@ -455,7 +455,7 @@ With the basics covered, let us dive into loading a real dataset, performing dat
 
 | File                                 | Type   | Link |
 | :------                              | :------| :------ |
-| SA Census 2011 Language Table        | `.dta` | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes/language.dta) |
+| SA Census 2011 Language Table        | `.dta` | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes/sa-language.dta) |
 
 To get started, let us create our first script. **File** -> **New File** -> **R Script**. Create a folder named `scripts`, and save your script as `01-language-analysis.r`. 
 
@@ -491,7 +491,7 @@ If a script gets stuck or you realise there is an error in your code, you may ne
 :::
 
 ### Loading data
-Next, we can load the `language.dta` file into R. Using the `haven` library, R is capable to read a large range of different filetypes. This includes Stata `.dta` files:
+Next, we can load the `sa-language.dta` file into R. Using the `haven` library, R is capable to read a large range of different filetypes. This includes Stata `.dta` files:
 
 ```{r}
 #| label: 01-load-data
@@ -501,7 +501,7 @@ Next, we can load the `language.dta` file into R. Using the `haven` library, R i
 #| tidy: True
 #| filename: "R code"
 # load data
-att <- read_dta('data/attributes/language.dta')
+att <- read_dta('data/attributes/sa-language.dta')
 ```
 
 ::: {.callout-warning}
@@ -720,7 +720,7 @@ We can save this dataset so that we can easily load it the next time we want to 
 #| tidy: True
 #| filename: "R code"
 # write data
-write_csv(x = att, file = 'data/attributes/language.csv')
+write_csv(x = att, file = 'data/attributes/sa-language.csv')
 ```
 
 ## Assignment {#internet-at-home}
@@ -733,7 +733,7 @@ Next, use the link below to download another dataset sourced from the [South Afr
 
 | File                                 | Type   | Link |
 | :------                              | :------| :------ |
-| SA Census 2011 Internet Access Table          | `.dta` | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes/internet-access.dta) |
+| SA Census 2011 Internet Access Table          | `.dta` | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes/sa-internet-access.dta) |
 
 Use this dataset to:
 

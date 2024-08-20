@@ -6,7 +6,7 @@ meta:
 urls:
   c01: "01-getting-started.html"
   c02: "02-mapping-data.html"
-  c03: "03-autocorrelation.html"
+  c03: "03-spatial-autocorrelation.html"
   c04: "04-spatial-models.html"
 
 slides:

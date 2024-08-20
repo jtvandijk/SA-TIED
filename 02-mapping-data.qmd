@@ -32,7 +32,7 @@ tmap_mode("plot")
 #| label: 02-maxprint
 #| echo: False
 #| eval: True
-options(max.print=100)
+options(max.print=1000)
 ``` 
 
 We will continue working with the `.csv` dataset that we prepared and saved in the previous session, so let us make sure it is loaded properly:
@@ -46,7 +46,7 @@ We will continue working with the `.csv` dataset that we prepared and saved in t
 #| cache: True
 #| filename: "R code"
 # load data
-att <- read_csv('data/attributes/language.csv')
+att <- read_csv('data/attributes/sa-language.csv')
 ``` 
 
 ::: {.callout-note}
@@ -460,7 +460,8 @@ To begin styling your map, explore each of these functions and their parameters.
 tm_shape(cpt) +
 
   # specify column, classes, labels, title
-  tm_polygons(col= 'sp_prop_xhosa', n = 5, style = 'jenks',
+  tm_polygons(
+          col= 'sp_prop_xhosa', n = 5, style = 'jenks',
           border.col = '#ffffff',
           border.alpha = 0.3,
           palette = c('#feebe2','#fbb4b9','#f768a1','#c51b8a','#7a0177'), 
@@ -522,7 +523,8 @@ cpt_xhosa <-
 tm_shape(cpt) +
 
   # specify column, classes, labels, title
-  tm_polygons(col= 'sp_prop_xhosa', n = 5, style = 'jenks',
+  tm_polygons(
+          col= 'sp_prop_xhosa', n = 5, style = 'jenks',
           border.col = '#ffffff',
           border.alpha = 0.3,
           palette = c('#feebe2','#fbb4b9','#f768a1','#c51b8a','#7a0177'), 
