@@ -118,6 +118,9 @@ Looking at the map, the geographical patterning of the percentage of the populat
 #| cache: True
 #| filename: "R code"
 
+# seed for reproducibility of random permutation
+set.seed(99)
+
 # random permutation
 sa_municipality <- sa_municipality |>
   mutate(mn_prop_no_schooling_random = sample(sa_municipality$mn_prop_no_schooling, replace = FALSE))
@@ -179,7 +182,7 @@ If the purpose of a Moran’s I test is to quantify how similar places are to th
 
 - **Contiguity**: Spatial units are considered neighbours if their polygon boundaries touch.
 - **Fixed Distance**: Spatial units are considered neighbours if they fall within a specified distance.
-- **$K$ Nearest Neighbours**: Spatial units are considered neighbours if they are among the closest neighbours.
+- **$k$ Nearest Neighbours**: Spatial units are considered neighbours if they are among the closest neighbours.
 
 To capture this information, we need to formalise the spatial relationships within our data by constructing a spatial weights matrix ($W_{ij}$). This matrix defines which units are neighbours based on our chosen criteria.
 

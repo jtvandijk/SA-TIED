@@ -362,28 +362,31 @@ dbl (3): mn_code, mn_pop, mn_no_school
 </div>
 </div>
 <p>Looking at the map, the geographical patterning of the percentage of the population that did does not have any schooling appears to be neither random nor uniform, with a tendency for similar values to be found in closely located municipalities. Let us compare our map to a map with the same values which have been randomly permutated:</p>
-<div class="cell" data-hash="03-spatial-autocorrelation_cache/html/fig-03-choro-2_1fb165aefb8b7ac390f7ac591430a81b">
+<div class="cell" data-hash="03-spatial-autocorrelation_cache/html/fig-03-choro-2_c7ec9355953f996fa06f13f1d500af7b">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>R code</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># random permutation</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>sa_municipality <span class="ot">&lt;-</span> sa_municipality <span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mn_prop_no_schooling_random =</span> <span class="fu">sample</span>(sa_municipality<span class="sc">$</span>mn_prop_no_schooling, <span class="at">replace =</span> <span class="cn">FALSE</span>))</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># shape, polygons</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(sa_municipality) <span class="sc">+</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># specify column, classes</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">"mn_prop_no_schooling_random"</span>,</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="dv">5</span>,</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="st">"jenks"</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># no legend</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.show =</span> <span class="cn">FALSE</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># seed for reproducibility of random permutation</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">99</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># random permutation</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>sa_municipality <span class="ot">&lt;-</span> sa_municipality <span class="sc">|&gt;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mn_prop_no_schooling_random =</span> <span class="fu">sample</span>(sa_municipality<span class="sc">$</span>mn_prop_no_schooling, <span class="at">replace =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># shape, polygons</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(sa_municipality) <span class="sc">+</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># specify column, classes</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">"mn_prop_no_schooling_random"</span>,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="dv">5</span>,</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="st">"jenks"</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># no legend</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.show =</span> <span class="cn">FALSE</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output-display">
 <div id="fig-03-choro-2" class="quarto-figure quarto-figure-center anchored">
@@ -444,7 +447,7 @@ dbl (3): mn_code, mn_pop, mn_no_school
 <ul>
 <li><strong>Contiguity</strong>: Spatial units are considered neighbours if their polygon boundaries touch.</li>
 <li><strong>Fixed Distance</strong>: Spatial units are considered neighbours if they fall within a specified distance.</li>
-<li><strong><span class="math inline">\(K\)</span> Nearest Neighbours</strong>: Spatial units are considered neighbours if they are among the closest neighbours.</li>
+<li><strong><span class="math inline">\(k\)</span> Nearest Neighbours</strong>: Spatial units are considered neighbours if they are among the closest neighbours.</li>
 </ul>
 <p>To capture this information, we need to formalise the spatial relationships within our data by constructing a spatial weights matrix (<span class="math inline">\(W_{ij}\)</span>). This matrix defines which units are neighbours based on our chosen criteria.</p>
 <div class="callout callout-style-simple callout-note">
