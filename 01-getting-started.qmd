@@ -51,7 +51,7 @@ Now we have installed R and RStudio, we need to customise R. Many useful R funct
 #| tidy: True
 #| filename: "R code"
 # install packages
-install.packages(c('tidyverse','haven','sf','tmap','spdep'))
+install.packages(c('tidyverse','haven','sf','tmap','spdep','GWmodel'))
 ```
 
 ::: callout-warning
@@ -75,6 +75,7 @@ library(haven)
 library(sf)
 library(tmap)
 library(spdep)
+library(GWmodel)
 ```
 
 You will see some information printed to your console but as long as you do not get any of the messages below, the installation was successful. If you do get any of the messages below it means that the package was not properly installed, so try to install the package in question again.

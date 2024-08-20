@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -64,6 +98,8 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="assets/styles.css">
 </head>
@@ -175,7 +211,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#spatial-models" id="toc-spatial-models" class="nav-link active" data-scroll-target="#spatial-models"><span class="header-section-number">4</span> Spatial Models</a></li>
+  <li><a href="#spatial-models" id="toc-spatial-models" class="nav-link active" data-scroll-target="#spatial-models"><span class="header-section-number">4</span> Spatial Models</a>
+  <ul class="collapse">
+  <li><a href="#loading-spatial-data" id="toc-loading-spatial-data" class="nav-link" data-scroll-target="#loading-spatial-data"><span class="header-section-number">4.1</span> Loading spatial data</a></li>
+  <li><a href="#geographical-weighted-statistics" id="toc-geographical-weighted-statistics" class="nav-link" data-scroll-target="#geographical-weighted-statistics"><span class="header-section-number">4.2</span> Geographical weighted statistics</a></li>
+  <li><a href="#geographically-weighted-correlation" id="toc-geographically-weighted-correlation" class="nav-link" data-scroll-target="#geographically-weighted-correlation"><span class="header-section-number">4.3</span> Geographically weighted correlation</a></li>
+  <li><a href="#spatial-regression" id="toc-spatial-regression" class="nav-link" data-scroll-target="#spatial-regression"><span class="header-section-number">4.4</span> Spatial regression</a>
+  <ul class="collapse">
+  <li><a href="#spatial-error-model" id="toc-spatial-error-model" class="nav-link" data-scroll-target="#spatial-error-model"><span class="header-section-number">4.4.1</span> Spatial error model</a></li>
+  <li><a href="#spatial-lag-model" id="toc-spatial-lag-model" class="nav-link" data-scroll-target="#spatial-lag-model"><span class="header-section-number">4.4.2</span> Spatial lag model</a></li>
+  <li><a href="#geographically-weighted-regression" id="toc-geographically-weighted-regression" class="nav-link" data-scroll-target="#geographically-weighted-regression"><span class="header-section-number">4.4.3</span> Geographically weighted regression</a></li>
+  <li><a href="#to-note" id="toc-to-note" class="nav-link" data-scroll-target="#to-note"><span class="header-section-number">4.4.4</span> To note</a></li>
+  </ul></li>
+  <li><a href="#assignment" id="toc-assignment" class="nav-link" data-scroll-target="#assignment"><span class="header-section-number">4.5</span> Assignment</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jtvandijk/SA-TIED/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -186,8 +235,102 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="spatial-models" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">4</span> Spatial Models</h1>
+<section id="loading-spatial-data" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="loading-spatial-data"><span class="header-section-number">4.1</span> Loading spatial data</h2>
+<p>Open a new script within your <code>Geospatial-Workshop24</code> project and save this as <code>04-spatial-models.r</code>. Of course, we will start again by loading the libraries that we will need. This time, you should load:</p>
+<div class="cell styled-output" data-hash="04-spatial-models_cache/html/04-load-libraries_4901f03b508ecb9441f3313ee269f66a">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GWmodel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="cell styled-output" data-hash="04-spatial-models_cache/html/04-tmap-settings_319f4d3f957e6086598f28f9f48df78a">
+
+</div>
+</section>
+<section id="geographical-weighted-statistics" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="geographical-weighted-statistics"><span class="header-section-number">4.2</span> Geographical weighted statistics</h2>
+</section>
+<section id="geographically-weighted-correlation" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="geographically-weighted-correlation"><span class="header-section-number">4.3</span> Geographically weighted correlation</h2>
+</section>
+<section id="spatial-regression" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="spatial-regression"><span class="header-section-number">4.4</span> Spatial regression</h2>
+<p>We looked at geographically weighted statistics, including geographically weighted correlation, which examines whether the correlation between two variables varies across space. However, whilst out of the scope of this workshop, these concepts can be extended to regression modelling. Examples of such models are the spatial error model, spatial lag model, and geographically weighted regression.</p>
+<section id="spatial-error-model" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="spatial-error-model"><span class="header-section-number">4.4.1</span> Spatial error model</h3>
+<p>The spatial error model is used when the error terms in a regression model exhibit spatial autocorrelation, meaning the error terms are not independent across space. This can happen due to omitted variables that have a spatial pattern or unmeasured factors that affect the dependent variable similarly across nearby locations.</p>
+<p>The model adjusts for spatial autocorrelation by adding a spatially lagged error term (a weighted sum of the errors from neighboring locations) to the regression equation:</p>
+<p><span class="math display">\[
+y = X\beta + \epsilon, \epsilon = \lambda W \epsilon + \upsilon
+\]</span></p>
+<p>where <span class="math inline">\(\lambda\)</span> is a spatial autoregressive parameter, <span class="math inline">\(W\)</span> is a spatial weights matrix, and <span class="math inline">\(\upsilon\)</span> is a vector of normally distributed error terms.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Spatial error models can be fitted using R’s <a href="https://cran.r-project.org/web/packages/spatialreg/index.html">spatialreg</a> package.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="spatial-lag-model" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="spatial-lag-model"><span class="header-section-number">4.4.2</span> Spatial lag model</h3>
+<p>The spatial lag model is appropriate when the dependent variable itself exhibits spatial dependence. This means the value of the dependent variable in one location depends on the values in neighboring locations. This model is used to capture the spillover effects or diffusion processes, where the outcome in one area is influenced by outcomes in nearby areas (e.g., house prices, crime rates).</p>
+<p>The model incorporates a spatially lagged dependent variable, which is the weighted sum of the dependent variable values in neighboring locations, into the regression equation:</p>
+<p><span class="math display">\[
+y = \rho Wy + X\beta + \epsilon
+\]</span></p>
+<p>where <span class="math inline">\(\rho\)</span> is the spatial autoregressive coefficient, <span class="math inline">\(Wy\)</span> represents the spatially lagged dependent variable, and <span class="math inline">\(X\beta\)</span> represents the standard regression components.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Spatial lag models can be fitted using R’s <a href="https://cran.r-project.org/web/packages/spatialreg/index.html">spatialreg</a> package.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="geographically-weighted-regression" class="level3" data-number="1.4.3">
+<h3 data-number="1.4.3" class="anchored" data-anchor-id="geographically-weighted-regression"><span class="header-section-number">4.4.3</span> Geographically weighted regression</h3>
+<p>Geographically weighted regression (GWR) is used when the relationship between the dependent and independent variables is not constant across space, meaning the model coefficients vary by location. This is useful when you suspect that the relationship between variables may change depending on the geographic context. GWR provides a localised understanding of the relationships by allowing each observation to have its own set of regression coefficients, which can provide insights into how relationships differ across the study area.</p>
+<p>GWR fits a separate regression equation at each location in the study area, weighting nearby observations more heavily than those farther away. The weighting is typically based on a kernel function. The basic GWR equation is:</p>
+<p><span class="math display">\[
+y_{i} = \beta_{0}(\upsilon_{i}, v_{i}) + \sum_{k=1}^{p}\beta_{k}(\upsilon_{i}, v_{i})x_{ik} + \epsilon_{i}
+\]</span></p>
+<p>where <span class="math inline">\((\upsilon_{i}, v_{i})\)</span> are the coordinates of location <span class="math inline">\(i\)</span> and <span class="math inline">\(\beta_{k}(\upsilon_{i}, v_{i})\)</span> are the location-specific coefficients.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The <a href="https://cran.r-project.org/web/packages/GWmodel/index.html">GWmodel</a> R package can be used to run a GWR, including multiscale geographically weighted regressions (GWRs) that accommodate different bandwidths for each variable. However, these models can be computationally intensive, especially as the complexity of the analysis increases.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="to-note" class="level3" data-number="1.4.4">
+<h3 data-number="1.4.4" class="anchored" data-anchor-id="to-note"><span class="header-section-number">4.4.4</span> To note</h3>
+<p>The spatial error model adjusts for spatial autocorrelation in the error terms, whereas the spatial lag model adjusts for spatial dependence in the dependent variable itself. The spatial error model does not alter the interpretation of the coefficients of the independent variables, while the spatial lag model introduces a feedback loop where changes in one area can influence neighboring areas.</p>
+<p>Both the spatial error and spatial lag models assume that the relationships between variables are the same across the study area, with adjustments made only for spatial dependencies. GWR, on the other hand, allows the relationships themselves to vary across space. GWR is more flexible but also more complex and computationally intensive, providing local instead of global estimates of coefficients.</p>
+</section>
+</section>
+<section id="assignment" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="assignment"><span class="header-section-number">4.5</span> Assignment</h2>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
