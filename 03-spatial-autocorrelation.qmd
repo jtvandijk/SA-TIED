@@ -1,7 +1,7 @@
 # Spatial Autocorrelation
 
 ## Loading spatial data
-Start your `Geospatial-Workshop24` project and open a new script. Save this as `03-autocorrelation.r`. We will start again by loading the libraries that we will need for:
+Start your `Geospatial-Workshop24` project and open a new script. Save this as `03-autocorrelation.r`. We will start again by loading the libraries that we will need:
 
 ```{r}
 #| label: 03-load-libraries
@@ -37,7 +37,7 @@ tmap_mode("plot")
 options(max.print=1000)
 ``` 
 
-In this session, we will be looking at education, focusing on the number of people with no schooling at the municipal level, as aggregated from the [South African Census Community Profiles 2011](https://www.statssa.gov.za/?page_id=3839). Along with this dataset, we also have access to a `GeoPackage` that contains the spatial boundaries of these municipalities. You can download both files below and save them in your project folder under `data/attributes` and `data/spatial`, respectively.
+In this session, we will be looking at education at the municipal level, focusing on the number of people with no schooling aggregated from the [South African Census Community Profiles 2011](https://www.statssa.gov.za/?page_id=3839). Along with this dataset, we also have access to a `GeoPackage` that contains the spatial boundaries of these municipalities. You can download both files below and save them in your project folder under `data/attributes` and `data/spatial`, respectively.
 
 | File                                 | Type   | Link |
 | :------                              | :------| :------ |
@@ -45,10 +45,10 @@ In this session, we will be looking at education, focusing on the number of peop
 | SA Municipalities                    | `GeoPackage`  | [Download](https://github.com/jtvandijk/SA-TIED/raw/master/data/spatial/municipality-south-africa-2013.gpkg) |
 
 ::: {.callout-note}
-To download the `csv` file containing the `no_schooling` variable that is hosted on GitHub, click on the `Download raw file` button on the top right of your screen and it should download directly to your computer as normal.
+To download the `csv` file containing the `no_schooling` variable that is hosted on GitHub, click on the `Download raw file` button on the top right of your screen and it should download directly to your computer.
 :::
 
-Now, we can load both files into memory:
+Once downloaded, we can load both files into memory:
 ```{r}
 #| label: 03-load-gpkg-csv
 #| classes: styled-output
@@ -65,7 +65,7 @@ sa_no_schooling <- read_csv('data/attributes/sa-no-schooling.csv')
 ``` 
 
 ::: {.callout-note}
-You can further inspect the results using the `View()` function. 
+You can inspect both objects using the `View()` function. 
 :::
 
 ## Spatial dependency
@@ -112,7 +112,7 @@ tm_shape(sa_municipality) +
   )
 ``` 
 
-Looking at the map, the geographical patterning of the percentage of the population that did does not have any schooling appears to be neither random nor uniform, with a tendency for similar values to be found in closely located municipalities. Let us compare our map to a map with the same values which have been randomly permutated:
+Looking at the map, the geographical patterning of the percentage of the population that does not have any schooling appears to be neither random nor uniform, with a tendency for similar values to be found in closely located municipalities. Let us compare our map to a map with the same values which have been randomly permutated:
 
 ```{r tidy='styler'} 
 #| label: fig-03-choro-2
@@ -163,7 +163,7 @@ Moran’s I values [typically](https://doi.org/10.1111/j.1538-4632.1984.tb00797.
 - **-1**: Indicates perfect negative spatial autocorrelation. High values cluster near low values, and vice versa (a checkerboard pattern).
 :::
 
-To calculate a $p$-value for our Moran’s I model, the spatial lag model is run multiple times using a random distribution of neighbouring values. This generates different slopes representing various ways our data could be distributed under the assumption of randomness. The outcome of this process is a sampling distribution of Moran’s I values that supports the null hypothesis, suggesting our data is randomly distributed. We then compare our observed slope with the distribution of these random slopes to determine whether our slope falls within the typical range or is an outlier. This approach is known as a Monte Carlo simulation or permutation bootstrap test.
+To calculate a $p$-value for our Moran’s I model, the Moran's I statistics is calculated multiple times, each time using a random distribution of neighbouring values. This generates different slopes representing various ways our data could be distributed under the assumption of randomness. The outcome of this process is a sampling distribution of Moran’s I values that supports the null hypothesis, suggesting our data is randomly distributed. We then compare our observed slope with the distribution of these random slopes to determine whether our slope falls within the typical range or is an outlier. This approach is known as a Monte Carlo simulation or permutation bootstrap test.
 
 ```{r}
 #| label: fig-moran-plot-sig
@@ -178,7 +178,7 @@ $$
 \frac{N_{extreme} + 1}{N + 1}
 $$
 
-Where ${N_{extreme}}$ is the number of simulated Moran's I values that were more extreme that our observed statistic and ${N}$ is the total number of simulations. In the example above shown in @fig-moran-plot-sig, only 1 out the 199 simulations was more extreme than the observed local Moran's I statistic. Therefore ${N_{extreme}}$ = 1 , so $p$ is equal to $(1+1) / (199 + 1) = 0.01$. This means that there is a one percent probability that we would be wrong in rejecting the null hypothesis.
+Where ${N_{extreme}}$ is the number of simulated Moran's I values that were more extreme that our observed statistic and ${N}$ is the total number of simulations. In the example shown in @fig-moran-plot-sig, only 1 out the 199 simulations was more extreme than the observed local Moran's I statistic. Therefore ${N_{extreme}}$ = 1 , so $p$ is equal to $(1+1) / (199 + 1) = 0.01$. This means that there is a one percent probability that we would be wrong in rejecting the null hypothesis.
 
 
 ## Defining neighbours
@@ -208,10 +208,10 @@ sa_mn_nb <- poly2nb(sa_municipality, queen = TRUE)
 # inspect
 summary(sa_mn_nb)
 ``` 
-The `neighbour list` object is a [sparse matrix](https://en.wikipedia.org/wiki/Sparse_matrix) that lists the neighboring polygons for each municipality. This matrix represents the spatial relationships between municipalities, where each entry indicates which polygons share boundaries. These neighborhood relationships can be visualized as a graph by extracting the coordinate points of the centroids of the polygons representing each municipality:
+The `neighbour list` object is a [sparse matrix](https://en.wikipedia.org/wiki/Sparse_matrix) that lists the neighboring polygons for each municipality. This matrix represents the spatial relationships between municipalities, where each entry indicates which polygons share boundaries. These neighborhood relationships can be visualised as a graph by extracting the coordinate points of the centroids of the polygons representing each municipality:
 
 ::: {.callout-warning}
-Regardless of the neighborhood definition you choose, it is important to verify the results, particularly when using contiguity-based approaches. If your spatial file has issues such as polygons that appear adjacent but do not actually share a border, your results may be inaccurate. You could increase the default value of the `snap` distance parameter in the `poly2nb` function to include these polygons only seperated by small gaps.
+Regardless of the neighborhood definition you choose, it is important to verify the results, particularly when using contiguity-based approaches. If your spatial file has issues such as polygons that appear adjacent but do not actually share a border, your results may be inaccurate. You could increase the default value of the `snap` distance parameter in the `poly2nb()` function to include these polygons only separated by small gaps.
 :::
 
 ```{r}
@@ -232,7 +232,7 @@ plot(st_geometry(sa_municipality), border = '#cccccc')
 plot(sa_mn_nb, st_geometry(sa_mn_cent), add = T)
 ``` 
 ## Defining weights
-The neighbourhood list simply identifies which areas are neighbours, but spatial weights take this a step further by assigning a weight to each neighbourhood connection. This is important because not all polygons have the same number of neighbours. To ensure that our spatially lagged values are comparable across neighbourhoods of different sizes, standardisation is required. The code below uses `style = 'W'` to row-standardise the values: if a municipality has five neighbours, the value of the spatially lagged variable will be the average of that variable across those five neighbours, with each neighbour receiving equal weight.
+The neighbourhood list simply identifies which areas (polygons) are neighbours, but spatial weights take this a step further by assigning a weight to each neighbourhood connection. This is important because not all polygons have the same number of neighbours. To ensure that our spatially lagged values are comparable across neighbourhoods of different sizes, standardisation is required. The code below uses `style = 'W'` to row-standardise the values: if a municipality has five neighbours, the value of the spatially lagged variable will be the average of that variable across those five neighbours, with each neighbour receiving equal weight.
 
 ```{r}
 #| label: 03-nb-weights
@@ -254,7 +254,7 @@ sa_mn_nb_weights$weights[[10]]
 ``` 
 
 :::{.callout-note}
-Not all places have neighbours. Islands, by definition, will not be considered as neighbours using a contiguity approach. If you attempt to create spatial weights using the `nb2listw()` function with a neighbourhood list that includes places without neighbours, you will encounter an error message. Potential solutions include using a different neighbourhood definition (e.g. $k$-nearest neighbours) or manually editing the neighbourhood file if you wish to include these polygons. Alternatively, you can leave it as is but must specify the argument `zero.policy = TRUE` in `nb2listw()` to allow for empty sets.
+Not all places have neighbours. Islands, by definition, will not be considered as neighbours using a contiguity approach. If you attempt to create spatial weights using the `nb2listw()` function with a neighbourhood list that includes places without neighbours, you will encounter an error message. Potential solutions include using a different neighbourhood definition (e.g. $k$-nearest neighbours) or manually editing the neighbourhood file if you wish to include these polygons. Alternatively, you can leave it as is but then you must specify the argument `zero.policy = TRUE` in `nb2listw()` to allow for empty sets.
 :::
 
 ## Global Moran's I
@@ -306,9 +306,8 @@ Although we have established that there is positive spatial autocorrelation in o
 - **Bottom-left quadrant**: This area represents municipalities with a lower-than-average share of the population without schooling, surrounded by other municipalities with similarly low shares. These are *low-low* clusters.
 - **Top-left quadrant**: Municipalities with a higher-than-average share of the population without schooling surrounded by municipalities with a lower-than-average share. These are *high-low* clusters.
 - **Bottom-right quadrant**: Municipalities with a lower-than-average share of the population without schooling surrounded by municipalities with a higher-than-average share. These are *low-high* clusters.
-Identifying these patterns helps us understand the specific types of spatial relationships and clustering present in our data.
 
-We can show these area on the map by deconstructing the Moran's I into a series of [local Moran values](https://doi.org/10.1111/j.1538-4632.1995.tb00338.x), each measuring how similar each place is (individually) to its neighbours.
+We can show these area on a map by deconstructing the Moran's I into a series of [local Moran values](https://doi.org/10.1111/j.1538-4632.1995.tb00338.x), each measuring how similar each place is (individually) to its neighbours.
 
 ```{r}
 #| label: 03-test-moran-local
@@ -325,7 +324,7 @@ lmoran <- localmoran(sa_municipality$mn_prop_no_schooling, listw = sa_mn_nb_weig
 head(lmoran) 
 ```
 
-We are not given a single statistic as we did with our global Moran's I, but rather a table of different statistics that are all related back to each of the municipalities in our dataset. If we look at the help page for the `localmoran` function we can find out what each of these statistics mean:
+We are not given a single statistic as we did with our global Moran's I, but rather we get a table of different statistics that are all related back to each of the municipalities in our dataset. If we look at the help page for the `localmoran()` function we can find out what each of these statistics mean:
 
 | Name    | Description |
 | :-----  | :---------------|
@@ -352,10 +351,10 @@ lmoran_quadrants <- attr(lmoran, "quadr")
 head(lmoran_quadrants)
 ```
 
-We can now link these values to our spatial dataframe and make a map using the `tmap` library:
+We can now link these values back to our spatial dataframe and make a map using the `tmap` library:
 
 ```{r tidy='styler'} 
-#| label: fig-02-choro-3
+#| label: fig-03-choro-3
 #| fig-cap: "Mapping the Local Moran's I clusters."
 #| echo: True
 #| eval: True
@@ -394,7 +393,7 @@ tm_shape(sa_municipality) +
 This type of map is called a [LISA map](https://geodacenter.github.io/workbook/6a_local_auto/lab6a.html) and is a great way of showing how a variable is actually clustering over space. However, we can improve on this further, by only mapping the statistically significant clusters:
 
 ```{r tidy='styler'} 
-#| label: fig-02-choro-4
+#| label: fig-03-choro-4
 #| fig-cap: "Mapping the significant Local Moran's I clusters."
 #| echo: True
 #| eval: True
@@ -434,15 +433,15 @@ tm_shape(sa_municipality) +
 ``` 
 
 :::{.callout-note}
-This new map may still not fully address the issue of statistical significance due to repeated testing, and some values may appear significant purely by chance. To correct for this, you can adjust $p$-values using R’s `p.adjust()` function. For further details, refer to [Manual Gimond's explanation](https://mgimond.github.io/Spatial/spatial-autocorrelation.html#a-note-about-interpreting-the-pseudo-p-value) of the [multiple comparison](https://en.wikipedia.org/wiki/Multiple_comparisons_problem) problem in the context of the *pseudo-*$p$ values.
+This new map may still not fully address the issue of statistical significance due to repeated testing, and some values may appear significant purely by chance. To correct for this, you can adjust the $p$-values using R’s `p.adjust()` function. For further details, refer to [Manual Gimond's explanation](https://mgimond.github.io/Spatial/spatial-autocorrelation.html#a-note-about-interpreting-the-pseudo-p-value) of the [multiple comparison](https://en.wikipedia.org/wiki/Multiple_comparisons_problem) problem in the context of the *pseudo-*$p$ values.
 :::
 
 ## Assignment {#autocorrelation}
-This concludes this session. Please try to complete the following tasks:
+This concludes this session. Any statistic that includes spatial weights is dependent upon how those weights are defined. We have so far used first order contiguity, i.e. polygons that share a boundary, but there is no particular reason why we should not include second order contiguity polygons (i.e. neighbours of neighbours), a fixed distance neigbhours defintions, or a $k$ nearest neighbours definition.
 
-Any statistic that includes spatial weights is dependent upon how those weights are defined. We have so far used first order contiguity, i.e. polygons that share a boundary, but there is no particular reason why we should not use a fixed distance or $k$ nearest neighbours:
+Please try to complete the following tasks:
 
-1. Extract the centroids from the `sa_municipality` file and assign to an object called `coords`.
+1. Extract the centroids from the `sa_municipality` file and assign these to an object called `coords`.
 2. Identify the `5` nearest neighbours for each municipalities, using `sa_mn_knn <- knearneigh(coords, k = 5)`.
 3. Create a neigbhour list of these nearest neighbours, using `sa_mn_nb_knn <- knn2nb(sa_mn_knn)`.
 4. Compute the Global Moran’s I using this new neighbourhood definition.

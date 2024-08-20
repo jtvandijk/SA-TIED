@@ -85,11 +85,11 @@ $$
 where $(\upsilon_{i}, v_{i})$ are the coordinates of location $i$ and $\beta_{k}(\upsilon_{i}, v_{i})$ are the location-specific coefficients.
 
 :::{.callout-note}
-The [GWmodel](https://cran.r-project.org/web/packages/GWmodel/index.html) R package can be used to run a GWR, including multiscale geographically weighted regressions (GWRs) that accommodate different bandwidths for each variable. However, these models can be computationally intensive, especially as the complexity of the analysis increases.
+The [GWmodel](https://cran.r-project.org/web/packages/GWmodel/index.html) R package can be used to run a GWR, including a multiscale geographically weighted regression (GWRs) that accommodates different bandwidths for each variable. However, these models can be computationally intensive, especially with large datasets.
 :::
 
 ### To note
-The spatial error model adjusts for spatial autocorrelation in the error terms, whereas the spatial lag model adjusts for spatial dependence in the dependent variable itself. The spatial error model does not alter the interpretation of the coefficients of the independent variables, while the spatial lag model introduces a feedback loop where changes in one area can influence neighboring areas.
+The spatial error model adjusts for spatial autocorrelation in the error terms, whereas the spatial lag model adjusts for spatial dependence in the dependent variable itself. The spatial error model does not alter the interpretation of the coefficients of the independent variables, while the spatial lag model introduces a feedback loop where changes in one area can influence neighbouring areas.
 
 Both the spatial error and spatial lag models assume that the relationships between variables are the same across the study area, with adjustments made only for spatial dependencies. GWR, on the other hand, allows the relationships themselves to vary across space. GWR is more flexible but also more complex and computationally intensive, providing local instead of global estimates of coefficients.
 

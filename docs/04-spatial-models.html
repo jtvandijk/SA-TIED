@@ -315,14 +315,14 @@ y_{i} = \beta_{0}(\upsilon_{i}, v_{i}) + \sum_{k=1}^{p}\beta_{k}(\upsilon_{i}, v
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>The <a href="https://cran.r-project.org/web/packages/GWmodel/index.html">GWmodel</a> R package can be used to run a GWR, including multiscale geographically weighted regressions (GWRs) that accommodate different bandwidths for each variable. However, these models can be computationally intensive, especially as the complexity of the analysis increases.</p>
+<p>The <a href="https://cran.r-project.org/web/packages/GWmodel/index.html">GWmodel</a> R package can be used to run a GWR, including a multiscale geographically weighted regression (GWRs) that accommodates different bandwidths for each variable. However, these models can be computationally intensive, especially with large datasets.</p>
 </div>
 </div>
 </div>
 </section>
 <section id="to-note" class="level3" data-number="1.4.4">
 <h3 data-number="1.4.4" class="anchored" data-anchor-id="to-note"><span class="header-section-number">4.4.4</span> To note</h3>
-<p>The spatial error model adjusts for spatial autocorrelation in the error terms, whereas the spatial lag model adjusts for spatial dependence in the dependent variable itself. The spatial error model does not alter the interpretation of the coefficients of the independent variables, while the spatial lag model introduces a feedback loop where changes in one area can influence neighboring areas.</p>
+<p>The spatial error model adjusts for spatial autocorrelation in the error terms, whereas the spatial lag model adjusts for spatial dependence in the dependent variable itself. The spatial error model does not alter the interpretation of the coefficients of the independent variables, while the spatial lag model introduces a feedback loop where changes in one area can influence neighbouring areas.</p>
 <p>Both the spatial error and spatial lag models assume that the relationships between variables are the same across the study area, with adjustments made only for spatial dependencies. GWR, on the other hand, allows the relationships themselves to vary across space. GWR is more flexible but also more complex and computationally intensive, providing local instead of global estimates of coefficients.</p>
 </section>
 </section>
