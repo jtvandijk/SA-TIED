@@ -456,7 +456,7 @@ With the basics covered, let us dive into loading a real dataset, performing dat
 
 | File                                 | Type   | Link |
 | :------                              | :------| :------ |
-| SA Census 2011 Language Table        | `.dta` | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes/sa-language.dta) |
+| SA Census 2011 Language Table        | `.dta` | [Download](https://github.com/jtvandijk/SA-TIED/raw/master/data/attributes/sa-language.dta) |
 
 To get started, let us create our first script. **File** -> **New File** -> **R Script**. Create a folder named `scripts`, and save your script as `01-language-analysis.r`. 
 
@@ -734,7 +734,7 @@ Next, use the link below to download another dataset sourced from the [South Afr
 
 | File                                 | Type   | Link |
 | :------                              | :------| :------ |
-| SA Census 2011 Internet Access Table          | `.dta` | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes/sa-internet-access.dta) |
+| SA Census 2011 Internet Access Table          | `.dta` | [Download](https://github.com/jtvandijk/SA-TIED/raw/master/data/attributes/sa-internet-access.dta) |
 
 Use this dataset to:
 

@@ -42,7 +42,11 @@ In this session, we will be looking at education, focusing on the number of peop
 | File                                 | Type   | Link |
 | :------                              | :------| :------ |
 | SA Census 2011 No Schooling Variable          | `csv` | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes/sa-no-schooling.csv) |
-| SA Municipalities                    | `GeoPackage`  | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/spatial/municipality-south-africa-2013.gpkg) |
+| SA Municipalities                    | `GeoPackage`  | [Download](https://github.com/jtvandijk/SA-TIED/raw/master/data/spatial/municipality-south-africa-2013.gpkg) |
+
+::: {.callout-note}
+To download the `csv` file containing the `no_schooling` variable that is hosted on GitHub, click on the `Download raw file` button on the top right of your screen and it should download directly to your computer as normal.
+:::
 
 Now, we can load both files into memory:
 ```{r}

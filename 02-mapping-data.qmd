@@ -57,7 +57,7 @@ Next, we need a corresponding spatial dataset that contains the Cape Town's sub 
 
 | File                    | Type          | Link |
 | :------                 | :------       | :------ |
-| Cape Town Sub Places    | `GeoPackage`  | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/spatial/subplace-cape-town-2013.gpkg) |
+| Cape Town Sub Places    | `GeoPackage`  | [Download](https://github.com/jtvandijk/SA-TIED/raw/master/data/spatial/subplace-cape-town-2013.gpkg) |
 
 ::: {.callout-note}
 You may have used spatial data before and noticed that we did not download a collection of files known as a `shapefile` but a `GeoPackage` instead. Whilst `shapefiles` are still being used, `GeoPackage` is a more modern and portable file format. Have a look at this article on *towardsdatascience.com* for an excellent explanation on why one should use `GeoPackage` files over `shapefiles` where possible: [[Link]](https://towardsdatascience.com/why-you-need-to-use-geopackage-files-instead-of-shapefile-or-geojson-7cb24fe56416)
@@ -604,4 +604,4 @@ This concludes this session. Please try to complete the following tasks:
 
 | File                    | Type          | Link |
 | :------                 | :------       | :------ |
-| Johannesburg Sub Places | `GeoPackage`  | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/spatial/subplace-johannesburg-2013.gpkg) |
+| Johannesburg Sub Places | `GeoPackage`  | [Download](https://github.com/jtvandijk/SA-TIED/raw/master/data/spatial/subplace-johannesburg-2013.gpkg) |
