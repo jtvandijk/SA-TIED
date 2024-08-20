@@ -139,7 +139,7 @@ tm_shape(sa_municipality) +
 
 Looking at @fig-03-choro-2, even with the values being randomly permuted, certain patterns seem to emerge. This observation raises an important question: to what extent are the patterns that we see in the actual data actually present? A widely used method to quantify the similarity between neighbouring locations is by calculating Moran’s I statistic. This measure assesses spatial autocorrelation, indicating the degree to which values of a variable cluster spatially — either through similar (positive spatial autocorrelation) or contrasting values (negative spatial autocorrelation).
 
-Underlying our  Moran's I test is the concept of a **spatial lag**. A spatial lag refers to a concept in spatial analysis where the value of a variable at a given location is influenced by the values of the same variable at neighboring locations. Essentially, it captures the idea that observations in close proximity are likely to be correlated, meaning that what happens in one area can 'lag' into or affect nearby areas. The Moran's I statistic tries to capture the relationship between a value and its spatial lag. An Ordinary Least Squares (OLS) regression is applied, after both variables have been transformed to [z-scores](https://en.wikipedia.org/wiki/Standard_score), to fit the data and produce a slope, which determines the Moran’s I statistic.
+Underlying our Moran's I test is the concept of a **spatial lag**. A spatial lag refers to a concept in spatial analysis where the value of a variable at a given location is influenced by the values of the same variable at neighboring locations. Essentially, it captures the idea that observations in close proximity are likely to be correlated, meaning that what happens in one area can 'lag' into or affect nearby areas. The Moran's I statistic tries to capture the relationship between a value and its spatial lag. An Ordinary Least Squares (OLS) regression is applied, after both variables have been transformed to [z-scores](https://en.wikipedia.org/wiki/Standard_score), to fit the data and produce a slope, which determines the Moran’s I statistic.
 
 ```{r}
 #| label: fig-moran-plot
@@ -148,7 +148,15 @@ Underlying our  Moran's I test is the concept of a **spatial lag**. A spatial la
 knitr::include_graphics('images/w03/moran-scatter.png')
 ```
 
-To calculate a $p$-value for our Moran’s I model, the spatial lag model is run multiple times using a random distribution of neighbouring values. This generates different slopes representing various ways our data could be distributed under the assumption of randomness. The outcome of this process is a sampling distribution of Moran’s I values that supports the null hypothesis, suggesting our data is randomly distributed. We then compare our observed slope with the distribution of these random slopes to determine whether our slope falls within the typical range or is an outlier.
+:::{.callout-important}
+Moran’s I values [typically](https://doi.org/10.1111/j.1538-4632.1984.tb00797.x) range from $-1$ to $1$:
+
+- **+1**: Indicates perfect positive spatial autocorrelation. High values cluster near other high values, and low values near other low values.
+- **0**: Suggests no spatial autocorrelation, meaning the spatial distribution of the variable is random.
+- **-1**: Indicates perfect negative spatial autocorrelation. High values cluster near low values, and vice versa (a checkerboard pattern).
+:::
+
+To calculate a $p$-value for our Moran’s I model, the spatial lag model is run multiple times using a random distribution of neighbouring values. This generates different slopes representing various ways our data could be distributed under the assumption of randomness. The outcome of this process is a sampling distribution of Moran’s I values that supports the null hypothesis, suggesting our data is randomly distributed. We then compare our observed slope with the distribution of these random slopes to determine whether our slope falls within the typical range or is an outlier. This approach is known as a Monte Carlo simulation or permutation bootstrap test.
 
 ```{r}
 #| label: fig-moran-plot-sig
@@ -165,12 +173,13 @@ $$
 
 Where ${N_{extreme}}$ is the number of simulated Moran's I values that were more extreme that our observed statistic and ${N}$ is the total number of simulations. In the example above shown in @fig-moran-plot-sig, only 1 out the 199 simulations was more extreme than the observed local Moran's I statistic. Therefore ${N_{extreme}}$ = 1 , so $p$ is equal to $(1+1) / (199 + 1) = 0.01$. This means that there is a one percent probability that we would be wrong in rejecting the null hypothesis.
 
+
 ## Defining neighbours
 If the purpose of a Moran’s I test is to quantify how similar places are to their neighbours, the first step is to define what constitutes a **neighbour.** This definition is not necessarily straightforward, because 'neighbouring' observations can be determined in various ways, based on either geometry or proximity. The most common methods include:
 
 - **Contiguity**: Spatial units are considered neighbours if their polygon boundaries touch.
 - **Fixed Distance**: Spatial units are considered neighbours if they fall within a specified distance.
-- **(K) Nearest Neighbours**: Spatial units are considered neighbours if they are among the closest neighbours.
+- **$K$ Nearest Neighbours**: Spatial units are considered neighbours if they are among the closest neighbours.
 
 To capture this information, we need to formalise the spatial relationships within our data by constructing a spatial weights matrix ($W_{ij}$). This matrix defines which units are neighbours based on our chosen criteria.
 
@@ -186,7 +195,7 @@ In the following example, neighbours are defined as places that share a border (
 #| tidy: True
 #| cache: True
 #| filename: "R code"
-# create neighbourlist
+# create neighbour list
 sa_mn_nb <- poly2nb(sa_municipality, queen = TRUE)
 
 # inspect
@@ -241,4 +250,194 @@ sa_mn_nb_weights$weights[[10]]
 Not all places have neighbours. Islands, by definition, will not be considered as neighbours using a contiguity approach. If you attempt to create spatial weights using the `nb2listw()` function with a neighbourhood list that includes places without neighbours, you will encounter an error message. Potential solutions include using a different neighbourhood definition (e.g. $k$-nearest neighbours) or manually editing the neighbourhood file if you wish to include these polygons. Alternatively, you can leave it as is but must specify the argument `zero.policy = TRUE` in `nb2listw()` to allow for empty sets.
 :::
 
+## Global Moran's I
+Now that everything is in place, we can begin by plotting the proportion of people without schooling against the spatially lagged values:
+
+```{r}
+#| label: fig-03-plot-moran-queens
+#| fig-cap: "Plot of lagged values versus polygon values."
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| filename: "R code"
+# moran's plot
+moran.plot(sa_municipality$mn_prop_no_schooling, listw = sa_mn_nb_weights)
+```
+
+We observe a positive relationship between our `mn_prop_no_schooling` variable and the spatially lagged values, suggesting that our global Moran’s I test will likely yield a statistic reflective of the slope visible in the scatter plot.
+
+```{r}
+#| label: 03-test-moran
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| cache: True
+#| filename: "R code"
+# moran's test
+moran <- moran.test(sa_municipality$mn_prop_no_schooling, listw = sa_mn_nb_weights)
+
+# results
+moran 
+
+# confidence intervals
+z <- c(-1.96, 1.96)
+round(moran$estimate[1]  + z * sqrt(moran$estimate[3]), 3)
+```
+
+Because the confidence interval does not include the expected value of `-0.004`, we can conclude that there is statistically significant positive autocorrelation in the variables. This indicates that municipalities with higher percentages of people without schooling tend to be surrounded by other municipalities with similarly high percentages. Likewise, municipalities with lower percentages of people without schooling are generally surrounded by others with similarly low values.
+
+::: {.callout-note}
+In a spatially random distribution (where spatial autocorrelation is absent), the expected value of Moran's I is generally close to zero. However, for finite samples, it can be approximated by: $E[I] = -\frac{1}{n-1}$, where $n$ is the number of spatial units (e.g., municipalities). 
+:::
+
+## Local Moran's I
+Although we have established that there is positive spatial autocorrelation in our data, we still need to identify the specific spatial patterns. Referring to @fig-moran-plot, you will notice that the plot is divided into four quadrants.
+
+- **Top-right quadrant**: This area represents municipalities that have a higher-than-average share of the population without schooling and are surrounded by other municipalities with similarly high shares of the population without schooling. These are known as *high-high* clusters.
+- **Bottom-left quadrant**: This area represents municipalities with a lower-than-average share of the population without schooling, surrounded by other municipalities with similarly low shares. These are *low-low* clusters.
+- **Top-left quadrant**: Municipalities with a higher-than-average share of the population without schooling surrounded by municipalities with a lower-than-average share. These are *high-low* clusters.
+- **Bottom-right quadrant**: Municipalities with a lower-than-average share of the population without schooling surrounded by municipalities with a higher-than-average share. These are *low-high* clusters.
+Identifying these patterns helps us understand the specific types of spatial relationships and clustering present in our data.
+
+We can show these area on the map by deconstructing the Moran's I into a series of [local Moran values](https://doi.org/10.1111/j.1538-4632.1995.tb00338.x), each measuring how similar each place is (individually) to its neighbours.
+
+```{r}
+#| label: 03-test-moran-local
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| cache: True
+#| filename: "R code"
+# local moran's test
+lmoran <- localmoran(sa_municipality$mn_prop_no_schooling, listw = sa_mn_nb_weights)
+
+# results
+head(lmoran) 
+```
+
+We are not given a single statistic as we did with our global Moran's I, but rather a table of different statistics that are all related back to each of the municipalities in our dataset. If we look at the help page for the `localmoran` function we can find out what each of these statistics mean:
+
+| Name    | Description |
+| :-----  | :---------------|
+| Ii      | Local Moran's I statistic |
+| E.Ii    | Expectation of local Moran's I statistic |
+| Var.Ii  | Variance of local Moran's I statistic |
+| Z.Ii    | Standard deviation of local Moran's I statistic |
+| Pr()    | $p$-value of local Moran's I statistic |
+
+We can further extract the quadrants to which of all these polygons have been assigned:
+
+```{r}
+#| label: 03-moran-local-quadrant
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| cache: True
+#| filename: "R code"
+# extract quadrants
+lmoran_quadrants <- attr(lmoran, "quadr")
+
+# inspect
+head(lmoran_quadrants)
+```
+
+We can now link these values to our spatial dataframe and make a map using the `tmap` library:
+
+```{r tidy='styler'} 
+#| label: fig-02-choro-3
+#| fig-cap: "Mapping the Local Moran's I clusters."
+#| echo: True
+#| eval: True
+#| cache: True
+#| filename: "R code"
+# replace names
+names(lmoran_quadrants) <- c('lmoran_mean', 'lmoran_median', 'lmoran_pysal')
+
+# bind results
+sa_municipality <- sa_municipality |>
+  cbind(lmoran_quadrants)
+
+# shape, polygons
+tm_shape(sa_municipality) +
+
+  # specify column, colours
+  tm_polygons(
+          col= 'lmoran_mean',
+          border.col = '#ffffff',
+          border.alpha = 0.3,
+          palette = c('Low-Low' = '#0571b0', 
+                      'Low-High' = '#92c5de', 
+                      'High-Low' = '#f4a582', 
+                      'High-High' = '#ca0020'),
+          title = 'Cluster type',
+  ) +
+  
+  # set layout
+  tm_layout(
+    legend.outside = FALSE,
+    legend.position = c('left', 'top'),
+  ) 
+
+``` 
+
+This type of map is called a [LISA map](https://geodacenter.github.io/workbook/6a_local_auto/lab6a.html) and is a great way of showing how a variable is actually clustering over space. However, we can improve on this further, by only mapping the statistically significant clusters:
+
+```{r tidy='styler'} 
+#| label: fig-02-choro-4
+#| fig-cap: "Mapping the significant Local Moran's I clusters."
+#| echo: True
+#| eval: True
+#| cache: True
+#| filename: "R code"
+# replace values if not significant
+lmoran_quadrants[lmoran[,5] > 0.05, ] <- NA
+
+# replace names
+names(lmoran_quadrants) <- c('lmoran_mean_sig', 'lmoran_median_sig', 'lmoran_pysal_sig')
+
+# bind results
+sa_municipality <- sa_municipality |>
+  cbind(lmoran_quadrants)
+
+# shape, polygons
+tm_shape(sa_municipality) +
+
+  # specify column, colours
+  tm_polygons(
+          col= 'lmoran_mean_sig',
+          border.col = '#ffffff',
+          border.alpha = 0.3,
+          palette = c('Low-Low' = '#0571b0', 
+                      'Low-High' = '#92c5de', 
+                      'High-Low' = '#f4a582', 
+                      'High-High' = '#ca0020'),
+          title = 'Cluster type',
+  ) +
+  
+  # set layout
+  tm_layout(
+    legend.outside = FALSE,
+    legend.position = c('left', 'top'),
+  ) 
+
+``` 
+
+:::{.callout-note}
+This new map may still not fully address the issue of statistical significance due to repeated testing, and some values may appear significant purely by chance. To correct for this, you can adjust $p$-values using R’s `p.adjust()` function. For further details, refer to [Manual Gimond's explanation](https://mgimond.github.io/Spatial/spatial-autocorrelation.html#a-note-about-interpreting-the-pseudo-p-value) of the [multiple comparison](https://en.wikipedia.org/wiki/Multiple_comparisons_problem) problem in the context of the *pseudo-*$p$ values.
+:::
+
+## Assignment {#autocorrelation}
+This concludes this session. Please try to complete the following tasks:
+
+Any statistic that includes spatial weights is dependent upon how those weights are defined. We have so far used first order contiguity, i.e. polygons that share a boundary, but there is no particular reason why we should not use a fixed distance or $k$ nearest neighbours:
+
+1. Extract the centroids from the `sa_municipality` file and assign to an object called `coords`.
+2. Identify the `5` nearest neighbours for each municipalities, using `sa_mn_knn <- knearneigh(coords, k = 5)`.
+3. Create a neigbhour list of these nearest neighbours, using `sa_mn_nb_knn <- knn2nb(sa_mn_knn)`.
+4. Compute the Global Moran’s I using this new neighbourhood definition.
+5. Map the statistically significant clusters of Local Moran’s I based on this new neighbourhood definition.
 

@@ -35,7 +35,7 @@ The schedule of the workshop is as follows:
 | 2    | Computer tutorial | 14h00-16h00 | [Spatial Models]({{< var urls.c04 >}}) | 
 
 ## Acknowledgements {.unnumbered}
-This workbook is created using the [Quarto](https://quarto.org/) publishing system. The workbook's content is partially based on content from:
+This workbook is created using the [Quarto](https://quarto.org/) publishing system. Elements of this workbook are partially partially based on and modified from:
 
 - The [GEOG0030: Geocomputation 2023-2024](https://jtvandijk.github.io/GEOG0030_20232024/) workbook by [Justin van Dijk](https://www.mappingdutchman.com)
 - The [Mapping and Modelling Geographic Data in R](https://profrichharris.github.io/MandM/) course by [Richard Harris](https://profrichharris.github.io/)

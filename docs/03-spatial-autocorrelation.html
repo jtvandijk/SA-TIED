@@ -218,6 +218,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#spatial-dependency" id="toc-spatial-dependency" class="nav-link" data-scroll-target="#spatial-dependency"><span class="header-section-number">3.2</span> Spatial dependency</a></li>
   <li><a href="#defining-neighbours" id="toc-defining-neighbours" class="nav-link" data-scroll-target="#defining-neighbours"><span class="header-section-number">3.3</span> Defining neighbours</a></li>
   <li><a href="#defining-weights" id="toc-defining-weights" class="nav-link" data-scroll-target="#defining-weights"><span class="header-section-number">3.4</span> Defining weights</a></li>
+  <li><a href="#global-morans-i" id="toc-global-morans-i" class="nav-link" data-scroll-target="#global-morans-i"><span class="header-section-number">3.5</span> Global Moran’s I</a></li>
+  <li><a href="#local-morans-i" id="toc-local-morans-i" class="nav-link" data-scroll-target="#local-morans-i"><span class="header-section-number">3.6</span> Local Moran’s I</a></li>
+  <li><a href="#autocorrelation" id="toc-autocorrelation" class="nav-link" data-scroll-target="#autocorrelation"><span class="header-section-number">3.7</span> Assignment</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jtvandijk/SA-TIED/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -403,7 +406,22 @@ dbl (3): mn_code, mn_pop, mn_no_school
 </div>
 </div>
 </div>
-<p>To calculate a <span class="math inline">\(p\)</span>-value for our Moran’s I model, the spatial lag model is run multiple times using a random distribution of neighbouring values. This generates different slopes representing various ways our data could be distributed under the assumption of randomness. The outcome of this process is a sampling distribution of Moran’s I values that supports the null hypothesis, suggesting our data is randomly distributed. We then compare our observed slope with the distribution of these random slopes to determine whether our slope falls within the typical range or is an outlier.</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Moran’s I values <a href="https://doi.org/10.1111/j.1538-4632.1984.tb00797.x">typically</a> range from <span class="math inline">\(-1\)</span> to <span class="math inline">\(1\)</span>:</p>
+<ul>
+<li><strong>+1</strong>: Indicates perfect positive spatial autocorrelation. High values cluster near other high values, and low values near other low values.</li>
+<li><strong>0</strong>: Suggests no spatial autocorrelation, meaning the spatial distribution of the variable is random.</li>
+<li><strong>-1</strong>: Indicates perfect negative spatial autocorrelation. High values cluster near low values, and vice versa (a checkerboard pattern).</li>
+</ul>
+</div>
+</div>
+</div>
+<p>To calculate a <span class="math inline">\(p\)</span>-value for our Moran’s I model, the spatial lag model is run multiple times using a random distribution of neighbouring values. This generates different slopes representing various ways our data could be distributed under the assumption of randomness. The outcome of this process is a sampling distribution of Moran’s I values that supports the null hypothesis, suggesting our data is randomly distributed. We then compare our observed slope with the distribution of these random slopes to determine whether our slope falls within the typical range or is an outlier. This approach is known as a Monte Carlo simulation or permutation bootstrap test.</p>
 <div class="cell" data-hash="03-spatial-autocorrelation_cache/html/fig-moran-plot-sig_925a60cbba3f3ac643ae57e971f2fea3">
 <div class="cell-output-display">
 <div id="fig-moran-plot-sig" class="quarto-figure quarto-figure-center anchored">
@@ -426,7 +444,7 @@ dbl (3): mn_code, mn_pop, mn_no_school
 <ul>
 <li><strong>Contiguity</strong>: Spatial units are considered neighbours if their polygon boundaries touch.</li>
 <li><strong>Fixed Distance</strong>: Spatial units are considered neighbours if they fall within a specified distance.</li>
-<li><strong>(K) Nearest Neighbours</strong>: Spatial units are considered neighbours if they are among the closest neighbours.</li>
+<li><strong><span class="math inline">\(K\)</span> Nearest Neighbours</strong>: Spatial units are considered neighbours if they are among the closest neighbours.</li>
 </ul>
 <p>To capture this information, we need to formalise the spatial relationships within our data by constructing a spatial weights matrix (<span class="math inline">\(W_{ij}\)</span>). This matrix defines which units are neighbours based on our chosen criteria.</p>
 <div class="callout callout-style-simple callout-note">
@@ -439,12 +457,12 @@ dbl (3): mn_code, mn_pop, mn_no_school
 </div>
 </div>
 </div>
-<div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/03-nb-queen_ce94f2ce1b6d7e991ef96bc78c8a16ae">
+<div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/03-nb-queen_de38d17556cc714f251ed219590c388d">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>R code</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create neighbourlist</span></span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create neighbour list</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>sa_mn_nb <span class="ot">&lt;-</span> <span class="fu">poly2nb</span>(sa_municipality, <span class="at">queen =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect</span></span>
@@ -536,6 +554,272 @@ Link number distribution:
 </div>
 </div>
 </div>
+</section>
+<section id="global-morans-i" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="global-morans-i"><span class="header-section-number">3.5</span> Global Moran’s I</h2>
+<p>Now that everything is in place, we can begin by plotting the proportion of people without schooling against the spatially lagged values:</p>
+<div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/fig-03-plot-moran-queens_76c8ae33958972db29f3793f6afbea92">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># moran's plot</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.plot</span>(sa_municipality<span class="sc">$</span>mn_prop_no_schooling, <span class="at">listw =</span> sa_mn_nb_weights)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output-display">
+<div id="fig-03-plot-moran-queens" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03-spatial-autocorrelation_files/figure-html/fig-03-plot-moran-queens-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;6: Plot of lagged values versus polygon values.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We observe a positive relationship between our <code>mn_prop_no_schooling</code> variable and the spatially lagged values, suggesting that our global Moran’s I test will likely yield a statistic reflective of the slope visible in the scatter plot.</p>
+<div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/03-test-moran_3f0fcf901ea8d4f8ffe66be19d387853">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># moran's test</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>moran <span class="ot">&lt;-</span> <span class="fu">moran.test</span>(sa_municipality<span class="sc">$</span>mn_prop_no_schooling, <span class="at">listw =</span> sa_mn_nb_weights)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># results</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>moran</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Moran I test under randomisation
+
+data:  sa_municipality$mn_prop_no_schooling  
+weights: sa_mn_nb_weights    
+
+Moran I statistic standard deviate = 12.967, p-value &lt; 2.2e-16
+alternative hypothesis: greater
+sample estimates:
+Moran I statistic       Expectation          Variance 
+      0.526655845      -0.004291845       0.001676683 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># confidence intervals</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.96</span>, <span class="fl">1.96</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(moran<span class="sc">$</span>estimate[<span class="dv">1</span>] <span class="sc">+</span> z <span class="sc">*</span> <span class="fu">sqrt</span>(moran<span class="sc">$</span>estimate[<span class="dv">3</span>]), <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.446 0.607</code></pre>
+</div>
+</div>
+<p>Because the confidence interval does not include the expected value of <code>-0.004</code>, we can conclude that there is statistically significant positive autocorrelation in the variables. This indicates that municipalities with higher percentages of people without schooling tend to be surrounded by other municipalities with similarly high percentages. Likewise, municipalities with lower percentages of people without schooling are generally surrounded by others with similarly low values.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>In a spatially random distribution (where spatial autocorrelation is absent), the expected value of Moran’s I is generally close to zero. However, for finite samples, it can be approximated by: <span class="math inline">\(E[I] = -\frac{1}{n-1}\)</span>, where <span class="math inline">\(n\)</span> is the number of spatial units (e.g., municipalities).</p>
+</div>
+</div>
+</div>
+</section>
+<section id="local-morans-i" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="local-morans-i"><span class="header-section-number">3.6</span> Local Moran’s I</h2>
+<p>Although we have established that there is positive spatial autocorrelation in our data, we still need to identify the specific spatial patterns. Referring to <a href="#fig-moran-plot">Figure&nbsp;3</a>, you will notice that the plot is divided into four quadrants.</p>
+<ul>
+<li><strong>Top-right quadrant</strong>: This area represents municipalities that have a higher-than-average share of the population without schooling and are surrounded by other municipalities with similarly high shares of the population without schooling. These are known as <em>high-high</em> clusters.</li>
+<li><strong>Bottom-left quadrant</strong>: This area represents municipalities with a lower-than-average share of the population without schooling, surrounded by other municipalities with similarly low shares. These are <em>low-low</em> clusters.</li>
+<li><strong>Top-left quadrant</strong>: Municipalities with a higher-than-average share of the population without schooling surrounded by municipalities with a lower-than-average share. These are <em>high-low</em> clusters.</li>
+<li><strong>Bottom-right quadrant</strong>: Municipalities with a lower-than-average share of the population without schooling surrounded by municipalities with a higher-than-average share. These are <em>low-high</em> clusters. Identifying these patterns helps us understand the specific types of spatial relationships and clustering present in our data.</li>
+</ul>
+<p>We can show these area on the map by deconstructing the Moran’s I into a series of <a href="https://doi.org/10.1111/j.1538-4632.1995.tb00338.x">local Moran values</a>, each measuring how similar each place is (individually) to its neighbours.</p>
+<div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/03-test-moran-local_64a1846d47711c69a1eefaa6d5cab1be">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># local moran's test</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>lmoran <span class="ot">&lt;-</span> <span class="fu">localmoran</span>(sa_municipality<span class="sc">$</span>mn_prop_no_schooling, <span class="at">listw =</span> sa_mn_nb_weights)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># results</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(lmoran)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Ii          E.Ii       Var.Ii       Z.Ii Pr(z != E(Ii))
+1 -0.050379105 -1.203630e-04 0.0055352017 -0.6755304      0.4993389
+2  0.076088895 -1.050657e-03 0.0341776878  0.4172591      0.6764889
+3  0.294045408 -1.787580e-03 0.1030366649  0.9216175      0.3567281
+4  0.452492637 -3.711661e-03 0.4307875582  0.6950688      0.4870122
+5  0.111902772 -4.611044e-04 0.0211978451  0.7717575      0.4402581
+6  0.002486432 -1.153693e-05 0.0005306132  0.1084421      0.9136450</code></pre>
+</div>
+</div>
+<p>We are not given a single statistic as we did with our global Moran’s I, but rather a table of different statistics that are all related back to each of the municipalities in our dataset. If we look at the help page for the <code>localmoran</code> function we can find out what each of these statistics mean:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Ii</td>
+<td style="text-align: left;">Local Moran’s I statistic</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">E.Ii</td>
+<td style="text-align: left;">Expectation of local Moran’s I statistic</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Var.Ii</td>
+<td style="text-align: left;">Variance of local Moran’s I statistic</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Z.Ii</td>
+<td style="text-align: left;">Standard deviation of local Moran’s I statistic</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pr()</td>
+<td style="text-align: left;"><span class="math inline">\(p\)</span>-value of local Moran’s I statistic</td>
+</tr>
+</tbody>
+</table>
+<p>We can further extract the quadrants to which of all these polygons have been assigned:</p>
+<div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/03-moran-local-quadrant_b3b840827071eb61b0989bd8bb24f73b">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract quadrants</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>lmoran_quadrants <span class="ot">&lt;-</span> <span class="fu">attr</span>(lmoran, <span class="st">"quadr"</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(lmoran_quadrants)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  mean      median    pysal    
+  &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;    
+1 Low-High  Low-High  Low-High 
+2 High-High High-High High-High
+3 High-High High-High High-High
+4 High-High High-High High-High
+5 High-High High-High High-High
+6 Low-Low   Low-Low   Low-Low  </code></pre>
+</div>
+</div>
+<p>We can now link these values to our spatial dataframe and make a map using the <code>tmap</code> library:</p>
+<div class="cell" data-hash="03-spatial-autocorrelation_cache/html/fig-02-choro-3_1b6100e0df52f2a163adc4384d71feb1">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># replace names</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(lmoran_quadrants) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"lmoran_mean"</span>, <span class="st">"lmoran_median"</span>, <span class="st">"lmoran_pysal"</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># bind results</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>sa_municipality <span class="ot">&lt;-</span> sa_municipality <span class="sc">|&gt;</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(lmoran_quadrants)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co"># shape, polygons</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(sa_municipality) <span class="sc">+</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># specify column, colours</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">"lmoran_mean"</span>,</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">border.col =</span> <span class="st">"#ffffff"</span>,</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">border.alpha =</span> <span class="fl">0.3</span>,</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="fu">c</span>(</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Low-Low"</span> <span class="ot">=</span> <span class="st">"#0571b0"</span>,</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Low-High"</span> <span class="ot">=</span> <span class="st">"#92c5de"</span>,</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>      <span class="st">"High-Low"</span> <span class="ot">=</span> <span class="st">"#f4a582"</span>,</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>      <span class="st">"High-High"</span> <span class="ot">=</span> <span class="st">"#ca0020"</span></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Cluster type"</span>,</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set layout</span></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(</span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.outside =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="st">"left"</span>, <span class="st">"top"</span>),</span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output-display">
+<div id="fig-02-choro-3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03-spatial-autocorrelation_files/figure-html/fig-02-choro-3-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;7: Mapping the Local Moran’s I clusters.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This type of map is called a <a href="https://geodacenter.github.io/workbook/6a_local_auto/lab6a.html">LISA map</a> and is a great way of showing how a variable is actually clustering over space. However, we can improve on this further, by only mapping the statistically significant clusters:</p>
+<div class="cell" data-hash="03-spatial-autocorrelation_cache/html/fig-02-choro-4_7b5829a250985f5b280289fb9af44c91">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># replace values if not significant</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>lmoran_quadrants[lmoran[, <span class="dv">5</span>] <span class="sc">&gt;</span> <span class="fl">0.05</span>, ] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># replace names</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(lmoran_quadrants) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"lmoran_mean_sig"</span>, <span class="st">"lmoran_median_sig"</span>, <span class="st">"lmoran_pysal_sig"</span>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co"># bind results</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>sa_municipality <span class="ot">&lt;-</span> sa_municipality <span class="sc">|&gt;</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(lmoran_quadrants)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co"># shape, polygons</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(sa_municipality) <span class="sc">+</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># specify column, colours</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">"lmoran_mean_sig"</span>,</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">border.col =</span> <span class="st">"#ffffff"</span>,</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">border.alpha =</span> <span class="fl">0.3</span>,</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="fu">c</span>(</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Low-Low"</span> <span class="ot">=</span> <span class="st">"#0571b0"</span>,</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Low-High"</span> <span class="ot">=</span> <span class="st">"#92c5de"</span>,</span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>      <span class="st">"High-Low"</span> <span class="ot">=</span> <span class="st">"#f4a582"</span>,</span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>      <span class="st">"High-High"</span> <span class="ot">=</span> <span class="st">"#ca0020"</span></span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Cluster type"</span>,</span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set layout</span></span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(</span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.outside =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="st">"left"</span>, <span class="st">"top"</span>),</span>
+<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output-display">
+<div id="fig-02-choro-4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03-spatial-autocorrelation_files/figure-html/fig-02-choro-4-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;8: Mapping the significant Local Moran’s I clusters.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>This new map may still not fully address the issue of statistical significance due to repeated testing, and some values may appear significant purely by chance. To correct for this, you can adjust <span class="math inline">\(p\)</span>-values using R’s <code>p.adjust()</code> function. For further details, refer to <a href="https://mgimond.github.io/Spatial/spatial-autocorrelation.html#a-note-about-interpreting-the-pseudo-p-value">Manual Gimond’s explanation</a> of the <a href="https://en.wikipedia.org/wiki/Multiple_comparisons_problem">multiple comparison</a> problem in the context of the <em>pseudo-</em><span class="math inline">\(p\)</span> values.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="autocorrelation" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="autocorrelation"><span class="header-section-number">3.7</span> Assignment</h2>
+<p>This concludes this session. Please try to complete the following tasks:</p>
+<p>Any statistic that includes spatial weights is dependent upon how those weights are defined. We have so far used first order contiguity, i.e.&nbsp;polygons that share a boundary, but there is no particular reason why we should not use a fixed distance or <span class="math inline">\(k\)</span> nearest neighbours:</p>
+<ol type="1">
+<li>Extract the centroids from the <code>sa_municipality</code> file and assign to an object called <code>coords</code>.</li>
+<li>Identify the <code>5</code> nearest neighbours for each municipalities, using <code>sa_mn_knn &lt;- knearneigh(coords, k = 5)</code>.</li>
+<li>Create a neigbhour list of these nearest neighbours, using <code>sa_mn_nb_knn &lt;- knn2nb(sa_mn_knn)</code>.</li>
+<li>Compute the Global Moran’s I using this new neighbourhood definition.</li>
+<li>Map the statistically significant clusters of Local Moran’s I based on this new neighbourhood definition.</li>
+</ol>
 
 
 </section>
