@@ -256,7 +256,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Navigate to the official webpage of RStudio: <a href="https://posit.co/download/rstudio-desktop/#download">[Link]</a></li>
 <li>Download and install RStudio on your computer.</li>
 </ol>
-<p>After this, start <strong>RStudio</strong> to see if the installation was successful. Your screen should something that looks like what is shown in <a href="#fig-rstudio-interface">Figure&nbsp;1</a>.</p>
+<p>After this, start <strong>RStudio</strong> to see if the installation was successful. Your screen should look something like what is shown in <a href="#fig-rstudio-interface">Figure&nbsp;1</a>.</p>
 <div class="cell" data-hash="01-getting-started_cache/html/fig-rstudio-interface_c8158df261f66491761e18412d82586a">
 <div class="cell-output-display">
 <div id="fig-rstudio-interface" class="quarto-figure quarto-figure-center anchored">
@@ -317,7 +317,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>For Linux and macOS users who are new to working with spatial data in R, this installation of some of these libraries may fail since additional (non-R) libraries are required (which are automatically installed for Windows users). If this is the case, please refer to the <a href="https://r-spatial.github.io/sf/#macos">information pages</a> of the <code>sf</code> library for instructions.</p>
+<p>For Linux and macOS users who are new to working with spatial data in R, this installation of some of these libraries may fail since additional (non-R) libraries are required (which are automatically installed for Windows users). If this is the case, please refer to the <a href="https://r-spatial.github.io/sf/#macos">information pages</a> of the <code>sf</code> library for instructions on how to install these additional libraries.</p>
 </div>
 </div>
 </div>
@@ -348,7 +348,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Many packages require additional software components, known as <em>dependencies</em>, to function properly. Occasionally, when you install a package, some of these dependencies might not be installed automatically. If you encounter errors related to a package that you did not explicitly install, it is likely due to a missing dependency. To resolve this, identify the missing dependency and install it using the command <code>install.packages('&lt;dependencyname&gt;')</code>. Afterward, try loading your packages again.</p>
+<p>Many packages require additional software components, known as <em>dependencies</em>, to function properly. Occasionally, when you install a package, some of these dependencies are not installed automatically. When you then try to load a package, you might encounter error messages that relate to a package that you did not explicitly loaded or installed. If this is the case, it is likely due to a missing dependency. To resolve this, identify the missing dependency and install it using the command <code>install.packages('&lt;dependencyname&gt;')</code>. Afterwards, try loading your packages again.</p>
 </div>
 </div>
 </div>
@@ -366,7 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Let us begin by exploring some of R’s built-in functionality through a simple exercise: creating a few variables and performing basic calculations. Open your console, and let us start with some quick math. At its core, every programming language can be used as a powerful calculator.</p>
+<p>Let us begin by exploring some of R’s built-in functionality through a simple exercise: creating a few variables and performing basic mathematical operations.</p>
 <div class="callout callout-style-simple callout-warning">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -377,7 +377,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Type in <code>10 * 12</code> into the console and execute.</p>
+<p>At its core, every programming language can be used as a powerful calculator. Type in <code>10 * 12</code> into the console and execute.</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-math1_ad911a0e19e934c4ac259dcac48be662">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -415,8 +415,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>twelve <span class="ot">&lt;-</span> <span class="dv">12</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>Again, nothing will be returned to the console, but be sure to check your environment window for the newly created variable. We have now stored two numbers in our environment and assigned them variable names for easy reference. R stores these objects as variables in your computer’s <a href="https://en.wikipedia.org/wiki/Random-access_memory">RAM memory</a>, allowing for quick processing. Keep in mind that without saving your environment, these variables will be lost when you close R. Now that we have our variables, let us proceed with a simple multiplication:</p>
-<p>Type in <code>ten * twelve</code> into the console and execute.</p>
+<p>Again, nothing will be returned to the console, but be sure to check your environment window for the newly created variable. We have now stored two numbers in our environment and assigned them variable names for easy reference. R stores these objects as variables in your computer’s <a href="https://en.wikipedia.org/wiki/Random-access_memory">RAM memory</a>, allowing for quick processing. Keep in mind that without saving your environment, these variables will be lost when you close R and you would need to run your code again.</p>
+<p>Now that we have our variables, let us proceed with a simple multiplication. Type in <code>ten * twelve</code> into the console and execute.</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-math4_bb8b720b13d0b371b765c19f27279393">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -1092,7 +1092,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #   lng_15 &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>Our code appears to have worked successfully.</p>
 </section>
 <section id="aggregating-data" class="level3" data-number="1.5.4">
 <h3 data-number="1.5.4" class="anchored" data-anchor-id="aggregating-data"><span class="header-section-number">1.5.4</span> Aggregating data</h3>
@@ -1141,11 +1140,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>We now have the percentage of people who speak isiXhosa as their primary language for each Small Area Layer. To provide a more meaningful representation, however, we can aggregate the data by sub-places. This involves grouping our data by <code>sp_code</code>, which contains unique sub-place codes. We will then:</p>
+<p>We now have the percentage of people who speak isiXhosa as their primary language for each Small Area Layer. To provide a more meaningful representation, however, we can aggregate the data by sub places. This involves grouping our data by <code>sp_code</code>, which contains unique sub place codes. We will then:</p>
 <ol type="1">
-<li>Sum the number of isiXhosa speakers within each sub-place and store this in a new variable.</li>
-<li>Sum the total number of people within each sub-place and store this in another new variable.</li>
-<li>Extract the distinct values for each sub-place.</li>
+<li>Sum the number of isiXhosa speakers within each sub place and store this in a new variable.</li>
+<li>Sum the total number of people within each sub place and store this in another new variable.</li>
+<li>Extract the distinct values for each sub place.</li>
 </ol>
 <p>By using the pipe function again, we can chain these steps together efficiently as follows:</p>
 <div class="cell styled-output" data-hash="01-getting-started_cache/html/01-aggregate-sub-place_837b91e7c5d276cdce7d9733bb9b82ce">
@@ -1202,7 +1201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="1.6" class="anchored" data-anchor-id="internet-at-home"><span class="header-section-number">1.6</span> Assignment [Optional]</h2>
 <p>This concludes this session. Please try to complete the following tasks:</p>
 <ol type="1">
-<li>Create a histogram showing the distribution of the <em>number</em> of isiXhosa speakers in Cape Town, grouped by sub-place.</li>
+<li>Create a histogram showing the distribution of the <em>number</em> of isiXhosa speakers in Cape Town, grouped by sub place.</li>
 <li>Create a boxplot of the <em>proportion</em> of isiXhosa-speakers in Cape Town, grouped by sub place.</li>
 </ol>
 <p>Next, use the link below to download another dataset sourced from the <a href="https://www.statssa.gov.za/?page_id=3839">South African Census Community Profiles 2011</a> that contains information on internet access. Save the file in your project folder under <code>data/attributes</code>.</p>
@@ -1224,8 +1223,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <p>Use this dataset to:</p>
 <ol type="1">
-<li>Create a histogram of the distribution of the <em>number</em> of people with <code>internet access at home</code> in the City of Johannesburg, grouped by sub-place.</li>
-<li>Create a boxplot of the <em>proportion</em> of people with <code>internet access at home</code> in the City of Johannesburg, grouped by sub-place.</li>
+<li>Create a histogram of the distribution of the <em>number</em> of people with <code>internet access at home</code> in the City of Johannesburg, grouped by sub place.</li>
+<li>Create a boxplot of the <em>proportion</em> of people with <code>internet access at home</code> in the City of Johannesburg, grouped by sub place.</li>
 </ol>
 
 

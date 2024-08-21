@@ -35,7 +35,7 @@ tmap_mode("plot")
 options(max.print=1000)
 ``` 
 
-We will continue working with the `.csv` dataset that we prepared and saved in the previous session, so let us make sure it is loaded properly:
+We will continue working with the `csv` dataset that we prepared and saved in the previous session, so let us make sure it is loaded properly:
 
 ```{r}
 #| label: 02-load-csv
@@ -138,7 +138,7 @@ class(cpt)
 We should see our data is an `sf` dataframe, which is what we want and we can move on.
 
 ## Joining attribute data
-We now have our language dataset (`att`) with the number of isiXhosa speakers in Cape Town, organised by sub-place, as well as a spatial dataset containing the boundaries of these sub-places (`cpt`). We can now join this table data to our spatial data using an **Attribute Join**.
+We now have our language dataset (`att`) with the number of isiXhosa speakers in Cape Town, organised by sub place, as well as a spatial dataset containing the boundaries of these sub places (`cpt`). We can now join this table data to our spatial data using an **Attribute Join**.
 
 ::: {.callout-note}
 An attribute join links two datasets based on a common attribute, enabling the ‘matching’ of rows between them.
@@ -272,7 +272,7 @@ sum(!is.na(cpt$sp_pop))
 sum(!is.na(cpt$sp_xhosa))
 ```
 
-Out of the 921 sub-places, only 878 have data on the number of isiXhosa speakers and the total population. However, this discrepancy may not be due to the join; it could simply be that the original dataset lacks data for some units. Let's confirm this:
+Out of the 921 sub places, only 878 have data on the number of isiXhosa speakers and the total population. However, this discrepancy may not be due to the join; it could simply be that the original dataset lacks data for some units. Let's confirm this:
 
 ```{r}
 #| label: 02-confirm-na

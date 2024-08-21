@@ -111,7 +111,7 @@ sa_municipality_sp <- as_Spatial(sa_municipality)
 The `sf` package in R is now favoured over the `sp` package due to its more modern and efficient handling of spatial data. `sf` uses simple features, which are a standardised way to store and manipulate spatial geometries, making it more compatible with other geospatial tools and software. It also integrates more seamlessly with the `tidyverse` ecosystem, allowing for easier data manipulation and analysis. Additionally, `sf` offers better performance, simpler syntax, and enhanced support for spatial operations compared to `sp`.
 :::
 
-We can use the `GWmodel` to calculate statistics such as local means, local standard deviations, and local variances. As with autocorrelation, this raises the question: what is considered local? One approach is to use a [kernel function](https://en.wikipedia.org/wiki/Kernel_(statistics)) to determine which values should contribute to the local estimates. These kernels operate on point location data (e.g., polygon centroids) and overlay a window of a specific shape and bandwidth on each point to derive local estimates. The bandwidth, which refers to the kernel's size, can be measured in absolute terms (e.g., including all polygon centroids within 10km) or relative terms (e.g., including the 10 nearest centroids), with the latter known as an adaptive kernel. While bandwidth typically has a greater impact on density estimation than the kernel type, the choice of kernel can also influence the results by weighting the points within the kernel differently.
+We can use the `GWmodel` to calculate statistics such as local means, local standard deviations, and local variances. As with autocorrelation, this raises the question: what is considered local? One approach is to use a [kernel function](https://en.wikipedia.org/wiki/Kernel_(statistics)) to determine which values should contribute to the local estimates. These kernels operate on point location data (e.g. polygon centroids) and overlay a window of a specific shape and bandwidth on each point to derive local estimates. The bandwidth, which refers to the kernel's size, can be measured in absolute terms (e.g. including all polygon centroids within 10km) or relative terms (e.g. including the 10 nearest centroids), with the latter known as an adaptive kernel. While bandwidth typically has a greater impact on density estimation than the kernel type, the choice of kernel can also influence the results by weighting the points within the kernel differently.
 
 ```{r}
 #| label: fig-kernels
@@ -139,6 +139,10 @@ sa_gwss_average_age <- gwss(sa_municipality_sp , vars = "mn_avg_age",
                           bw = 25, kernel = "bisquare", adaptive = TRUE, longlat = T)
 ```
 
+::: {.callout-warning}
+The results of the outcomes of `gwss` function can be accessed through the `$SDF` data frame.
+:::
+
 We can extract the values and bind these to our original `sf` dataset as follows:
 
 ```{r}
@@ -157,10 +161,6 @@ names(sa_gwss_average_age$SDF)
 sa_municipality$mn_no_schooling_LM25 <- sa_gwss_no_schooling$SDF$mn_no_school_prop_LM
 sa_municipality$mn_average_age_LM25 <- sa_gwss_average_age$SDF$mn_avg_age_LM
 ```
-
-::: {.callout-warning}
-The results of the outcomes of `gwss` function can be accessed through the `$SDF` data frame.
-:::
 
 We can now create a simple map of the local mean values of the `mn_no_school` variable:
 
@@ -238,7 +238,7 @@ plot(sa_municipality$mn_no_school_prop, sa_municipality$mn_avg_age,
 cor(sa_municipality$mn_no_school_prop, sa_municipality$mn_avg_age)
 ```
 
-The Pearson correlation coefficient suggests a moderate negative association between the proportion of people without schooling an the average age at the municipal level. 
+@fig-04-correlation and the Pearson correlation coefficient suggests a moderate negative association between the proportion of people without schooling an the average age at the municipal level. 
 
 ::: {.callout-note}
 Sometimes heteroscedasticity is indicative of a geographically varying relationship and it is worth considering calculating a geographically weighted correlation.
@@ -361,7 +361,7 @@ Spatial error models can be fitted using R’s [spatialreg](https://cran.r-proje
 :::
 
 ### Spatial lag model
-The spatial lag model is appropriate when the dependent variable itself exhibits spatial dependence. This means the value of the dependent variable in one location depends on the values in neighboring locations. This model is used to capture the spillover effects or diffusion processes, where the outcome in one area is influenced by outcomes in nearby areas (e.g., house prices, crime rates).
+The spatial lag model is appropriate when the dependent variable itself exhibits spatial dependence. This means the value of the dependent variable in one location depends on the values in neighboring locations. This model is used to capture the spillover effects or diffusion processes, where the outcome in one area is influenced by outcomes in nearby areas (e.g. house prices, crime rates).
 
 The model incorporates a spatially lagged dependent variable, which is the weighted sum of the dependent variable values in neighboring locations, into the regression equation:
 
@@ -376,7 +376,7 @@ Spatial lag models can be fitted using R’s [spatialreg](https://cran.r-project
 :::
 
 ### Geographically weighted regression
-Geographically weighted regression (GWR) is used when the relationship between the dependent and independent variables is not constant across space, meaning the model coefficients vary by location. This is useful when you suspect that the relationship between variables may change depending on the geographic context. GWR provides a localised understanding of the relationships by allowing each observation to have its own set of regression coefficients, which can provide insights into how relationships differ across the study area.
+Geographically weighted regression (GWR) is used when the relationship between the dependent and independent variables is not constant across space, meaning the model coefficients vary by location. This is useful when you suspect that the relationship between variables may change depending on the geographic context. GWR provides a localised understanding of the relationships by allowing each observation to have its own set of regression coefficients, which can provide insights into how relationships differ across the study area. 
 
 GWR fits a separate regression equation at each location in the study area, weighting nearby observations more heavily than those farther away. The weighting is typically based on a kernel function. The basic GWR equation is:
 
@@ -384,7 +384,7 @@ $$
 y_{i} = \beta_{0}(\upsilon_{i}, v_{i}) + \sum_{k=1}^{p}\beta_{k}(\upsilon_{i}, v_{i})x_{ik} + \epsilon_{i}
 $$
 
-where $(\upsilon_{i}, v_{i})$ are the coordinates of location $i$ and $\beta_{k}(\upsilon_{i}, v_{i})$ are the location-specific coefficients.
+where $(\upsilon_{i}, v_{i})$ are the coordinates of location $i$ and $\beta_{k}(\upsilon_{i}, v_{i})$ are the location-specific coefficients. The geographically weighted correlation that we calculated is therefore essentially a univariate GWR.
 
 ::: {.callout-note}
 The [GWmodel](https://cran.r-project.org/web/packages/GWmodel/index.html) R package can be used to run a GWR, including a multiscale geographically weighted regression (GWRs) that accommodates different bandwidths for each variable. However, these models can be computationally intensive, especially with large datasets.

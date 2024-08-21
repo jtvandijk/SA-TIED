@@ -295,7 +295,7 @@ round(moran$estimate[1]  + z * sqrt(moran$estimate[3]), 3)
 Because the confidence interval does not include the expected value of `-0.004`, we can conclude that there is statistically significant positive autocorrelation in the variables. This indicates that municipalities with higher percentages of people without schooling tend to be surrounded by other municipalities with similarly high percentages. Likewise, municipalities with lower percentages of people without schooling are generally surrounded by others with similarly low values.
 
 ::: {.callout-note}
-In a spatially random distribution (where spatial autocorrelation is absent), the expected value of Moran's I is generally close to zero. However, for finite samples, it can be approximated by: $E[I] = -\frac{1}{n-1}$, where $n$ is the number of spatial units (e.g., municipalities). 
+In a spatially random distribution (where spatial autocorrelation is absent), the expected value of Moran's I is generally close to zero. However, for finite samples, it can be approximated by: $E[I] = -\frac{1}{n-1}$, where $n$ is the number of spatial units (e.g. municipalities). 
 :::
 
 ## Local Moran's I

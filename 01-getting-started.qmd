@@ -13,7 +13,7 @@ That is it! You now have successfully installed R onto your computer. To make wo
 1.  Navigate to the official webpage of RStudio: [\[Link\]](https://posit.co/download/rstudio-desktop/#download)
 2.  Download and install RStudio on your computer.
 
-After this, start **RStudio** to see if the installation was successful. Your screen should something that looks like what is shown in @fig-rstudio-interface.
+After this, start **RStudio** to see if the installation was successful. Your screen should look something like what is shown in @fig-rstudio-interface.
 
 ```{r}
 #| label: 01-maxprint
@@ -55,7 +55,7 @@ install.packages(c('tidyverse','haven','sf','tmap','spdep','GWmodel'))
 ```
 
 ::: callout-warning
-For Linux and macOS users who are new to working with spatial data in R, this installation of some of these libraries may fail since additional (non-R) libraries are required (which are automatically installed for Windows users). If this is the case, please refer to the [information pages](https://r-spatial.github.io/sf/#macos) of the `sf` library for instructions.
+For Linux and macOS users who are new to working with spatial data in R, this installation of some of these libraries may fail since additional (non-R) libraries are required (which are automatically installed for Windows users). If this is the case, please refer to the [information pages](https://r-spatial.github.io/sf/#macos) of the `sf` library for instructions on how to install these additional libraries.
 :::
 
 Once you have installed the packages, we need to check whether we can in fact load them into R. Copy and paste the following code into the **console**, and execute by pressing **Return** on your keyboard again.
@@ -85,7 +85,7 @@ You will see some information printed to your console but as long as you do not 
 -   `Error in library(<packagename>) : there is no package called '<packagename>'`
 
 ::: callout-note
-Many packages require additional software components, known as *dependencies*, to function properly. Occasionally, when you install a package, some of these dependencies might not be installed automatically. If you encounter errors related to a package that you did not explicitly install, it is likely due to a missing dependency. To resolve this, identify the missing dependency and install it using the command `install.packages('<dependencyname>')`. Afterward, try loading your packages again.
+Many packages require additional software components, known as *dependencies*, to function properly. Occasionally, when you install a package, some of these dependencies are not installed automatically. When you then try to load a package, you might encounter error messages that relate to a package that you did not explicitly loaded or installed. If this is the case, it is likely due to a missing dependency. To resolve this, identify the missing dependency and install it using the command `install.packages('<dependencyname>')`. Afterwards, try loading your packages again.
 :::
 
 ## Getting started with R
@@ -95,13 +95,13 @@ Unlike traditional statistical analysis software like [Microsoft Excel](https://
 If you are familiar with Stata's **do-file** you will find that the approach to programming in R is comparable.
 :::
 
-Let us begin by exploring some of R's built-in functionality through a simple exercise: creating a few variables and performing basic calculations. Open your console, and let us start with some quick math. At its core, every programming language can be used as a powerful calculator.
+Let us begin by exploring some of R's built-in functionality through a simple exercise: creating a few variables and performing basic mathematical operations.
 
 ::: callout-warning
 In your RStudio console, you will notice a prompt sign `>` on the left-hand side. This is where you can directly interact with R. If any text appears in red, it indicates an error or warning. When you see the `>`, it means R is ready for your next command. However, if you see a `+`, it means you have not completed the previous line of code. This often happens when brackets are left open or a command is not properly finished as R expected.
 :::
 
-Type in `10 * 12` into the console and execute.
+At its core, every programming language can be used as a powerful calculator. Type in `10 * 12` into the console and execute.
 
 ```{r}
 #| label: 01-math1
@@ -147,9 +147,9 @@ Type in `twelve <- 12` into the console and execute.
 twelve <- 12
 ```
 
-Again, nothing will be returned to the console, but be sure to check your environment window for the newly created variable. We have now stored two numbers in our environment and assigned them variable names for easy reference. R stores these objects as variables in your computer's [RAM memory](https://en.wikipedia.org/wiki/Random-access_memory), allowing for quick processing. Keep in mind that without saving your environment, these variables will be lost when you close R. Now that we have our variables, let us proceed with a simple multiplication:
+Again, nothing will be returned to the console, but be sure to check your environment window for the newly created variable. We have now stored two numbers in our environment and assigned them variable names for easy reference. R stores these objects as variables in your computer's [RAM memory](https://en.wikipedia.org/wiki/Random-access_memory), allowing for quick processing. Keep in mind that without saving your environment, these variables will be lost when you close R and you would need to run your code again. 
 
-Type in `ten * twelve` into the console and execute.
+Now that we have our variables, let us proceed with a simple multiplication. Type in `ten * twelve` into the console and execute.
 
 ```{r}
 #| label: 01-math4
@@ -651,8 +651,6 @@ In this case, we have overwritten our initial object, though this is not strictl
 head(att)
 ```
 
-Our code appears to have worked successfully. 
-
 ### Aggregating data
 The next thing that we probably want to do is standardise our data. A common challenge with spatial data is that the spatial units aren not always the same size — some Small Area Layers may have larger populations, while others have fewer residents. This makes it difficult to compare absolute counts fairly. To address this, we can sum the counts across all relevant columns to determine the total number of speakers in each area. Then, we can calculate the proportion of isiXhosa speakers within each Small Area Layer:
 
@@ -680,11 +678,11 @@ head(att)
 You can further inspect the results using the `View()` function. 
 :::
 
-We now have the percentage of people who speak isiXhosa as their primary language for each Small Area Layer. To provide a more meaningful representation, however, we can aggregate the data by sub-places. This involves grouping our data by `sp_code`, which contains unique sub-place codes. We will then:
+We now have the percentage of people who speak isiXhosa as their primary language for each Small Area Layer. To provide a more meaningful representation, however, we can aggregate the data by sub places. This involves grouping our data by `sp_code`, which contains unique sub place codes. We will then:
 
-1. Sum the number of isiXhosa speakers within each sub-place and store this in a new variable.
-2. Sum the total number of people within each sub-place and store this in another new variable.
-3. Extract the distinct values for each sub-place.
+1. Sum the number of isiXhosa speakers within each sub place and store this in a new variable.
+2. Sum the total number of people within each sub place and store this in another new variable.
+3. Extract the distinct values for each sub place.
 
 By using the pipe function again, we can chain these steps together efficiently as follows:
 
@@ -727,7 +725,7 @@ write_csv(x = att, file = 'data/attributes/sa-language.csv')
 ## Assignment [Optional] {#internet-at-home}
 This concludes this session. Please try to complete the following tasks:
 
-1. Create a histogram showing the distribution of the *number* of isiXhosa speakers in Cape Town, grouped by sub-place.
+1. Create a histogram showing the distribution of the *number* of isiXhosa speakers in Cape Town, grouped by sub place.
 2. Create a boxplot of the *proportion* of isiXhosa-speakers in Cape Town, grouped by sub place.
 
 Next, use the link below to download another dataset sourced from the [South African Census Community Profiles 2011](https://www.statssa.gov.za/?page_id=3839) that contains information on internet access. Save the file in your project folder under `data/attributes`.
@@ -738,5 +736,5 @@ Next, use the link below to download another dataset sourced from the [South Afr
 
 Use this dataset to:
 
-1. Create a histogram of the distribution of the *number* of people with `internet access at home` in the City of Johannesburg, grouped by sub-place.
-2. Create a boxplot of the *proportion* of people with `internet access at home` in the City of Johannesburg, grouped by sub-place.
+1. Create a histogram of the distribution of the *number* of people with `internet access at home` in the City of Johannesburg, grouped by sub place.
+2. Create a boxplot of the *proportion* of people with `internet access at home` in the City of Johannesburg, grouped by sub place.

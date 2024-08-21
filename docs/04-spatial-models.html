@@ -375,7 +375,7 @@ dbl (3): mn_code, mn_pop, mn_avg_age
 </div>
 </div>
 </div>
-<p>We can use the <code>GWmodel</code> to calculate statistics such as local means, local standard deviations, and local variances. As with autocorrelation, this raises the question: what is considered local? One approach is to use a <a href="https://en.wikipedia.org/wiki/Kernel_(statistics)">kernel function</a> to determine which values should contribute to the local estimates. These kernels operate on point location data (e.g., polygon centroids) and overlay a window of a specific shape and bandwidth on each point to derive local estimates. The bandwidth, which refers to the kernel’s size, can be measured in absolute terms (e.g., including all polygon centroids within 10km) or relative terms (e.g., including the 10 nearest centroids), with the latter known as an adaptive kernel. While bandwidth typically has a greater impact on density estimation than the kernel type, the choice of kernel can also influence the results by weighting the points within the kernel differently.</p>
+<p>We can use the <code>GWmodel</code> to calculate statistics such as local means, local standard deviations, and local variances. As with autocorrelation, this raises the question: what is considered local? One approach is to use a <a href="https://en.wikipedia.org/wiki/Kernel_(statistics)">kernel function</a> to determine which values should contribute to the local estimates. These kernels operate on point location data (e.g.&nbsp;polygon centroids) and overlay a window of a specific shape and bandwidth on each point to derive local estimates. The bandwidth, which refers to the kernel’s size, can be measured in absolute terms (e.g.&nbsp;including all polygon centroids within 10km) or relative terms (e.g.&nbsp;including the 10 nearest centroids), with the latter known as an adaptive kernel. While bandwidth typically has a greater impact on density estimation than the kernel type, the choice of kernel can also influence the results by weighting the points within the kernel differently.</p>
 <div class="cell" data-hash="04-spatial-models_cache/html/fig-kernels_adeab131fc45de64c9a5884c3f00079c">
 <div class="cell-output-display">
 <div id="fig-kernels" class="quarto-figure quarto-figure-center anchored">
@@ -401,6 +401,16 @@ dbl (3): mn_code, mn_pop, mn_avg_age
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">adaptive =</span> <span class="cn">TRUE</span>, <span class="at">longlat =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The results of the outcomes of <code>gwss</code> function can be accessed through the <code>$SDF</code> data frame.</p>
+</div>
+</div>
+</div>
 <p>We can extract the values and bind these to our original <code>sf</code> dataset as follows:</p>
 <div class="cell styled-output" data-hash="04-spatial-models_cache/html/04-gwss-sf_0a4c000de65e26ae697dd7932751eb1d">
 <div class="code-with-filename">
@@ -422,16 +432,6 @@ dbl (3): mn_code, mn_pop, mn_avg_age
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract local means</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>sa_municipality<span class="sc">$</span>mn_no_schooling_LM25 <span class="ot">&lt;-</span> sa_gwss_no_schooling<span class="sc">$</span>SDF<span class="sc">$</span>mn_no_school_prop_LM</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>sa_municipality<span class="sc">$</span>mn_average_age_LM25 <span class="ot">&lt;-</span> sa_gwss_average_age<span class="sc">$</span>SDF<span class="sc">$</span>mn_avg_age_LM</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="callout callout-style-simple callout-warning">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>The results of the outcomes of <code>gwss</code> function can be accessed through the <code>$SDF</code> data frame.</p>
-</div>
-</div>
 </div>
 <p>We can now create a simple map of the local mean values of the <code>mn_no_school</code> variable:</p>
 <div class="cell" data-hash="04-spatial-models_cache/html/fig-04-choro-1_ac964631b99d77aead88b0426d62e3bb">
@@ -528,7 +528,7 @@ dbl (3): mn_code, mn_pop, mn_avg_age
 <pre><code>[1] -0.5705525</code></pre>
 </div>
 </div>
-<p>The Pearson correlation coefficient suggests a moderate negative association between the proportion of people without schooling an the average age at the municipal level.</p>
+<p><a href="#fig-04-correlation">Figure&nbsp;4</a> and the Pearson correlation coefficient suggests a moderate negative association between the proportion of people without schooling an the average age at the municipal level.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -665,7 +665,7 @@ y = X\beta + \epsilon, \epsilon = \lambda W \epsilon + \upsilon
 </section>
 <section id="spatial-lag-model" class="level3" data-number="1.4.2">
 <h3 data-number="1.4.2" class="anchored" data-anchor-id="spatial-lag-model"><span class="header-section-number">4.4.2</span> Spatial lag model</h3>
-<p>The spatial lag model is appropriate when the dependent variable itself exhibits spatial dependence. This means the value of the dependent variable in one location depends on the values in neighboring locations. This model is used to capture the spillover effects or diffusion processes, where the outcome in one area is influenced by outcomes in nearby areas (e.g., house prices, crime rates).</p>
+<p>The spatial lag model is appropriate when the dependent variable itself exhibits spatial dependence. This means the value of the dependent variable in one location depends on the values in neighboring locations. This model is used to capture the spillover effects or diffusion processes, where the outcome in one area is influenced by outcomes in nearby areas (e.g.&nbsp;house prices, crime rates).</p>
 <p>The model incorporates a spatially lagged dependent variable, which is the weighted sum of the dependent variable values in neighboring locations, into the regression equation:</p>
 <p><span class="math display">\[
 y = \rho Wy + X\beta + \epsilon
@@ -689,7 +689,7 @@ y = \rho Wy + X\beta + \epsilon
 <p><span class="math display">\[
 y_{i} = \beta_{0}(\upsilon_{i}, v_{i}) + \sum_{k=1}^{p}\beta_{k}(\upsilon_{i}, v_{i})x_{ik} + \epsilon_{i}
 \]</span></p>
-<p>where <span class="math inline">\((\upsilon_{i}, v_{i})\)</span> are the coordinates of location <span class="math inline">\(i\)</span> and <span class="math inline">\(\beta_{k}(\upsilon_{i}, v_{i})\)</span> are the location-specific coefficients.</p>
+<p>where <span class="math inline">\((\upsilon_{i}, v_{i})\)</span> are the coordinates of location <span class="math inline">\(i\)</span> and <span class="math inline">\(\beta_{k}(\upsilon_{i}, v_{i})\)</span> are the location-specific coefficients. The geographically weighted correlation that we calculated is therefore essentially a univariate GWR.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
