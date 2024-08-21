@@ -276,7 +276,7 @@ sa_municipality$mn_noschool_age_cor <- sa_gwss_cor$SDF$Corr_mn_no_school_prop.mn
 summary(sa_municipality$mn_noschool_age_cor)
 ```
 
-The summary shows that there indeed seems to be variation of this relationship across the country, with the local Pearson correlation ranging from very weak to very strong. Of course, we can map this in the usual way:
+The summary shows that there indeed seems to be variation of this relationship across the country, with the local Pearson correlation ranging from very weak to very strong, althoug the direction seems to be consistent. Of course, we can map this in the usual way:
 
 ```{r tidy='styler'} 
 #| label: fig-04-choro-3
@@ -408,7 +408,7 @@ This concludes this session. Please try to complete the following tasks:
 4. Join all the data together and then:
     * Calculate the geographically weighted *means* for your new `education` variable, selecting the optimal bandwidth using an automatic selector.
     * Calculate the geographically weighted *means* for your new `income` variable, selecting the optimal bandwidth using an automatic selector.
-    * Calculate the geographically weighted *correlation* between the two variables, again selecting the optimal bandwidth using an automatic selector.
+    * Calculate the geographically weighted *correlation* between the `education` and `income` variables, again selecting the optimal bandwidth using an automatic selector.
 5. Map the geographically weighted correlation coefficients. 
 
 | File                            | Type          | Link |
