@@ -456,7 +456,7 @@ With the basics covered, let us dive into loading a real dataset, performing dat
 
 | File                                 | Type   | Link |
 | :------                              | :------| :------ |
-| SA Census 2011 Language Table        | `.dta` | [Download](https://github.com/jtvandijk/SA-TIED/raw/master/data/attributes/sa-language.dta) |
+| SA Census 2011 Language Table        | `dta` | [Download](https://github.com/jtvandijk/SA-TIED/raw/master/data/attributes/sa-language.dta) |
 
 To get started, let us create our first script. **File** -> **New File** -> **R Script**. Create a folder named `scripts`, and save your script as `01-language-analysis.r`. 
 
@@ -492,7 +492,7 @@ If a script gets stuck or you realise there is an error in your code, you may ne
 :::
 
 ### Loading data
-Next, we can load the `sa-language.dta` file into R. Using the `haven` library, R is capable to read a large range of different filetypes. This includes Stata `.dta` files:
+Next, we can load the `sa-language.dta` file into R. Using the `haven` library, R is capable to read a large range of different filetypes. This includes Stata `dta` files:
 
 ```{r}
 #| label: 01-load-data
@@ -711,7 +711,7 @@ head(att)
 You can further inspect the results using the `View()` function. 
 :::
 
-We can save this dataset so that we can easily load it the next time we want to work with this by writing it to a `.csv` file.
+We can save this dataset so that we can easily load it the next time we want to work with this by writing it to a `csv` file.
 
 ```{r}
 #| label: 01-write-csv
@@ -734,7 +734,7 @@ Next, use the link below to download another dataset sourced from the [South Afr
 
 | File                                 | Type   | Link |
 | :------                              | :------| :------ |
-| SA Census 2011 Internet Access Table          | `.dta` | [Download](https://github.com/jtvandijk/SA-TIED/raw/master/data/attributes/sa-internet-access.dta) |
+| SA Census 2011 Internet Access Table          | `dta` | [Download](https://github.com/jtvandijk/SA-TIED/raw/master/data/attributes/sa-internet-access.dta) |
 
 Use this dataset to:
 

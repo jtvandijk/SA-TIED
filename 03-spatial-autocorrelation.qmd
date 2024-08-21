@@ -18,7 +18,6 @@ library(tmap)
 library(spdep)
 ```
 
-
 ```{r}
 #| label: 03-tmap-settings
 #| classes: styled-output
@@ -45,7 +44,7 @@ In this session, we will be looking at education at the municipal level, focusin
 | SA Municipalities                    | `GeoPackage`  | [Download](https://github.com/jtvandijk/SA-TIED/raw/master/data/spatial/municipality-south-africa-2013.gpkg) |
 
 ::: {.callout-note}
-To download the `csv` file containing the `no_schooling` variable that is hosted on GitHub, click on the `Download raw file` button on the top right of your screen and it should download directly to your computer.
+To download the `csv` file containing the `mn_no_school` variable that is hosted on GitHub, click on the `Download raw file` button on the top right of your screen and it should download directly to your computer.
 :::
 
 Once downloaded, we can load both files into memory:
@@ -57,7 +56,7 @@ Once downloaded, we can load both files into memory:
 #| tidy: True
 #| cache: True
 #| filename: "R code"
-# load spatial data, transform projection
+# load spatial data
 sa_municipality <- st_read('data/spatial/municipality-south-africa-2013.gpkg')
 
 # load attribute data
@@ -437,7 +436,7 @@ This new map may still not fully address the issue of statistical significance d
 :::
 
 ## Assignment {#autocorrelation}
-This concludes this session. Any statistic that includes spatial weights is dependent upon how those weights are defined. We have so far used first order contiguity, i.e. polygons that share a boundary, but there is no particular reason why we should not include second order contiguity polygons (i.e. neighbours of neighbours), a fixed distance neigbhours defintions, or a $k$ nearest neighbours definition.
+This concludes this session. Any statistic that includes spatial weights is dependent upon how those weights are defined. We have so far used first order contiguity, i.e. polygons that share a boundary, but there is no particular reason why we should not include second order contiguity polygons (i.e. neighbours of neighbours), a fixed distance neighbours definitions, or a $k$ nearest neighbours definition.
 
 Please try to complete the following tasks:
 

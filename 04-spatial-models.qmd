@@ -1,7 +1,7 @@
 # Spatial Models
 
 ## Loading spatial data
-Open a new script within your `Geospatial-Workshop24` project and save this as `04-spatial-models.r`. Of course, we will start again by loading the libraries that we will need. This time, you should load:
+Open a new script within your `Geospatial-Workshop24` project and save this as `04-spatial-models.r`. As usual, we will begin by loading the necessary libraries. This time, you should load:
 
 ```{r}
 #| label: 04-load-libraries
@@ -36,7 +36,171 @@ tmap_mode("plot")
 options(max.print=1000)
 ``` 
 
-## Geographical weighted statistics
+## Geographically weighted statistics
+In the previous session, we explored identifying and measuring patterns of spatial autocorrelation (clustering) in data. If such patterns exist, we can potentially exploit them by creating local summary statistics for geographical areas using the `GWmodel` library.
+
+In this session, we will continue to look at the `mn_no_school` variable at the municipal level. We will further use a second dataset containing the average age by municipality (`mn_avg_age`), aggregated from the [South African Census Community Profiles 2011](https://www.statssa.gov.za/?page_id=3839). You can download this files below and save it in your project folder under `data/attributes`.
+
+| File                                 | Type   | Link |
+| :------                              | :------| :------ |
+| SA Census 2011 Average Age Variable  | `csv` | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes/sa-average-age.csv) |
+
+::: {.callout-note}
+To download the `csv` file containing the `mn_avg_age` variable that is hosted on GitHub, click on the `Download raw file` button on the top right of your screen and it should download directly to your computer.
+:::
+
+Once downloaded, we can load both files into memory together with our spatial data file:
+```{r}
+#| label: 04-load-gpkg-csv
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| cache: True
+#| filename: "R code"
+# load spatial data
+sa_municipality <- st_read('data/spatial/municipality-south-africa-2013.gpkg')
+
+# load attribute data
+sa_no_schooling <- read_csv('data/attributes/sa-no-schooling.csv')
+
+# load attribute data
+sa_average_age <- read_csv('data/attributes/sa-average-age.csv')
+``` 
+
+::: {.callout-note}
+You can inspect all objects using the `View()` function. 
+:::
+
+Let us start by combining all three datasets:
+
+```{r}
+#| label: 04-join-data
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: False
+#| cache: True
+#| filename: "R code"
+# calculate proportions
+sa_no_schooling <- sa_no_schooling |> 
+  mutate(mn_no_school_prop = round(mn_no_school/mn_pop, 3)) |>
+  select(mn_code, mn_no_school_prop)
+
+# join attribute data onto spatial data
+sa_municipality <- sa_municipality |>
+  left_join(sa_no_schooling, by = c("mn_code" = "mn_code")) |>
+  left_join(sa_average_age, by = c("mn_code" = "mn_code"))
+``` 
+
+The `GWmodel` library uses the older `sp` data format for handling spatial data. We therefore need to covnert our current `sf` object to `sp` before continuing:
+
+```{r}
+#| label: 04-to-sp
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: False
+#| cache: True
+#| filename: "R code"
+# to sp
+sa_municipality_sp <- as_Spatial(sa_municipality)
+```
+
+::: {.callout-note}
+The `sf` package in R is now favoured over the `sp` package due to its more modern and efficient handling of spatial data. `sf` uses simple features, which are a standardised way to store and manipulate spatial geometries, making it more compatible with other geospatial tools and software. It also integrates more seamlessly with the `tidyverse` ecosystem, allowing for easier data manipulation and analysis. Additionally, `sf` offers better performance, simpler syntax, and enhanced support for spatial operations compared to `sp`.
+:::
+
+We can use the `GWmodel` to calculate statistics such as local means, local standard deviations, and local variances. As with autocorrelation, this raises the question: what is considered local? One approach is to use a [kernel function](https://en.wikipedia.org/wiki/Kernel_(statistics)) to determine which values should contribute to the local estimates. These kernels operate on point location data (e.g., polygon centroids) and overlay a window of a specific shape and bandwidth on each point to derive local estimates. The bandwidth, which refers to the kernel's size, can be measured in absolute terms (e.g., including all polygon centroids within 10km) or relative terms (e.g., including the 10 nearest centroids), with the latter known as an adaptive kernel. While bandwidth typically has a greater impact on density estimation than the kernel type, the choice of kernel can also influence the results by weighting the points within the kernel differently.
+
+```{r}
+#| label: fig-kernels
+#| echo: False 
+#| fig-cap: "Kernel types and their distributions."
+knitr::include_graphics('images/w04/kerneltypes.png')
+```
+
+Let's calculate the geographically weighted mean value for the `mn_no_school_prop` and `mn_avg_age` variables using an adaptive bandwidth of 25 neighbours and a `bisquare` kernel: 
+
+```{r}
+#| label: 04-gwss
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: False
+#| cache: True
+#| filename: "R code"
+# geographically weighted statistics: no schooling
+sa_gwss_no_schooling <- gwss(sa_municipality_sp , vars = "mn_no_school_prop", 
+                          bw = 25, kernel = "bisquare", adaptive = TRUE, longlat = T)
+
+# geographically weighted statistics: average age
+sa_gwss_average_age <- gwss(sa_municipality_sp , vars = "mn_avg_age", 
+                          bw = 25, kernel = "bisquare", adaptive = TRUE, longlat = T)
+```
+
+We can extract the values and bind these to our original `sf` dataset as follows:
+
+```{r}
+#| label: 04-gwss-sf
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: False
+#| cache: True
+#| filename: "R code"
+# names
+names(sa_gwss_no_schooling$SDF)
+names(sa_gwss_average_age$SDF)
+
+# extract local means
+sa_municipality$mn_no_schooling_LM25 <- sa_gwss_no_schooling$SDF$mn_no_school_prop_LM
+sa_municipality$mn_average_age_LM25 <- sa_gwss_average_age$SDF$mn_avg_age_LM
+```
+
+::: {.callout-warning}
+The results of the outcomes of `gwss` function can be accessed through the `$SDF` data frame.
+:::
+
+We can now create a simple map of the local mean values of the `mn_no_school` variable:
+
+```{r tidy='styler'} 
+#| label: fig-04-choro-1
+#| fig-cap: Local mean values `mn_no_school` variable.
+#| echo: True
+#| eval: True
+#| cache: True
+#| filename: "R code"
+# shape, polygons
+tm_shape(sa_municipality) +
+  # specify column, classes
+  tm_polygons(
+    col = "mn_no_schooling_LM25", 
+    n = 5, 
+    style = "jenks",
+    title = "Local Mean"
+  ) 
+``` 
+
+And we can do the same for the `mn_average_age` variable:
+
+```{r tidy='styler'} 
+#| label: fig-04-choro-2
+#| fig-cap: Local mean values `mn_average age` variable.
+#| echo: True
+#| eval: True
+#| cache: True
+#| filename: "R code"
+# shape, polygons
+tm_shape(sa_municipality) +
+  # specify column, classes
+  tm_polygons(
+    col = "mn_average_age_LM25", 
+    n = 5, 
+    style = "jenks",
+    title = "Local Mean"
+  ) 
+```
 
 ## Geographically weighted correlation
 
@@ -54,7 +218,7 @@ $$
 
 where $\lambda$ is a spatial autoregressive parameter, $W$ is a spatial weights matrix, and $\upsilon$ is a vector of normally distributed error terms.
 
-:::{.callout-note}
+::: {.callout-note}
 Spatial error models can be fitted using R’s [spatialreg](https://cran.r-project.org/web/packages/spatialreg/index.html) package.
 :::
 
@@ -69,7 +233,7 @@ $$
 
 where $\rho$ is the spatial autoregressive coefficient, $Wy$ represents the spatially lagged dependent variable, and $X\beta$ represents the standard regression components.
 
-:::{.callout-note}
+::: {.callout-note}
 Spatial lag models can be fitted using R’s [spatialreg](https://cran.r-project.org/web/packages/spatialreg/index.html) package.
 :::
 
@@ -84,8 +248,12 @@ $$
 
 where $(\upsilon_{i}, v_{i})$ are the coordinates of location $i$ and $\beta_{k}(\upsilon_{i}, v_{i})$ are the location-specific coefficients.
 
-:::{.callout-note}
+::: {.callout-note}
 The [GWmodel](https://cran.r-project.org/web/packages/GWmodel/index.html) R package can be used to run a GWR, including a multiscale geographically weighted regression (GWRs) that accommodates different bandwidths for each variable. However, these models can be computationally intensive, especially with large datasets.
+:::
+
+::: {.callout-note}
+To get started with Geographically Weighted Regression, the [Spatial Modelling for Data Scientists](https://gdsl-ul.github.io/san/09-gwr.html) course by Liverpool-based Professors [Francisco Rowe](https://www.franciscorowe.com/) and [Dani Arribas-Bel](https://darribas.org/) provides an excellent introduction. 
 :::
 
 ### To note

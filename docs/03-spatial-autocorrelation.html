@@ -278,17 +278,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>To download the <code>csv</code> file containing the <code>no_schooling</code> variable that is hosted on GitHub, click on the <code>Download raw file</code> button on the top right of your screen and it should download directly to your computer.</p>
+<p>To download the <code>csv</code> file containing the <code>mn_no_school</code> variable that is hosted on GitHub, click on the <code>Download raw file</code> button on the top right of your screen and it should download directly to your computer.</p>
 </div>
 </div>
 </div>
 <p>Once downloaded, we can load both files into memory:</p>
-<div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/03-load-gpkg-csv_f8a18e3dc3a4870de76c292a840090d2">
+<div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/03-load-gpkg-csv_4664cacfc413767a998d4805ab28a1c0">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>R code</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load spatial data, transform projection</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load spatial data</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sa_municipality <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"data/spatial/municipality-south-africa-2013.gpkg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
@@ -824,7 +824,7 @@ Moran I statistic       Expectation          Variance
 </section>
 <section id="autocorrelation" class="level2" data-number="1.7">
 <h2 data-number="1.7" class="anchored" data-anchor-id="autocorrelation"><span class="header-section-number">3.7</span> Assignment</h2>
-<p>This concludes this session. Any statistic that includes spatial weights is dependent upon how those weights are defined. We have so far used first order contiguity, i.e.&nbsp;polygons that share a boundary, but there is no particular reason why we should not include second order contiguity polygons (i.e.&nbsp;neighbours of neighbours), a fixed distance neigbhours defintions, or a <span class="math inline">\(k\)</span> nearest neighbours definition.</p>
+<p>This concludes this session. Any statistic that includes spatial weights is dependent upon how those weights are defined. We have so far used first order contiguity, i.e.&nbsp;polygons that share a boundary, but there is no particular reason why we should not include second order contiguity polygons (i.e.&nbsp;neighbours of neighbours), a fixed distance neighbours definitions, or a <span class="math inline">\(k\)</span> nearest neighbours definition.</p>
 <p>Please try to complete the following tasks:</p>
 <ol type="1">
 <li>Extract the centroids from the <code>sa_municipality</code> file and assign these to an object called <code>coords</code>.</li>
