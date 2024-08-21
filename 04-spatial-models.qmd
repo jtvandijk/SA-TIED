@@ -100,7 +100,7 @@ The `GWmodel` library uses the older `sp` data format for handling spatial data.
 #| classes: styled-output
 #| echo: True
 #| eval: True
-#| tidy: False
+#| tidy: True
 #| cache: True
 #| filename: "R code"
 # to sp
@@ -127,7 +127,7 @@ Let's calculate the geographically weighted mean value for the `mn_no_school_pro
 #| classes: styled-output
 #| echo: True
 #| eval: True
-#| tidy: False
+#| tidy: True
 #| cache: True
 #| filename: "R code"
 # geographically weighted statistics: no schooling
@@ -146,7 +146,7 @@ We can extract the values and bind these to our original `sf` dataset as follows
 #| classes: styled-output
 #| echo: True
 #| eval: True
-#| tidy: False
+#| tidy: True
 #| cache: True
 #| filename: "R code"
 # names
@@ -202,7 +202,145 @@ tm_shape(sa_municipality) +
   ) 
 ```
 
+Both maps show that there is some clear variation in both mean values across the country.
+
+::: {.callout-warning}
+As in the previous session, the resulting maps are influenced by the geographical weighting applied, which is largely determined by the bandwidth. There is no definitive answer for selecting the optimal bandwidth, though automatic selectors, such as those based on cross-validation, can help guide the choice (e.g. `bw.gwr(mn_no_school_prop ~ 1, data = sa_municipality_sp, adaptive = TRUE, kernel = "bisquare", longlat = T)`). If you were to run the code above on our current variables, the automatic procedure suggests to consider rather large bandwidths. This suggests that the area we are analysing could be too extensive for detailed local analysis.
+:::
+
 ## Geographically weighted correlation
+We can also decompose bivariate relationship by geographical areas. For instance, we can compare the global correlation and break down to what extent the association between two variables is consistent over space. Let us first look at the association between our `mn_no_school_prop` and `mn_avg_age` variables:
+
+```{r}
+#| label: fig-04-correlation
+#| fig-cap: Scatterplot between the `mn_no_school_prop` and `mn_avg_age` variables.
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| cache: True
+#| filename: "R code"
+# bivariate plot
+plot(sa_municipality$mn_no_school_prop, sa_municipality$mn_avg_age, 
+     xlab = 'No schooling', ylab = 'Average Age')
+
+```
+
+```{r}
+#| label: 04-pearson
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| cache: True
+#| filename: "R code"
+# correlation
+cor(sa_municipality$mn_no_school_prop, sa_municipality$mn_avg_age)
+```
+
+The Pearson correlation coefficient suggests a moderate negative association between the proportion of people without schooling an the average age at the municipal level. 
+
+::: {.callout-note}
+Sometimes heteroscedasticity is indicative of a geographically varying relationship and it is worth considering calculating a geographically weighted correlation.
+:::
+
+Using the same bandwidth as before, we can derive a localised correlation as follows:
+
+```{r}
+#| label: 04-gwc
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| cache: True
+#| filename: "R code"
+# geographically weighted statistics: correlation
+sa_gwss_cor <- gwss(sa_municipality_sp , vars = c("mn_no_school_prop", "mn_avg_age"), 
+                    bw = 25, kernel = "bisquare", adaptive = TRUE, longlat = T)
+```
+
+We can now extract the values and bind these back to our original `sf` object:
+
+```{r}
+#| label: 04-gwc-extract
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| cache: True
+#| filename: "R code"
+# extract correlation
+sa_municipality$mn_noschool_age_cor <- sa_gwss_cor$SDF$Corr_mn_no_school_prop.mn_avg_age
+
+# inspect
+summary(sa_municipality$mn_noschool_age_cor)
+```
+
+The summary shows that there indeed seems to be variation of this relationship across the country, with the local Pearson correlation ranging from very weak to very strong. Of course, we can map this in the usual way:
+
+```{r tidy='styler'} 
+#| label: fig-04-choro-3
+#| fig-cap: Local correlation values `mn_no_school` and `mn_avg_age` variable.
+#| echo: True
+#| eval: True
+#| cache: True
+#| filename: "R code"
+# shape, polygons
+tm_shape(sa_municipality) +
+  # specify column, classes
+  tm_polygons(
+    col = "mn_noschool_age_cor", 
+    n = 5, 
+    style = "jenks",
+    title = "Local Correlation"
+  ) 
+``` 
+
+What the map does not tell us is whether the correlations are significant. We can test for this using a Monte Carlo simulation:
+
+```{r}
+#| label: 04-gwc-sig
+#| classes: styled-output
+#| echo: True
+#| eval: True
+#| tidy: True
+#| cache: True
+#| filename: "R code"
+# test for significance, only select relevant column
+sa_gwss_cor_sig <- gwss.montecarlo(sa_municipality_sp , vars = c("mn_no_school_prop", "mn_avg_age"), 
+                                  bw = 25, kernel = "bisquare", adaptive = TRUE, longlat = T) |> 
+  as_tibble() |>
+  select(Corr_mn_no_school_prop.mn_avg_age) 
+
+# replace names
+names(sa_gwss_cor_sig) <- 'mn_no_school_age_cor_p'
+```
+
+We can bind the results back to the original `sf` dataframe. We then can create a column containing only the correlations that show as significant and use `tmap` to plot these:
+
+```{r tidy='styler'} 
+#| label: fig-04-choro-4
+#| fig-cap: Significant local correlation values `mn_no_school` and `mn_avg_age` variable.
+#| echo: True
+#| eval: True
+#| cache: True
+#| filename: "R code"
+# bind results
+sa_municipality <- sa_municipality |>
+  cbind(sa_gwss_cor_sig) |>
+  mutate(sa_gwss_cor = if_else(mn_no_school_age_cor_p < 0.025, mn_noschool_age_cor,
+                       if_else(mn_no_school_age_cor_p > 0.975, mn_noschool_age_cor, NA)))
+  
+# shape, polygons
+tm_shape(sa_municipality) +
+  # specify column, classes
+  tm_polygons(
+    col = "sa_gwss_cor", 
+    n = 5, 
+    style = "jenks",
+    title = "Local Correlation"
+  ) 
+``` 
 
 ## Spatial regression
 We looked at geographically weighted statistics, including geographically weighted correlation, which examines whether the correlation between two variables varies across space. However, whilst out of the scope of this workshop, these concepts can be extended to regression modelling. Examples of such models are the spatial error model, spatial lag model, and geographically weighted regression.
@@ -261,4 +399,24 @@ The spatial error model adjusts for spatial autocorrelation in the error terms, 
 
 Both the spatial error and spatial lag models assume that the relationships between variables are the same across the study area, with adjustments made only for spatial dependencies. GWR, on the other hand, allows the relationships themselves to vary across space. GWR is more flexible but also more complex and computationally intensive, providing local instead of global estimates of coefficients.
 
-## Assignment
+## Assignment [Optional]
+This concludes this session. Please try to complete the following tasks:
+
+1. Download the three datasets below to your computer. These include a `GeoPackage` of the 2011 electoral ward boundaries for the Western Cape, a `csv` file detailing the percentage of the population within each ward at the highest level of education, and a `csv` file showing the percentage of the population within each ward by income category.
+2. Create a new variable in the `education` dataset representing the percentage of the population within each ward that has *at least* a `higher diploma`.
+3. Create another variable in the `income` dataset representing the percentage of the population within each ward that earns at least `ZAR 25,601`.
+4. Join all the data together and then:
+    * Calculate the geographically weighted *means* for your new `education` variable, selecting the optimal bandwidth using an automatic selector.
+    * Calculate the geographically weighted *means* for your new `income` variable, selecting the optimal bandwidth using an automatic selector.
+    * Calculate the geographically weighted *correlation* between the two variables, again selecting the optimal bandwidth using an automatic selector.
+5. Map the geographically weighted correlation coefficients. 
+
+| File                            | Type          | Link |
+| :------                         | :------       | :------ |
+| Western Cape Electoral Wards    | `GeoPackage`  | [Download](https://github.com/jtvandijk/SA-TIED/raw/master/data/spatial/ward-western-cape-2011.gpkg) |
+| SA Census 2011 Income Table     | `csv` | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes/sa-ward-income.csv) |
+| SA Census 2011 Education Table  | `csv` | [Download](https://github.com/jtvandijk/SA-TIED/tree/master/data/attributes/sa-ward-education.csv) |
+
+::: {.callout-note}
+These datasets have been sourced from the [StatsSA Superweb](https://superweb.statssa.gov.za/webapi/jsf/login.xhtml) table builder and have subsequently been slightly cleaned.
+:::

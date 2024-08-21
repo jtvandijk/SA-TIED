@@ -92,7 +92,7 @@ tm_shape(sa_municipality) +
 
 # significance
 sa_gwss_cor_sig <- gwss.montecarlo(sa_municipality_sp , vars = c("mn_no_school_prop", "mn_avg_age"), 
-                                  bw = 10, kernel = "bisquare", adaptive = TRUE, longlat = T) |> 
+                                  bw = 25, kernel = "bisquare", adaptive = TRUE, longlat = T) |> 
   as_tibble() |>
   select(Corr_mn_no_school_prop.mn_avg_age) 
 names(sa_gwss_cor_sig) <- 'mn_no_school_age_cor_p'

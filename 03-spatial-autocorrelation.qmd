@@ -435,7 +435,7 @@ tm_shape(sa_municipality) +
 This new map may still not fully address the issue of statistical significance due to repeated testing, and some values may appear significant purely by chance. To correct for this, you can adjust the $p$-values using R’s `p.adjust()` function. For further details, refer to [Manual Gimond's explanation](https://mgimond.github.io/Spatial/spatial-autocorrelation.html#a-note-about-interpreting-the-pseudo-p-value) of the [multiple comparison](https://en.wikipedia.org/wiki/Multiple_comparisons_problem) problem in the context of the *pseudo-*$p$ values.
 :::
 
-## Assignment {#autocorrelation}
+## Assignment [Optional] {#autocorrelation}
 This concludes this session. Any statistic that includes spatial weights is dependent upon how those weights are defined. We have so far used first order contiguity, i.e. polygons that share a boundary, but there is no particular reason why we should not include second order contiguity polygons (i.e. neighbours of neighbours), a fixed distance neighbours definitions, or a $k$ nearest neighbours definition.
 
 Please try to complete the following tasks:

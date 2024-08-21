@@ -724,7 +724,7 @@ We can save this dataset so that we can easily load it the next time we want to 
 write_csv(x = att, file = 'data/attributes/sa-language.csv')
 ```
 
-## Assignment {#internet-at-home}
+## Assignment [Optional] {#internet-at-home}
 This concludes this session. Please try to complete the following tasks:
 
 1. Create a histogram showing the distribution of the *number* of isiXhosa speakers in Cape Town, grouped by sub-place.

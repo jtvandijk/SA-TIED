@@ -146,7 +146,6 @@ An attribute join links two datasets based on a common attribute, enabling the â
 ```{r} 
 #| label: fig-join-attributes
 #| echo: False 
-#| cache: True
 #| fig-cap: "Attribute Joins."
 knitr::include_graphics('images/w02/attribute-joins.png')
 ```
@@ -595,7 +594,7 @@ In the code above, we stored the full map definition as an object. This makes it
 tmap_save(tm = xhosa_map, 'cpt-xhosa.jpg', width=15, height=15, units=c('cm'))
 ```
 
-## Assignment 
+## Assignment [Optional]
 This concludes this session. Please try to complete the following tasks:
 
 1. If you have not already done so [in the previous session](01-getting-started.html#internet-at-home), aggregate the internet access dataset by the `internet at home` variable for sub places in the City of Johannesburg.
