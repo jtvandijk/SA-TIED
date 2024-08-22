@@ -167,13 +167,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-getting-started.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R for Data Analysis</span></a>
+ <span class="menu-text">1 R for Data Analysis</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-mapping-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R for Spatial Analysis</span></a>
+ <span class="menu-text">2 R for Spatial Analysis</span></a>
   </div>
 </li>
       </ul>
@@ -190,13 +190,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-spatial-autocorrelation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Spatial Autocorrelation</span></a>
+ <span class="menu-text">3 Spatial Autocorrelation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-spatial-models.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Spatial Models</span></a>
+ <span class="menu-text">4 Spatial Models</span></a>
   </div>
 </li>
       </ul>
@@ -211,19 +211,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#spatial-models" id="toc-spatial-models" class="nav-link active" data-scroll-target="#spatial-models"><span class="header-section-number">1</span> Spatial Models</a>
+  <li><a href="#spatial-models" id="toc-spatial-models" class="nav-link active" data-scroll-target="#spatial-models"><span class="header-section-number">4</span> Spatial Models</a>
   <ul class="collapse">
-  <li><a href="#loading-spatial-data" id="toc-loading-spatial-data" class="nav-link" data-scroll-target="#loading-spatial-data"><span class="header-section-number">1.1</span> Loading spatial data</a></li>
-  <li><a href="#geographically-weighted-statistics" id="toc-geographically-weighted-statistics" class="nav-link" data-scroll-target="#geographically-weighted-statistics"><span class="header-section-number">1.2</span> Geographically weighted statistics</a></li>
-  <li><a href="#geographically-weighted-correlation" id="toc-geographically-weighted-correlation" class="nav-link" data-scroll-target="#geographically-weighted-correlation"><span class="header-section-number">1.3</span> Geographically weighted correlation</a></li>
-  <li><a href="#spatial-regression" id="toc-spatial-regression" class="nav-link" data-scroll-target="#spatial-regression"><span class="header-section-number">1.4</span> Spatial regression</a>
+  <li><a href="#loading-spatial-data" id="toc-loading-spatial-data" class="nav-link" data-scroll-target="#loading-spatial-data"><span class="header-section-number">4.1</span> Loading spatial data</a></li>
+  <li><a href="#geographically-weighted-statistics" id="toc-geographically-weighted-statistics" class="nav-link" data-scroll-target="#geographically-weighted-statistics"><span class="header-section-number">4.2</span> Geographically weighted statistics</a></li>
+  <li><a href="#geographically-weighted-correlation" id="toc-geographically-weighted-correlation" class="nav-link" data-scroll-target="#geographically-weighted-correlation"><span class="header-section-number">4.3</span> Geographically weighted correlation</a></li>
+  <li><a href="#spatial-regression" id="toc-spatial-regression" class="nav-link" data-scroll-target="#spatial-regression"><span class="header-section-number">4.4</span> Spatial regression</a>
   <ul class="collapse">
-  <li><a href="#spatial-error-model" id="toc-spatial-error-model" class="nav-link" data-scroll-target="#spatial-error-model"><span class="header-section-number">1.4.1</span> Spatial error model</a></li>
-  <li><a href="#spatial-lag-model" id="toc-spatial-lag-model" class="nav-link" data-scroll-target="#spatial-lag-model"><span class="header-section-number">1.4.2</span> Spatial lag model</a></li>
-  <li><a href="#geographically-weighted-regression" id="toc-geographically-weighted-regression" class="nav-link" data-scroll-target="#geographically-weighted-regression"><span class="header-section-number">1.4.3</span> Geographically weighted regression</a></li>
-  <li><a href="#to-note" id="toc-to-note" class="nav-link" data-scroll-target="#to-note"><span class="header-section-number">1.4.4</span> To note</a></li>
+  <li><a href="#spatial-error-model" id="toc-spatial-error-model" class="nav-link" data-scroll-target="#spatial-error-model"><span class="header-section-number">4.4.1</span> Spatial error model</a></li>
+  <li><a href="#spatial-lag-model" id="toc-spatial-lag-model" class="nav-link" data-scroll-target="#spatial-lag-model"><span class="header-section-number">4.4.2</span> Spatial lag model</a></li>
+  <li><a href="#geographically-weighted-regression" id="toc-geographically-weighted-regression" class="nav-link" data-scroll-target="#geographically-weighted-regression"><span class="header-section-number">4.4.3</span> Geographically weighted regression</a></li>
+  <li><a href="#to-note" id="toc-to-note" class="nav-link" data-scroll-target="#to-note"><span class="header-section-number">4.4.4</span> To note</a></li>
   </ul></li>
-  <li><a href="#assignment-optional" id="toc-assignment-optional" class="nav-link" data-scroll-target="#assignment-optional"><span class="header-section-number">1.5</span> Assignment [Optional]</a></li>
+  <li><a href="#assignment-optional" id="toc-assignment-optional" class="nav-link" data-scroll-target="#assignment-optional"><span class="header-section-number">4.5</span> Assignment [Optional]</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jtvandijk/SA-TIED/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -234,9 +234,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <section id="spatial-models" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Spatial Models</h1>
+<h1 data-number="1"><span class="header-section-number">4</span> Spatial Models</h1>
 <section id="loading-spatial-data" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="loading-spatial-data"><span class="header-section-number">1.1</span> Loading spatial data</h2>
+<h2 data-number="1.1" class="anchored" data-anchor-id="loading-spatial-data"><span class="header-section-number">4.1</span> Loading spatial data</h2>
 <p>Open a new script within your <code>Geospatial-Workshop24</code> project and save this as <code>04-spatial-models.r</code>. As usual, we will begin by loading the necessary libraries. This time, you should load:</p>
 <div class="cell styled-output" data-hash="04-spatial-models_cache/html/04-load-libraries_4901f03b508ecb9441f3313ee269f66a">
 <div class="code-with-filename">
@@ -255,7 +255,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <section id="geographically-weighted-statistics" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="geographically-weighted-statistics"><span class="header-section-number">1.2</span> Geographically weighted statistics</h2>
+<h2 data-number="1.2" class="anchored" data-anchor-id="geographically-weighted-statistics"><span class="header-section-number">4.2</span> Geographically weighted statistics</h2>
 <p>In the previous session, we explored identifying and measuring patterns of spatial autocorrelation (clustering) in data. If such patterns exist, we can potentially exploit them by creating local summary statistics for geographical areas using the <code>GWmodel</code> library.</p>
 <p>In this session, we will continue to look at the <code>mn_no_school</code> variable at the municipal level. We will further use a second dataset containing the average age by municipality (<code>mn_avg_age</code>), aggregated from the <a href="https://www.statssa.gov.za/?page_id=3839">South African Census Community Profiles 2011</a>. You can download this files below and save it in your project folder under <code>data/attributes</code>.</p>
 <table class="table">
@@ -496,7 +496,7 @@ dbl (3): mn_code, mn_pop, mn_avg_age
 </div>
 </section>
 <section id="geographically-weighted-correlation" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="geographically-weighted-correlation"><span class="header-section-number">1.3</span> Geographically weighted correlation</h2>
+<h2 data-number="1.3" class="anchored" data-anchor-id="geographically-weighted-correlation"><span class="header-section-number">4.3</span> Geographically weighted correlation</h2>
 <p>We can also decompose bivariate relationship by geographical areas. For instance, we can compare the global correlation and break down to what extent the association between two variables is consistent over space. Let us first look at the association between our <code>mn_no_school_prop</code> and <code>mn_avg_age</code> variables:</p>
 <div class="cell styled-output" data-hash="04-spatial-models_cache/html/fig-04-correlation_06421ef8befa8f31b5b12531a4ac3310">
 <div class="code-with-filename">
@@ -642,10 +642,10 @@ dbl (3): mn_code, mn_pop, mn_avg_age
 </div>
 </section>
 <section id="spatial-regression" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="spatial-regression"><span class="header-section-number">1.4</span> Spatial regression</h2>
+<h2 data-number="1.4" class="anchored" data-anchor-id="spatial-regression"><span class="header-section-number">4.4</span> Spatial regression</h2>
 <p>We looked at geographically weighted statistics, including geographically weighted correlation, which examines whether the correlation between two variables varies across space. However, whilst out of the scope of this workshop, these concepts can be extended to regression modelling. Examples of such models are the spatial error model, spatial lag model, and geographically weighted regression.</p>
 <section id="spatial-error-model" class="level3" data-number="1.4.1">
-<h3 data-number="1.4.1" class="anchored" data-anchor-id="spatial-error-model"><span class="header-section-number">1.4.1</span> Spatial error model</h3>
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="spatial-error-model"><span class="header-section-number">4.4.1</span> Spatial error model</h3>
 <p>The spatial error model is used when the error terms in a regression model exhibit spatial autocorrelation, meaning the error terms are not independent across space. This can happen due to omitted variables that have a spatial pattern or unmeasured factors that affect the dependent variable similarly across nearby locations.</p>
 <p>The model adjusts for spatial autocorrelation by adding a spatially lagged error term (a weighted sum of the errors from neighboring locations) to the regression equation:</p>
 <p><span class="math display">\[
@@ -664,7 +664,7 @@ y = X\beta + \epsilon, \epsilon = \lambda W \epsilon + \upsilon
 </div>
 </section>
 <section id="spatial-lag-model" class="level3" data-number="1.4.2">
-<h3 data-number="1.4.2" class="anchored" data-anchor-id="spatial-lag-model"><span class="header-section-number">1.4.2</span> Spatial lag model</h3>
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="spatial-lag-model"><span class="header-section-number">4.4.2</span> Spatial lag model</h3>
 <p>The spatial lag model is appropriate when the dependent variable itself exhibits spatial dependence. This means the value of the dependent variable in one location depends on the values in neighboring locations. This model is used to capture the spillover effects or diffusion processes, where the outcome in one area is influenced by outcomes in nearby areas (e.g.&nbsp;house prices, crime rates).</p>
 <p>The model incorporates a spatially lagged dependent variable, which is the weighted sum of the dependent variable values in neighboring locations, into the regression equation:</p>
 <p><span class="math display">\[
@@ -683,7 +683,7 @@ y = \rho Wy + X\beta + \epsilon
 </div>
 </section>
 <section id="geographically-weighted-regression" class="level3" data-number="1.4.3">
-<h3 data-number="1.4.3" class="anchored" data-anchor-id="geographically-weighted-regression"><span class="header-section-number">1.4.3</span> Geographically weighted regression</h3>
+<h3 data-number="1.4.3" class="anchored" data-anchor-id="geographically-weighted-regression"><span class="header-section-number">4.4.3</span> Geographically weighted regression</h3>
 <p>Geographically weighted regression (GWR) is used when the relationship between the dependent and independent variables is not constant across space, meaning the model coefficients vary by location. This is useful when you suspect that the relationship between variables may change depending on the geographic context. GWR provides a localised understanding of the relationships by allowing each observation to have its own set of regression coefficients, which can provide insights into how relationships differ across the study area.</p>
 <p>GWR fits a separate regression equation at each location in the study area, weighting nearby observations more heavily than those farther away. The weighting is typically based on a kernel function. The basic GWR equation is:</p>
 <p><span class="math display">\[
@@ -712,13 +712,13 @@ y_{i} = \beta_{0}(\upsilon_{i}, v_{i}) + \sum_{k=1}^{p}\beta_{k}(\upsilon_{i}, v
 </div>
 </section>
 <section id="to-note" class="level3" data-number="1.4.4">
-<h3 data-number="1.4.4" class="anchored" data-anchor-id="to-note"><span class="header-section-number">1.4.4</span> To note</h3>
+<h3 data-number="1.4.4" class="anchored" data-anchor-id="to-note"><span class="header-section-number">4.4.4</span> To note</h3>
 <p>The spatial error model adjusts for spatial autocorrelation in the error terms, whereas the spatial lag model adjusts for spatial dependence in the dependent variable itself. The spatial error model does not alter the interpretation of the coefficients of the independent variables, while the spatial lag model introduces a feedback loop where changes in one area can influence neighbouring areas.</p>
 <p>Both the spatial error and spatial lag models assume that the relationships between variables are the same across the study area, with adjustments made only for spatial dependencies. GWR, on the other hand, allows the relationships themselves to vary across space. GWR is more flexible but also more complex and computationally intensive, providing local instead of global estimates of coefficients.</p>
 </section>
 </section>
 <section id="assignment-optional" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="assignment-optional"><span class="header-section-number">1.5</span> Assignment [Optional]</h2>
+<h2 data-number="1.5" class="anchored" data-anchor-id="assignment-optional"><span class="header-section-number">4.5</span> Assignment [Optional]</h2>
 <p>This concludes this session. Please try to complete the following tasks:</p>
 <ol type="1">
 <li>Download the three datasets below to your computer. These include a <code>GeoPackage</code> of the 2011 electoral ward boundaries for the Western Cape, a <code>csv</code> file detailing the percentage of the population within each ward at the highest level of education, and a <code>csv</code> file showing the percentage of the population within each ward by income category.</li>

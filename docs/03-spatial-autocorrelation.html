@@ -168,13 +168,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-getting-started.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R for Data Analysis</span></a>
+ <span class="menu-text">1 R for Data Analysis</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-mapping-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R for Spatial Analysis</span></a>
+ <span class="menu-text">2 R for Spatial Analysis</span></a>
   </div>
 </li>
       </ul>
@@ -191,13 +191,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-spatial-autocorrelation.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Spatial Autocorrelation</span></a>
+ <span class="menu-text">3 Spatial Autocorrelation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-spatial-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Spatial Models</span></a>
+ <span class="menu-text">4 Spatial Models</span></a>
   </div>
 </li>
       </ul>
@@ -212,15 +212,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#spatial-autocorrelation" id="toc-spatial-autocorrelation" class="nav-link active" data-scroll-target="#spatial-autocorrelation"><span class="header-section-number">1</span> Spatial Autocorrelation</a>
+  <li><a href="#spatial-autocorrelation" id="toc-spatial-autocorrelation" class="nav-link active" data-scroll-target="#spatial-autocorrelation"><span class="header-section-number">3</span> Spatial Autocorrelation</a>
   <ul class="collapse">
-  <li><a href="#loading-spatial-data" id="toc-loading-spatial-data" class="nav-link" data-scroll-target="#loading-spatial-data"><span class="header-section-number">1.1</span> Loading spatial data</a></li>
-  <li><a href="#spatial-dependency" id="toc-spatial-dependency" class="nav-link" data-scroll-target="#spatial-dependency"><span class="header-section-number">1.2</span> Spatial dependency</a></li>
-  <li><a href="#defining-neighbours" id="toc-defining-neighbours" class="nav-link" data-scroll-target="#defining-neighbours"><span class="header-section-number">1.3</span> Defining neighbours</a></li>
-  <li><a href="#defining-weights" id="toc-defining-weights" class="nav-link" data-scroll-target="#defining-weights"><span class="header-section-number">1.4</span> Defining weights</a></li>
-  <li><a href="#global-morans-i" id="toc-global-morans-i" class="nav-link" data-scroll-target="#global-morans-i"><span class="header-section-number">1.5</span> Global Moran’s I</a></li>
-  <li><a href="#local-morans-i" id="toc-local-morans-i" class="nav-link" data-scroll-target="#local-morans-i"><span class="header-section-number">1.6</span> Local Moran’s I</a></li>
-  <li><a href="#autocorrelation" id="toc-autocorrelation" class="nav-link" data-scroll-target="#autocorrelation"><span class="header-section-number">1.7</span> Assignment [Optional]</a></li>
+  <li><a href="#loading-spatial-data" id="toc-loading-spatial-data" class="nav-link" data-scroll-target="#loading-spatial-data"><span class="header-section-number">3.1</span> Loading spatial data</a></li>
+  <li><a href="#spatial-dependency" id="toc-spatial-dependency" class="nav-link" data-scroll-target="#spatial-dependency"><span class="header-section-number">3.2</span> Spatial dependency</a></li>
+  <li><a href="#defining-neighbours" id="toc-defining-neighbours" class="nav-link" data-scroll-target="#defining-neighbours"><span class="header-section-number">3.3</span> Defining neighbours</a></li>
+  <li><a href="#defining-weights" id="toc-defining-weights" class="nav-link" data-scroll-target="#defining-weights"><span class="header-section-number">3.4</span> Defining weights</a></li>
+  <li><a href="#global-morans-i" id="toc-global-morans-i" class="nav-link" data-scroll-target="#global-morans-i"><span class="header-section-number">3.5</span> Global Moran’s I</a></li>
+  <li><a href="#local-morans-i" id="toc-local-morans-i" class="nav-link" data-scroll-target="#local-morans-i"><span class="header-section-number">3.6</span> Local Moran’s I</a></li>
+  <li><a href="#autocorrelation" id="toc-autocorrelation" class="nav-link" data-scroll-target="#autocorrelation"><span class="header-section-number">3.7</span> Assignment [Optional]</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jtvandijk/SA-TIED/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -231,9 +231,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <section id="spatial-autocorrelation" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Spatial Autocorrelation</h1>
+<h1 data-number="1"><span class="header-section-number">3</span> Spatial Autocorrelation</h1>
 <section id="loading-spatial-data" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="loading-spatial-data"><span class="header-section-number">1.1</span> Loading spatial data</h2>
+<h2 data-number="1.1" class="anchored" data-anchor-id="loading-spatial-data"><span class="header-section-number">3.1</span> Loading spatial data</h2>
 <p>Start your <code>Geospatial-Workshop24</code> project and open a new script. Save this as <code>03-autocorrelation.r</code>. We will start again by loading the libraries that we will need:</p>
 <div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/03-load-libraries_1d1fc109f3f0ead73cb5c7cd09e7d33a">
 <div class="code-with-filename">
@@ -326,7 +326,7 @@ dbl (3): mn_code, mn_pop, mn_no_school
 </div>
 </section>
 <section id="spatial-dependency" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="spatial-dependency"><span class="header-section-number">1.2</span> Spatial dependency</h2>
+<h2 data-number="1.2" class="anchored" data-anchor-id="spatial-dependency"><span class="header-section-number">3.2</span> Spatial dependency</h2>
 <p>With this dataset, we are interested in analysing the proportion of people without schooling across the country and visualising this information on a map. Let us start by preparing the data for mapping:</p>
 <div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/03-join-data_008e7c79af63e8ce749b7552cc9a2884">
 <div class="code-with-filename">
@@ -453,7 +453,7 @@ dbl (3): mn_code, mn_pop, mn_no_school
 <p>where <span class="math inline">\({N_{extreme}}\)</span> is the number of simulated Moran’s I values that were more extreme than our observed statistic and <span class="math inline">\({N}\)</span> is the total number of simulations. In the example shown in <a href="#fig-moran-plot-sig">Figure&nbsp;4</a>, only 1 out the 199 simulations was more extreme than the observed local Moran’s I statistic. Therefore <span class="math inline">\({N_{extreme}}\)</span> = 1 , so <span class="math inline">\(p\)</span> is equal to <span class="math inline">\((1+1) / (199 + 1) = 0.01\)</span>. This means that there is a one percent probability that we would be wrong in rejecting the null hypothesis of spatial randomness.</p>
 </section>
 <section id="defining-neighbours" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="defining-neighbours"><span class="header-section-number">1.3</span> Defining neighbours</h2>
+<h2 data-number="1.3" class="anchored" data-anchor-id="defining-neighbours"><span class="header-section-number">3.3</span> Defining neighbours</h2>
 <p>If the purpose of a Moran’s I test is to quantify how similar places are to their neighbours, the first step is to define what constitutes a <strong>neighbour.</strong> This definition is not necessarily straightforward, because ‘neighbouring’ observations can be determined in various ways, based on either geometry or proximity. The most common methods include:</p>
 <ul>
 <li><strong>Contiguity</strong>: Spatial units are considered neighbours if their polygon boundaries touch.</li>
@@ -535,7 +535,7 @@ Link number distribution:
 </div>
 </section>
 <section id="defining-weights" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="defining-weights"><span class="header-section-number">1.4</span> Defining weights</h2>
+<h2 data-number="1.4" class="anchored" data-anchor-id="defining-weights"><span class="header-section-number">3.4</span> Defining weights</h2>
 <p>The neighbourhood list simply identifies which areas (polygons) are neighbours, but spatial weights take this a step further by assigning a weight to each neighbourhood connection. This is important because not all polygons have the same number of neighbours. To ensure that our spatially lagged values are comparable across neighbourhoods of different sizes, standardisation is required. The code below uses <code>style = 'W'</code> to row-standardise the values: if a municipality has five neighbours, the value of the spatially lagged variable will be the average of that variable across those five neighbours, with each neighbour receiving equal weight.</p>
 <div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/03-nb-weights_ce339eab180b7b04b379c17132aa4343">
 <div class="code-with-filename">
@@ -570,7 +570,7 @@ Link number distribution:
 </div>
 </section>
 <section id="global-morans-i" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="global-morans-i"><span class="header-section-number">1.5</span> Global Moran’s I</h2>
+<h2 data-number="1.5" class="anchored" data-anchor-id="global-morans-i"><span class="header-section-number">3.5</span> Global Moran’s I</h2>
 <p>Now that everything is in place, we can begin by plotting the proportion of people without schooling against the spatially lagged values:</p>
 <div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/fig-03-plot-moran-queens_76c8ae33958972db29f3793f6afbea92">
 <div class="code-with-filename">
@@ -634,7 +634,7 @@ alternative hypothesis: greater</code></pre>
 </div>
 </section>
 <section id="local-morans-i" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="local-morans-i"><span class="header-section-number">1.6</span> Local Moran’s I</h2>
+<h2 data-number="1.6" class="anchored" data-anchor-id="local-morans-i"><span class="header-section-number">3.6</span> Local Moran’s I</h2>
 <p>Although we have established that there is positive spatial autocorrelation in our data, we still need to identify the specific spatial patterns. Looking back at <a href="#fig-moran-plot">Figure&nbsp;3</a>, you will notice that the plot is divided into four quadrants.</p>
 <ul>
 <li><strong>Top-right quadrant</strong>: This area represents municipalities that have a higher-than-average share of the population without schooling and are surrounded by other municipalities with similarly high shares of the population without schooling. These are known as <em>high-high</em> clusters.</li>
@@ -842,7 +842,7 @@ alternative hypothesis: greater</code></pre>
 </div>
 </section>
 <section id="autocorrelation" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="autocorrelation"><span class="header-section-number">1.7</span> Assignment [Optional]</h2>
+<h2 data-number="1.7" class="anchored" data-anchor-id="autocorrelation"><span class="header-section-number">3.7</span> Assignment [Optional]</h2>
 <p>This concludes this session. Any statistic that includes spatial weights is dependent upon how those weights are defined. We have so far used first order contiguity, i.e.&nbsp;polygons that share a boundary, but there is no particular reason why we should not include second order contiguity polygons (i.e.&nbsp;neighbours of neighbours), use a fixed distance neighbours definitions, or adopt a <span class="math inline">\(k\)</span> nearest neighbours definition.</p>
 <p>Please try to complete the following tasks:</p>
 <ol type="1">
