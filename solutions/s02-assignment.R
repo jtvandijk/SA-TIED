@@ -20,8 +20,8 @@ jhb_att <- jhb_att |>
 
 jhb_att <- jhb_att |>
   group_by(sp_code) |>
-  mutate(sp_pop = sum(sal_pop)) |>
-  mutate(sp_inet = sum(inter_1)) |>
+  mutate(sp_pop = sum(sal_pop), 
+        sp_inet = sum(inter_1)) |>
   ungroup() |>
   distinct(sp_code, sp_pop, sp_inet) |>
   mutate(sp_inet_prop = sp_inet/sp_pop) |>
