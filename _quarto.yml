@@ -21,7 +21,6 @@ format:
     number-sections: true
     number-depth: 3
     pagetitle: "{{< var meta.title >}}"
-    df-print: kable
 
 website:
   repo-url: https://github.com/jtvandijk/SA-TIED

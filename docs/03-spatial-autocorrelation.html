@@ -212,15 +212,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#spatial-autocorrelation" id="toc-spatial-autocorrelation" class="nav-link active" data-scroll-target="#spatial-autocorrelation"><span class="header-section-number">1</span> Spatial Autocorrelation</a>
+  <li><a href="#spatial-autocorrelation" id="toc-spatial-autocorrelation" class="nav-link active" data-scroll-target="#spatial-autocorrelation"><span class="header-section-number">3</span> Spatial Autocorrelation</a>
   <ul class="collapse">
-  <li><a href="#loading-spatial-data" id="toc-loading-spatial-data" class="nav-link" data-scroll-target="#loading-spatial-data"><span class="header-section-number">1.1</span> Loading spatial data</a></li>
-  <li><a href="#spatial-dependency" id="toc-spatial-dependency" class="nav-link" data-scroll-target="#spatial-dependency"><span class="header-section-number">1.2</span> Spatial dependency</a></li>
-  <li><a href="#defining-neighbours" id="toc-defining-neighbours" class="nav-link" data-scroll-target="#defining-neighbours"><span class="header-section-number">1.3</span> Defining neighbours</a></li>
-  <li><a href="#defining-weights" id="toc-defining-weights" class="nav-link" data-scroll-target="#defining-weights"><span class="header-section-number">1.4</span> Defining weights</a></li>
-  <li><a href="#global-morans-i" id="toc-global-morans-i" class="nav-link" data-scroll-target="#global-morans-i"><span class="header-section-number">1.5</span> Global Moran’s I</a></li>
-  <li><a href="#local-morans-i" id="toc-local-morans-i" class="nav-link" data-scroll-target="#local-morans-i"><span class="header-section-number">1.6</span> Local Moran’s I</a></li>
-  <li><a href="#autocorrelation" id="toc-autocorrelation" class="nav-link" data-scroll-target="#autocorrelation"><span class="header-section-number">1.7</span> Assignment [Optional]</a></li>
+  <li><a href="#loading-spatial-data" id="toc-loading-spatial-data" class="nav-link" data-scroll-target="#loading-spatial-data"><span class="header-section-number">3.1</span> Loading spatial data</a></li>
+  <li><a href="#spatial-dependency" id="toc-spatial-dependency" class="nav-link" data-scroll-target="#spatial-dependency"><span class="header-section-number">3.2</span> Spatial dependency</a></li>
+  <li><a href="#defining-neighbours" id="toc-defining-neighbours" class="nav-link" data-scroll-target="#defining-neighbours"><span class="header-section-number">3.3</span> Defining neighbours</a></li>
+  <li><a href="#defining-weights" id="toc-defining-weights" class="nav-link" data-scroll-target="#defining-weights"><span class="header-section-number">3.4</span> Defining weights</a></li>
+  <li><a href="#global-morans-i" id="toc-global-morans-i" class="nav-link" data-scroll-target="#global-morans-i"><span class="header-section-number">3.5</span> Global Moran’s I</a></li>
+  <li><a href="#local-morans-i" id="toc-local-morans-i" class="nav-link" data-scroll-target="#local-morans-i"><span class="header-section-number">3.6</span> Local Moran’s I</a></li>
+  <li><a href="#autocorrelation" id="toc-autocorrelation" class="nav-link" data-scroll-target="#autocorrelation"><span class="header-section-number">3.7</span> Assignment [Optional]</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jtvandijk/SA-TIED/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -231,9 +231,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <section id="spatial-autocorrelation" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Spatial Autocorrelation</h1>
+<h1 data-number="1"><span class="header-section-number">3</span> Spatial Autocorrelation</h1>
 <section id="loading-spatial-data" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="loading-spatial-data"><span class="header-section-number">1.1</span> Loading spatial data</h2>
+<h2 data-number="1.1" class="anchored" data-anchor-id="loading-spatial-data"><span class="header-section-number">3.1</span> Loading spatial data</h2>
 <p>Start your <code>Geospatial-Workshop24</code> project and open a new script. Save this as <code>03-autocorrelation.r</code>. We will start again by loading the libraries that we will need:</p>
 <div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/03-load-libraries_1d1fc109f3f0ead73cb5c7cd09e7d33a">
 <div class="code-with-filename">
@@ -326,7 +326,7 @@ dbl (3): mn_code, mn_pop, mn_no_school
 </div>
 </section>
 <section id="spatial-dependency" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="spatial-dependency"><span class="header-section-number">1.2</span> Spatial dependency</h2>
+<h2 data-number="1.2" class="anchored" data-anchor-id="spatial-dependency"><span class="header-section-number">3.2</span> Spatial dependency</h2>
 <p>With this dataset, we are interested in analysing the proportion of people without schooling across the country and visualising this information on a map. Let us start by preparing the data for mapping:</p>
 <div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/03-join-data_008e7c79af63e8ce749b7552cc9a2884">
 <div class="code-with-filename">
@@ -453,7 +453,7 @@ dbl (3): mn_code, mn_pop, mn_no_school
 <p>where <span class="math inline">\({N_{extreme}}\)</span> is the number of simulated Moran’s I values that were more extreme than our observed statistic and <span class="math inline">\({N}\)</span> is the total number of simulations. In the example shown in <a href="#fig-moran-plot-sig">Figure&nbsp;4</a>, only 1 out the 199 simulations was more extreme than the observed local Moran’s I statistic. Therefore <span class="math inline">\({N_{extreme}}\)</span> = 1 , so <span class="math inline">\(p\)</span> is equal to <span class="math inline">\((1+1) / (199 + 1) = 0.01\)</span>. This means that there is a one percent probability that we would be wrong in rejecting the null hypothesis of spatial randomness.</p>
 </section>
 <section id="defining-neighbours" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="defining-neighbours"><span class="header-section-number">1.3</span> Defining neighbours</h2>
+<h2 data-number="1.3" class="anchored" data-anchor-id="defining-neighbours"><span class="header-section-number">3.3</span> Defining neighbours</h2>
 <p>If the purpose of a Moran’s I test is to quantify how similar places are to their neighbours, the first step is to define what constitutes a <strong>neighbour.</strong> This definition is not necessarily straightforward, because ‘neighbouring’ observations can be determined in various ways, based on either geometry or proximity. The most common methods include:</p>
 <ul>
 <li><strong>Contiguity</strong>: Spatial units are considered neighbours if their polygon boundaries touch.</li>
@@ -535,7 +535,7 @@ Link number distribution:
 </div>
 </section>
 <section id="defining-weights" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="defining-weights"><span class="header-section-number">1.4</span> Defining weights</h2>
+<h2 data-number="1.4" class="anchored" data-anchor-id="defining-weights"><span class="header-section-number">3.4</span> Defining weights</h2>
 <p>The neighbourhood list simply identifies which areas (polygons) are neighbours, but spatial weights take this a step further by assigning a weight to each neighbourhood connection. This is important because not all polygons have the same number of neighbours. To ensure that our spatially lagged values are comparable across neighbourhoods of different sizes, standardisation is required. The code below uses <code>style = 'W'</code> to row-standardise the values: if a municipality has five neighbours, the value of the spatially lagged variable will be the average of that variable across those five neighbours, with each neighbour receiving equal weight.</p>
 <div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/03-nb-weights_ce339eab180b7b04b379c17132aa4343">
 <div class="code-with-filename">
@@ -570,7 +570,7 @@ Link number distribution:
 </div>
 </section>
 <section id="global-morans-i" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="global-morans-i"><span class="header-section-number">1.5</span> Global Moran’s I</h2>
+<h2 data-number="1.5" class="anchored" data-anchor-id="global-morans-i"><span class="header-section-number">3.5</span> Global Moran’s I</h2>
 <p>Now that everything is in place, we can begin by plotting the proportion of people without schooling against the spatially lagged values:</p>
 <div class="cell styled-output" data-hash="03-spatial-autocorrelation_cache/html/fig-03-plot-moran-queens_76c8ae33958972db29f3793f6afbea92">
 <div class="code-with-filename">
@@ -634,7 +634,7 @@ alternative hypothesis: greater</code></pre>
 </div>
 </section>
 <section id="local-morans-i" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="local-morans-i"><span class="header-section-number">1.6</span> Local Moran’s I</h2>
+<h2 data-number="1.6" class="anchored" data-anchor-id="local-morans-i"><span class="header-section-number">3.6</span> Local Moran’s I</h2>
 <p>Although we have established that there is positive spatial autocorrelation in our data, we still need to identify the specific spatial patterns. Looking back at <a href="#fig-moran-plot">Figure&nbsp;3</a>, you will notice that the plot is divided into four quadrants.</p>
 <ul>
 <li><strong>Top-right quadrant</strong>: This area represents municipalities that have a higher-than-average share of the population without schooling and are surrounded by other municipalities with similarly high shares of the population without schooling. These are known as <em>high-high</em> clusters.</li>
@@ -727,50 +727,14 @@ alternative hypothesis: greater</code></pre>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect</span></span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(lmoran_quadrants)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell-output-display">
-<div class="kable-table">
-<table class="table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;">mean</th>
-<th style="text-align: left;">median</th>
-<th style="text-align: left;">pysal</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Low-High</td>
-<td style="text-align: left;">Low-High</td>
-<td style="text-align: left;">Low-High</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">High-High</td>
-<td style="text-align: left;">High-High</td>
-<td style="text-align: left;">High-High</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">High-High</td>
-<td style="text-align: left;">High-High</td>
-<td style="text-align: left;">High-High</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">High-High</td>
-<td style="text-align: left;">High-High</td>
-<td style="text-align: left;">High-High</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">High-High</td>
-<td style="text-align: left;">High-High</td>
-<td style="text-align: left;">High-High</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Low-Low</td>
-<td style="text-align: left;">Low-Low</td>
-<td style="text-align: left;">Low-Low</td>
-</tr>
-</tbody>
-</table>
-</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       mean    median     pysal
+1  Low-High  Low-High  Low-High
+2 High-High High-High High-High
+3 High-High High-High High-High
+4 High-High High-High High-High
+5 High-High High-High High-High
+6   Low-Low   Low-Low   Low-Low</code></pre>
 </div>
 </div>
 <p>We can now link these values back to our spatial dataframe and make a map using the <code>tmap</code> library:</p>
@@ -779,35 +743,35 @@ alternative hypothesis: greater</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>R code</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># replace names</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(lmoran_quadrants) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"lmoran_mean"</span>, <span class="st">"lmoran_median"</span>, <span class="st">"lmoran_pysal"</span>)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># bind results</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>sa_municipality <span class="ot">&lt;-</span> sa_municipality <span class="sc">|&gt;</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(lmoran_quadrants)</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># shape, polygons</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(sa_municipality) <span class="sc">+</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># specify column, colours</span></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">"lmoran_mean"</span>,</span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">border.col =</span> <span class="st">"#ffffff"</span>,</span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">border.alpha =</span> <span class="fl">0.3</span>,</span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="fu">c</span>(</span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Low-Low"</span> <span class="ot">=</span> <span class="st">"#0571b0"</span>,</span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Low-High"</span> <span class="ot">=</span> <span class="st">"#92c5de"</span>,</span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>      <span class="st">"High-Low"</span> <span class="ot">=</span> <span class="st">"#f4a582"</span>,</span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>      <span class="st">"High-High"</span> <span class="ot">=</span> <span class="st">"#ca0020"</span></span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Cluster type"</span>,</span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set layout</span></span>
-<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(</span>
-<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.outside =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="st">"left"</span>, <span class="st">"top"</span>),</span>
-<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># replace names</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(lmoran_quadrants) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"lmoran_mean"</span>, <span class="st">"lmoran_median"</span>, <span class="st">"lmoran_pysal"</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># bind results</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>sa_municipality <span class="ot">&lt;-</span> sa_municipality <span class="sc">|&gt;</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(lmoran_quadrants)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co"># shape, polygons</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(sa_municipality) <span class="sc">+</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># specify column, colours</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">"lmoran_mean"</span>,</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">border.col =</span> <span class="st">"#ffffff"</span>,</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">border.alpha =</span> <span class="fl">0.3</span>,</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="fu">c</span>(</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Low-Low"</span> <span class="ot">=</span> <span class="st">"#0571b0"</span>,</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Low-High"</span> <span class="ot">=</span> <span class="st">"#92c5de"</span>,</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>      <span class="st">"High-Low"</span> <span class="ot">=</span> <span class="st">"#f4a582"</span>,</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>      <span class="st">"High-High"</span> <span class="ot">=</span> <span class="st">"#ca0020"</span></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Cluster type"</span>,</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set layout</span></span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.outside =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="st">"left"</span>, <span class="st">"top"</span>),</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output-display">
 <div id="fig-03-choro-3" class="quarto-figure quarto-figure-center anchored">
@@ -824,38 +788,38 @@ alternative hypothesis: greater</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>R code</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># replace values if not significant</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>lmoran_quadrants[lmoran[, <span class="dv">6</span>] <span class="sc">&gt;</span> <span class="fl">0.05</span>, ] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># replace names</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(lmoran_quadrants) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"lmoran_mean_sig"</span>, <span class="st">"lmoran_median_sig"</span>, <span class="st">"lmoran_pysal_sig"</span>)</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># bind results</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>sa_municipality <span class="ot">&lt;-</span> sa_municipality <span class="sc">|&gt;</span></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(lmoran_quadrants)</span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co"># shape, polygons</span></span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(sa_municipality) <span class="sc">+</span></span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># specify column, colours</span></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(</span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">"lmoran_mean_sig"</span>,</span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">border.col =</span> <span class="st">"#ffffff"</span>,</span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">border.alpha =</span> <span class="fl">0.3</span>,</span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="fu">c</span>(</span>
-<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Low-Low"</span> <span class="ot">=</span> <span class="st">"#0571b0"</span>,</span>
-<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Low-High"</span> <span class="ot">=</span> <span class="st">"#92c5de"</span>,</span>
-<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>      <span class="st">"High-Low"</span> <span class="ot">=</span> <span class="st">"#f4a582"</span>,</span>
-<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>      <span class="st">"High-High"</span> <span class="ot">=</span> <span class="st">"#ca0020"</span></span>
-<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Cluster type"</span>,</span>
-<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set layout</span></span>
-<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(</span>
-<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.outside =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="st">"left"</span>, <span class="st">"top"</span>),</span>
-<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># replace values if not significant</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>lmoran_quadrants[lmoran[, <span class="dv">6</span>] <span class="sc">&gt;</span> <span class="fl">0.05</span>, ] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># replace names</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(lmoran_quadrants) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"lmoran_mean_sig"</span>, <span class="st">"lmoran_median_sig"</span>, <span class="st">"lmoran_pysal_sig"</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># bind results</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>sa_municipality <span class="ot">&lt;-</span> sa_municipality <span class="sc">|&gt;</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(lmoran_quadrants)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="co"># shape, polygons</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(sa_municipality) <span class="sc">+</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># specify column, colours</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">"lmoran_mean_sig"</span>,</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">border.col =</span> <span class="st">"#ffffff"</span>,</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">border.alpha =</span> <span class="fl">0.3</span>,</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="fu">c</span>(</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Low-Low"</span> <span class="ot">=</span> <span class="st">"#0571b0"</span>,</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Low-High"</span> <span class="ot">=</span> <span class="st">"#92c5de"</span>,</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>      <span class="st">"High-Low"</span> <span class="ot">=</span> <span class="st">"#f4a582"</span>,</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>      <span class="st">"High-High"</span> <span class="ot">=</span> <span class="st">"#ca0020"</span></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Cluster type"</span>,</span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set layout</span></span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(</span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.outside =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="st">"left"</span>, <span class="st">"top"</span>),</span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output-display">
 <div id="fig-03-choro-4" class="quarto-figure quarto-figure-center anchored">
@@ -878,7 +842,7 @@ alternative hypothesis: greater</code></pre>
 </div>
 </section>
 <section id="autocorrelation" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="autocorrelation"><span class="header-section-number">1.7</span> Assignment [Optional]</h2>
+<h2 data-number="1.7" class="anchored" data-anchor-id="autocorrelation"><span class="header-section-number">3.7</span> Assignment [Optional]</h2>
 <p>This concludes this session. Any statistic that includes spatial weights is dependent upon how those weights are defined. We have so far used first order contiguity, i.e.&nbsp;polygons that share a boundary, but there is no particular reason why we should not include second order contiguity polygons (i.e.&nbsp;neighbours of neighbours), use a fixed distance neighbours definitions, or adopt a <span class="math inline">\(k\)</span> nearest neighbours definition.</p>
 <p>Please try to complete the following tasks:</p>
 <ol type="1">
