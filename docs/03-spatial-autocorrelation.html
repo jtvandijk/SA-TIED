@@ -830,7 +830,7 @@ Moran I statistic       Expectation          Variance
 <li>Extract the centroids from the <code>sa_municipality</code> file and assign these to an object called <code>coords</code>.</li>
 <li>Identify the <code>5</code> nearest neighbours for each municipalities, using <code>sa_mn_knn &lt;- knearneigh(coords, k = 5)</code>.</li>
 <li>Create a neigbhour list of these nearest neighbours, using <code>sa_mn_nb_knn &lt;- knn2nb(sa_mn_knn)</code>.</li>
-<li>Compute the Global Moran’s I using this new neighbourhood definition.</li>
+<li>Compute the Global Moran’s I of the <code>mn_prop_no_schooling</code> variable using this new neighbourhood definition.</li>
 <li>Map the statistically significant clusters of Local Moran’s I based on this new neighbourhood definition.</li>
 </ol>
 
