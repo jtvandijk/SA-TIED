@@ -22,17 +22,18 @@ While there are no specific prerequisites for this workshop, basic familiarity w
 ## Workshop overview {.unnumbered}
 The schedule of the workshop is as follows:
 
-| Day  | Type              | Time        | Details
-| :-:  |:------            |:------      | :--------------
-| 1    | Lecture           | 09h00-09h45 | [Lecture Notes #1]({{< var slides.l01 >}}) |
-| 1    | Computer tutorial | 10h00-12h00 | [R for Data Analysis]({{< var urls.c01 >}}) |
-| 1    | Lecture           | 13h00-13h45 | [Lecture Notes #2]({{< var slides.l02 >}}) | 
-| 1    | Computer tutorial | 14h00-16h00 | [R for Spatial Analysis]({{< var urls.c02 >}}) | 
-|      |                   |             | |
-| 2    | Lecture           | 09h00-09h45 | [Lecture Notes #3]({{< var slides.l03 >}}) |
-| 2    | Computer tutorial | 10h00-12h00 | [Spatial Autocorrelation]({{< var urls.c03 >}}) |
-| 2    | Lecture           | 13h00-13h45 | [Lecture Notes #4]({{< var slides.l04 >}}) | 
-| 2    | Computer tutorial | 14h00-16h00 | [Spatial Models]({{< var urls.c04 >}}) | 
+| Day  | Type                     | Time        | Details
+| :-:  |:------                   |:------      | :--------------
+| 1    | Lecture                  | 09h00-09h30 | [Lecture Notes #1]({{< var slides.l01 >}}) |
+| 1    | Software instatllation   | 09h30-09h45 | [R for Data Analysis]({{< var urls.c01 >}}) |
+| 1    | Computer tutorial        | 10h00-12h00 | [R for Data Analysis]({{< var urls.c01 >}}) |
+| 1    | Lecture                  | 13h00-13h45 | [Lecture Notes #2]({{< var slides.l02 >}}) | 
+| 1    | Computer tutorial        | 14h00-16h00 | [R for Spatial Analysis]({{< var urls.c02 >}}) | 
+|      |                          |             | |
+| 2    | Lecture                  | 09h00-09h45 | [Lecture Notes #3]({{< var slides.l03 >}}) |
+| 2    | Computer tutorial        | 10h00-12h00 | [Spatial Autocorrelation]({{< var urls.c03 >}}) |
+| 2    | Lecture                  | 13h00-13h45 | [Lecture Notes #4]({{< var slides.l04 >}}) | 
+| 2    | Computer tutorial        | 14h00-16h00 | [Spatial Models]({{< var urls.c04 >}}) | 
 
 ## Acknowledgements {.unnumbered}
 This workbook is created using the [Quarto](https://quarto.org/) publishing system. Elements of this workbook are partially partially based on and modified from:
