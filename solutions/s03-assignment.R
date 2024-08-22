@@ -27,21 +27,17 @@ sa_mn_nb_knn_weights <- sa_mn_nb_knn |>
   nb2listw(style = 'W')
 
 # moran's test
-moran <- moran.test(sa_municipality$mn_prop_no_schooling, listw = sa_mn_nb_knn_weights)
+moran <- moran.mc(sa_municipality$mn_prop_no_schooling, listw = sa_mn_nb_knn_weights, nsim = 999)
 
 # local moran's test
-lmoran <- localmoran(sa_municipality$mn_prop_no_schooling, listw = sa_mn_nb_knn_weights)
+lmoran <- localmoran_perm(sa_municipality$mn_prop_no_schooling, listw = sa_mn_nb_knn_weights, nsim = 999)
 
-# extract quadrants
+# significant quadrants
 lmoran_quadrants <- attr(lmoran, 'quadr')
-
-# replace values if not significant
 lmoran_quadrants[lmoran[, 5] > 0.05, ] <- NA
-
-# replace names
 names(lmoran_quadrants) <- c('lmoran_mean_sig', 'lmoran_median_sig', 'lmoran_pysal_sig')
 
-# bind results
+# bind
 sa_municipality <- sa_municipality |>
   cbind(lmoran_quadrants)
 
