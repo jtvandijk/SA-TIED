@@ -289,10 +289,10 @@ moran <- moran.mc(sa_municipality$mn_prop_no_schooling, listw = sa_mn_nb_weights
 moran 
 ```
 
-The results of the [Monte Carlo](https://en.wikipedia.org/wiki/Monte_Carlo_method) simulation, visualised in @-fig-03-monte-carlo, suggest that there is statistically significant positive autocorrelation in our variable. This indicates that municipalities with higher percentages of people without schooling tend to be surrounded by other municipalities with similarly high percentages. Likewise, municipalities with lower percentages of people without schooling are generally surrounded by municipalities with similarly low values.
+The results of the [Monte Carlo](https://en.wikipedia.org/wiki/Monte_Carlo_method) simulation, visualised in @fig-03-plot-moran-permutation, suggest that there is statistically significant positive autocorrelation in our variable. This indicates that municipalities with higher percentages of people without schooling tend to be surrounded by other municipalities with similarly high percentages. Likewise, municipalities with lower percentages of people without schooling are generally surrounded by municipalities with similarly low values.
 
 ```{r}
-#| label: fig-03-plot-moran-queens
+#| label: fig-03-plot-moran-permutation
 #| fig-cap: Density plot of permutation outcomes.
 #| classes: styled-output
 #| echo: True
