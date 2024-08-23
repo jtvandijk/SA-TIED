@@ -647,11 +647,11 @@ dbl (3): mn_code, mn_pop, mn_avg_age
 <section id="spatial-error-model" class="level3" data-number="1.4.1">
 <h3 data-number="1.4.1" class="anchored" data-anchor-id="spatial-error-model"><span class="header-section-number">4.4.1</span> Spatial error model</h3>
 <p>The spatial error model is used when the error terms in a regression model exhibit spatial autocorrelation, meaning the error terms are not independent across space. This can happen due to omitted variables that have a spatial pattern or unmeasured factors that affect the dependent variable similarly across nearby locations.</p>
-<p>The model adjusts for spatial autocorrelation by adding a spatially lagged error term (a weighted sum of the errors from neighboring locations) to the regression equation:</p>
+<p>The model adjusts for spatial autocorrelation by adding a spatially lagged error term (a weighted sum of the errors from neighbouring locations) to the regression equation:</p>
 <p><span class="math display">\[
-y = X\beta + \epsilon, \epsilon = \lambda W \epsilon + \upsilon
+y = X\beta + \upsilon, \upsilon = \lambda W \upsilon + \epsilon
 \]</span></p>
-<p>where <span class="math inline">\(\lambda\)</span> is a spatial autoregressive parameter, <span class="math inline">\(W\)</span> is a spatial weights matrix, and <span class="math inline">\(\upsilon\)</span> is a vector of normally distributed error terms.</p>
+<p>where <span class="math inline">\(X\beta\)</span> represents the standard regression components, <span class="math inline">\(\lambda\)</span> is a spatial autoregressive parameter, <span class="math inline">\(W\)</span> is a spatial weights matrix, and <span class="math inline">\(\upsilon\)</span> is a vector of spatially autocorrelated errors.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -665,8 +665,8 @@ y = X\beta + \epsilon, \epsilon = \lambda W \epsilon + \upsilon
 </section>
 <section id="spatial-lag-model" class="level3" data-number="1.4.2">
 <h3 data-number="1.4.2" class="anchored" data-anchor-id="spatial-lag-model"><span class="header-section-number">4.4.2</span> Spatial lag model</h3>
-<p>The spatial lag model is appropriate when the dependent variable itself exhibits spatial dependence. This means the value of the dependent variable in one location depends on the values in neighboring locations. This model is used to capture the spillover effects or diffusion processes, where the outcome in one area is influenced by outcomes in nearby areas (e.g.&nbsp;house prices, crime rates).</p>
-<p>The model incorporates a spatially lagged dependent variable, which is the weighted sum of the dependent variable values in neighboring locations, into the regression equation:</p>
+<p>The spatial lag model is appropriate when the dependent variable itself exhibits spatial dependence. This means the value of the dependent variable in one location depends on the values in neighbouring locations. This model is used to capture the spillover effects or diffusion processes, where the outcome in one area is influenced by outcomes in nearby areas (e.g.&nbsp;house prices, crime rates).</p>
+<p>The model incorporates a spatially lagged dependent variable, which is the weighted sum of the dependent variable values in neighbouring locations, into the regression equation:</p>
 <p><span class="math display">\[
 y = \rho Wy + X\beta + \epsilon
 \]</span></p>
