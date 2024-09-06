@@ -132,11 +132,11 @@ Let's calculate the geographically weighted mean value for the `mn_no_school_pro
 #| filename: "R code"
 # geographically weighted statistics: no schooling
 sa_gwss_no_schooling <- gwss(sa_municipality_sp , vars = "mn_no_school_prop", 
-                          bw = 25, kernel = "bisquare", adaptive = TRUE, longlat = T)
+                          bw = 25, kernel = "bisquare", adaptive = TRUE, longlat = TRUE)
 
 # geographically weighted statistics: average age
 sa_gwss_average_age <- gwss(sa_municipality_sp , vars = "mn_avg_age", 
-                          bw = 25, kernel = "bisquare", adaptive = TRUE, longlat = T)
+                          bw = 25, kernel = "bisquare", adaptive = TRUE, longlat = TRUE)
 ```
 
 ::: {.callout-warning}

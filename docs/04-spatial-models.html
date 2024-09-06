@@ -387,18 +387,18 @@ dbl (3): mn_code, mn_pop, mn_avg_age
 </div>
 </div>
 <p>Let’s calculate the geographically weighted mean value for the <code>mn_no_school_prop</code> and <code>mn_avg_age</code> variables using an adaptive bandwidth of 25 neighbours and a <code>bisquare</code> kernel:</p>
-<div class="cell styled-output" data-hash="04-spatial-models_cache/html/04-gwss_430c3b941de20c1cbd50e6cb25260bd8">
+<div class="cell styled-output" data-hash="04-spatial-models_cache/html/04-gwss_e3a3eac7522de33630b17bf858421549">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>R code</strong></pre>
 </div>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># geographically weighted statistics: no schooling</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>sa_gwss_no_schooling <span class="ot">&lt;-</span> <span class="fu">gwss</span>(sa_municipality_sp, <span class="at">vars =</span> <span class="st">"mn_no_school_prop"</span>, <span class="at">bw =</span> <span class="dv">25</span>,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">kernel =</span> <span class="st">"bisquare"</span>, <span class="at">adaptive =</span> <span class="cn">TRUE</span>, <span class="at">longlat =</span> T)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">kernel =</span> <span class="st">"bisquare"</span>, <span class="at">adaptive =</span> <span class="cn">TRUE</span>, <span class="at">longlat =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># geographically weighted statistics: average age</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>sa_gwss_average_age <span class="ot">&lt;-</span> <span class="fu">gwss</span>(sa_municipality_sp, <span class="at">vars =</span> <span class="st">"mn_avg_age"</span>, <span class="at">bw =</span> <span class="dv">25</span>, <span class="at">kernel =</span> <span class="st">"bisquare"</span>,</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">adaptive =</span> <span class="cn">TRUE</span>, <span class="at">longlat =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">adaptive =</span> <span class="cn">TRUE</span>, <span class="at">longlat =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="callout callout-style-simple callout-warning">
