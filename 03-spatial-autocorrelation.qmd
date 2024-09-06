@@ -229,7 +229,7 @@ sa_mn_cent <- st_centroid(sa_municipality, of_largest_polygon = TRUE)
 # plot graph
 par(mai = c(0,0,0,0))
 plot(st_geometry(sa_municipality), border = '#cccccc')
-plot(sa_mn_nb, st_geometry(sa_mn_cent), add = T)
+plot(sa_mn_nb, st_geometry(sa_mn_cent), add = TRUE)
 ``` 
 ## Defining weights
 The neighbourhood list simply identifies which areas (polygons) are neighbours, but spatial weights take this a step further by assigning a weight to each neighbourhood connection. This is important because not all polygons have the same number of neighbours. To ensure that our spatially lagged values are comparable across neighbourhoods of different sizes, standardisation is required. The code below uses `style = 'W'` to row-standardise the values: if a municipality has five neighbours, the value of the spatially lagged variable will be the average of that variable across those five neighbours, with each neighbour receiving equal weight.

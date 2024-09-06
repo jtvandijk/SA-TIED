@@ -205,7 +205,7 @@ tm_shape(sa_municipality) +
 Both maps show that there is some clear variation in both mean values across the country.
 
 ::: {.callout-warning}
-As in the previous session, the resulting maps are influenced by the geographical weighting applied, which is largely determined by the bandwidth. There is no definitive answer for selecting the optimal bandwidth, though automatic selectors, such as those based on cross-validation, can help guide the choice (e.g. `bw.gwr(mn_no_school_prop ~ 1, data = sa_municipality_sp, adaptive = TRUE, kernel = "bisquare", longlat = T)`). If you were to run the code above on our current variables, the automatic procedure suggests to consider rather large bandwidths. This suggests that the area we are analysing could be too extensive for detailed local analysis.
+As in the previous session, the resulting maps are influenced by the geographical weighting applied, which is largely determined by the bandwidth. There is no definitive answer for selecting the optimal bandwidth, though automatic selectors, such as those based on cross-validation, can help guide the choice (e.g. `bw.gwr(mn_no_school_prop ~ 1, data = sa_municipality_sp, adaptive = TRUE, kernel = "bisquare", longlat = TRUE)`). If you were to run the code above on our current variables, the automatic procedure suggests to consider rather large bandwidths. This suggests that the area we are analysing could be too extensive for detailed local analysis.
 :::
 
 ## Geographically weighted correlation
@@ -256,7 +256,7 @@ Using the same bandwidth as before, we can derive a localised correlation as fol
 #| filename: "R code"
 # geographically weighted statistics: correlation
 sa_gwss_cor <- gwss(sa_municipality_sp , vars = c("mn_no_school_prop", "mn_avg_age"), 
-                    bw = 25, kernel = "bisquare", adaptive = TRUE, longlat = T)
+                    bw = 25, kernel = "bisquare", adaptive = TRUE, longlat = TRUE)
 ```
 
 We can now extract the values and bind these back to our original `sf` object:
@@ -308,7 +308,7 @@ What the map does not tell us is whether the correlations are significant. We ca
 #| filename: "R code"
 # test for significance, only select relevant column
 sa_gwss_cor_sig <- gwss.montecarlo(sa_municipality_sp , vars = c("mn_no_school_prop", "mn_avg_age"), 
-                                  bw = 25, kernel = "bisquare", adaptive = TRUE, longlat = T) |> 
+                                  bw = 25, kernel = "bisquare", adaptive = TRUE, longlat = TRUE) |> 
   as_tibble() |>
   select(Corr_mn_no_school_prop.mn_avg_age) 
 

@@ -490,7 +490,7 @@ dbl (3): mn_code, mn_pop, mn_avg_age
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>As in the previous session, the resulting maps are influenced by the geographical weighting applied, which is largely determined by the bandwidth. There is no definitive answer for selecting the optimal bandwidth, though automatic selectors, such as those based on cross-validation, can help guide the choice (e.g.&nbsp;<code>bw.gwr(mn_no_school_prop ~ 1, data = sa_municipality_sp, adaptive = TRUE, kernel = "bisquare", longlat = T)</code>). If you were to run the code above on our current variables, the automatic procedure suggests to consider rather large bandwidths. This suggests that the area we are analysing could be too extensive for detailed local analysis.</p>
+<p>As in the previous session, the resulting maps are influenced by the geographical weighting applied, which is largely determined by the bandwidth. There is no definitive answer for selecting the optimal bandwidth, though automatic selectors, such as those based on cross-validation, can help guide the choice (e.g.&nbsp;<code>bw.gwr(mn_no_school_prop ~ 1, data = sa_municipality_sp, adaptive = TRUE, kernel = "bisquare", longlat = TRUE)</code>). If you were to run the code above on our current variables, the automatic procedure suggests to consider rather large bandwidths. This suggests that the area we are analysing could be too extensive for detailed local analysis.</p>
 </div>
 </div>
 </div>
@@ -540,14 +540,14 @@ dbl (3): mn_code, mn_pop, mn_avg_age
 </div>
 </div>
 <p>Using the same bandwidth as before, we can derive a localised correlation as follows:</p>
-<div class="cell styled-output" data-hash="04-spatial-models_cache/html/04-gwc_bc775d48528e8e98310dd827b8ff90f5">
+<div class="cell styled-output" data-hash="04-spatial-models_cache/html/04-gwc_1287c6866b41d7a0685ec196a613b826">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>R code</strong></pre>
 </div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># geographically weighted statistics: correlation</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>sa_gwss_cor <span class="ot">&lt;-</span> <span class="fu">gwss</span>(sa_municipality_sp, <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"mn_no_school_prop"</span>, <span class="st">"mn_avg_age"</span>),</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">bw =</span> <span class="dv">25</span>, <span class="at">kernel =</span> <span class="st">"bisquare"</span>, <span class="at">adaptive =</span> <span class="cn">TRUE</span>, <span class="at">longlat =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">bw =</span> <span class="dv">25</span>, <span class="at">kernel =</span> <span class="st">"bisquare"</span>, <span class="at">adaptive =</span> <span class="cn">TRUE</span>, <span class="at">longlat =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>We can now extract the values and bind these back to our original <code>sf</code> object:</p>
@@ -593,14 +593,14 @@ dbl (3): mn_code, mn_pop, mn_avg_age
 </div>
 </div>
 <p>What the map does not tell us is whether the correlations are significant. We can test for this using a Monte Carlo simulation:</p>
-<div class="cell styled-output" data-hash="04-spatial-models_cache/html/04-gwc-sig_e6e07909a84a60052c15a6a387896fe1">
+<div class="cell styled-output" data-hash="04-spatial-models_cache/html/04-gwc-sig_f97aff7ebeabf1bd868c16d66c0f47bc">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>R code</strong></pre>
 </div>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># test for significance, only select relevant column</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>sa_gwss_cor_sig <span class="ot">&lt;-</span> <span class="fu">gwss.montecarlo</span>(sa_municipality_sp, <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"mn_no_school_prop"</span>,</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mn_avg_age"</span>), <span class="at">bw =</span> <span class="dv">25</span>, <span class="at">kernel =</span> <span class="st">"bisquare"</span>, <span class="at">adaptive =</span> <span class="cn">TRUE</span>, <span class="at">longlat =</span> T) <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mn_avg_age"</span>), <span class="at">bw =</span> <span class="dv">25</span>, <span class="at">kernel =</span> <span class="st">"bisquare"</span>, <span class="at">adaptive =</span> <span class="cn">TRUE</span>, <span class="at">longlat =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Corr_mn_no_school_prop.mn_avg_age)</span>
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
