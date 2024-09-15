@@ -681,7 +681,7 @@ Projected CRS: WGS_1984_Transverse_Mercator
 </div>
 </div>
 </div>
-<p>In this case, the <code>fill()</code> argument in <code>tmap</code> is how we instruct the library to create a choropleth map based on the values in the specified column. If we set <code>fill()</code> to NULL, only the borders of our polygons will be drawn, without any colour fill. The <code>qtm()</code> function in tmap is versatile, allowing us to pass various parameters to customise the aesthetics of our map. By checking the function’s documentation, you can explore the full list of available parameters. For instance, to set the borders of our Cape Town polygons to white, we can use the <code>borders</code> parameter:</p>
+<p>In this case, the <code>fill()</code> argument in <code>tmap</code> is how we instruct the library to create a choropleth map based on the values in the specified column. If we set <code>fill()</code> to <code>NULL</code>, only the borders of our polygons will be drawn, without any colour fill. The <code>qtm()</code> function in tmap is versatile, allowing us to pass various parameters to customise the aesthetics of our map. By checking the function’s documentation, you can explore the full list of available parameters. For instance, to set the borders of our Cape Town polygons to white, we can use the <code>borders</code> parameter:</p>
 <div class="cell" data-hash="02-mapping-data_cache/html/fig-02-qtm-borders_12b2796caf146cbb48c362640e6020bb">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -707,7 +707,7 @@ Projected CRS: WGS_1984_Transverse_Mercator
 </div>
 <div class="callout-body-container">
 <p>The primary approach to creating maps in <code>tmap</code> involves using a <a href="https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149">layered grammar of graphics</a> to build up your map, starting with the <code>tm_shape()</code> function. This function, when provided with a spatial dataframe, captures the spatial information of your data, including its projection and geometry, and creates a spatial object. While you can override certain aspects of the spatial data (such as its projection) using the function’s parameters, the essential role of <code>tm_shape()</code> is to instruct R to “use this object as the basis for drawing the shapes.”</p>
-<p>To actually render the shapes, you need to add a layer that specifies the type of shape you want R to draw from this spatial information—such as polygons for our data. This layer function tells R to “draw my spatial object as <code>X</code>,” where <code>X</code> represents the type of shape. Within this layer, you can also provide additional details to control how R draws your shapes. Further, you can add more layers to include other spatial objects and their corresponding shapes on your map. Finally, layout options can be specified through a layout layer, allowing you to customize the overall appearance and arrangement of your map.</p>
+<p>To actually render the shapes, you need to add a layer that specifies the type of shape you want R to draw from this spatial information—such as polygons for our data. This layer function tells R to “draw my spatial object as <code>X</code>,” where <code>X</code> represents the type of shape. Within this layer, you can also provide additional details to control how R draws your shapes. Further, you can add more layers to include other spatial objects and their corresponding shapes on your map. Finally, layout options can be specified through a layout layer, allowing you to customise the overall appearance and arrangement of your map.</p>
 </div>
 </div>
 </div>
@@ -766,7 +766,7 @@ Projected CRS: WGS_1984_Transverse_Mercator
 </div>
 </div>
 </div>
-<p>We are making progress, but there are two immediate issues with our map. First, the classification breaks do not adequately reflect the variation in our dataset. By default, <code>tmap</code> uses <em>pretty</em> breaks, which may not be the most effective for our data. An alternative, such as natural breaks (or Jenks), might better reveal the data’s variation.</p>
+<p>We are making progress, but there are two immediate issues with our map. First, the classification breaks do not adequately reflect the variation in our dataset. By default, <code>tmap</code> uses <em>pretty</em> breaks, which may not be the most effective for our data. An alternative, such as natural breaks (or jenks), might better reveal the data’s variation.</p>
 <p>To customise the classification breaks, refer to the <code>tm_polygons()</code> documentation. The following parameters are relevant:</p>
 <ul>
 <li><code>n</code>: Specifies the number of classification breaks.</li>
@@ -802,7 +802,7 @@ Projected CRS: WGS_1984_Transverse_Mercator
 <h2 data-number="1.5" class="anchored" data-anchor-id="styling-spatial-data"><span class="header-section-number">2.5</span> Styling spatial data</h2>
 <p>Styling a map in <code>tmap</code> requires a deeper understanding and familiarity with the library, which is something you will develop best through hands-on practice. Here are the key functions to be aware of:</p>
 <ul>
-<li><code>tm_layout()</code>: Customize titles, fonts, legends, and other layout elements.</li>
+<li><code>tm_layout()</code>: Customise titles, fonts, legends, and other layout elements.</li>
 <li><code>tm_compass()</code>: Add and style a North arrow or compass.</li>
 <li><code>tm_scale_bar()</code>: Add and style a scale bar.</li>
 </ul>
@@ -953,13 +953,13 @@ Projected CRS: WGS_1984_Transverse_Mercator
 </div>
 </div>
 <p>In the code above, we stored the full map definition as an object. This makes it easy to export the map and save it as a <code>.jpg</code>, <code>.png</code> or <code>.pdf</code> file:</p>
-<div class="cell styled-output" data-hash="02-mapping-data_cache/html/02-export-map_23c13147c4ace0bd536acd5d68f74728">
+<div class="cell styled-output" data-hash="02-mapping-data_cache/html/02-export-map_affca2582beb409e692b9b691414be7f">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>R code</strong></pre>
 </div>
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># write map</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_save</span>(<span class="at">tm =</span> xhosa_map, <span class="st">"cpt-xhosa.jpg"</span>, <span class="at">width =</span> <span class="dv">15</span>, <span class="at">height =</span> <span class="dv">15</span>, <span class="at">units =</span> <span class="fu">c</span>(<span class="st">"cm"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_save</span>(<span class="at">tm =</span> xhosa_map, <span class="at">filename =</span> <span class="st">"cpt-xhosa.jpg"</span>, <span class="at">width =</span> <span class="dv">15</span>, <span class="at">height =</span> <span class="dv">15</span>, <span class="at">units =</span> <span class="fu">c</span>(<span class="st">"cm"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>

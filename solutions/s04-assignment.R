@@ -69,5 +69,3 @@ tm_shape(wrd) +
     style = 'jenks',
     title = 'Local Correlation'
   )
-
-

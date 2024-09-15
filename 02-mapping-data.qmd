@@ -347,7 +347,7 @@ For our map-making, we will use one of the two primary visualisation libraries f
 qtm(cpt, fill="sp_prop_xhosa")
 ``` 
 
-In this case, the `fill()` argument in `tmap` is how we instruct the library to create a choropleth map based on the values in the specified column. If we set `fill()` to NULL, only the borders of our polygons will be drawn, without any colour fill. The `qtm()` function in tmap is versatile, allowing us to pass various parameters to customise the aesthetics of our map. By checking the function's documentation, you can explore the full list of available parameters. For instance, to set the borders of our Cape Town polygons to white, we can use the `borders` parameter:
+In this case, the `fill()` argument in `tmap` is how we instruct the library to create a choropleth map based on the values in the specified column. If we set `fill()` to `NULL`, only the borders of our polygons will be drawn, without any colour fill. The `qtm()` function in tmap is versatile, allowing us to pass various parameters to customise the aesthetics of our map. By checking the function's documentation, you can explore the full list of available parameters. For instance, to set the borders of our Cape Town polygons to white, we can use the `borders` parameter:
 
 
 ```{r}
@@ -367,7 +367,7 @@ The map does not look quite right yet. While we can continue tweaking parameters
 ::: {.callout-note}
 The primary approach to creating maps in `tmap` involves using a [layered grammar of graphics](https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149) to build up your map, starting with the `tm_shape()` function. This function, when provided with a spatial dataframe, captures the spatial information of your data, including its projection and geometry, and creates a spatial object. While you can override certain aspects of the spatial data (such as its projection) using the function's parameters, the essential role of `tm_shape()` is to instruct R to "use this object as the basis for drawing the shapes." 
 
-To actually render the shapes, you need to add a layer that specifies the type of shape you want R to draw from this spatial information—such as polygons for our data. This layer function tells R to "draw my spatial object as `X`," where `X` represents the type of shape. Within this layer, you can also provide additional details to control how R draws your shapes. Further, you can add more layers to include other spatial objects and their corresponding shapes on your map. Finally, layout options can be specified through a layout layer, allowing you to customize the overall appearance and arrangement of your map.
+To actually render the shapes, you need to add a layer that specifies the type of shape you want R to draw from this spatial information—such as polygons for our data. This layer function tells R to "draw my spatial object as `X`," where `X` represents the type of shape. Within this layer, you can also provide additional details to control how R draws your shapes. Further, you can add more layers to include other spatial objects and their corresponding shapes on your map. Finally, layout options can be specified through a layout layer, allowing you to customise the overall appearance and arrangement of your map.
 :::
 
 Let us build a map using `tmap`:
@@ -412,7 +412,7 @@ tm_shape(cpt) +
   )
 ```
 
-We are making progress, but there are two immediate issues with our map. First, the classification breaks do not adequately reflect the variation in our dataset. By default, `tmap` uses *pretty* breaks, which may not be the most effective for our data. An alternative, such as natural breaks (or Jenks), might better reveal the data's variation.
+We are making progress, but there are two immediate issues with our map. First, the classification breaks do not adequately reflect the variation in our dataset. By default, `tmap` uses *pretty* breaks, which may not be the most effective for our data. An alternative, such as natural breaks (or jenks), might better reveal the data's variation.
 
 To customise the classification breaks, refer to the `tm_polygons()` documentation. The following parameters are relevant:
 
@@ -442,7 +442,7 @@ tm_shape(cpt) +
 ## Styling spatial data
 Styling a map in `tmap` requires a deeper understanding and familiarity with the library, which is something you will develop best through hands-on practice. Here are the key functions to be aware of:
 
-- `tm_layout()`: Customize titles, fonts, legends, and other layout elements.
+- `tm_layout()`: Customise titles, fonts, legends, and other layout elements.
 - `tm_compass()`: Add and style a North arrow or compass.
 - `tm_scale_bar()`: Add and style a scale bar.
 
@@ -591,7 +591,7 @@ In the code above, we stored the full map definition as an object. This makes it
 #| tidy: True
 #| filename: "R code"
 # write map
-tmap_save(tm = xhosa_map, 'cpt-xhosa.jpg', width=15, height=15, units=c('cm'))
+tmap_save(tm = xhosa_map, filename = 'cpt-xhosa.jpg', width=15, height=15, units=c('cm'))
 ```
 
 ## Assignment [Optional]
