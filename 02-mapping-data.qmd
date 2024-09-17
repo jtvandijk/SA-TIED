@@ -604,3 +604,6 @@ This concludes this session. Please try to complete the following tasks:
 | File                    | Type          | Link |
 | :------                 | :------       | :------ |
 | Johannesburg Sub Places | `GeoPackage`  | [Download](https://github.com/jtvandijk/SA-TIED/raw/master/data/spatial/subplace-johannesburg-2013.gpkg) |
+
+## Solutions [Optional]
+There are several ways to achieve the above, but if you would like to see an example solution, you can find it here: [[Link]](https://github.com/jtvandijk/SA-TIED/blob/master/solutions/s02-assignment.R)

@@ -420,3 +420,6 @@ This concludes this session. Please try to complete the following tasks:
 ::: {.callout-note}
 These datasets have been sourced from the [StatsSA Superweb](https://superweb.statssa.gov.za/webapi/jsf/login.xhtml) table builder and have subsequently been slightly cleaned.
 :::
+
+## Solutions [Optional]
+There are several ways to achieve the above, but if you would like to see an example solution, you can find it here: [[Link]](https://github.com/jtvandijk/SA-TIED/blob/master/solutions/s04-assignment.R)

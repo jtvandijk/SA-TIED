@@ -452,3 +452,6 @@ Please try to complete the following tasks:
 3. Create a neigbhour list of these nearest neighbours, using the `knn2nb()` function.
 4. Compute the Global Moran’s I of the `mn_prop_no_schooling` variable using this new neighbourhood definition.
 5. Map the statistically significant clusters of Local Moran’s I based on this new neighbourhood definition.
+
+## Solutions [Optional]
+There are several ways to achieve the above, but if you would like to see an example solution, you can find it here: [[Link]](https://github.com/jtvandijk/SA-TIED/blob/master/solutions/s03-assignment.R)

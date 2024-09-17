@@ -738,3 +738,6 @@ Use this dataset to:
 
 1. Create a histogram of the distribution of the *number* of people with `internet access at home` in the City of Johannesburg, grouped by sub place.
 2. Create a boxplot of the *proportion* of people with `internet access at home` in the City of Johannesburg, grouped by sub place.
+
+## Solutions [Optional]
+There are several ways to achieve the above, but if you would like to see an example solution, you can find it here: [[Link]](https://github.com/jtvandijk/SA-TIED/blob/master/solutions/s01-assignment.R)

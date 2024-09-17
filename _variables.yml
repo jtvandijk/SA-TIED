@@ -4,8 +4,8 @@ meta:
   title: SA-TIED
 
 urls:
-  c00: ""
-  c01: "01-getting-started.html"
+  c00: "01-getting-started.html"
+  c01: "01-getting-started.html#getting-started-with-r"
   c02: "02-mapping-data.html"
   c03: "03-spatial-autocorrelation.html"
   c04: "04-spatial-models.html"
