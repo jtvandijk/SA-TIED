@@ -25,7 +25,7 @@ The schedule of the workshop is as follows:
 | Day  | Type                     | Time        | Details
 | :-:  |:------                   |:------      | :--------------
 | 1    | Lecture                  | 09h00-09h30 | [Lecture Notes #1]({{< var slides.l01 >}}) |
-| 1    | Software installation   | 09h30-09h45 | [R for Data Analysis]({{< var urls.c0 >}}) |
+| 1    | Software installation   | 09h30-09h45 | [R for Data Analysis]({{< var urls.c00 >}}) |
 | 1    | Computer tutorial        | 10h00-12h00 | [R for Data Analysis]({{< var urls.c01 >}}) |
 | 1    | Lecture                  | 13h00-13h45 | [Lecture Notes #2]({{< var slides.l02 >}}) | 
 | 1    | Computer tutorial        | 14h00-16h00 | [R for Spatial Analysis]({{< var urls.c02 >}}) | 
